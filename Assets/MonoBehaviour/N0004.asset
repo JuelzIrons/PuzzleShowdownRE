@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0004
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 7eb75b4c62a5a224d86331fc98f8030c, type: 3}
+  Timestamps: "0.13\n3.867\n5.769\n10.607\n15.446\n19.95\n26.223\n27.825\n28.492\n34.565\n35.399\n37.701\n41.238\n48.145\n49.98\n51.749\n57.654\n60.224\n61.925\n66.163\n69.833\n71.902"
+  WrittenDialogue: "Oh my, Nicole! Fancy seeing you here.\nWhy do you need to talk like that?\nTalk like what? A dialect free of any slang or pitiful ignorance?\nYou sound like an 1800’s concierge who’s gay but hasn’t discovered homosexuality yet.\nHey! I am not... {1}That, I like girls!\nYou like girls that’re 2 dimensional and can’t fuck you instead of girls that’re 3 dimensional and won’t fuck you.\nGrrr, that’s it!\nWhat’s it?\nRather than stooping to your level of insults I think it’s better I’d best you in a true ring of wit!\nOh my god.\nThat’s right, the puzzle showdown!\nYou think beating me in a puzzle is gonna make you not a perpetual virgin?\nTalk all you want cause talk is cheap! At the end of the day if I beat you it means I’m better.\n...Better at what?\nLife and intelligence!\nNo you’re only better at a stupid fucking baby puzzle game, you think you can pay bills and get bitches with this shit?\nWha-... You’re just afraid I’ll beat you!\nOkay Jeffery, let’s play then.\nFine. It’s time to show down!{0.8}\nThis isn’t a cartoon, there’s no like fate of the world here.\nYeah we’ll see!{1}"
+  DialogueCharacterNames: "JEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY"

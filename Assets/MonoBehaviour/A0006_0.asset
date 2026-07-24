@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0006
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 343439f2e7a00374ba20cfa608115f46, type: 3}
+  Timestamps: "0.03\n2.566\n4.301\n5.469\n8.672\n11.575\n14.011\n15.979\n17.381\n23.186\n25.789\n30.494\n34.464\n39.703\n44.107\n46.143\n50.514\n51.381\n61.591\n65.028\n71.134\n75.272\n77.007"
+  WrittenDialogue: "Oh there’s my hot little red head.\nI don’t think you should be saying that.\nWhat? What’s wrong?\nDidn’t you used to have like a bunch of sexual harassment complaints?\nYeah and I still do, my students are hot!\nHow does the law protect people like you??\nOh you got a problem with how I live my life!?\nI think most people would.\nOh my god, first it’s dating, then it’s pollution- next you’re gonna tell me fast food’s bad for ya!\nIt is bad for you- {1}and you should eat more of it.\nI just have a light snack of 2 whoppers every lunch and they make a whole documentary about it!\nJust one of those is an entire meal. Do you know anything about nutrition?\nNutrition? What about old-trician where you could eat raw bacon grease and it was good for ya?\nAgain, that sounds perfectly great you should always eat like that.  How old are you?\nUh 50.. {1.2}Something.\nOh that’s even better cause your risk of cardiac arrest is cut in half after 50.\nReally?\nYeah and I hear there’s an AARP MSG KFC TCBY A&W{6} promotion going on right now.\nThat sounds delicious but I need to work up an appetite.\nWhat better way to do that then to show you your generation is full of dumb bitches who can’t even solve a puzzle good!\nBeating me in a puzzle’s gonna provide commentary on why my generation’s bad?\nYou god damn right it will!"
+  DialogueCharacterNames: "COACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nARI\nCOACH COLBY\nCOACH COLBY\nARI\nCOACH COLBY"

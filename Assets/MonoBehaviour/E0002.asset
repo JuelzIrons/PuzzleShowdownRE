@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0002
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 7d5c10d11908230469671863658cf37a, type: 3}
+  Timestamps: "0.036\n1.938\n3.706\n5.775\n9.278\n11.614\n15.118\n16.185\n20.49\n23.192\n27.096\n29.032\n31.401\n34.237\n37.04\n39.375\n43.646\n45.681\n48.317\n50.586\n54.824\n57.427\n60.029\n61.697"
+  WrittenDialogue: "Yo my bitch what it do?\nYou sound like a fucking dumbass.\nWhat? Cause I’m up on the slang game?\nYou sound like Justin Timberlake 5 years into knowing black people.\nYeah right, like I know any black people.\nI can’t even tell if that was a comeback. Hey you wanna buy this watch?\nWhat kinda watch?\nI don’t know but it’s shiny. Excuse the smell I found it at a laundromat with no soap.\nDo you wanna buy my MP3 player?\nJust an... MP3 player?{1} Like no brand?\nYeah it’s just as good as those iPods.\nYeah maybe to Helen Keller without hands.\nWhat defunct girl group is Helen Keller from?\nIs that the setup for a joke or are you actually asking?\nWhatever! Do you want it or not?\nUhhh maybe before I buy it you could let me try it out for a day.\nThis ain’t no Best Buy, bitch. Pay up.\nC’mon, if I beat you at a puzzle will you let me try it out?\nSure. No risk losing to you.\nCool lemme take an addy first, it’s kinda hard to play this without drugs.\nOh wait! Just trade me your adderrall for the MP3 player.\nBut then I can’t abuse this adderall, what the fuck is that shit?\nWhatever let’s go."
+  DialogueCharacterNames: "KYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR\nEMILY\nKYLAR"

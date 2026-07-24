@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0007
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 85f67bb6d3077b640b1a8c9cd99cf830, type: 3}
+  Timestamps: "0.028\n5.166\n7.068\n10.305\n13.541\n15.276\n18.78\n20.215\n24.185\n25.987\n28.389\n32.293\n33.995\n35.663\n36.364\n39.434\n43.004\n44.572\n45.94\n46.808\n48.042\n52.08\n53.581"
+  WrittenDialogue: "Ay there’s my beautiful blonde student! How ya doing, Smiles?\nWh-Who’s “Smiles”?\nRemember? It was what I called ya when you were in my class.\nYou literally never called me that cause I was never happy to be there.\nOh no you smiled in there.\nYeah like an awkward “what the fuck” smile when you’d slap my underaged ass.\nI never got you alone.\nYeah you’re right, cause it was in the middle of class where everyone saw!\nOh like it’s that big of a deal.\nYou got suspended from teaching for a month!\nKeyword: suspended! I came back didn’t I?\nOnly cause you threatened the principal.\nYeah well fuck that bitch!\nYou first.\nI’ve had enough of your political correctness bullshit!\nI’m not sure if there’s a political divide on protecting the rights of children.\nOh big words!\nWhat big word did I use??\nPolitical!\nYou just said political!\nI’m gonna show ya how fuckin’ dumb you are after I beat your ass in this puzzle!\nYeah that’ll prove it."
+  DialogueCharacterNames: "COACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA"

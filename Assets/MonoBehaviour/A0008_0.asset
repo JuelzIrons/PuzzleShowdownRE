@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0008
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 13dc4a5844fb7664b982a68e17a36311, type: 3}
+  Timestamps: "0.063\n3.233\n6.169\n8.271\n10.84\n19.682\n23.286\n29.692\n30.76\n36.666\n38.201\n42.705\n44.14\n49.879\n54.484\n57.253\n62.759\n65.928\n69.899\n74.304\n75.138\n82.378\n84.514\n87.517\n91.721\n93.923\n96.426\n102.298\n105.034\n114.243\n123.086\n123.953"
+  WrittenDialogue: "What brings you to crossing my path?\nJ-Jeffery? Why are you talking like that?\nUh... Ari?\nYeah what’s with the trench coat?\nOh it’s just a part of my apprenticeship. I needed to up my puzzle game by isolating myself from the human distractions of the world.\nAnd you’re sure that’s the best way to go about it?\nUm,{1} perhaps I didn’t consider empathy towards everybody. Especially you.\nWhy me?\nWell to be unempathetic towards gay people would be wrong. Homophobic.\nGee thanks...\nThanks for being my friend despite both of us being so lonely.\nYeah sure.\nBut then I thought, if we have that in common should we really be that lonely together?\nMaybe a relationship doesn’t have to be decided by sexuality.\nUhh I think it kinda does.\nBut why? Do you really need to be straight to hug and cuddle me in my times of need?\nYeah, I do. {1}Are you seeing how this wouldn’t be fair?\nI would hug and cuddle you too. I’d even kiss you if you wanted.\nEw- that’s not the point. It’s entirely unbalanced and unfair to me.\nHow?\nCause if we “ignored sexuality” you’d get the girlfriend you always wanted and I’m stuck compromising not getting the girlfriend I wanted.\nShould you really be that selfish?\nWhat the fuck do you mean selfish?? I’m selfish for being gay?\nYou can’t guilt me into being straight while you’re dressed like the Columbine shooters!\nI should’ve just known.\nKnown to not resent gay women?\nThe modifier of “gay” is unnecessary. {1}You’ve taught me a valuable lesson, Ari.\nYeah and I don’t wanna be your fuckin’ friend anymore either.\nWithout your friendship the conclusion is easy... Women in general are a distraction from my ultimate conquest.\nI don’t need you, or Emily, or anybody! {1}All I need is The Puzzler’s guidance in the pursuit of Puzzle Shogun!!!\nOh shit."
+  DialogueCharacterNames: "JEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nJEFFERY\nARI"

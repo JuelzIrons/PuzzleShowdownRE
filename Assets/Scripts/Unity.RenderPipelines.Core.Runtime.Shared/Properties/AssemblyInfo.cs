@@ -1,0 +1,5 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.HighDefinition.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.HighDefinition.Runtime")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.Universal.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.Universal.Runtime")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0004
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 583f4a7511f89724abb1cc4706a7cbcb, type: 3}
+  Timestamps: "0.065\n1.166\n1.833\n3.902\n6.171\n9.041\n10.509\n12.945\n14.78\n15.781\n19.985\n20.786\n24.289\n25.624\n30.963\n32.297\n35.233\n36.902\n38.103\n40.472\n45.243\n46.511\n50.749\n53.018\n55.053\n56.254\n57.589\n60.926\n63.028\n63.929\n67.799\n69.601\n74.106\n76.341\n81.847"
+  WrittenDialogue: "Oh hey Emily.\nWhat?\nNothing, just hi.\nAre you still mad I stole from the place you work at?\nYou have the world record in stealing from the place I work at.\nDamn sucks to be employed.\nHave you done literally anything after high school?\nI’ve done ketamine, that’s a new one.\nWhat do you want??\nBitch you came up to me!{1} Wait actually I got something for ya.\nDon’t pull out a gun.\nYou wanna buy this MP3 player? Really good price, 20 bucks.\nWhy would I want that?\nIt’s good, it has the entire discographies of Phil Collins and Rick Springfield.\nI don’t even know who that is!\nOkay what about this really fancy watch?\nThat’s pretty clearly fake.\nWhat? No way.\nSince when is there 2 L’s in “Rolex”?\nKelly, how is the dumbest slut I knew in high school suddenly an expert in watches?\nWait who are we talking about?\nOk whatever. How about we play this puzzle thing but make it interesting?\nLike a bet? I don’t have anything to bet.\nWhat about your ring? Looks valuable.\nMy purity ring?\nWhen did that start?\nIt’s just so god watches me at all times to make sure I don’t stray.\nDamn God must be a pervert then.\nExcuse me?\nWhatever, you put up your ring and I’ll put up this watch and MP3 player.\nI don’t know if I wanna bet this though.\nYeah if I was a dumb whore like you I wouldn’t risk anything on me being smarter than someone.\nHey! I’m tired of your shit, let’s play!\nCool, before we do lemme just take some vitamins that are definitely not more adderrall."
+  DialogueCharacterNames: "KELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY\nKELLY\nEMILY"

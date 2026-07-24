@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005A.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: cbba75f77b74a89419720599681661cf, type: 3}
+  Timestamps: "1.931\n4.033\n7.37\n12.141\n15.745\n19.081\n22.918"
+  WrittenDialogue: "He crashed the car into a tree!\nKidnapper guy, are you still alive?\n...Well that solves that but how do we get out of here? I can’t get untied.\nI hope I’m white and famous enough for the police to go looking for us.\nWhat if this is God getting me back for letting that kid drown?\nChrist maybe I do belong at a satanist swinger party."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

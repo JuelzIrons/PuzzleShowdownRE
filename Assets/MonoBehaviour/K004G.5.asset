@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004G.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 32de2de7dd9eb744f9ec4b6e965ace7a, type: 3}
+  Timestamps: "0.027\n2.897\n6.567\n10.171\n11.739\n16.11\n17.778"
+  WrittenDialogue: "Excellent, give in to your urges!\nWith our combined power we can start the new world order!\nWe can start... the church of Kelly!\nYes my Mistress.\nTo the internet! To spread the message, not to jack off to Carl’s Jr commercials!\nRight away!"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nPRIEST\nKELLY\nPRIEST"

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K001.1
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 6cbedda2009f1fa48a73c42aa094e2df, type: 3}
+  Timestamps: "0.065\n1.9\n6.004"
+  WrittenDialogue: "ACTION\nDamn I didn’t know you were a prodigy.  Don’t stop now, keep it going!"
+  DialogueCharacterNames: "ACTION\nKELLY"

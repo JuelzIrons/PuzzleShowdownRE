@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0005
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 86f76a7586b5a4a4a8f67c0a11d9a0c6, type: 3}
+  Timestamps: "0.032\n5.104\n7.773\n11.577\n13.479\n17.016\n18.918\n22.622\n24.19\n26.325\n28.361\n30.897\n34.901\n35.801\n37.536\n40.94\n43.209\n48.447\n53.619\n57.223\n62.128\n64.964\n66.599\n68.868\n70.803\n74.74\n76.142\n81.213\n83.349"
+  WrittenDialogue: "Oh hello, Ari. Did you see they might make a new Jak and Daxter?\nHave we ever talked about that before?\nUm no, but it’s big news.\nTo who?\nUh, {1}how are you doing at puzzles by the way?\nWell I’ve been winning so far.\nYeah I’m getting really good too, I bet you’re impressed.\nI mean it’s okay.\nDid I mention I think you’re cute?\nMaybe you shouldn’t mention that.\nYou’re so humble, that’s why I love you.\nThat’s great but I’m gay so I can never love you back, sorry.\nWhat??\nDo you even know what that is?\nOf course, the football team would call me that everyday.\nReally shouldn’t be used as an insult like that but-\nIt’s just my luck! The last girl in town I had a chance with and she’s gay!\nIf it makes you feel any better, if I was straight I still definitely wouldn’t date you.\nHow can I feel better when I’m in perpetual loneliness?\nI know how ya feel but the most I could really do is.. {0.7}Be your friend.\nA girl? Who’s a friend?\nUh yeah technically.\nThat sounds pretty good. Thanks!\nYeah like whatever.\nAs friends would you like to practice a round of puzzles with me?\nSure I can do that.\nBut just cause we’re friends, don’t think I’ll go easy on you!{1}\nThat was a really weird cadence for that."
+  DialogueCharacterNames: "JEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI\nJEFFERY\nARI"

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b80866749e6ddd84468fe9aa8e26d0, type: 3}
+  m_Name: Jeffrey
+  m_EditorClassIdentifier:
+  Type: 11
+  PodColorShiftValue: {r: 0.5882353, g: 0.90588236, b: 0.12941177, a: 1}
+  CharacterPortraitRight: {fileID: 21300000, guid: 434350e1e674eeb41a7729236c135eed, type: 2}
+  CharacterPortraitLeft: {fileID: 21300000, guid: 434350e1e674eeb41a7729236c135eed, type: 2}
+  CharacterInnerBannerP1: {fileID: 21300000, guid: 4849e6bd63a6d3a4dbefaeeb815bca74, type: 2}
+  CharacterInnerBannerP2: {fileID: 21300000, guid: 4849e6bd63a6d3a4dbefaeeb815bca74, type: 2}
+  CharacterSplashSprite: {fileID: 21300000, guid: b460e4d10ff8da0469a4ce172be127c9, type: 2}
+  VoiceBoxSO: {fileID: 11400000, guid: 4e5b855c6506f6e4d8d83172bb128304, type: 2}

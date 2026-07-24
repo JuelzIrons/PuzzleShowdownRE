@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005A
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: c9b50e7b0f6077c4493741fb536d83f4, type: 3}
+  Timestamps: "0.036\n2.872\n5.474\n10.713\n12.748\n14.917\n16.252\n21.991\n23.893\n31.067\n33.269\n40.042\n41.11\n50.119\n54.323\n56.358"
+  WrittenDialogue: "I can’t believe we got kidnapped by this psycho!\nAll because you told me to get on social media!\nIt’s okay you’re safe with me. I’ll protect you from the evil construct.\nWhat the fuck are you talking about!?\nStop it I love you Kelly!\nYou don’t even know me!\nI know every photograph you’ve ever taken. From modeling to the screen, I’ve analyzed you.\nEven my shitty cell phone pictures?\nOf course. Especially your cell phone swimsuit set that got you discovered in 2009!\nWhy’d you have to take those pictures so good!\nThe pure essence of your body and facial structure will serve as the perfect goddess to my colony.\nLet us go!\nYou needn’t worry my sweet Kelly. Once we’ve arrived I’ll deprogram the cynical mind this western world has forced upon you!\nYou’re literally the only person here forcing anything on anyone!\nYou gotta get us out of this."
+  DialogueCharacterNames: "KELLY\nKELLY\nKIDNAPPER\nKELLY\nKIDNAPPER\nKELLY\nKIDNAPPER\nKELLY\nKIDNAPPER\nKELLY\nKIDNAPPER\nKELLY\nKIDNAPPER\nKELLY\nKELLY"

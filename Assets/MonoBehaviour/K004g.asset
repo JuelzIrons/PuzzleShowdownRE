@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004g
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: c68ea9ef550f13e4d9878de9552024e4, type: 3}
+  Timestamps: "0.033\n3.437\n5.472\n8.508\n13.246\n15.315\n19.453\n24.024\n28.528"
+  WrittenDialogue: "Hasn’t this place been so much more fun since I took over?\nYes, Mistress Kelly!\nYou called it “satanism”? I call it fun!\nThere’s no rules or anything! Sniff Sharpies, rip a mattress tag, live a little!\nYou’ve shown us the way.\nDude I flirted with you for two minutes and you gave this all up instantly.\nWhy would our creator put all this fun stuff in the world for us to just not do it?\nThe time of sin is upon us! Be free my children!"
+  DialogueCharacterNames: "KELLY\nPRIEST\nKELLY\nKELLY\nPRIEST\nKELLY\nKELLY\nKELLY"

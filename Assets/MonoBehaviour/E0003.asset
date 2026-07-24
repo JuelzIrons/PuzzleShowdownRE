@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0003
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 17d5e14e103a14941a90768e28b16ade, type: 3}
+  Timestamps: "0.072\n1.073\n2.341\n8.046\n10.148\n14.953\n18.39\n21.46\n24.763\n26.598\n28.5\n33.472\n35.874\n36.742\n38.777\n40.212"
+  WrittenDialogue: "Emily!\nNot you again.\nI had a reservation at a really fancy place.{1} Ever been to The Macaroni Grill?\nYeah I went there when I turned 12.\nOh now don’t you go blowing off another dinner date. You barely text me anymore.\nDude did you not see all our phones got hacked by this puzzle thing yesterday?\nYesterday? You haven’t texted back in 3 months.\nYou can’t even text forwards, what the fuck does “I JOVE YOU” mean?\nOh that was supposed to be an L!\nThe only L you’ve ever avoided.\nLook enough of this petty arguing, why don’t we bond over a nice round of puzzles?\nSure fine, can I have 40 dollars first?\nFor what?\nIf you thought I wasn’t texting back before-\nOkay! Okay!"
+  DialogueCharacterNames: "JECKA’S DAD\nEMILY\nJECKA’S DAD\nEMILY\nJECKA’S DAD\nEMILY\nJECKA’S DAD\nEMILY\nJECKA’S DAD\nEMILY\nJECKA’S DAD\nEMILY\nJECKA’S DAD\nEMILY\nJECKA’S DAD"

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0011
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 323040bdde4763f43a6a8e187ff854e8, type: 3}
+  Timestamps: "0.067\n4.638\n6.306\n8.776\n10.911\n15.549\n18.752\n25.559\n31.965\n33.233\n41.508\n45.579\n48.081\n50.584\n54.688\n56.79\n63.13\n64.431\n69.203\n76.61\n78.011\n87.421\n89.857"
+  WrittenDialogue: "It seems it’s the end of the line... Was it worth it?\nWas what worth it?\nI know you weren’t playing for a prize.\nWhat? Then what was I playing for?\nChasing a distraction.{1} Or running away from yourself, rather.\nI guess playing helped me take my mind off life.\nDid it? Did any of your problems go away? ...Did you truly feel better?\nI’ll ask it again... Was it worth it?\nI don’t know.\nPlaying my game, what did it really bring you? You could have waited for someone else to win for this to all be over.\nAll playing did was help me encounter everything I already knew.\nThere’s a lesson to be learned in this.\nIf you’re not straight men’ll try to kill you?\nFocus on yourself! Not the games in front of you.\nBut why would you put it there in the first place?\nOnly one winner will get the true answer to that question.  You’re free to deduce on your own though.\nCause you’re a psychopath!\nYou see how easy it is to analyze others before analyzing yourself?\nI hear you’re cripplingly lonely, that’s something you should work on first before working on me.\nYou would be too.\nDeflections and excuses, y’know what? Let’s play!  Beating 10 other players didn’t help you but maybe 11th time’s the charm.\nI’m gonna win this and see what your deal really is."
+  DialogueCharacterNames: "THE PUZZLER\nARI\nTHE PUZZLER\nARI\nTHE PUZZLER\nARI\nTHE PUZZLER\nTHE PUZZLER\nARI\nTHE PUZZLER\nARI\nTHE PUZZLER\nARI\nTHE PUZZLER\nARI\nTHE PUZZLER\nARI\nTHE PUZZLER\nTHE PUZZLER\nARI\nTHE PUZZLER\nARI"

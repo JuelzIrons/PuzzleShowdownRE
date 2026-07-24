@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0004
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 24d890005798df34b8589acf2ff2b33a, type: 3}
+  Timestamps: "0.039\n2.007\n5.578\n7.98\n9.715\n13.719\n17.089\n18.691\n20.693\n22.428\n24.53\n29.468\n32.271\n35.708\n37.643\n42.114\n43.516\n49.455\n52.258\n58.13\n61.167\n64.17"
+  WrittenDialogue: "Yo what’s up bitch you straight yet?\nThat’s not really how it works. {0.5}And fuck you leave me alone.\nDude I bet you’re only gay cause you dated losers.\nWell I definitely shouldn’t date you then.\nYeah right, do you realize how many games of lacrosse I’ve won?\nIs that like a sport or just a game?\nHow could you even say that to me?\nAnd all the shit you said to me was just fine??\nThat was me just trying to help you.\nI’m gonna help you to a loss in this puzzle!\nOh you don’t even wanna start there. Do you realize how good I am? No one beats me at puzzles!\nIt’s gonna really suck when I beat you at something you care about then.\nYeah why don’t you care about not going to hell for being gay, bitch!\nI knew you started the straight club!\nOh so you’re allowed to have pride parades but I can’t celebrate loving bitches?\nDon’t they have gentlemen’s clubs?\nI’m not old enough to get in to one of those, but you’re allowed to be gay at whatever age you want. So who’s really oppressed?\nI think you need to read more books about this before speaking on it.\nSorry reading’s gay I don’t really do that.  What’s next? You want me to do more gay stuff like jogging and math?\nOkay I guess I’m just gonna have to show you how stupid you are.\nBitch my IQs like 98 I’ll kill you."
+  DialogueCharacterNames: "KYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR\nARI\nKYLAR"

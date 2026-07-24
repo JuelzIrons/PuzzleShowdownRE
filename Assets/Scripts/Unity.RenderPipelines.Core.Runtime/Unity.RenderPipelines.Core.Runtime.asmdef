@@ -1,0 +1,10 @@
+{
+  "name": "Unity.RenderPipelines.Core.Runtime",
+  "references": [
+    "Unity.Mathematics",
+    "Unity.InputSystem",
+    "UnityEngine.UI",
+    "Unity.Collections"
+  ],
+  "allowUnsafeCode": true
+}

@@ -1,0 +1,8 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Animation.Runtime")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Animation.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Animation.Tests.RuntimeTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.IK.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.IK.Runtime")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.SpriteShape.Runtime")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.PSDImporter.Editor")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

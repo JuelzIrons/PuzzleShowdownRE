@@ -1,0 +1,7 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Authentication.PlayerAccounts.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Authentication.PlayerAccounts.Tests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Authentication.PlayerAccounts.EditorTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Authentication.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Authentication.TestUtils")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

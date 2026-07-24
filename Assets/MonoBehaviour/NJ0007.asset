@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: NJ0007
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: c165331237ce7154891f39c01ae90152, type: 3}
+  Timestamps: "0.065\n3.035\n4.103\n6.138\n7.173\n11.544\n13.045\n14.78\n21.02\n28.794\n30.596\n36.168\n39.572\n42.208\n44.009\n46.412\n50.349\n54.22\n56.856\n58.524\n66.198\n69.201\n70.769\n76.041"
+  WrittenDialogue: "I didn’t expect to see you so soon.\nIs this the end?\nYeah we beat everybody else, it has to be.\nAnd you’re next.\nSo determined for something you found so tedious only days ago.\nWe’re not here for the puzzle, dude.\nYeah we’re here to get our prize.\nOh but you stayed for the puzzle. At any point you could have put it down, but you chose not to.\nFirst it started simple, but then it grew to be harder. Intellectually captured in a state of preoccupation.\nIsn’t that most games?\nMost games you keep playing. They call it a learning curve, but remember this...\n...A curve is merely the start to a spiral.\nWe’ve been in a downward spiral way before you got here.\nYeah, so the prize?\nSo it’s the meaning of life you seek?\nI mean that’s different for literally every person so yeah?\nMy meaning of life includes being rich so you better have money in the bank, bub.\nEverything your heart should desire.\nAnd who decides that?\nWhatever needs your societal gaps have created.  The meaning of life will always adapt to the predicament you’re in, of course.\nI think I’d know what I really need out of life, okay?\nYeah you don’t know us!\nIn this final puzzle... {0.8}There’s only one way to find out.{1}"
+  DialogueCharacterNames: "THE PUZZLER\nJECKA\nNICOLE\nJECKA\nTHE PUZZLER\nNICOLE\nJECKA\nTHE PUZZLER\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nTHE PUZZLER\nJECKA\nNICOLE\nTHE PUZZLER\nNICOLE\nJECKA\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nJECKA\nTHE PUZZLER"

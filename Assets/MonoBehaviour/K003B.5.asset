@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K003B.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 7cc78cadd3a11364fb2592246d63efe2, type: 3}
+  Timestamps: "0.007\n2.976\n3.877\n5.646\n8.449\n9.716\n11.385\n13.086\n14.855\n15.756\n18.759\n20.16\n23.23\n24.198\n26.233\n27.634\n31.672"
+  WrittenDialogue: "No more mister nice guy. The jig is up!\nWhat’s a jig?\nLet’s get down to brass tax.\nI never bought brass in my life how would you tax me on it?\nDon’t beat around the bush.\nI’m not, I wax twice a week.\nDon’t make me waterboard you!\nCan I look that up on Urban Dictionary?\nI’ve had enough!\nOne bite of your donut’s enough? Do you have an eating disorder?\nI don’t think you understand.\nI understand plenty, every hot girl has an eating disorder.\nThis is hopeless.\nDon’t give up hope. There’s a hotline for this.\nShut up!!\nI’ll ask it plainly, what happened the night of that party?"
+  DialogueCharacterNames: "COP\nKELLY\nCOP\nKELLY\nCOP\nKELLY\nCOP\nKELLY\nCOP\nKELLY\nCOP\nKELLY\nCOP\nKELLY\nCOP\nCOP"

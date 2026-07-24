@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0003
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 8a258d6590bb1c54ea495593ddf2afc2, type: 3}
+  Timestamps: "0.065\n1.567\n2.501\n5.537\n8.173\n9.942\n10.842\n14.846\n17.883\n19.151\n21.22\n25.624\n29.661\n31.53\n33.098\n34.366\n37.669\n37.838"
+  WrittenDialogue: "Yo what’s up, bitch?\nWhat do you want??\nHeard you were in the puzzle scene. I wanted to see what’s up.\nYeah I’m in it just to get this virus off my phone.\nGuess it won’t end well for ya.\nWhat do you mean?\nI’m playing to win, you’re just playing to not lose and get this over with.\nYou think you’re gonna win the puzzle showdown? You can’t even read!\nMan, I can read.\nI mean more than the logo on a football.\nYeah no like books ‘n shit? I got them Dr. Seuss joints on lock.\nIs it racist that you slip into blaccent when describing how you can’t read?\nWait the answer’s “yes” why’d I even ask that?\nOh I’ll show you racist.\nYou show me everyday.\nI’m gonna be racist against women when I whip your ass in this puzzle!\nYeah right, you’re on.{1}"
+  DialogueCharacterNames: "KYLAR\nNICOLE\nKYLAR\nNICOLE\nKYLAR\nNICOLE\nKYLAR\nNICOLE\nKYLAR\nNICOLE\nKYLAR\nNICOLE\nNICOLE\nKYLAR\nNICOLE\nKYLAR\nNICOLE"

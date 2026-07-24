@@ -1,0 +1,14 @@
+namespace LibTessDotNet
+{
+	internal struct ContourVertex
+	{
+		public global::LibTessDotNet.Vec3 Position;
+
+		public object Data;
+
+		public override string ToString()
+		{
+			return $"{Position}, {Data}";
+		}
+	}
+}

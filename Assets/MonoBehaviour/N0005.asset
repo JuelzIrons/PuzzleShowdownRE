@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0005
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 5f6c78bf088f95d419065f2bb28fc3e7, type: 3}
+  Timestamps: "0.064\n1.866\n4.035\n8.606\n12.577\n16.447\n18.516\n23.621\n25.59\n31.563\n34.232\n40.004\n42.84\n44.509\n47.512\n50.848\n53.384\n56.888\n60.725\n64.429\n68.366"
+  WrittenDialogue: "Aw look who’s here!\nCoach Colby?? You don’t even have a phone.\nCourse I do. Gotta keep up with my girlfriends somehow. I still got it, you know?\nAre any of these girlfriends coincidentally not old enough to drive?\nEverybody’s so sensitive now. My students are people too.\nPeople who can’t legally consent.\nAlright that’s enough! You think you’re so smart? Why don’t you beat me in these puzzles?\nWhy do old people pluralize everything?\nGot a problem with how I talk? You kids eat at a fancy restaurant like Chipotle’s and think you know everything.\nIt’s not Chipotle’s! There’s no S at the end of that.\nOh excuse me for not speaking Mexican, you kids are so worldly now!\nI’ll just play you in this puzzle shit cause you’re clearly gonna lose.\nAnd what makes you so sure of that?\nYou probably don’t even know what buttons to push. Do you even know if your phone is on?\nCourse it’s on! It’s just in brown-out mode to save battery.\nPhones don’t have “brown-out mode”.\nOh wait... Oh that’s why she wasn’t calling me back!\nNow I feel bad about mailing naked pictures of her to her parents.\nThere’s like so many crimes just in that sentence-- Okay can we play now??\nOkay but I’ll warn ya, I’m good!"
+  DialogueCharacterNames: "COACH COLBY\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nCOACH COLBY\nNICOLE\nCOACH COLBY"

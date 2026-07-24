@@ -1,0 +1,13 @@
+{
+  "name": "Unity.Services.Multiplayer",
+  "references": [
+    "Newtonsoft.Json",
+    "Unity.Services.Core",
+    "Unity.Services.Core.Internal",
+    "Unity.Networking.Transport",
+    "Unity.Services.QoS",
+    "Unity.Collections",
+    "Unity.Netcode.Runtime"
+  ],
+  "allowUnsafeCode": true
+}

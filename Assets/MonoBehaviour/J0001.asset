@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0001
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 3f98b23343b115947a970e6df4ce73dd, type: 3}
+  Timestamps: "0.032\n0.966\n1.767\n4.87\n6.839\n10.876\n14.346\n16.615\n19.852\n23.655\n26.492\n31.697\n33.932\n35.868\n37.903\n42.174\n45.31\n48.547\n52.651\n58.156\n59.925\n62.194\n63.762\n67.232\n70.168\n75.407\n77.175\n79.711"
+  WrittenDialogue: "Hey what’s up?\nLeave me alone.\nAw dude don’t act like you’re too cool to talk to me outside of class.\nI don’t talk to you inside of class!\nWell whatever, I’m bout to hit it big then you’re gonna be crawling to be with me.\nHow many times do we have to tell you? There’s no pro lacrosse league!\nYeah there is! They just aren’t profitable yet.\nWell okay go play lacrosse and be broke and undesirable.\nThat’s not even what I meant though. I just found an opportunity of a lifetime.\nLiterally how? I’m pretty sure you’re a felon.\nCriminal record’s got nothing to do with it, baby. I just gotta solve some puzzles and I’m set for life.\nYou clicked on that ad too?\nWhat ad? How’d you know about that?\nCause literally everybody in town clicked on it.\nAnd to think I just wanted a phone. After I win this I’m gonna be a billionaire!\nYeah but that requires you to not be fucking stupid as shit.\nThe money can sit in a bank account, how smart do you gotta be for that?\nI’m not talking about holding the money, dipshit! It’s doing the puzzle, that’s my point!\nOh yeah you think you’re so fuckin’ smart cause you can like read books and do long division.\n...Was that a question or a statement?\nLet’s face it, bitches like you are dumb!\nYou’re calling me dumb??\nYeah being a woman’s easy, lower standards across the board.\nI’ll show you how easy it is after I beat you in this puzzle!\nYeah let’s go! I just jacked off to some Asian torture porn so I won’t go easy on you.\nWhy would you tell anyone that??\nCause women are fucking worthless!!!"
+  DialogueCharacterNames: "KYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR\nJECKA\nKYLAR"

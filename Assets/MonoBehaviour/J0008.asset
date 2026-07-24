@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0008
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 2d7802986baf54e4c988ef6c75e40a9f, type: 3}
+  Timestamps: "0.036\n2.739\n4.04\n4.774\n6.476\n7.31\n12.282\n13.416\n16.82\n19.522\n23.994\n28.164\n31.635\n34.037\n39.709\n40.81\n44.681\n46.349\n49.419\n53.69\n56.426"
+  WrittenDialogue: "Man I don’t like the looks of this dark alley.\nWatch out!!!\nWhat the hell??\nOh you think you’re good, huh!?\nWho’re you!?\nI be out here in the streets for real, man! I’m swapping blocks so fast made the whole block hot!\nWhat does that mean?\nI’m the Chustler! The chain-hustler, ya dig??\nOh! Well I hear chains are illegal now.\nGive a fuck about the law! The white man’s puzzle law ain’t shit I’ll motherfuckin’ kill you!!\nI can’t tell if it’s an Asian guy trying to sound black or a black guy trying to sound Asian!\nI’m one race! And that’s in this puzzle race you heard??\nSo I guess you’re good at puzzles then?\nGood don’t even describe this level, boy. I be dropping chains like no tomorrow, like no next week!\nLike no next month!\nGarbage blocks like no next year! Like Steve Harvey ain’t getting renewed!\nIs that the Mr. Potato Head guy?\nShut up and pull up that phone bitch! It’s time to lose!\nY’know what Mr. Chustler? I’m gonna beat your ethnically ambiguous ass!\nAwwwwww bitch you 'on done it now!"
+  DialogueCharacterNames: "JECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER"

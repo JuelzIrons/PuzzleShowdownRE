@@ -1,0 +1,7 @@
+{
+  "name": "Unity.InputSystem",
+  "references": [
+    "UnityEngine.UI"
+  ],
+  "allowUnsafeCode": true
+}

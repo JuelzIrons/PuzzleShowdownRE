@@ -1,0 +1,411 @@
+namespace UnityWebSocketSharp.Net
+{
+	internal sealed class EndPointListener
+	{
+		private global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> _all;
+
+		private global::System.Collections.Generic.Dictionary<global::UnityWebSocketSharp.Net.HttpConnection, global::UnityWebSocketSharp.Net.HttpConnection> _connections;
+
+		private object _connectionsSync;
+
+		private static readonly string _defaultCertFolderPath;
+
+		private global::System.Net.IPEndPoint _endpoint;
+
+		private global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> _prefixes;
+
+		private bool _secure;
+
+		private global::System.Net.Sockets.Socket _socket;
+
+		private global::UnityWebSocketSharp.Net.ServerSslConfiguration _sslConfig;
+
+		private global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> _unhandled;
+
+		public global::System.Net.IPAddress Address => _endpoint.Address;
+
+		public bool IsSecure => _secure;
+
+		public int Port => _endpoint.Port;
+
+		public global::UnityWebSocketSharp.Net.ServerSslConfiguration SslConfiguration => _sslConfig;
+
+		static EndPointListener()
+		{
+			_defaultCertFolderPath = global::System.Environment.GetFolderPath(global::System.Environment.SpecialFolder.ApplicationData);
+		}
+
+		internal EndPointListener(global::System.Net.IPEndPoint endpoint, bool secure, string certificateFolderPath, global::UnityWebSocketSharp.Net.ServerSslConfiguration sslConfig, bool reuseAddress)
+		{
+			_endpoint = endpoint;
+			if (secure)
+			{
+				global::System.Security.Cryptography.X509Certificates.X509Certificate2 certificate = getCertificate(endpoint.Port, certificateFolderPath, sslConfig.ServerCertificate);
+				if (certificate == null)
+				{
+					throw new global::System.ArgumentException("No server certificate could be found.");
+				}
+				_secure = true;
+				_sslConfig = new global::UnityWebSocketSharp.Net.ServerSslConfiguration(sslConfig);
+				_sslConfig.ServerCertificate = certificate;
+			}
+			_prefixes = new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>();
+			_connections = new global::System.Collections.Generic.Dictionary<global::UnityWebSocketSharp.Net.HttpConnection, global::UnityWebSocketSharp.Net.HttpConnection>();
+			_connectionsSync = ((global::System.Collections.ICollection)_connections).SyncRoot;
+			_socket = new global::System.Net.Sockets.Socket(endpoint.Address.AddressFamily, global::System.Net.Sockets.SocketType.Stream, global::System.Net.Sockets.ProtocolType.Tcp);
+			if (reuseAddress)
+			{
+				_socket.SetSocketOption(global::System.Net.Sockets.SocketOptionLevel.Socket, global::System.Net.Sockets.SocketOptionName.ReuseAddress, optionValue: true);
+			}
+			_socket.Bind(endpoint);
+			_socket.Listen(500);
+			_socket.BeginAccept(onAccept, this);
+		}
+
+		private static void addSpecial(global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> prefixes, global::UnityWebSocketSharp.Net.HttpListenerPrefix prefix)
+		{
+			string path = prefix.Path;
+			foreach (global::UnityWebSocketSharp.Net.HttpListenerPrefix prefix2 in prefixes)
+			{
+				if (prefix2.Path == path)
+				{
+					string message = "The prefix is already in use.";
+					throw new global::UnityWebSocketSharp.Net.HttpListenerException(87, message);
+				}
+			}
+			prefixes.Add(prefix);
+		}
+
+		private void clearConnections()
+		{
+			global::UnityWebSocketSharp.Net.HttpConnection[] array = null;
+			lock (_connectionsSync)
+			{
+				int count = _connections.Count;
+				if (count == 0)
+				{
+					return;
+				}
+				array = new global::UnityWebSocketSharp.Net.HttpConnection[count];
+				_connections.Values.CopyTo(array, 0);
+				_connections.Clear();
+			}
+			global::UnityWebSocketSharp.Net.HttpConnection[] array2 = array;
+			for (int i = 0; i < array2.Length; i++)
+			{
+				array2[i].Close(force: true);
+			}
+		}
+
+		private static global::System.Security.Cryptography.RSACryptoServiceProvider createRSAFromFile(string path)
+		{
+			global::System.Security.Cryptography.RSACryptoServiceProvider rSACryptoServiceProvider = new global::System.Security.Cryptography.RSACryptoServiceProvider(2048);
+			byte[] keyBlob = global::System.IO.File.ReadAllBytes(path);
+			rSACryptoServiceProvider.ImportCspBlob(keyBlob);
+			return rSACryptoServiceProvider;
+		}
+
+		private static global::System.Security.Cryptography.X509Certificates.X509Certificate2 getCertificate(int port, string folderPath, global::System.Security.Cryptography.X509Certificates.X509Certificate2 defaultCertificate)
+		{
+			if (folderPath == null || folderPath.Length == 0)
+			{
+				folderPath = _defaultCertFolderPath;
+			}
+			try
+			{
+				string text = global::System.IO.Path.Combine(folderPath, $"{port}.cer");
+				string path = global::System.IO.Path.Combine(folderPath, $"{port}.key");
+				if (global::System.IO.File.Exists(text) && global::System.IO.File.Exists(path))
+				{
+					return new global::System.Security.Cryptography.X509Certificates.X509Certificate2(text)
+					{
+						PrivateKey = createRSAFromFile(path)
+					};
+				}
+			}
+			catch
+			{
+			}
+			return defaultCertificate;
+		}
+
+		private void leaveIfNoPrefix()
+		{
+			if (_prefixes.Count > 0)
+			{
+				return;
+			}
+			global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> unhandled = _unhandled;
+			if (unhandled == null || unhandled.Count <= 0)
+			{
+				unhandled = _all;
+				if (unhandled == null || unhandled.Count <= 0)
+				{
+					Close();
+				}
+			}
+		}
+
+		private static void onAccept(global::System.IAsyncResult asyncResult)
+		{
+			global::UnityWebSocketSharp.Net.EndPointListener endPointListener = (global::UnityWebSocketSharp.Net.EndPointListener)asyncResult.AsyncState;
+			global::System.Net.Sockets.Socket socket = null;
+			try
+			{
+				socket = endPointListener._socket.EndAccept(asyncResult);
+			}
+			catch (global::System.ObjectDisposedException)
+			{
+				return;
+			}
+			catch (global::System.Exception)
+			{
+			}
+			try
+			{
+				endPointListener._socket.BeginAccept(onAccept, endPointListener);
+			}
+			catch (global::System.Exception)
+			{
+				socket?.Close();
+				return;
+			}
+			if (socket != null)
+			{
+				processAccepted(socket, endPointListener);
+			}
+		}
+
+		private static void processAccepted(global::System.Net.Sockets.Socket socket, global::UnityWebSocketSharp.Net.EndPointListener listener)
+		{
+			global::UnityWebSocketSharp.Net.HttpConnection httpConnection = null;
+			try
+			{
+				httpConnection = new global::UnityWebSocketSharp.Net.HttpConnection(socket, listener);
+			}
+			catch (global::System.Exception)
+			{
+				socket.Close();
+				return;
+			}
+			lock (listener._connectionsSync)
+			{
+				listener._connections.Add(httpConnection, httpConnection);
+			}
+			httpConnection.BeginReadRequest();
+		}
+
+		private static bool removeSpecial(global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> prefixes, global::UnityWebSocketSharp.Net.HttpListenerPrefix prefix)
+		{
+			string path = prefix.Path;
+			int count = prefixes.Count;
+			for (int i = 0; i < count; i++)
+			{
+				if (prefixes[i].Path == path)
+				{
+					prefixes.RemoveAt(i);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private static global::UnityWebSocketSharp.Net.HttpListener searchHttpListenerFromSpecial(string path, global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> prefixes)
+		{
+			if (prefixes == null)
+			{
+				return null;
+			}
+			global::UnityWebSocketSharp.Net.HttpListener result = null;
+			int num = -1;
+			foreach (global::UnityWebSocketSharp.Net.HttpListenerPrefix prefix in prefixes)
+			{
+				string path2 = prefix.Path;
+				int length = path2.Length;
+				if (length >= num && path.StartsWith(path2, global::System.StringComparison.Ordinal))
+				{
+					num = length;
+					result = prefix.Listener;
+				}
+			}
+			return result;
+		}
+
+		internal static bool CertificateExists(int port, string folderPath)
+		{
+			if (folderPath == null || folderPath.Length == 0)
+			{
+				folderPath = _defaultCertFolderPath;
+			}
+			string path = global::System.IO.Path.Combine(folderPath, $"{port}.cer");
+			string path2 = global::System.IO.Path.Combine(folderPath, $"{port}.key");
+			if (global::System.IO.File.Exists(path))
+			{
+				return global::System.IO.File.Exists(path2);
+			}
+			return false;
+		}
+
+		internal void RemoveConnection(global::UnityWebSocketSharp.Net.HttpConnection connection)
+		{
+			lock (_connectionsSync)
+			{
+				_connections.Remove(connection);
+			}
+		}
+
+		internal bool TrySearchHttpListener(global::System.Uri uri, out global::UnityWebSocketSharp.Net.HttpListener listener)
+		{
+			listener = null;
+			if (uri == null)
+			{
+				return false;
+			}
+			string host = uri.Host;
+			bool flag = global::System.Uri.CheckHostName(host) == global::System.UriHostNameType.Dns;
+			string text = uri.Port.ToString();
+			string text2 = global::UnityWebSocketSharp.Net.HttpUtility.UrlDecode(uri.AbsolutePath);
+			if (text2[text2.Length - 1] != '/')
+			{
+				text2 += "/";
+			}
+			if (host != null && host.Length > 0)
+			{
+				global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> prefixes = _prefixes;
+				int num = -1;
+				foreach (global::UnityWebSocketSharp.Net.HttpListenerPrefix item in prefixes)
+				{
+					if (flag)
+					{
+						string host2 = item.Host;
+						if (global::System.Uri.CheckHostName(host2) == global::System.UriHostNameType.Dns && host2 != host)
+						{
+							continue;
+						}
+					}
+					if (!(item.Port != text))
+					{
+						string path = item.Path;
+						int length = path.Length;
+						if (length >= num && text2.StartsWith(path, global::System.StringComparison.Ordinal))
+						{
+							num = length;
+							listener = item.Listener;
+						}
+					}
+				}
+				if (num != -1)
+				{
+					return true;
+				}
+			}
+			listener = searchHttpListenerFromSpecial(text2, _unhandled);
+			if (listener != null)
+			{
+				return true;
+			}
+			listener = searchHttpListenerFromSpecial(text2, _all);
+			return listener != null;
+		}
+
+		public void AddPrefix(global::UnityWebSocketSharp.Net.HttpListenerPrefix prefix)
+		{
+			global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> unhandled;
+			global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> list;
+			if (prefix.Host == "*")
+			{
+				do
+				{
+					unhandled = _unhandled;
+					list = ((unhandled != null) ? new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>(unhandled) : new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>());
+					addSpecial(list, prefix);
+				}
+				while (global::System.Threading.Interlocked.CompareExchange(ref _unhandled, list, unhandled) != unhandled);
+				return;
+			}
+			if (prefix.Host == "+")
+			{
+				do
+				{
+					unhandled = _all;
+					list = ((unhandled != null) ? new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>(unhandled) : new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>());
+					addSpecial(list, prefix);
+				}
+				while (global::System.Threading.Interlocked.CompareExchange(ref _all, list, unhandled) != unhandled);
+				return;
+			}
+			do
+			{
+				unhandled = _prefixes;
+				int num = unhandled.IndexOf(prefix);
+				if (num > -1)
+				{
+					if (unhandled[num].Listener != prefix.Listener)
+					{
+						string message = $"There is another listener for {prefix}.";
+						throw new global::UnityWebSocketSharp.Net.HttpListenerException(87, message);
+					}
+					break;
+				}
+				list = new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>(unhandled);
+				list.Add(prefix);
+			}
+			while (global::System.Threading.Interlocked.CompareExchange(ref _prefixes, list, unhandled) != unhandled);
+		}
+
+		public void Close()
+		{
+			_socket.Close();
+			clearConnections();
+			global::UnityWebSocketSharp.Net.EndPointManager.RemoveEndPoint(_endpoint);
+		}
+
+		public void RemovePrefix(global::UnityWebSocketSharp.Net.HttpListenerPrefix prefix)
+		{
+			global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> unhandled;
+			global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix> list;
+			if (prefix.Host == "*")
+			{
+				do
+				{
+					unhandled = _unhandled;
+					if (unhandled == null)
+					{
+						break;
+					}
+					list = new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>(unhandled);
+				}
+				while (removeSpecial(list, prefix) && global::System.Threading.Interlocked.CompareExchange(ref _unhandled, list, unhandled) != unhandled);
+				leaveIfNoPrefix();
+				return;
+			}
+			if (prefix.Host == "+")
+			{
+				do
+				{
+					unhandled = _all;
+					if (unhandled == null)
+					{
+						break;
+					}
+					list = new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>(unhandled);
+				}
+				while (removeSpecial(list, prefix) && global::System.Threading.Interlocked.CompareExchange(ref _all, list, unhandled) != unhandled);
+				leaveIfNoPrefix();
+				return;
+			}
+			do
+			{
+				unhandled = _prefixes;
+				if (!unhandled.Contains(prefix))
+				{
+					break;
+				}
+				list = new global::System.Collections.Generic.List<global::UnityWebSocketSharp.Net.HttpListenerPrefix>(unhandled);
+				list.Remove(prefix);
+			}
+			while (global::System.Threading.Interlocked.CompareExchange(ref _prefixes, list, unhandled) != unhandled);
+			leaveIfNoPrefix();
+		}
+	}
+}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K003A.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 042f3d3b2376b8143897d8c66290b817, type: 3}
+  Timestamps: "0.027\n4.432\n9.804\n13.707\n18.179\n23.451\n26.487\n29.056"
+  WrittenDialogue: "Sorry that took a while. They needed me to twist my spine 120 degrees.\nAnd I know I said we were going out but during the shoot a producer gave me a script for an audition tonight.\nI really wanna have fun but this is a once-in-a-lifetime opportunity!\nLike, me as a real actor with awards and political opinions?\nThat sounds amazing! But I would need to get some political opinions first.\nHow did people feel about 9/11? Like are we over that?\nWhatever, but yeah should I do it?"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

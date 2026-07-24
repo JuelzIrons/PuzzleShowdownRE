@@ -1,0 +1,10 @@
+{
+  "name": "Unity.Multiplayer.Tools.NetVis.Configuration",
+  "references": [
+    "Unity.Multiplayer.Tools.Common",
+    "Unity.Mathematics",
+    "Unity.Burst",
+    "Unity.Multiplayer.Tools.Adapters"
+  ],
+  "allowUnsafeCode": true
+}

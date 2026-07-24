@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0001
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: b171b380b388a8e4ea9c94de06ede1e0, type: 3}
+  Timestamps: "0.094\n2.897\n4.866\n9.137\n10.304\n16.043\n16.911\n18.546\n20.148\n21.215\n24.919\n28.189\n31.826\n37.665\n39.467\n41.736\n44.438\n49.21\n52.146\n53.681\n55.583\n60.121\n62.023\n65.793\n68.863"
+  WrittenDialogue: "Oh hey, Nicole. You doin’ these puzzles too?\nOh my god, you’re doing this shit?\nI think everybody is honestly, but it’s still cool that you’re doing it.\nYeah I’m sure.\nYeah the guy um,{1.2} he like said there was a prize?\n...Uh huh.\nWhat do you want the prize to be?\nYou to fuck off and die.\nNo seriously.\nYeah I was just joking I meant everybody to fuck off and die.\nWell y’know whatever it is I hope it’s just chill.\nHow do you never shut up while also saying absolutely nothing?\nBut honestly, I hope the prize is just hanging out with you.. As a friend.. Though.\nWow really just me?\nTotally! I haven’t said that to anyone else.\nYeah cause I’m probably the first bitch you’re lying to.\nSo you wanna try like..{1.1} Playing this puzzle thing?\nIf I beat you will you fuck off to your basket of guitar picks?\nOh you like guitar too?\nWhy are you trying to extend this conversation?\nSorry no I get it, cause like talking is hard cause of trauma.\nYeah trauma from you.\nWell if I win can we talk a little more?\nI’ve never been so motivated to solve a puzzle."
+  DialogueCharacterNames: "CRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE\nCRISPIN\nNICOLE"

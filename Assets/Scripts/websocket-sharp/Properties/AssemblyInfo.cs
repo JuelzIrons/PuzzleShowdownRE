@@ -1,0 +1,8 @@
+[assembly: global::System.Reflection.AssemblyTitle("websocket-sharp")]
+[assembly: global::System.Reflection.AssemblyDescription("A C# implementation of the WebSocket protocol client and server")]
+[assembly: global::System.Reflection.AssemblyConfiguration("")]
+[assembly: global::System.Reflection.AssemblyCompany("")]
+[assembly: global::System.Reflection.AssemblyProduct("websocket-sharp.dll")]
+[assembly: global::System.Reflection.AssemblyCopyright("sta.blockhead")]
+[assembly: global::System.Reflection.AssemblyTrademark("")]
+[assembly: global::System.Reflection.AssemblyVersion("1.0.2.18559")]

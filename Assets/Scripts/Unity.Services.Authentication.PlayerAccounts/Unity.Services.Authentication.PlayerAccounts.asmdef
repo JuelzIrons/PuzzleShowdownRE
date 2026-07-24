@@ -1,0 +1,9 @@
+{
+  "name": "Unity.Services.Authentication.PlayerAccounts",
+  "references": [
+    "Unity.Services.Core",
+    "Newtonsoft.Json",
+    "Unity.Services.Core.Internal"
+  ],
+  "allowUnsafeCode": true
+}

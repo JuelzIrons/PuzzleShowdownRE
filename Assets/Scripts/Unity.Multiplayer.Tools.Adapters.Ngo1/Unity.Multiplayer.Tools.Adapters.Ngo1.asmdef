@@ -1,0 +1,13 @@
+{
+  "name": "Unity.Multiplayer.Tools.Adapters.Ngo1",
+  "references": [
+    "Unity.Multiplayer.Tools.Adapters",
+    "Unity.Multiplayer.Tools.NetStats",
+    "Unity.Netcode.Runtime",
+    "Unity.Multiplayer.Tools.Common",
+    "Unity.Multiplayer.Tools.MetricTypes",
+    "Unity.Multiplayer.Tools.MetricEvents",
+    "Unity.Collections"
+  ],
+  "allowUnsafeCode": true
+}

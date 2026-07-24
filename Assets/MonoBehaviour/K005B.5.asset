@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005B.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: b001a8704b4ef6540a3c4deaca735876, type: 3}
+  Timestamps: "0.034\n2.87\n7.608\n11.779\n14.515\n16.083\n17.051"
+  WrittenDialogue: "Damn this is where not giving a fuck got me.\nLike yeah I’m really hot but I wanna kill myself everyday.\nDamn suicidal thoughts again, that can only mean one thing.\nHeroin and cosmetic surgery.\nBy the way thanks for coming.\nNot like that!"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

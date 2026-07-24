@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b80866749e6ddd84468fe9aa8e26d0, type: 3}
+  m_Name: Kelly
+  m_EditorClassIdentifier:
+  Type: 4
+  PodColorShiftValue: {r: 1, g: 0.8509804, b: 0.08627451, a: 1}
+  CharacterPortraitRight: {fileID: 21300000, guid: 7b5e2a8c3f8a55f42ab0098c050b4da5, type: 2}
+  CharacterPortraitLeft: {fileID: 21300000, guid: 7b5e2a8c3f8a55f42ab0098c050b4da5, type: 2}
+  CharacterInnerBannerP1: {fileID: 21300000, guid: 02dc8ee77a105e841ac9287e6ef93dc1, type: 2}
+  CharacterInnerBannerP2: {fileID: 21300000, guid: 02dc8ee77a105e841ac9287e6ef93dc1, type: 2}
+  CharacterSplashSprite: {fileID: 21300000, guid: b50fcc544cc317e4bacfbead68255c4c, type: 2}
+  VoiceBoxSO: {fileID: 11400000, guid: 6823031ecef85774db4bc90c5efea1d1, type: 2}

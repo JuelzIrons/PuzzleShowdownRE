@@ -1,0 +1,8 @@
+{
+  "name": "Unity.Multiplayer.Tools.Adapters",
+  "references": [
+    "Unity.Multiplayer.Tools.NetStats",
+    "Unity.Multiplayer.Tools.Common"
+  ],
+  "allowUnsafeCode": true
+}

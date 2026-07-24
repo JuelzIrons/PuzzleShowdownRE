@@ -1,0 +1,554 @@
+namespace Newtonsoft.Json.Serialization
+{
+	internal class TraceJsonWriter : global::Newtonsoft.Json.JsonWriter
+	{
+		private readonly global::Newtonsoft.Json.JsonWriter _innerWriter;
+
+		private readonly global::Newtonsoft.Json.JsonTextWriter _textWriter;
+
+		private readonly global::System.IO.StringWriter _sw;
+
+		public TraceJsonWriter(global::Newtonsoft.Json.JsonWriter innerWriter)
+		{
+			_innerWriter = innerWriter;
+			_sw = new global::System.IO.StringWriter(global::System.Globalization.CultureInfo.InvariantCulture);
+			_sw.Write("Serialized JSON: " + global::System.Environment.NewLine);
+			_textWriter = new global::Newtonsoft.Json.JsonTextWriter(_sw);
+			_textWriter.Formatting = global::Newtonsoft.Json.Formatting.Indented;
+			_textWriter.Culture = innerWriter.Culture;
+			_textWriter.DateFormatHandling = innerWriter.DateFormatHandling;
+			_textWriter.DateFormatString = innerWriter.DateFormatString;
+			_textWriter.DateTimeZoneHandling = innerWriter.DateTimeZoneHandling;
+			_textWriter.FloatFormatHandling = innerWriter.FloatFormatHandling;
+		}
+
+		public string GetSerializedJsonMessage()
+		{
+			return _sw.ToString();
+		}
+
+		public override void WriteValue(decimal value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(decimal? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(bool value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(bool? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value == true);
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(byte value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(byte? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(char value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(char? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(byte[]? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value == null)
+			{
+				base.WriteUndefined();
+			}
+			else
+			{
+				base.WriteValue(value);
+			}
+		}
+
+		public override void WriteValue(global::System.DateTime value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(global::System.DateTime? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(global::System.DateTimeOffset value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(global::System.DateTimeOffset? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(double value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(double? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteUndefined()
+		{
+			_textWriter.WriteUndefined();
+			_innerWriter.WriteUndefined();
+			base.WriteUndefined();
+		}
+
+		public override void WriteNull()
+		{
+			_textWriter.WriteNull();
+			_innerWriter.WriteNull();
+			base.WriteUndefined();
+		}
+
+		public override void WriteValue(float value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(float? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(global::System.Guid value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(global::System.Guid? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(int value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(int? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(long value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(long? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(object? value)
+		{
+			if (value is global::System.Numerics.BigInteger)
+			{
+				_textWriter.WriteValue(value);
+				_innerWriter.WriteValue(value);
+				InternalWriteValue(global::Newtonsoft.Json.JsonToken.Integer);
+				return;
+			}
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value == null)
+			{
+				base.WriteUndefined();
+			}
+			else
+			{
+				InternalWriteValue(global::Newtonsoft.Json.JsonToken.String);
+			}
+		}
+
+		public override void WriteValue(sbyte value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(sbyte? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(short value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(short? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(string? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(global::System.TimeSpan value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(global::System.TimeSpan? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(uint value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(uint? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(ulong value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(ulong? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteValue(global::System.Uri? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value == null)
+			{
+				base.WriteUndefined();
+			}
+			else
+			{
+				base.WriteValue(value);
+			}
+		}
+
+		public override void WriteValue(ushort value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			base.WriteValue(value);
+		}
+
+		public override void WriteValue(ushort? value)
+		{
+			_textWriter.WriteValue(value);
+			_innerWriter.WriteValue(value);
+			if (value.HasValue)
+			{
+				base.WriteValue(value.GetValueOrDefault());
+			}
+			else
+			{
+				base.WriteUndefined();
+			}
+		}
+
+		public override void WriteWhitespace(string ws)
+		{
+			_textWriter.WriteWhitespace(ws);
+			_innerWriter.WriteWhitespace(ws);
+			base.WriteWhitespace(ws);
+		}
+
+		public override void WriteComment(string? text)
+		{
+			_textWriter.WriteComment(text);
+			_innerWriter.WriteComment(text);
+			base.WriteComment(text);
+		}
+
+		public override void WriteStartArray()
+		{
+			_textWriter.WriteStartArray();
+			_innerWriter.WriteStartArray();
+			base.WriteStartArray();
+		}
+
+		public override void WriteEndArray()
+		{
+			_textWriter.WriteEndArray();
+			_innerWriter.WriteEndArray();
+			base.WriteEndArray();
+		}
+
+		public override void WriteStartConstructor(string name)
+		{
+			_textWriter.WriteStartConstructor(name);
+			_innerWriter.WriteStartConstructor(name);
+			base.WriteStartConstructor(name);
+		}
+
+		public override void WriteEndConstructor()
+		{
+			_textWriter.WriteEndConstructor();
+			_innerWriter.WriteEndConstructor();
+			base.WriteEndConstructor();
+		}
+
+		public override void WritePropertyName(string name)
+		{
+			_textWriter.WritePropertyName(name);
+			_innerWriter.WritePropertyName(name);
+			base.WritePropertyName(name);
+		}
+
+		public override void WritePropertyName(string name, bool escape)
+		{
+			_textWriter.WritePropertyName(name, escape);
+			_innerWriter.WritePropertyName(name, escape);
+			base.WritePropertyName(name);
+		}
+
+		public override void WriteStartObject()
+		{
+			_textWriter.WriteStartObject();
+			_innerWriter.WriteStartObject();
+			base.WriteStartObject();
+		}
+
+		public override void WriteEndObject()
+		{
+			_textWriter.WriteEndObject();
+			_innerWriter.WriteEndObject();
+			base.WriteEndObject();
+		}
+
+		public override void WriteRawValue(string? json)
+		{
+			_textWriter.WriteRawValue(json);
+			_innerWriter.WriteRawValue(json);
+			InternalWriteValue(global::Newtonsoft.Json.JsonToken.Undefined);
+		}
+
+		public override void WriteRaw(string? json)
+		{
+			_textWriter.WriteRaw(json);
+			_innerWriter.WriteRaw(json);
+			base.WriteRaw(json);
+		}
+
+		public override void Close()
+		{
+			_textWriter.Close();
+			_innerWriter.Close();
+			base.Close();
+		}
+
+		public override void Flush()
+		{
+			_textWriter.Flush();
+			_innerWriter.Flush();
+		}
+	}
+}

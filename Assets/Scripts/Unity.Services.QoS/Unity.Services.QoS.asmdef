@@ -1,0 +1,10 @@
+{
+  "name": "Unity.Services.QoS",
+  "references": [
+    "Unity.Collections",
+    "Unity.Services.Core",
+    "Unity.Services.Core.Internal",
+    "Newtonsoft.Json"
+  ],
+  "allowUnsafeCode": true
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Unity.Multiplayer.Tools.Adapters.Utp2",
+  "references": [
+    "Unity.Multiplayer.Tools.Adapters",
+    "Unity.Networking.Transport"
+  ],
+  "allowUnsafeCode": true
+}

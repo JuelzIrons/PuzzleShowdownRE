@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0002
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: cc16fc72e7cdcec44906311ebbd86640, type: 3}
+  Timestamps: "0.039\n3.943\n6.646\n10.55\n12.084\n13.719\n16.455\n20.993\n24.764\n26.299\n29.769\n35.408\n37.243\n40.78\n43.849\n48.254\n53.392\n55.928\n57.263\n59.899\n65.871\n69.508\n72.845\n77.316\n79.518\n84.924\n86.259\n91.597\n92.832\n94.133\n96.068\n99.572\n103.042\n103.976\n105.311"
+  WrittenDialogue: "Yo! Didn’t think I’d be seeing you playing this too.\nUm, I mean I have nothing better to do.\nYeah yeah same. It’s really cool that you’re playing though.\nO-okay, thanks.\nYou been doing it well so far?\nWell I only played a couple rounds so--\nHaha yeah me too same I’ve been yeah.\nThat’s great. It kinda helps me get some escape from all the stuff I’m going through.\nOh like what stuff?\nSort of my depression and I guess feelings of isolation?\nOh isolation, yeah no that’s uh that’s lame.{1} Me too though.\nReally? You have depression?\nYeah yeah totally.. Sometimes and stuff.\nIt got really bad for me. I would cut myself a lot.\nAw man cutting yourself... You shouldn’t do that it’s bad.\nI know... {0.7}I feel like I got depression in high school since I was the only gay girl there.\nOh yeah same, {0.5}I mean, uh.\nYou were gay too?\nYeah y’know I think I was.\nWow I never knew that, I couldn’t even tell. {0.5}If you ever like need to talk to someone...\nYeah definitely I always like need to talk. What’s your number?\nI’d give it to you but all of our phones are kinda messed up right now.\nAw fuck yeah that’s kind of annoying. Like what’s your address?\nUm, do you really {0.5} need my address?\nWell y’know I figured I could like come over and we can cuddle about our issues.\nI thought you were gay.\nOh yeah I’m gay it’s just being with girls helps me?\nGet the fuck out of here!!\nWhat?? What’d I do?\nYou’re lucky I left my knife at home today!\nKnife? Bro! Let’s just settle this over a puzzle maybe?\nIf I beat you in this puzzle you need to leave me alone for the rest of your life!\nWell hold on.\nNo! Now!"
+  DialogueCharacterNames: "CRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI\nCRISPIN\nARI"

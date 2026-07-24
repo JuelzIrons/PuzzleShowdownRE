@@ -1,0 +1,4 @@
+namespace UnityEngine.AdaptivePerformance
+{
+	public delegate void PerformanceBottleneckChangeHandler(global::UnityEngine.AdaptivePerformance.PerformanceBottleneckChangeEventArgs bottleneckEventArgs);
+}

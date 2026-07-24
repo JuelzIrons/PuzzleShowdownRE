@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0007
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: db2c9f93d14aec34f974f71d2f7b6a8d, type: 3}
+  Timestamps: "0.069\n1.037\n3.706\n5.241\n8.244\n11.314\n12.548\n18.187\n19.789\n20.99\n25.628\n30.933\n32.235\n36.339\n37.073\n41.177\n43.613\n44.614\n46.349\n48.251\n50.987\n52.121"
+  WrittenDialogue: "Wait hold on!\nYou’re not my principal anymore I can go where ever I want.\nWhat are you in such a rush for?\nIn a rush to mind my own damn business, you should try it sometime.\nAwfully jittery,{1} running from something?\nNo dude I’m cool.\nOne of our faculty reported a stolen watch. {1}You wouldn’t know anything about that would you?\nWhat, you think I took his watch?\nHow’d you know their gender?\nFuck! Uh...{1}  I gotta run, entirely for recreational purposes.\nPerhaps a puzzle could satisfy your recreational needs? They’re quite the fad these days.\nBitch leave me alone!\nWhy don’t you pull your phone out for a game?{1} We need to have a little talk.\nAbout?\nThat missing watch of course, I hear it was very nice.\nI wonder if he was honest about how he lost it.\nIn due time.\nYou will not like the answer.\nWould you know what that answer is?\nNo I don’t know shit about that watch. Okay let’s play.\nGladly."
+  DialogueCharacterNames: "PRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN\nEMILY\nPRINCIPAL LYNN"

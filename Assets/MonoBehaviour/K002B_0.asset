@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a895ccc9707dab3da44b60e732524bd, type: 3}
+  m_Name: K002B
+  m_EditorClassIdentifier:
+  LevelSpeechData:
+  - {fileID: 11400000, guid: 32a3076036d9aad4c9d09044e5acc870, type: 2}
+  - {fileID: 11400000, guid: 7d0cf297901444747bc12d8b3d0be253, type: 2}
+  - {fileID: 11400000, guid: e8dbc00d060f84446808de07160eee01, type: 2}
+  - {fileID: 11400000, guid: 8a0957df6f1c3134793768060ab434c4, type: 2}
+  - {fileID: 11400000, guid: 516a6c6430171bb4aa84203c168d3952, type: 2}
+  - {fileID: 11400000, guid: 6510cae470e48c74d8c75b9db3311ed6, type: 2}
+  LevelDepth: fdffff/ffcffff/ffbffff/ffaffff/ff9ffff/f
+  LevelSpeed: 0f00000010000000110000001200000016000000
+  LevelCG: {fileID: 21300000, guid: 07afd369ff0bcc842880a8218d842fe8, type: 2}
+  Choices:
+  - Show everyone how healthy peanut oil is
+  - Reconsider life with god this time
+  NextLevels:
+  - {fileID: 11400000, guid: e97f01b8e4fa3a94797ca46fe157e478, type: 2}
+  - {fileID: 11400000, guid: 09d1142f089ddd4498e50cf701bdc0aa, type: 2}
+  PlayersChar: 0
+  EnemyChar: 0
+  AiDifficultyLevel: 0
+  AmbienceTrack: {fileID: 8300000, guid: 39c4e109a6addac42902483518ecdb2a, type: 3}
+  WAKTrack: 9
+  ReverbPreset: 0
+  CustomReverbPreset: {fileID: 0}

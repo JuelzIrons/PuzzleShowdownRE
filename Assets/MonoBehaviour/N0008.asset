@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0008
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 3a500e9a10f50fc49af3769ac2482c8d, type: 3}
+  Timestamps: "0.061\n1.396\n2.296\n5.767\n6.768\n9.637\n10.505\n11.272\n15.443\n17.979\n21.015\n21.749\n23.284\n26.287\n27.789\n30.591\n32.527\n36.297\n37.899\n41.335\n45.907\n48.076\n49.811\n56.05\n59.454\n61.589\n66.06\n68.629\n73.301\n78.139\n80.908\n84.045"
+  WrittenDialogue: "Oh shit it’s you!\nWhat’s wrong with me?\nNo, nothing’s wrong, that’s my point. I’m a little on the run.\nWhat’d you do this time?\nUh the principal kinda like called the feds on me?\nThe feds?\nLiterally.\nThe principal doesn’t have a direct line to the FBI, pretty sure she just called the cops.\nOkay but still! You have any adderrall? I gotta keep running.\nI was gonna ask you for adderrall, I can’t finish all these puzzles!\nWell I’m out!\nHow much did you take?\nLike... a hundred something milligrams.\nAnd you still need adderrall??\nI’m gonna walk all the way to Montana, they’ll never find me there.\nI’m pretty sure they can find you there.\nNo! Cause I’m gonna change my identity and become a truck-stop stripper.\nI think you could aim higher.\nIt’s actually perfect cause I’m so hot every guy’s gonna want a lap dance.\nSo I’ll take them to this back room and just fucking murder them for objectifying women.\nMurder as in kill them?\nYeah what’re you like stupid?\nSo to avoid police you’re gonna create a fake persona that’ll be wanted by even more police?\nOkay maybe I haven’t thought it all through clearly, I told you I need adderrall.\nWhat the fuck do you think on zero milligrams?\nAbsolutely nothing. It’s just TV static in my brain.\nOkay well you wanna like hang out for a while?\nHang out? No I gotta do something, I’m still on some adderrall. Let’s play this puzzle thing.\nA hundred milligrams versus zero? That’s like a performance enhancing drug for tedious bullshit.\nDo you actually care whether you win or lose?\nUh yeah no. Okay let’s go."
+  DialogueCharacterNames: "EMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE\nEMILY\nNICOLE"

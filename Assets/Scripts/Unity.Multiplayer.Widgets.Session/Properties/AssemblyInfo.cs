@@ -1,0 +1,6 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.Editor.Tests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.Tests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.UGUI")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

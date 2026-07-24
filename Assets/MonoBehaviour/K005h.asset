@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005h
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 574b7a34a4e51ab4092578d5c3e2d69a, type: 3}
+  Timestamps: "0.032\n3.769\n6.805\n13.879\n20.385\n28.627\n36.301"
+  WrittenDialogue: "Listen people, I’ve been coming on and doing this show for 8 years now.\nThese atheist liberals don’t seem to get it.\nIf you’re a man, and have sex with other men, you’re a sinner! Take it up with God Not me!\nI worked as a conversion therapist for a couple years in college. These gay kids are messed up!\nThey’re told all these lies about love is love, and be who you want, and evolution, and it makes ‘em wackos!\nWe’ll be on the phone lines all day taking callers. This is the Back On Track Hour with your host Kelly."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

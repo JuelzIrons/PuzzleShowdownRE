@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0006
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 2d636babc9cd388409a6938f50750c95, type: 3}
+  Timestamps: "0.039\n3.91\n6.813\n12.652\n14.253\n18.591\n19.826\n23.796\n27.467\n29.735\n32.305\n35.508\n37.31\n39.212\n43.983\n45.184\n45.885\n49.021\n51.324\n53.459\n56.496\n59.432\n63.202\n67.139\n69.141"
+  WrittenDialogue: "Hello citizen! Are we respecting the laws of puzzling?\nOh yeah totally, officer...{1} Wait what?\nNow that the showdown’s taken over the city they’ve issued temporary sanctions on what you can and can’t do.\nYeah, like what?\nJust like how there’s a speeding limit we had to institute a chaining limit.\nA chaining limit?\nThat’s right. Chains of 3x or higher are officially banned.\nBut isn’t that like a major way of winning at the game?\nAre you questioning an officer of the law?\nNo, I’m just trying to make sense of it.\nWhy don’t you make sure those chains stay to a minimum!\nOkay, no problem.\nSo would you like to play a friendly round?\nI was actually just about to go to city hall and see what other puzzle laws there are.\nNo you can’t!\nWhy not?\nCause going to city hall’s illegal too now.\nUm... Since when?\nJust this morning actually!\nYeah I’m not so sure about these puzzle laws.\nListen you fucking bitch this puzzle prize is mine!\nWow literally making up fake laws for an unfair advantage.\nAfter one showdown with me it’ll become very clear...\nI am the law.{0.5}"
+  DialogueCharacterNames: "COP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nJECKA\nCOP\nCOP"

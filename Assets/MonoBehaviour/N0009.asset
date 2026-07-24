@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0009
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: ebef0d40311a8f14090cc706505a0ba7, type: 3}
+  Timestamps: "0.037\n1.872\n3.841\n6.51\n9.213\n12.049\n13.183\n16.987\n18.155\n19.657\n22.393\n24.862\n26.096\n29.7\n32.87\n38.042\n43.447\n46.55\n50.354\n53.924"
+  WrittenDialogue: "Aw look who showed up!\nOf course you’re into this stupid shit.\nShut up noob I’m gonna beat you down!\nHow am I a “noob” I had this on my phone first!\nYeah whatever! Tits or GTFO!\nI’m your sister.\nWhatever you’re gay! I’ll wipe the floor with everybody in this game!\nOh you’re good at this?\nI’m amazing at this.\nWow if only you were amazing at getting higher employment.\nShut up! That’s not even like attainable.\nNot with that attitude.\nYou just don’t understand what being cool and good at video games is like.\nYeah these bitches givin’ mad pussy to watch you put blocks together.\nY’know maybe if you were like intellectually on my level you’d get why it’s important to be good at this.\nMaybe if you were intellectually on my level you’d get why this doesn’t fucking matter at all.\nOh you think you’re so smart? Only one way to prove it!\nThere’s actually way better ways to prove it but we’ll play your little baby game.\nIt’s not a baby game. Probably like T for Teen or something."
+  DialogueCharacterNames: "GAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER"

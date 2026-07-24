@@ -1,0 +1,13 @@
+{
+  "name": "Unity.Multiplayer.Center.NetcodeForGameObjectsExample",
+  "references": [
+    "Unity.Netcode.Runtime",
+    "UnityEngine.UI",
+    "Unity.Services.Multiplayer",
+    "Unity.InputSystem",
+    "Unity.Services.Core",
+    "Unity.Services.Authentication",
+    "Unity.Collections"
+  ],
+  "allowUnsafeCode": true
+}

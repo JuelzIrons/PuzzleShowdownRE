@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0002
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 4975e896f676a7b4abc4693674df7784, type: 3}
+  Timestamps: "0.136\n1.471\n3.739\n7.243\n9.345\n13.783\n17.22\n19.055\n21.691\n26.562\n28.364\n31.701\n35.872\n36.439\n39.542\n41.143\n42.378"
+  WrittenDialogue: "Hey have you won so far?\nI think, I beat Kylar.\nOh, for a puzzle that’s kinda just like punching the air.\nYeah he’s got a developmental disorder.\nWhat do they call it when you report someone for being mentally incapable and they get committed?\nThat’s not “mentally incapable” it’s mentally insane!\nOh, well they should do it for both.\nYou mean throwing people in jail for being stupid?\nYeah. Then all the idiots are in jail instead of way smarter people like shoplifters and drug dealers.\nThat actually sounds pretty good.\nLike at least you gotta know how to weigh shit to sell crack to homeless people.\nYeah they teach us how to weigh stuff in school so you gotta be kinda smart to do that.\nReally?\nNo you sound like fucking idiot I’m gonna call your ass to jail!\nI’ll show you who’s an idiot.\nLet’s play!"
+  DialogueCharacterNames: "NICOLE\nJECKA\nNICOLE\nJECKA\nNICOLE\nJECKA\nNICOLE\nJECKA\nNICOLE\nJECKA\nNICOLE\nJECKA\nNICOLE\nJECKA\nNICOLE\nJECKA"

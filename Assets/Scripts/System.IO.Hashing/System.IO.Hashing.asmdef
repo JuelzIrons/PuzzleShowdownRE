@@ -1,0 +1,7 @@
+{
+  "name": "System.IO.Hashing",
+  "references": [
+    "System.Runtime.CompilerServices.Unsafe"
+  ],
+  "allowUnsafeCode": true
+}

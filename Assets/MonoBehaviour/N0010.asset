@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0010
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 1beccf33055633e43a65c11c88be8419, type: 3}
+  Timestamps: "0.038\n2.073\n3.808\n10.081\n12.951\n19.424\n23.661\n26.331\n39.978\n44.315\n45.75\n53.725\n60.465\n64.002\n70.174\n71.409\n73.211"
+  WrittenDialogue: "It seems we meet again.\nWhat do you want? I already beat you.\nThat’s precisely why things will be different this time. I was silly to ever think of wanting you.\nWhat’s your deal? Did they cancel Naruto?\nMy master has made me realize attempts to appease or appeal to women like you are futile.\nProcess of elimination... It’s The Puzzler’s way.\nThe Puzzler?? You listen to that weirdo now!?\nFollowers of the messiah do far more than listen, they obey. I must for the only one who accepted me in my time of despair.  He’s commanded me to test you to your absolute limit.\nThis time my emotions won’t force me to go easy on you.\nOh that’s what you tell yourself.\nEnough! Once I beat you all of his secrets will become clear. I must destroy you to become Puzzle Shogun!\nNow get ready, Nicole! You’ve fallen into dangerous sights and the only way out is through me!\nYou said so many things I don’t even feel like processing.\nOh you’re so cool! You so don’t care! Well I’m gonna make you care!\nHave at you!\nI’m having a headache hearing this."
+  DialogueCharacterNames: "JEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY\nJEFFERY\nNICOLE\nJEFFERY\nJEFFERY\nNICOLE\nJEFFERY\nJEFFERY\nNICOLE\nJEFFERY\nJEFFERY\nNICOLE"

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005d.3
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 4e583e1f71cf9594f8a4ef6029ecdd6e, type: 3}
+  Timestamps: "0.034\n5.606\n13.748\n19.92"
+  WrittenDialogue: "Is it true that you’re trying to use the government for your own financial interest with your non-profit?\nUhhh that’s not true at all. It’s in the language. Non-Profit?  Helping Hands getting a boost has no benefit in my life.\nBy the way after this rally I’ll be traveling to Luxemburg to help their growing homeless crisis."
+  DialogueCharacterNames: "KAREN\nKELLY\nKELLY"

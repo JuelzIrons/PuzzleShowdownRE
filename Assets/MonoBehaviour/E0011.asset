@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0011
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: fec556997e18ab748affcb04dea0134d, type: 3}
+  Timestamps: "0.032\n2.768\n4.069\n6.004\n7.906\n9.975\n13.846\n17.249\n19.985\n23.222\n28.694\n32.03\n34.066\n38.804\n41.473\n46.779\n49.882\n53.285\n54.119\n59.625\n72.504\n73.438\n77.943\n81.38\n85.45\n88.287\n91.356\n93.058\n98.997\n100.265\n103.535\n105.47\n112.744\n117.616\n119.885"
+  WrittenDialogue: "Okay I think they’re gone.\nWhere am I?\nThe last place you haven’t run to.\nOh shit, you’re that guy.\nThat’s the most you can remember?\nDude I had to take all my adderrall just to play this shit, don’t question me!\nOne could consider that a performance enhancing drug.\nCool, are you gonna disqualify me and gimme my phone back?\nI meant that in a positive way,{1} look at baseball.\nBaseball’s for really gay straight men and really straight gay men, why would I ever watch that?\nReally... Straight... What?\nAre you the last guy I gotta play for my iPhone?\nBefore that we’d usually have a talk but I can’t quite pin you on anything.\nLet’s hurry up and play I wanna buy this xanax.\nIs that all life is for you?{1} Chasing a state other than yourself?\nA state? Dude I wasn’t serious about walking to Montana.\nNo I meant- ugh this is pointless! How do I do this?\nDo what?\nThe Puzzler’s job is quite difficult. It’s not just forcing puzzles upon people, there’s more to it.\nI need to monitor everyone who plays. Then I read what makes them tick, like a problem to solve.  From there I strike with words to make them second-guess the reality they thought they knew before me!\nOkay?\nBut you, {1}you don’t guess anything! There’s no thought for the world around you!\nHere’s a thought, what’s your deal? Why do you do any of this??\nThere’s a quote from Willy Wonka which answers that quite well.\nYeah that’s like the one Johnny Depp movie I haven’t seen.\nJ-... Okay, wrong example never mind.\nGuess I won’t get the origin then.\nAn origin I can’t quite help you with. {1}Though my motives will be revealed in due time.\nTo me if I win?\n{1}To the person who needs to hear it the most.\nDude you are not that special.\nOh believe me, in the age of online obsessions the man controlling your phone is the most special of all.\nAnd if I beat you will that man fuck off and go back to his 90’s computer tower?\nThe answer awaits you."
+  DialogueCharacterNames: "EMILY\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER\nEMILY\nTHE PUZZLER"

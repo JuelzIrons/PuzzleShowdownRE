@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005D.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: efd7a30958b7a214ea15ab051edaffca, type: 3}
+  Timestamps: "0.093\n4.698\n7.934\n9.669\n10.47\n13.406\n14.307\n16.343\n17.978\n21.982\n25.118\n28.288\n32.192\n36.129"
+  WrittenDialogue: "I don’t know about all this. Are you sure the people are in your best interest?\nThe people are always in my best interest!\nWhat about this person!\nHey!\nHunter?? I thought you died in my pool!\nYour pool!?\nShe’s a fraud! She lied!\nYo we should kill this bitch!\nShe left me for dead, I was in a coma for 10 years!\nNot only dishonest but you were the one who killed him?\nNever vote for Kelly she let me die technically!\nWait no! Come on guys there’s a perfectly good explanation.\nDid I mention Helping Hands has free catering for non-members?"
+  DialogueCharacterNames: "KAREN\nKELLY\nJEFFERY\nHUNTER\nKELLY\nKAREN\nCOP\nKYLAR\nHUNTER\nKAREN\nHUNTER\nKELLY\nKELLY"

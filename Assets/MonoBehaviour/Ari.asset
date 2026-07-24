@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b80866749e6ddd84468fe9aa8e26d0, type: 3}
+  m_Name: Ari
+  m_EditorClassIdentifier:
+  Type: 2
+  PodColorShiftValue: {r: 0.68235296, g: 0.08627451, b: 0.07058824, a: 1}
+  CharacterPortraitRight: {fileID: 21300000, guid: 2aa458dfa4053ea4486258ae3ad732c4, type: 2}
+  CharacterPortraitLeft: {fileID: 21300000, guid: 6cc05da46a69b8b47aea585fd862225b, type: 2}
+  CharacterInnerBannerP1: {fileID: 21300000, guid: e092a4883af634f47a18291181ea4934, type: 2}
+  CharacterInnerBannerP2: {fileID: 21300000, guid: b0efa8c742bde8244ac58026c91bc68e, type: 2}
+  CharacterSplashSprite: {fileID: 21300000, guid: 17a12a58d6d98414da072145b164df9e, type: 2}
+  VoiceBoxSO: {fileID: 11400000, guid: b0bad61d464a653499fb0da000133f8c, type: 2}

@@ -1,0 +1,13 @@
+{
+  "name": "Unity.RenderPipelines.Universal.Runtime",
+  "references": [
+    "Unity.RenderPipelines.Core.Runtime",
+    "Unity.RenderPipelines.GPUDriven.Runtime",
+    "Unity.RenderPipeline.Universal.ShaderLibrary",
+    "Unity.Mathematics",
+    "Unity.Burst",
+    "UnityEngine.AdaptivePerformanceModule",
+    "Unity.RenderPipelines.Core.Runtime.Shared"
+  ],
+  "allowUnsafeCode": true
+}

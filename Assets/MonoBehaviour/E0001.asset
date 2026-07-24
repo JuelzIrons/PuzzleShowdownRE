@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0001
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 55d6cb77fe599cb42bb21e67cc647555, type: 3}
+  Timestamps: "0.072\n1.907\n3.842\n8.547\n10.849\n13.652\n15.821\n18.657\n19.758\n21.927\n25.297\n30.335\n32.037\n34.606\n36.742\n42.748\n44.182\n45.617\n54.326\n57.562\n59.031\n62.034\n65.804\n68.14\n69.741\n76.081\n77.983\n80.552\n81.62\n84.623\n86.558\n87.726\n88.193\n89.061\n89.861\n91.763\n97.235\n100.105\n102.074\n103.475"
+  WrittenDialogue: "Aw hey I know you.\nUh hey Mr. Colby.\nDon’t be so formal, you can call me coach. Why don’t we have a friendly game?\nWait did you get that puzzle thing too?\nOf course, there’s a big grand prize if you win!\nYeah an iPhone, it’s gonna be sick.\nI’d hope for a little more than just a new phone.\nLike what?\nMaybe an outing with you, huh?\nThat’s really cool that you’re 3 times older than me and saying that.\nHow many times did I have to tell ya back when I had ya as students; age is just a number!\nHave you ever told the FBI that?\nWhy don’t I tell the FBI about your record?\nOh no, you don’t have to.\nThat’s right, how about a little more respect! Think you can walk all over a guy with a fancy watch like mine?\nDamn it is shiny.\nThat’s more like it!\nOh ummm... {1}I actually wanted to browse a Gucci store but I dress like I’m homeless so security always follows me.\nCan I borrow your watch so they don’t hound me in there?\nWhy don’t you go with me?\nThere’s a limited capacity, yeah.\nI mean I guess I could {1}but what’s in it for me?\nUh... {1}I’ll have sex with you.\nNow you’re talkin’!\nBut yeah let me have the watch, and I’ll take it out of your sight for 10 minutes, and then I’ll bring it back and have sex with you.\nThis ain’t no trick is it?\nWhy would anyone lie about having sex with you?\nWhat do ya mean by that?\nDo we have a deal or what? I’m not Howie Mandel here.\nFine! {1}On one condition.\nYou can’t stand outside.\nWhat about-\nYou can’t drive me there.\nWell surely-\nNo photo documentation.\nI’ll agree on one condition,{1} if you can beat me in a round of this puzzle game.\nYou’re making me win a puzzle to have sex with you?\nOkay you don’t even have to win.\nUgh {0.6}alright fine."
+  DialogueCharacterNames: "COACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY\nCOACH COLBY\nEMILY"

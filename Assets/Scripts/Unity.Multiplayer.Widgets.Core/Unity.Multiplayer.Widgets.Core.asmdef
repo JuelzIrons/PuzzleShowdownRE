@@ -1,0 +1,9 @@
+{
+  "name": "Unity.Multiplayer.Widgets.Core",
+  "references": [
+    "Unity.Services.Multiplayer",
+    "Unity.Services.Authentication",
+    "Unity.Services.Core"
+  ],
+  "allowUnsafeCode": true
+}

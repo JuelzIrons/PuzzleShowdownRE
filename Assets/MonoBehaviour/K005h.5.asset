@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005h.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: f1bd1480294de25478b2997964ac0b0e, type: 3}
+  Timestamps: "0.038\n3.541\n4.709\n7.512\n9.948\n13.785\n15.853\n16.788\n21.025\n23.261\n25.563\n27.465\n30.368\n32.971\n35.907\n38.743\n41.112\n43.848\n47.385\n48.519\n51.823\n54.325\n57.028\n60.231\n61.733\n63.601"
+  WrittenDialogue: "And we have our next caller, what’s your name?\nNicole?\nWait you sound familiar, Nicole.\nYeah like Nicole from your high school.\nOh my god that Nicole? I can’t believe it how’ve you been?\nYeah Kelly what the fuck are you doing?\nExcuse me??\nYou were the biggest whore I knew in high school and now you’re a conservative radio person?\nI have no idea what you’re talking about!\nHow are you mad about gay marriage now?\nI’ve always hated gay marriage!\nDid you hate it when you fucked 2 girls at the same party??\nI know who both of ‘em are too, they linked me your bullshit!\nFake news! I was celibate, thank you.\nThen how do I have like 10 of your nudes on my old phone?\nYeah right, like you got that from me.\nI didn’t! You took so many of ‘em they just circulated.\nYou can’t even prove that’s me, I never took any of those with my face in it!\nOh so it was you?\nShut up, Nicole. You’re just jealous boys liked me more!\nFucking half the football team doesn’t mean they like you.\nIt wasn’t half and everyone has exes!\nIn the locker room at the same time?? Bitch you had to get an abortion!\nUh! Let’s go to commercial!\nAnd I know you cammed in college, bitch! {3}"
+  DialogueCharacterNames: "KELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE\nKELLY\nNICOLE"

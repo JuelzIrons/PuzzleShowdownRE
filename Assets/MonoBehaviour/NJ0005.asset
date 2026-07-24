@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: NJ0005
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 3ca6e94da3f57df4abf85cb02a30c138, type: 3}
+  Timestamps: "0.069\n1.838\n3.206\n4.207\n10.213\n14.15\n20.056\n22.592\n29.498\n35.471\n38.841\n41.544\n43.346\n47.116\n50.686\n51.954\n63.633\n65.034\n67.737\n72.375"
+  WrittenDialogue: "Oh it’s on now, boy!\nNot this guy again.\nYou’ve seen this guy?\nAnybody in the streets been seeing me since day one. I’m the Chustler, the chain-hustler! Crip god!\nYeah no one can really tell what race he is, but he’s flagrantly many.\nAw shit you motherfuckers talking that loud, huh? I be out here on the street hustling when I catch you slipping!\nMan The Puzzler has weird taste in henchmen.\nAin’t about taste, this all skill baby in a real way! I’m flippin’ blocks and choppin’ so hot the whole street forgot!\nI’m getting the vibe you don’t really... do anything else but this.\nPuzzle’s life, bitch! Fuck you mean? Competition is all!\nWhat the hell did you even do before this puzzle took over?\nBattle rap bitch, ya heard?\nNo I actually haven’t heard the works of The Chustler in battle rap.\nYou better believe it! I was disqualified for being so good!\nYeah I’m sure.\nBefore swapping blocks I was swapping rhymes, opps in crime boutta drop some time. Opposites stop when their tops is popped, the aux is locked play my shit where the bops get props, you feel me??\nAt least we know he’s not black.\nYeah only Eminem would rap some gay shit like that.\nAw bitch you done it now! {0.5}You ain’t never getting the top spot let’s go!"
+  DialogueCharacterNames: "THE CHUSTLER\nJECKA\nNICOLE\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nNICOLE\nTHE CHUSTLER\nNICOLE\nTHE CHUSTLER\nNICOLE\nTHE CHUSTLER\nJECKA\nTHE CHUSTLER\nNICOLE\nTHE CHUSTLER\nJECKA\nNICOLE\nTHE CHUSTLER"

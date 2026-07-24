@@ -1,0 +1,25 @@
+namespace Unity.Multiplayer.Tools.NetStats
+{
+	internal static class MetricTypeExtensions
+	{
+		internal static string GetDisplayNameString(string metricType)
+		{
+			return global::Unity.Multiplayer.Tools.Common.StringUtil.AddSpacesToCamelCase(metricType);
+		}
+
+		internal static string GetDisplayNameString(this global::Unity.Multiplayer.Tools.MetricTypes.MetricType metricType)
+		{
+			return GetDisplayNameString(metricType.ToString());
+		}
+
+		internal static string GetTypeNameString(string metricType)
+		{
+			return metricType.ToLowerInvariant();
+		}
+
+		internal static string GetTypeNameString(this global::Unity.Multiplayer.Tools.MetricTypes.MetricType metricType)
+		{
+			return GetTypeNameString(metricType.ToString());
+		}
+	}
+}

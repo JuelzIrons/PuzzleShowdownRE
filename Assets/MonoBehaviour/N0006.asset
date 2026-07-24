@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0006
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 8c51f935da14d084283b88088a634354, type: 3}
+  Timestamps: "0.068\n6.575\n11.046\n12.514\n14.883\n15.918\n19.154\n22.691\n27.262\n29.264\n31.466\n34.303\n36.672\n42.01\n47.115\n50.352"
+  WrittenDialogue: "Nicole. I didn’t think you were one for... {0.5}Participation {0.5}in tasks like these.\nWe’re all literally forced to, I can’t do anything else on my phone but this.\nI don’t think it’s all bad though.\nYeah of course you don’t, principals love rules.\nDo we now?\nYeah rules and every spinoff of Law & Order but the good one.\nI wouldn’t look at it in such a brash way. It’s good to test your mind.\nYeah and you like testing how much trauma a girl handle, I just ran into your gym teacher.\nCoach Colby,{1} what’s wrong with him?\nIs there another lawsuit going on?\nLaw suit? Is that a new fashion trend?\nYou fuckin’ bitch I’m gonna kill you in this puzzle.\nNow careful with that threatening language. You remember what the counselor talked about.\nIt would probably be healthier to entirely forget what that counselor talked about.\nThere’s just no way to reason with you. Alright you’re on!"
+  DialogueCharacterNames: "PRINCIPAL LYNN\nNICOLE\nPRINCIPAL LYNN\nNICOLE\nPRINCIPAL LYNN\nNICOLE\nPRINCIPAL LYNN\nNICOLE\nPRINCIPAL LYNN\nNICOLE\nPRINCIPAL LYNN\nNICOLE\nPRINCIPAL LYNN\nNICOLE\nPRINCIPAL LYNN"

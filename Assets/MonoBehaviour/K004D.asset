@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004D
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 6ff9ffae7f4e99d429a66bf7c41d3481, type: 3}
+  Timestamps: "0.031\n6.705\n11.576\n18.049\n26.958\n31.93"
+  WrittenDialogue: "And welcome to Helping Hands, I’m Kelly. Founder and CEO of the Helping Hands non-profit.\nHere we fund and dispatch little helpers around town for anyone in need.\nTwo years ago when a boy drown right before my eyes, there was no one qualified to come to the rescue.\nSince then, I’ve taken it upon myself to make sure CPR-certified life savers patrol every block. Out-covering the police 4 to 1.\nPlease sit back and relax as I get into the next chapter of our mission statement."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY"

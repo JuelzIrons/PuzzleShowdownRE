@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0009
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 6c16d6bff579fd8428cfb9a198501eb4, type: 3}
+  Timestamps: "0.028\n0.962\n1.863\n3.665\n5.099\n8.97\n11.172\n11.839\n12.941\n15.109\n17.879\n22.65\n26.354\n33.361\n36.764\n38.066\n41.202\n42.57\n44.239\n46.341\n50.078\n51.079\n53.681\n57.352\n59.42\n62.523\n64.092\n66.761"
+  WrittenDialogue: "Hold it right there!\nWhat, who me?\nThat’s right. Where are you headed?\nUhh nowhere, home.\nWe got a call to look out for some stolen goods being transferred on foot.\nI already said I don’t know shit about that watch!\nWatch?\n“I didn’t say a watch”\nWe were called out to hunt down a ring.\nOh right. {1}Yeah I don’t know about that either.\nYou seem to match the description of the perpetrator. Is your name Emily?\nNo I’m uh,{1} Esmerelda.\nWell Esmerelda, the perp was described as a 5’3 Caucasian female with bleach blonde hair. \nBleach blonde? I color it naturally, thank you!\nOh my mistake!\nBetter be, pig. You’re like if Bruce Willis had dementia.\nWhat’s dementia?\nSee? It’s already setting in.\nI’ve had enough of this I’m bringing you in!\nShit uh, well you’re gonna have to beat me in a puzzle first!\nNo I don’t!\nYeah, your phone got taken over like everyone else.\nWell if I lose I could just shoot you anyway so let’s play!\nIsn’t that illegal?{1} Like to even say.\nShut the fuck up, Esmerelda they won’t miss you in Mexico!\nYou could lose your job for saying that.\nNo I won’t I’m white!!"
+  DialogueCharacterNames: "COP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP\nEMILY\nCOP"

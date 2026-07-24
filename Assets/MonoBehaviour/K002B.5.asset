@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K002B.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 9b93fb5b14e7e7b4e922717dcbdebfa4, type: 3}
+  Timestamps: "0.032\n1.733\n5.07\n6.939\n7.739\n14.513\n17.516\n19.084\n21.954\n32.397\n34.833\n38.203\n41.073"
+  WrittenDialogue: "It was good, wasn’t it?\nOh my god, let’s order more and have an eating contest!\nHello my child.\nWho’re you?\nI’m Father Patrick. I noticed how you love the atmosphere of this establishment so much.\nNoticed from all the way across the room?\nYes, my child.\nWhy do you keep calling me “child” do you have a Daddy kink??\nI’m not quite sure what you mean. I merely desired to invite you to Sunday mass. I think you’d love it quite well.\nSunday mass? Like Church?\nYes, the house God built.\nI don’t know... What do you think?"
+  DialogueCharacterNames: "KELLY\nKELLY\nPRIEST\nKELLY\nPRIEST\nKELLY\nPRIEST\nKELLY\nPRIEST\nKELLY\nPRIEST\nKELLY"

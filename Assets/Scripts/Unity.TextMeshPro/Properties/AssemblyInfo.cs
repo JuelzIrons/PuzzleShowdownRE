@@ -1,0 +1,6 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.TextCore")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.TextCore.FontEngine.Tools")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.FontEngine.Tests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.TextCore.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.TextMeshPro.Editor")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K001.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 2e6b2af51bee375468efa862f8019d07, type: 3}
+  Timestamps: "0.045\n1.58\n4.716\n6.985\n9.554\n13.225\n16.094\n18.697\n21.566\n24.703"
+  WrittenDialogue: "Way to show everyone up.\nYou wanna go with me somewhere? It’s kinda redundant right now.\nLike we could basically drink anywhere.\nUnless we’re in a third world country like Poland.\nHave you seen my pool? It’s indoors and heated!\nOkay not my pool but my parents’ pool.\nAw but I’m also really hungry.\nNot in a fat way but in like a Poland way.\nThey just opened a Chick-Fil-A near me, you wanna go?"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

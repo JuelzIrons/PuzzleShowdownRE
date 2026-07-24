@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0004
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 6f65bdcb1f1a1264187aa7a2b5793bb0, type: 3}
+  Timestamps: "0.03\n3.6\n5.369\n13.777\n15.479\n21.051\n25.189\n27.958\n34.198\n35.299\n42.339\n43.373\n48.545\n51.982\n58.055\n59.289\n60.924\n63.76\n68.298"
+  WrittenDialogue: "Jessica! I didn’t expect to catch you on a game like this.\nI didn’t even think you had a cell phone.\nJust recently I had to pick one up. Now that I’m dating again the marketplace is full of beautiful young women more tech savvy than your literal whore mother.\nWhy do you have to say things like that?\nI know you hate when I talk about splurging your future inheritance, but I was frugal with this phone. \nSo frugal I needed a better one so clicked an ad offering a free iPhone.\nYeah maybe if you bought me one I wouldn’t be dealing with this.\nNonsense, a puzzle challenge builds character! Maybe something like this could do your mind some good.\nWhat are you even saying?\nI’m saying in your world of cosmetics and socializing it may have turned your mind to mush.{0.7} You don’t seem too bright these days.\nDad what the fuck.\nOh if you’re so smart then you won’t have any problem beating me in this simple puzzle.\nAre you sure you can handle this? It kind of requires reaction time.\n“Reaction time”? That’s such a scientific phrase. If only you had used those on your homework.\nI’m not stupid, dad!\nWell you are related to your mother.\nOkay shut the fuck up I’m gonna win this whole thing now!\nWell if you can just make it fast. Macaroni Grill has a special tonight."
+  DialogueCharacterNames: "DAD\nJECKA\nDAD\nJECKA\nDAD\nDAD\nJECKA\nDAD\nJECKA\nDAD\nJECKA\nDAD\nJECKA\nDAD\nJECKA\nDAD\nJECKA\nDAD"

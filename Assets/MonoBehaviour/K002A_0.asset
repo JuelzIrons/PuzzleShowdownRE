@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a895ccc9707dab3da44b60e732524bd, type: 3}
+  m_Name: K002A
+  m_EditorClassIdentifier:
+  LevelSpeechData:
+  - {fileID: 11400000, guid: 0b95ca4b5d5bad9438b5c3915c4c592d, type: 2}
+  - {fileID: 11400000, guid: fbd4ff2d15ca62d4d9e2996d8eaa0958, type: 2}
+  - {fileID: 11400000, guid: 28faaaa2364a006499f46b075ded69c5, type: 2}
+  - {fileID: 11400000, guid: 3060ec60273ceeb4dac6a3673899214c, type: 2}
+  - {fileID: 11400000, guid: dd5593d925e2b55498732295a4c6c1f6, type: 2}
+  - {fileID: 11400000, guid: 98ac250cbe12da24297365873c8d64f0, type: 2}
+  LevelDepth: fdffff/ffcffff/ffbffff/ffaffff/ff9ffff/f
+  LevelSpeed: 0f00000010000000110000001200000016000000
+  LevelCG: {fileID: 21300000, guid: c489a2fb818a83c45b227a3254aed22c, type: 2}
+  Choices:
+  - Shoot hot myspace pics
+  - Dabble in CPR
+  NextLevels:
+  - {fileID: 11400000, guid: 82e18e41613bed248b2741a30b5a278f, type: 2}
+  - {fileID: 11400000, guid: 702ffaa757ea21b4cadf54af2fea3655, type: 2}
+  PlayersChar: 0
+  EnemyChar: 0
+  AiDifficultyLevel: 0
+  AmbienceTrack: {fileID: 8300000, guid: 3daf30d870ec27147b94e9afe821a8d0, type: 3}
+  WAKTrack: 12
+  ReverbPreset: 0
+  CustomReverbPreset: {fileID: 0}

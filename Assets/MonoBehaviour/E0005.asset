@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0005
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 3faab0b3b97fb974b8a8793d191e7a13, type: 3}
+  Timestamps: "0.029\n2.098\n3.032\n4.967\n6.903\n9.105\n13.676\n16.145\n21.25\n24.854\n29.926\n35.031\n39.669\n42.471\n45.408\n47.543\n49.478\n50.546\n52.848\n57.587\n60.423\n61.591\n63.526"
+  WrittenDialogue: "Damn did your phone get hacked too?\nEvidently.\nWhy did it have to be puzzles?\nYeah it should’ve been Hillary Duff trivia.\nLike I know jack shit about Hillary Duff.\nIt’s really hard to focus on any of this, y’know? I’m like 5 adderralls in.\nBefore noon? That’s a new record.\nI’ve never been presented with so much busy work in one place. Is that all video games are?\nWell it’s not busy work if you’re having fun. So yeah basically.\nTotally worth it though for that phone. There’s guys paying like 500 dollars for one cause they’re all sold out.\nYou know the prize is more than just the phone, right? That’s just what the ad virus said.\nYeah but do you know how much xanax you could buy with 500 dollars??\nY-You’re still capping it at just 500 dollars.\nWhich is a lot of money, right?\nSo... Let’s play.\nBefore we do, you wanna buy a ring?\nWhat am I getting married?\nNo, for like fashion or whatever.\nYou’re trying to sell me used jewelry to buy drugs, this is very homeless right now.\nAlright fine let’s play, but I’m gonna be competitive.\nI don’t doubt that.\nOkay hold on I gotta take another adderrall."
+  DialogueCharacterNames: "EMILY\nJECKA\nEMILY\nJECKA\nEMILY\nEMILY\nJECKA\nEMILY\nJECKA\nEMILY\nJECKA\nEMILY\nJECKA\nEMILY\nJECKA\nEMILY\nJECKA\nEMILY\nJECKA\nEMILY\nJECKA\nEMILY"

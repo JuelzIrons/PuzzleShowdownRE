@@ -1,0 +1,6 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Burst.CodeGen")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Burst.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Burst.Tests.UnitTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Burst.Editor.Tests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Burst.Benchmarks")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

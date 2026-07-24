@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K003C
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 398678cf19e0e014589b4629a93af50c, type: 3}
+  Timestamps: "0.031\n3.934\n7.738\n11.008\n14.478\n17.515\n19.683\n24.188\n28.059\n33.23"
+  WrittenDialogue: "I think all those eating contests really caught up to me.\nI’m fat and hideous, guys never text me now.\nUnless they’re black, then a lot of them text me actually.\nThere’s a burning desire to change my life but...\nI have a bigger desire to eat the shame away!\nOh, my delivery’s here.\nThe usual 50 chicken kickers and a medium pizza.\nThe medium pizza’s an appetizer. That’s what I tell myself.\nAw it smells so good, it smells like friendship. I gotta dig in!"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

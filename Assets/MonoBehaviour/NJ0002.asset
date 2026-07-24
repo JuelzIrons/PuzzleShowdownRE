@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: NJ0002
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 36fc6125051916d4d82442f39367370f, type: 3}
+  Timestamps: "0.03\n1.365\n3\n5.736\n16.013\n18.949\n26.357\n27.425\n30.294\n36.467\n42.706\n48.512\n49.38\n51.115\n52.783\n53.818\n57.221\n59.924\n69.233\n72.303\n74.305\n78.876\n80.911\n82.179\n86.75\n91.055\n99.263\n102.099\n104.802"
+  WrittenDialogue: "Halt, females!!\nCan you leave us alone??\nWe can’t be the only girls worth stalking.\nThe buck stops here,{1} my puzzle master has fully educated me in the art of isolation. No longer will you girls tempt me into throwing the match.\nI’m pretty sure we both beat you while you were actually trying.\nYou don’t understand,{1} it’s for real this time! What lies at the end for the victor is more than I could have ever hoped for.\nWill you just tell us?\nYeah if you don’t we’ll get bored and not play with you.\nErm, very well.{1} The gate The Puzzler keeps is to the most important of all...\nThe thing in the back of all human minds whether it be sorrow or celebration... The ultimate.\nThe true winner of the puzzle showdown will learn the secrets to the meaning of life.\nWhat’s that?\nI don’t know, we haven’t won it yet.\nOh dude I know the meaning to life.\nNo you don’t!\nYeah the meaning to life is killing yourself so you have full control over it.\nWow that’s smart actually, Jeffery should listen to you.\nThe meaning to life wasn’t created by those with life. It’s something that can’t be perceived by the 5 human senses, it can only be felt.\nFeeling is one of the 5 senses you fucking dumbass!\nI meant metaphorically of course.\nJeffery, you whack off to cartoons you’re not this deep philosophical guru.\nThey’re not mutually exclusive.\nWhat does that even mean?\nI think he’s saying he’s a philosophical guru because he whacks off to cartoons.\nWow I never knew jacking off to Bugs Bunny in a dress made you the next Tony Robbins.\nEnough! There’s no sense in pursuing women of the living with high standards when animated women will gladly accept me! Logic prevails!\nOkay meaning of life, let’s play, Jeffery.\nThis time, you won’t win."
+  DialogueCharacterNames: "JEFFERY\nNICOLE\nJECKA\nJEFFERY\nNICOLE\nJEFFERY\nJECKA\nNICOLE\nJEFFERY\nJEFFERY\nJEFFERY\nJECKA\nJEFFERY\nNICOLE\nJEFFERY\nNICOLE\nJECKA\nJEFFERY\nNICOLE\nJEFFERY\nJECKA\nJEFFERY\nNICOLE\nJECKA\nNICOLE\nJEFFERY\nNICOLE\nJEFFERY"

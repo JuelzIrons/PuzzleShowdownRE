@@ -1,0 +1,7 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.VisualScripting.Flow.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.VisualScripting.State.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.VisualScripting.State")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.VisualScripting.SettingsProvider.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.VisualScripting.Tests.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.VisualScripting.Tests")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

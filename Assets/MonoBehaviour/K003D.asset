@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K003D
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 0f5b2779489685e4da0575d61b3eb6c3, type: 3}
+  Timestamps: "0.03\n3.601\n8.005\n11.375\n14.878\n19.416\n21.619\n26.39"
+  WrittenDialogue: "Can’t believe I let this old guy talk me in to going to church.\nNot that I have a problem with Christianity it’s just very unsexy.\nI don’t wanna think about Jesus when I’m making out with a guy.\nIf Jesus sees everything he’s debilitated pervert.\nHe just watches people fuck while he’s in the corner with a Steve Buscemi smile.\nThis is why I’m bad at being religious.\nAlright Kelly let’s review some bible verses, eh?"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nPRIEST"

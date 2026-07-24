@@ -1,0 +1,7 @@
+{
+  "name": "Unity.Multiplayer.Tools.Initialization",
+  "references": [
+    "Unity.Multiplayer.Tools.Common"
+  ],
+  "allowUnsafeCode": true
+}

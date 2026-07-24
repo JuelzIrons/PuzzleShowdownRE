@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005d
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 14915843c7318ae4a9c3658847ac684e, type: 3}
+  Timestamps: "0.067\n2.536\n7.174\n15.049\n20.421\n24.358"
+  WrittenDialogue: "Everybody listen up!\nAs senator, I promise to make the streets safer on a daily basis.\nWe’re going to get the government to partner with my Helping Hands charity to spread little helpers all across the country!\nIt’s Kelly for Senate 2022! Scream it loud! Scream it proud!\nAny questions from you potential voters out there?"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY"

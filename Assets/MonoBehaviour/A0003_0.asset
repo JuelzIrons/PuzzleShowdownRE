@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0003
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: d751e94b83b508942bd856a7b2c8cfc3, type: 3}
+  Timestamps: "0.046\n1.981\n3.149\n7.02\n8.088\n14.694\n16.029\n19.666\n22.068\n24.237\n25.472\n28.541\n30.777\n35.181\n37.984\n42.889\n46.726\n52.699"
+  WrittenDialogue: "Ay what it do, bitch??\nE-Excuse me??\nY’all think you got puzzle skills? You ain’t got shit on The Chustler, boy!\nWho’s The Chustler!?\nI’m The Chustler the chain-hustler ya dig?? I’m dropping so many chains like they ended privatized prison!\nOh like a combo?\nI’m dropping combos pretzel and cheddar style, boy! Fuck you mean??\nWhat do you mean what do I mean? I didn’t say anything!\nPull that shit out we boutta play, bitch!!\nWhy are you yelling??\nI’ll fucking kill you with the block strap right now, boy!\nWhat the hell did you even do before puzzles?\nI’m from the ghetto bitch! The hood bitch! Tyson’s Corner and shit, blud!!\nTyson’s Corner? That’s actually a really nice area.\nFuck you we ain’t had no lights! We had no reason to live as products of my environment, ho!\nAlright let’s get this over with, no way someone as dumb as you can beat me.\nOh you think you hard! Bitch my blocks gonna find you and kill you! Murder for life I kill ho bitches!!{0.8}"
+  DialogueCharacterNames: "THE CHUSTLER\nARI\nTHE CHUSTLER\nARI\nTHE CHUSTLER\nARI\nTHE CHUSTLER\nARI\nTHE CHUSTLER\nARI\nTHE CHUSTLER\nARI\nTHE CHUSTLER\nARI\nTHE CHUSTLER\nARI\nTHE CHUSTLER"

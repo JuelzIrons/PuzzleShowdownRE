@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: N0011
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 11f35e139a35e684899f28416a83fd09, type: 3}
+  Timestamps: "0.071\n2.574\n4.442\n6.778\n8.213\n15.253\n20.859\n24.796\n28.5\n34.239\n43.214\n49.587\n53.491\n58.73\n62.4\n65.303\n72.01\n74.712\n82.12\n85.256\n90.462\n92.864\n97.936"
+  WrittenDialogue: "I think you’ve progressed far enough.\nJust trying to get this over with, dude.\n...Is that really how you approach life?\nBasically.\nBeing forced to play my game would make anyone impatient.. {1.2}But it seems you’ve been this way for a while.\nI’m so not here to have a conversation about this.  Especially after you sicced a future mass shooter at me.\nFuture I’m not so sure about,{1} maybe an alternate one.\nAre you about to zap me to a universe somehow more misogynistic than this one?\nNo I’m talking about what could’ve been. What might’ve happened to that boy if I hadn’t shown up.\nI gave him purpose, you know. Upon finding him he was desperate and lonely, far closer to committing atrocities than he is now.\nFor how long? I can’t say. The petty hobby of serving me will only take him so far.\nHe is wearing a trench coat now. Do you know what that means?\nOf course I do! They’ll run out of pizza rolls and he’ll shoot up the frozen food aisle!\nBut isn’t it nice my puzzle is here to delay the inevitable? \nI thought it was a test of “logic and wit”?\nFor you girls it was... But my puzzle serves many purposes, for many different people.\nThe purpose of holding us digitally hostage?\nHow many times can I explain it? You already were digitally hostage! All I did was change the application.\nYeah but at least before I was... Y’know...\nHappy?{1} In control?  {1.8}We both know that’s not true.\nDude just shut up and play me so I can get this over with!\nTelling me to play... who’s truly a pawn? Get ready."
+  DialogueCharacterNames: "THE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nTHE PUZZLER\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER"

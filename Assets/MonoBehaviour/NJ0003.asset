@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: NJ0003
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 68b911cd1b07f5c4799a071da63a6139, type: 3}
+  Timestamps: "0.035\n3.372\n5.708\n9.144\n10.746\n12.481\n13.549\n14.583\n23.258\n24.927\n28.897\n32.501\n34.937\n36.405\n41.11\n46.348\n49.218\n51.687\n53.722\n55.891\n59.194\n66.769\n69.672\n71.006\n72.675\n75.01"
+  WrittenDialogue: "Oh if it isn’t you fuckin’ vegetable-eatin’ bitches.\nHow is eating vegetables an insult?\nHis bloodstream’s a consistent .08 BCC.\nWhat’s BCC?\nBlood-Crisco-Content.\nHey I heard that!\nYou think I give a shit?\nYou have no clue how focused I have been the past few days. I made it so high up the leaderboard The Puzzler himself congratulated me.\nWow if only women would do that.\nOh trust me, I’ve been getting hit up by girls all day.\nGirls who are hopefully of legal age?\nI mean,{1} legal in their state.\nHow do you keep fucking this up??\nYeah if they’re not old enough to join the army they’re not old enough to handle the PTSD of seeing your dick.\nWell the age of joining the army is 17, not 18 which is a common misconception.\nOh that means they’re all at least 17 then?\nWh-Why are you prying into my personal life??\nYou’re the one who bragged about it, dipshit!\nI think the police are gonna show up at your house again.\nThere’s gonna be another round of assemblies at every middle school in the state again.\nDude shut up about this pointless bullshit!{1} Once I unlock the meaning of life I’m gonna learn everything you’re saying is wrong!\nMeaning right now you understand why we’re saying this?\nAnd you’re doing it anyway??\nThis time we wanna play.\nYeah gotta stop you from winning this tournament!"
+  DialogueCharacterNames: "GAMER BROTHER\nJECKA\nNICOLE\nJECKA\nNICOLE\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nJECKA\nGAMER BROTHER\nNICOLE\nGAMER BROTHER\nJECKA\nNICOLE\nGAMER BROTHER\nJECKA\nGAMER BROTHER\nNICOLE\nJECKA\nNICOLE\nGAMER BROTHER\nNICOLE\nJECKA\nNICOLE\nJECKA"

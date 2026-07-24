@@ -1,0 +1,6 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("PlayModeTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.SpriteShape.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.SpriteShape.Tests.EditorTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.SpriteShape.RuntimeTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.Universal.2D.Runtime")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

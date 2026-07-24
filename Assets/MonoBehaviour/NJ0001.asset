@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: NJ0001
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 658e3ac322edd244f8ecfea9c09d4af6, type: 3}
+  Timestamps: "0.194\n7.001\n8.435\n11.205\n13.874\n16.343\n22.116\n24.151\n32.56\n34.328\n38.132\n38.899\n46.874\n48.275\n52.613\n54.348\n57.117\n58.485\n63.157\n69.53\n71.732\n75.135\n77.438\n83.277\n84.645\n91.485\n92.319\n97.291\n98.000"
+  WrittenDialogue: "Well look who’s back.  For girls who just wanted this to be over it’s odd that you’d re-open my puzzle application.\nWe’re here on business!\nYeah, turns out we both beat you and we didn’t get shit.\nEverything your heart should desire, yes.\nAnd we didn’t desire some monologue from an old man.\nYes well, think of beating me the first time as a checkpoint. Much of this is synonymous with life, you see.\nFuck your cinnamon! Where’s our prize?\nIt’s very much on the way but not instantaneous. In life nothing comes without incremental progress.  Long-term gratification, you understand?\nNo perm short-term, bitch.\nI was under the impression you girls weren’t so up tight about things.\nLike how?\nDon’t you hang out at the mall and listen to popular music or something?  Like R. Kelly?{1} Bounce bounce bounce bounce bounce bounce bounce!\nHe’s okay.\nI don’t know, didn’t R Kelly do some weird stuff to kids?\nDamn I might have to change my answer.\nYou don’t like R Kelly? What’re you white??\nI am now!\nCan you get to this prize before two white girls get mad at you for defending the works of R. Kelly?\nMaybe it doesn’t need to be so complicated. After all there’s only one thing standing between you and the ultimate prize.\nI’m not giving another fake credit card number!\nNo, no forms of payment! Just a final challenge.\nTell me before we get bored and go do something else.\nFor the ultimate prize your hearts should desire, you must defeat my Puzzle Shoguns!\nWait that’s an actual phrase?\nIt is in the world you’ve welcomed yourself back into.  Defeat my very best and all will become clear!\nYou’re on!\nNow then, what better way to warm up than with The Puzzler himself?\nDude you are so fuckin’ lonely."
+  DialogueCharacterNames: "THE PUZZLER\nJECKA\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nJECKA\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nJECKA\nTHE PUZZLER\nNICOLE\nJECKA\nNICOLE\nTHE PUZZLER\nJECKA\nNICOLE\nTHE PUZZLER\nJECKA\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nNICOLE\nTHE PUZZLER\nJECKA\nTHE PUZZLER\nNICOLE"

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005C.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 42f3e3246387ccc4d981ec3ce8da0ad7, type: 3}
+  Timestamps: "0.035\n2.137\n6.541\n9.544\n13.448\n19.287"
+  WrittenDialogue: "Nice job clearing all that.\nDamn to think that’s basically how we met and it’s been a huge waste of time ever since.\nI wasted 20 years of my life in jail.\nAnd you wasted even more time with this stupid line clearing game.\nI got some nice prison ink and stories to tell, but what do you have to show for it?"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY"

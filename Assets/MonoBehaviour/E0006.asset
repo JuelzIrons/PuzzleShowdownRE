@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0006
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: ea414354e01e49344bf519e75b18c50a, type: 3}
+  Timestamps: "0.029\n2.031\n3.399\n7.103\n8.705\n9.305\n12.041\n18.881\n21.317\n24.787\n26.923\n27.89\n32.128\n33.262\n34.297\n36.065\n40.036\n42.505\n47.276\n48.745\n53.583\n57.987\n60.757\n65.094\n70.333\n72.702\n75.071\n77.106\n79.375\n82.278\n86.015\n86.883\n88.584\n91.02\n96.392\n102.064\n107.003\n109.071\n112.108"
+  WrittenDialogue: "Hey Emily, how ya doing?\nHi, nerd shirt.\nUh I was thinking, do you wanna be friends with me?\nNo! Go fuck yourself!\nWhat??\nWhat gave you any hint that I’d wanna be friends with you?\nI just thought instead of asking pretty girls to be my girlfriend, it’s an easier step to just be friends first.\nSo you wanna pretend to be my friend to eventually fuck me?\nIt’s not about that, it’s about finding true love!\nYou gotta stop clinging onto this dream, dude.\nWhat dream?\nWhatever dream your anime shit sold you about hot girls falling in love with you.\nIt’s possible.\nLiterally not.\nAre you sure!?\nUhhh... Well maybe you just need to up your game. You wanna buy this watch?\nI’ve never heard of Rollex before.\nIt’s like the best watch you can get. Mad bitches are gonna be all over you wearing this.\nWhat about you?\nMe? Oh if I see a guy with a Rolex he basically owns my body{2} according to men.\nOh really? And I really like your body.\nYeah all that “true love” shit just out the window.\nI’m sorry it’s just, as a male I have carnal urges.\nYeah the carnal urge for anime porn and Kraft easy mac. So you buying this or not? 50 bucks.\nAw it’s very tempting.\n60 bucks and I’ll throw in an MP3 player.\nYou have yourself a deal!\nCool thanks, try it on.\nHm well... How do I look?\nOh my god you look like a gross ass nerd with a fake watch.\nWait but!\nPleasure doing business, Jeffery.\nYou lied, you said you’d want me!\nI don’t fuck losers, Jeffery. My standard is perc dealers in Mustangs and MS-13 members.\nI’ve had it! We’ll settle this with a puzzle showdown! If I win you give me my money back!\nOh shit I better win then otherwise I’ll totally have to honor that thing I didn’t agree to.\nEnough talk, let’s play!\nYou really care about this so I’m gonna need way more adderrall."
+  DialogueCharacterNames: "JEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY\nJEFFERY\nEMILY"

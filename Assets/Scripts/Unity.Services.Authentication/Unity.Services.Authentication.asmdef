@@ -1,0 +1,10 @@
+{
+  "name": "Unity.Services.Authentication",
+  "references": [
+    "Unity.Services.Core",
+    "Unity.Services.Core.Internal",
+    "Newtonsoft.Json",
+    "Unity.Services.Core.Components"
+  ],
+  "allowUnsafeCode": true
+}

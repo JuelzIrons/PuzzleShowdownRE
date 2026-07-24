@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b80866749e6ddd84468fe9aa8e26d0, type: 3}
+  m_Name: Jecka
+  m_EditorClassIdentifier:
+  Type: 1
+  PodColorShiftValue: {r: 0.98039216, g: 0.4862745, b: 0.93333334, a: 1}
+  CharacterPortraitRight: {fileID: 21300000, guid: e9fd9c7a9739469439aad3754e413cf1, type: 2}
+  CharacterPortraitLeft: {fileID: 21300000, guid: 2bf3a1947c3ab37499088d8b43166400, type: 2}
+  CharacterInnerBannerP1: {fileID: 21300000, guid: c2d8e9cff06d58747a3363feb911d878, type: 2}
+  CharacterInnerBannerP2: {fileID: 21300000, guid: 778ece88b5ef6014bb48a936e2c263b9, type: 2}
+  CharacterSplashSprite: {fileID: 21300000, guid: 6d3c763054f1e5a4cb569717829c9656, type: 2}
+  VoiceBoxSO: {fileID: 11400000, guid: dd5c4df19f58a844f8c1683b4029a30a, type: 2}

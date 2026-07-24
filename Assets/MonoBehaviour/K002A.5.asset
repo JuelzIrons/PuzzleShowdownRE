@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K002A.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 452fd60f008c1094cb9e8785dbe77f1f, type: 3}
+  Timestamps: "0.005\n2.741\n5.511\n8.347\n14.286\n17.256\n21.794"
+  WrittenDialogue: "So sorry to interrupt but I think somebody’s drowning!\nUgh bluh! Uno! Ugh-ruh!!\nI don’t have any lifeguard experience, do you?\nBut hey maybe you could help me take a couple more angles.  I want some full-body shots, they could go super viral.\nDo you have an iPhone by the way? I hear the cameras on those is good.\nUrghh save me! Uh-huck!!"
+  DialogueCharacterNames: "KELLY\nHUNTER\nKELLY\nKELLY\nKELLY\nHUNTER"

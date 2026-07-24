@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K003C.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 319a1cc8a157fa044becd5b6e9c7fec7, type: 3}
+  Timestamps: "0.037\n4.475\n10.248\n15.486\n20.992\n23.961"
+  WrittenDialogue: "I don’t know it’s just... How can I expect to go on?\nIn high school I was thin, and hot, and popular, and now look at me!\nI’d rather read the nutrition facts on a Subway napkin than any self-help book.\nKnowing the calories makes me feel better, but I know I’m not gonna count them.\nPlease God, give me a sign."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY"

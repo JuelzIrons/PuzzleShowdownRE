@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0007
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 28810c6f91885cf4482c04b037dee574, type: 3}
+  Timestamps: "0.033\n1.568\n2.735\n7.407\n9.576\n10.743\n11.845\n13.546\n15.148\n18.785\n21.688\n23.289\n26.059\n29.996\n32.732\n36.769\n37.837\n38.805\n40.206\n42.008\n44.21\n47.18\n47.981\n51.017\n53.887\n55.722\n57.357"
+  WrittenDialogue: "Oh Nicole thank god.\nAre you religious now?\nNo I’m just relieved to see somebody who isn’t a man putting all their self-worth into a game.\nYeah it’s getting kinda crazy out here.\nBut I’m still glad to see you!\nShut the fuck up.\nOkay thank you I’m sorry.\nWhy’re you playing this anyway?\nUh kind of an escape... From myself.\nBeing good at puzzles isn’t gonna make you cut yourself any less.\nI feel like I’ve been doing better.\nWhy would you wanna do better though? Cutting yourself is hot.\nReally? A guy friend told me it’s actually really bad.\nYeah cause he wants you to stay attainable obviously.\nMaybe you’re right. Ugh all this stress is making me starve myself.\nThat’s good too.\nSeriously?\nWould you rather be fat?\nNo. I couldn’t pull that off.\nYeah when you’re fat there’s a lot you can’t pull off.\nOkay I’m kinda freaking out now, do you wanna play?\nPlay what?\nThis puzzle thing, it takes my mind off everything.\nSuicide could also do that, just saying.\nUh, please?\nAlright fine, damn."
+  DialogueCharacterNames: "ARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE\nARI\nNICOLE"

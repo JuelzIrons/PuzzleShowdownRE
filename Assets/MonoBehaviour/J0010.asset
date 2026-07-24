@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0010
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 113cc157f482ab9459be5b734943c6fe, type: 3}
+  Timestamps: "0.066\n1.934\n4.27\n9.742\n11.711\n17.65\n19.585\n28.894\n32.665\n37.903\n49.148\n53.753\n62.228\n64.43\n70.569\n73.339\n79.979\n82.581"
+  WrittenDialogue: "The line ends here.\nWhy are you dressed in black? It’s the summer.\nBlack is the only color which represents what I’ve become... Darkness.\nOkay well can you get out of my way?\nI’m not here to be in your way. I’m here to take you out on behalf of The Puzzler.\nWhy would you do anything for him??\nHe accepts me while others shun. No judgements, no petty excuses to avoid me, just transparency of an ultimate goal.\nSo just because no one wants to be your friend you’re gonna team up with a psychopath?\nThe Puzzler understands my abilities and applies me to where I will prosper.\nAll you ever did was treat me like a monster. Nothing but a fly to swat away. I would say it’s personal but that implies I have any emotions left to give.\nJeffery you’re not entitled to girls way hotter than you wanting to date you. At least get rich first.\nI tried to plead with your lower level of intellect but my master made it clear humanity is a waste of time for the highly intelligent.\nOh you gotta dumb yourself down when you talk to me!?\nBut I should’ve known it was an impossibility to stoop that low. My brain wouldn’t allow it.\nOkay if I’m so dumb you can beat me in this puzzle!\nIt’s not very intellectually stimulating, but for my master I must beat you...\n...To become Puzzle Shogun!!"
+  DialogueCharacterNames: "JEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJEFFERY"

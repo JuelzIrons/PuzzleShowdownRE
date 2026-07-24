@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K001
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 127ae70ccafd8214f83bb02e7c8bb735, type: 3}
+  Timestamps: "0.062\n2.064\n4.466\n9.138\n11.307\n16.178\n19.048\n21.383\n24.787\n28.223\n29.358\n31.961\n36.131"
+  WrittenDialogue: "Oh my god you actually showed up!\nN-not that I’m surprised you would show up.\nI’m not dumb I just drank half a Bud Light so I’m like absolutely shit-faced, y’know?\nBut the party’s going pretty good!\nOnly like 8 girls have been sexually assaulted so far which is a record low for my parties.\nOh and 2 guys but I don’t really care when it happens to guys.\nBut yeah we were actually about to play a game.\nAnd don’t worry it’s not as complicated as Chutes and Ladders.\nYou just gotta solve all the blocks until they’re under the clear line.\nAnd then you win!\nI don’t know what you win but just hang out for a while.\nAnd don’t worry you won’t get sexually assaulted while playing this I think."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

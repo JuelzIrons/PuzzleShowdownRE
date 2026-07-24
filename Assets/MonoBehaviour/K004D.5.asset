@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004D.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 4a38205b1136a2d449bf72668f0c1280, type: 3}
+  Timestamps: "0.034\n3.537\n8.008\n14.648\n19.887\n23.924"
+  WrittenDialogue: "Okay all, I think this was a really productive meeting.\nWith your help, we can take me-- this cause to the next level.\nI’m working with publicists every single day to make sure our message gets out in the best way possible.\nThe future is so so bright! Don’t be surprised if what we’re doing goes national one day.\nAlso if you’re not on salary, don’t touch the catering that’s for us."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY"

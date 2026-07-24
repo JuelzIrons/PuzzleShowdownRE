@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13157f96b959ef44afb673d9083e6af, type: 3}
+  m_Name: SpriteData
+  m_EditorClassIdentifier:
+  GarbageBlocks:
+    CoreTop: {fileID: 21300000, guid: 0c9c264ea49c5ca42b9012e886ff0beb, type: 2}
+    CoreBottom: {fileID: 21300000, guid: 207d8159d02170e44bfc8dde44649725, type: 2}
+    CoreLeft: {fileID: 21300000, guid: 0d14468aeee1a024b8ed4c5bb32a4c51, type: 2}
+    CoreRight: {fileID: 21300000, guid: 1bbe98f86a3e4584cb89b9fcbf7f0c92, type: 2}
+    Core: {fileID: 21300000, guid: 9695f3bfbff10ec4296e46e99bee8bf1, type: 2}
+    CoreTopLeft: {fileID: 21300000, guid: 8655953e8a4216842a2b8aec00c4ef06, type: 2}
+    CoreTopRight: {fileID: 21300000, guid: a2d8d47cd93cb9c4e9d6d6fe6fb9d4ea, type: 2}
+    CoreBottomLeft: {fileID: 21300000, guid: 3a4594598656c7f41a60e71c64c45a37, type: 2}
+    CoreBottomRight: {fileID: 21300000, guid: cd8ca41652850154da94f1eef35b4a29, type: 2}
+    Tube: {fileID: 21300000, guid: 74985138ec2b3054eb8cfaa34ff5d4ed, type: 2}
+    TubeRight: {fileID: 21300000, guid: 81bc550ea5ac8224c8e9b4f1f1f43445, type: 2}
+    TubeLeft: {fileID: 21300000, guid: ba2d9a2a9c17b3b449f08be2ded1cfcc, type: 2}
+    Single: {fileID: 21300000, guid: 8d5c115cd4e786242ac6ff0ac09caf19, type: 2}
+    SingleFlashing: {fileID: 21300000, guid: 41a710fc8a7cdf845b3eeb886ea0eec9, type: 2}
+  Teal:
+    LandSprites:
+    - {fileID: 21300000, guid: 11e4c0257f0f1974d8d3ef827323b56a, type: 2}
+    - {fileID: 21300000, guid: b89ffe49e4d8d0a43a3f52dc5e385a11, type: 2}
+    - {fileID: 21300000, guid: 0c956aa1fb0a4d14eb21f3e39e4f4609, type: 2}
+    - {fileID: 21300000, guid: 7a4417f5c84389141b550631095274f2, type: 2}
+    DanceSprites:
+    - {fileID: 21300000, guid: 0c956aa1fb0a4d14eb21f3e39e4f4609, type: 2}
+    - {fileID: 21300000, guid: 7a4417f5c84389141b550631095274f2, type: 2}
+    - {fileID: 21300000, guid: 11e4c0257f0f1974d8d3ef827323b56a, type: 2}
+    - {fileID: 21300000, guid: b89ffe49e4d8d0a43a3f52dc5e385a11, type: 2}
+    - {fileID: 21300000, guid: 11e4c0257f0f1974d8d3ef827323b56a, type: 2}
+    - {fileID: 21300000, guid: 7a4417f5c84389141b550631095274f2, type: 2}
+    DestroySprites:
+    - {fileID: 21300000, guid: af7b45d1dc4332d4bab215a5478196a6, type: 2}
+    - {fileID: 21300000, guid: 18de7257544a21a4bbb1dd1753b17071, type: 2}
+    - {fileID: 21300000, guid: e91f98d20c6c95e458e3340f4f86f027, type: 2}
+    - {fileID: 21300000, guid: 19555007bec0d2945bff400eec4455ed, type: 2}
+    - {fileID: 21300000, guid: 563072fe17217044fb141a6fb4d5d074, type: 2}
+    - {fileID: 21300000, guid: 67f5540f2a653e64387b13ba0b8b5d3d, type: 2}
+    FrozenSprite: {fileID: 21300000, guid: e7a308abc87071540bbcc7069e86032c, type: 2}
+    DestroyedSprite: {fileID: 21300000, guid: cfc8a4c238a7be84ea893f5c283a0485, type: 2}
+  Orange:
+    LandSprites:
+    - {fileID: 21300000, guid: 52b40cd128a67e446bb85562d986a74c, type: 2}
+    - {fileID: 21300000, guid: be5d68ff0e1d38043b7a750b21c0e7f7, type: 2}
+    - {fileID: 21300000, guid: 668571ac0158dd946a9ef7914f5eeff9, type: 2}
+    - {fileID: 21300000, guid: 4e54a5ddebb20204fbaf849773154859, type: 2}
+    DanceSprites:
+    - {fileID: 21300000, guid: 668571ac0158dd946a9ef7914f5eeff9, type: 2}
+    - {fileID: 21300000, guid: 4e54a5ddebb20204fbaf849773154859, type: 2}
+    - {fileID: 21300000, guid: 52b40cd128a67e446bb85562d986a74c, type: 2}
+    - {fileID: 21300000, guid: be5d68ff0e1d38043b7a750b21c0e7f7, type: 2}
+    - {fileID: 21300000, guid: 52b40cd128a67e446bb85562d986a74c, type: 2}
+    - {fileID: 21300000, guid: 4e54a5ddebb20204fbaf849773154859, type: 2}
+    DestroySprites:
+    - {fileID: 21300000, guid: 8064ac046ddd9184d8f5cbf6f27dd341, type: 2}
+    - {fileID: 21300000, guid: dfc78ecdc7ac4db49b219d4be4ce23d8, type: 2}
+    - {fileID: 21300000, guid: 81688c599e8afe04e978662db324c2d7, type: 2}
+    - {fileID: 21300000, guid: e6a8fd523db38d944b19649445cd721f, type: 2}
+    - {fileID: 21300000, guid: 4a9d90880792c3041971c081e921ce20, type: 2}
+    - {fileID: 21300000, guid: a67de27d04d780346859aa473c4caad0, type: 2}
+    FrozenSprite: {fileID: 21300000, guid: 860b0af64247b6741b9b7f320cc06c5a, type: 2}
+    DestroyedSprite: {fileID: 21300000, guid: cfc8a4c238a7be84ea893f5c283a0485, type: 2}
+  Green:
+    LandSprites:
+    - {fileID: 21300000, guid: a56b94062d393e9418c4d792340a1407, type: 2}
+    - {fileID: 21300000, guid: 273cb266111cbf9419b158816c826c61, type: 2}
+    - {fileID: 21300000, guid: b434d67c05883ef4a9ad629f6a886de7, type: 2}
+    - {fileID: 21300000, guid: f013dcce7f5f5954ca935da1ccbc227b, type: 2}
+    DanceSprites:
+    - {fileID: 21300000, guid: b434d67c05883ef4a9ad629f6a886de7, type: 2}
+    - {fileID: 21300000, guid: f013dcce7f5f5954ca935da1ccbc227b, type: 2}
+    - {fileID: 21300000, guid: a56b94062d393e9418c4d792340a1407, type: 2}
+    - {fileID: 21300000, guid: 273cb266111cbf9419b158816c826c61, type: 2}
+    - {fileID: 21300000, guid: a56b94062d393e9418c4d792340a1407, type: 2}
+    - {fileID: 21300000, guid: f013dcce7f5f5954ca935da1ccbc227b, type: 2}
+    DestroySprites:
+    - {fileID: 21300000, guid: 9b7e054573dae9f41ab129846a9346ed, type: 2}
+    - {fileID: 21300000, guid: 9b7e054573dae9f41ab129846a9346ed, type: 2}
+    - {fileID: 21300000, guid: 07dd4fa8f8e6ac64183f85393b3c8d63, type: 2}
+    - {fileID: 21300000, guid: 72b4eac1fad75944e865cdfda5765de7, type: 2}
+    - {fileID: 21300000, guid: 7193507c0e9309048bf8cf47610c93e4, type: 2}
+    - {fileID: 21300000, guid: a340fb1029db247438041b621a79eafe, type: 2}
+    FrozenSprite: {fileID: 21300000, guid: 33b51c3c06fb9274288b7aa402d0b442, type: 2}
+    DestroyedSprite: {fileID: 21300000, guid: cfc8a4c238a7be84ea893f5c283a0485, type: 2}
+  Yellow:
+    LandSprites:
+    - {fileID: 21300000, guid: e2da3b1047d66ab499b6cb0413e36fab, type: 2}
+    - {fileID: 21300000, guid: 84c3af7eb6e70744991a71b5ec8f2e67, type: 2}
+    - {fileID: 21300000, guid: 4f3404b22ea111c4b9329573ddb71fca, type: 2}
+    - {fileID: 21300000, guid: 96832e311bb673545b66cf81814c0dbb, type: 2}
+    DanceSprites:
+    - {fileID: 21300000, guid: 4f3404b22ea111c4b9329573ddb71fca, type: 2}
+    - {fileID: 21300000, guid: 96832e311bb673545b66cf81814c0dbb, type: 2}
+    - {fileID: 21300000, guid: e2da3b1047d66ab499b6cb0413e36fab, type: 2}
+    - {fileID: 21300000, guid: 84c3af7eb6e70744991a71b5ec8f2e67, type: 2}
+    - {fileID: 21300000, guid: e2da3b1047d66ab499b6cb0413e36fab, type: 2}
+    - {fileID: 21300000, guid: 96832e311bb673545b66cf81814c0dbb, type: 2}
+    DestroySprites:
+    - {fileID: 21300000, guid: 415e92c044571514998d54157f439692, type: 2}
+    - {fileID: 21300000, guid: 9e18796b0c35a8648baa48da685fcf94, type: 2}
+    - {fileID: 21300000, guid: d0ae7ec0dd15b4748b5e2b40ac3c6109, type: 2}
+    - {fileID: 21300000, guid: 49602a446eaa5f3448cbe0caafe3df2b, type: 2}
+    - {fileID: 21300000, guid: 7f0059187f68bec41aa5fd3ab4ec9430, type: 2}
+    - {fileID: 21300000, guid: 1e51c5a1877fe2249899588ac7ee4835, type: 2}
+    FrozenSprite: {fileID: 21300000, guid: 6dee0b66f5f90484e8a02e42f06231e4, type: 2}
+    DestroyedSprite: {fileID: 21300000, guid: cfc8a4c238a7be84ea893f5c283a0485, type: 2}
+  Purple:
+    LandSprites:
+    - {fileID: 21300000, guid: 01a1605cd4006cb4aa79b65726c84c67, type: 2}
+    - {fileID: 21300000, guid: f63e72c566fdabe468612706746f76ea, type: 2}
+    - {fileID: 21300000, guid: 2787683e96150d1468602d9f6e1baf52, type: 2}
+    - {fileID: 21300000, guid: 2ceba0a4191b72746be0f21dd3851cdd, type: 2}
+    DanceSprites:
+    - {fileID: 21300000, guid: 2787683e96150d1468602d9f6e1baf52, type: 2}
+    - {fileID: 21300000, guid: 2ceba0a4191b72746be0f21dd3851cdd, type: 2}
+    - {fileID: 21300000, guid: f63e72c566fdabe468612706746f76ea, type: 2}
+    - {fileID: 21300000, guid: 01a1605cd4006cb4aa79b65726c84c67, type: 2}
+    - {fileID: 21300000, guid: f63e72c566fdabe468612706746f76ea, type: 2}
+    - {fileID: 21300000, guid: 2ceba0a4191b72746be0f21dd3851cdd, type: 2}
+    DestroySprites:
+    - {fileID: 21300000, guid: a550a1b5bfbaf9e48892e0a125dea9a2, type: 2}
+    - {fileID: 21300000, guid: 30cbea2635d35d54d8cce8b6cce06ec6, type: 2}
+    - {fileID: 21300000, guid: e2bee538c57b5494e994ea8493e4d995, type: 2}
+    - {fileID: 21300000, guid: 7ae74a1b2c20f934781de3c6523b80e8, type: 2}
+    - {fileID: 21300000, guid: 81b8abee918ba57478abc3e141e5911f, type: 2}
+    - {fileID: 21300000, guid: a5446c3003d10f3438d5ed178dbf31c8, type: 2}
+    FrozenSprite: {fileID: 21300000, guid: c9c139362d141d842b7886b0ce933212, type: 2}
+    DestroyedSprite: {fileID: 21300000, guid: cfc8a4c238a7be84ea893f5c283a0485, type: 2}
+  Ghost:
+    LandSprites:
+    - {fileID: 21300000, guid: 656fbf156447907439c4e237f2f26f31, type: 2}
+    - {fileID: 21300000, guid: 656fbf156447907439c4e237f2f26f31, type: 2}
+    - {fileID: 21300000, guid: 656fbf156447907439c4e237f2f26f31, type: 2}
+    - {fileID: 21300000, guid: 656fbf156447907439c4e237f2f26f31, type: 2}
+    DanceSprites: []
+    DestroySprites: []
+    FrozenSprite: {fileID: 0}
+    DestroyedSprite: {fileID: 0}
+  MissingSprite: {fileID: 0}
+  GhostSprite: {fileID: 0}

@@ -1,0 +1,13 @@
+namespace Unity.VisualScripting
+{
+	[global::System.AttributeUsage(global::System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+	public sealed class UnitSurtitleAttribute : global::System.Attribute
+	{
+		public string surtitle { get; private set; }
+
+		public UnitSurtitleAttribute(string surtitle)
+		{
+			this.surtitle = surtitle;
+		}
+	}
+}

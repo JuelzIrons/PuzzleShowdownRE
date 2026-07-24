@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b80866749e6ddd84468fe9aa8e26d0, type: 3}
+  m_Name: Chustler
+  m_EditorClassIdentifier:
+  Type: 5
+  PodColorShiftValue: {r: 0.92941177, g: 0.69411767, b: 0, a: 1}
+  CharacterPortraitRight: {fileID: 21300000, guid: 6b2d16e44e4aeb54291dcca73b4ca390, type: 2}
+  CharacterPortraitLeft: {fileID: 21300000, guid: 6b2d16e44e4aeb54291dcca73b4ca390, type: 2}
+  CharacterInnerBannerP1: {fileID: 21300000, guid: af32654fc122fad48bbd1918055577a7, type: 2}
+  CharacterInnerBannerP2: {fileID: 21300000, guid: af32654fc122fad48bbd1918055577a7, type: 2}
+  CharacterSplashSprite: {fileID: 21300000, guid: 8ca8226439c7e314c8a2be60e6a95d1b, type: 2}
+  VoiceBoxSO: {fileID: 11400000, guid: 48acad91e7dcf3f4c9cf2567b6442031, type: 2}

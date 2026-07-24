@@ -1,0 +1,6 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("ScriptablePacker")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.SpriteShape.Runtime")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Common.Tests.EditorTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Animation.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Animation.Runtime")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

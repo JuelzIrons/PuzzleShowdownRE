@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0001
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 0dfc6ccb4b773904582befd46b564682, type: 3}
+  Timestamps: "0.031\n3.067\n4.135\n7.772\n9.34\n13.978\n16.581\n20.018\n21.386\n24.122\n24.956\n25.757\n31.162\n34.565\n37.802\n41.506\n45.443\n47.345\n49.647\n52.65\n54.018"
+  WrittenDialogue: "Oh hey! It’s um...\nHi, Kelly.\nYeah, hi...{1} You!\nDid you seriously forget my name?\nWhat? No of course not.. Um... I remember you’re gay though.\nYeah no shit I was one of like 3 kids.\nHey way more than 3 kids pretended to be gay in high school.\nI wasn’t pretending!\nRight, yeah I know...\n...Cari.\nIt’s Ari!\nWhat? Yeah I know that. I was just saying the name of a movie.. From the 70’s.\nI’m a manager at FYE like really important I know this stuff.\nSo have you played anyone in this puzzle thing on our phones?\nUgh unfortunately. I just wanna use my phone to talk to people!\nI don’t know it’s not so bad. It let’s me focus on something else.\nWhat do you usually focus on?\nUh.. Nothing. Do you wanna play?\nI guess, but don’t act like you’re really smart if you beat me.\nDon’t worry I won’t."
+  DialogueCharacterNames: "KELLY\nARI\nKELLY\nARI\nKELLY\nARI\nKELLY\nARI\nKELLY\nKELLY\nARI\nKELLY\nKELLY\nARI\nKELLY\nARI\nKELLY\nARI\nKELLY\nARI"

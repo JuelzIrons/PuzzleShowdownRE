@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a895ccc9707dab3da44b60e732524bd, type: 3}
+  m_Name: K005E
+  m_EditorClassIdentifier:
+  LevelSpeechData:
+  - {fileID: 11400000, guid: b077e4d5cf76f5c4582af505a2740a7a, type: 2}
+  - {fileID: 11400000, guid: 762bf8fc78ceb2d4783d235385e2f0b2, type: 2}
+  - {fileID: 11400000, guid: 4d670ca15de3bae44be36eb46ac0767d, type: 2}
+  - {fileID: 11400000, guid: dae2526162ad092489ccea92531f60cc, type: 2}
+  - {fileID: 11400000, guid: 4b44da6ceed97834babd563a48f455ee, type: 2}
+  - {fileID: 11400000, guid: 9e41636284f99d247902552db0b8f897, type: 2}
+  LevelDepth: f8ffff/ff6ffff/ff5ffff/ff4ffff/ff3ffff/f
+  LevelSpeed: 28000000280000002a0000002f00000031000000
+  LevelCG: {fileID: 21300000, guid: 3707775f4a5deb543a14e8a18ab87520, type: 2}
+  Choices: []
+  NextLevels: []
+  PlayersChar: 0
+  EnemyChar: 0
+  AiDifficultyLevel: 0
+  AmbienceTrack: {fileID: 8300000, guid: 3224209421983c34b89dee20dd2199b7, type: 3}
+  WAKTrack: 6
+  ReverbPreset: 0
+  CustomReverbPreset: {fileID: 0}

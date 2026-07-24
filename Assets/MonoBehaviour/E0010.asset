@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: E0010
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: e99995fd2cba6c14b8b602fde62fb332, type: 3}
+  Timestamps: "0.038\n1.606\n3.542\n7.079\n8.18\n9.481\n10.082\n11.516\n14.252\n16.888\n18.957\n23.929\n25.197\n29.668\n31.269\n33.972\n36.308\n39.478\n40.979\n44.082\n46.551\n50.822"
+  WrittenDialogue: "Ugh Christ almighty!\nEmily? I didn’t know you’re religious.\nI’m not I’m just running from police right now. Are you religious?\nNo I’m gay.\nYou could still be religious.\nReally?\nYeah if you’re a human doormat.\nI bet you’d turn religious if the police threw you in jail.\nI got way too many satanic tattoos for that one.\nOh that’s kinda cool, can I see?\nI am tweaked the fuck out off adderrall right now, I don’t have time for some fucking gay girl to be hitting on me!\nHow can they always tell?\nFace it, Ari. If you were a man you’d basically be Jeffery getting no bitches.\nThat’s like really fucked up to say.\nUh no, it’s like really fucked up and true.\nI’ll show you who’s Jeffery, beat me in a puzzle!\nThat’s exactly what Jeffery would say cause he loves this gay shit.\nI’ve seen you play it a lot too!\nYeah cause I’m trying to win the free iPhone and sell it for xanax.\nIf you can’t beat me you’re never gonna win that phone.\nFine let’s do this dumb shit, but just make it fast. I don’t know how close these guys are."
+  DialogueCharacterNames: "EMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY\nARI\nEMILY"

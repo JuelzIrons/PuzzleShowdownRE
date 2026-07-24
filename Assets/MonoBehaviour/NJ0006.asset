@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: NJ0006
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 513d85213a5b4cf48a5ca698a9505939, type: 3}
+  Timestamps: "0.039\n1.341\n4.377\n5.578\n7.58\n9.315\n11.251\n12.986\n19.092\n26.132\n27.734\n30.236\n32.805\n37.11\n41.114\n47.053\n49.422\n50.89\n52.091\n60.633\n63.369\n67.507\n68.808\n72.679\n74.647\n78.051\n79.252\n83.089"
+  WrittenDialogue: "Hold it right there, girls.\nOh thank god, can we report our former gym teacher to you?\nYeah and my brother.\nReport them on the basis of what?\nSomething that better be illegal.\nSorry girls, no can do.\nWe didn’t even tell you the crime yet.\nSeeing as this addictive puzzle has taken over all the phones in town, all the police have gone rogue.\nI now answer to none other than The Puzzler himself as his final ring of security.\nNicole, he owns the government!\nYeah so does GM and Wal-Mart, what else is new?\nI’d take it you girls would like to speak with him?\nUh one sec, we’re just trying to come to grips with whatever the fuck is going on.\nSo if we win we see The Puzzler, what happens if we lose?\nLet’s just say you’ll never be able to commit another crime again.\nI never committed a crime in the first place!\n...I mean let’s be real.\nDon’t give him any clues!\nI already sense a divide, with divide comes hesitation, in hesitation comes defeat.\nSo you’re saying if we lose you’ll murder us?\nThe definition of murder is an unjustified killing.\nYeah he’s gonna murder us.\nWould you rather go home and be a loser eating cold pepperonis out of the bag?\nThat actually sounds a lot better than this!\nNo! We got this far we gotta at least end this shit.\nI’m waiting...\nFine. But if we lose you have to get murdered first so I can tell you I was right."
+  DialogueCharacterNames: "COP\nJECKA\nNICOLE\nCOP\nNICOLE\nCOP\nJECKA\nCOP\nCOP\nJECKA\nNICOLE\nCOP\nJECKA\nNICOLE\nCOP\nNICOLE\nJECKA\nNICOLE\nCOP\nNICOLE\nCOP\nJECKA\nNICOLE\nJECKA\nNICOLE\nCOP\nJECKA"

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005F.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: e5ef0e618e4b7b546bde1aa113e34215, type: 3}
+  Timestamps: "0.03\n2.632\n6.87\n9.206\n12.976\n17.481"
+  WrittenDialogue: "And the gold medal goes to...\nKelly! Winning first place in the 8 meter relay!\nYeah! I knew I could do it!\nTo think it was all thanks to you and your line clearing skills.\nI should throw another house party, who knows what’ll happen at the next one!"
+  DialogueCharacterNames: "ANNOUNCER\nANNOUNCER\nKELLY\nKELLY\nKELLY"

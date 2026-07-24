@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005E
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: de098af30508a8b4a979409f46530bef, type: 3}
+  Timestamps: "1.103\n5.141\n11.08\n19.121\n25.828\n30.065\n38.541\n43.846\n49.485"
+  WrittenDialogue: "It’s Kelly! Welcome back everybody!\nToday on the show we have an intense lineup of guests all with their own unique stories.\nFirst we’ll talk to a girl born with a tragic birthmark resembling a Nazi swastika... On her face!\nThen we’ll talk to the world’s most viral TV Dinner reviewer, you won’t wanna miss that.\nAnd I know we can all get a little pervy sometimes...\nBut not as much as my last guest. It’s a guy who compulsively masturbates 100 times a day.\nEvery time I look in the mirror I can’t help but feel responsible.\nYou guys are great! Stick around as we navigate these on It’s Kelly!"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

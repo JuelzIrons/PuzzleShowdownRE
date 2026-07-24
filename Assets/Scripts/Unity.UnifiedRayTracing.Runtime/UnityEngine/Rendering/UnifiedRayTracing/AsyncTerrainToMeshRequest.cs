@@ -1,0 +1,62 @@
+namespace UnityEngine.Rendering.UnifiedRayTracing
+{
+	internal struct AsyncTerrainToMeshRequest
+	{
+		private global::Unity.Jobs.JobHandle m_JobHandle;
+
+		private global::UnityEngine.Rendering.UnifiedRayTracing.ComputeTerrainMeshJob m_Job;
+
+		public bool done => m_JobHandle.IsCompleted;
+
+		internal AsyncTerrainToMeshRequest(global::UnityEngine.Rendering.UnifiedRayTracing.ComputeTerrainMeshJob job, global::Unity.Jobs.JobHandle jobHandle)
+		{
+			m_Job = job;
+			m_JobHandle = jobHandle;
+		}
+
+		public global::UnityEngine.Mesh GetMesh()
+		{
+			if (!done)
+			{
+				return null;
+			}
+			global::UnityEngine.Mesh mesh = new global::UnityEngine.Mesh();
+			mesh.indexFormat = global::UnityEngine.Rendering.IndexFormat.UInt32;
+			mesh.SetVertices(m_Job.positions);
+			mesh.SetUVs(0, m_Job.uvs);
+			mesh.SetNormals(m_Job.normals);
+			mesh.SetIndices(TriangleIndicesWithoutHoles().ToArray(), global::UnityEngine.MeshTopology.Triangles, 0);
+			m_Job.DisposeArrays();
+			return mesh;
+		}
+
+		public void WaitForCompletion()
+		{
+			m_JobHandle.Complete();
+		}
+
+		private global::System.Collections.Generic.List<int> TriangleIndicesWithoutHoles()
+		{
+			global::System.Collections.Generic.List<int> list = new global::System.Collections.Generic.List<int>((m_Job.width - 1) * (m_Job.height - 1) * 6);
+			for (int i = 0; i < m_Job.indices.Length; i += 3)
+			{
+				int num = m_Job.indices[i];
+				int num2 = m_Job.indices[i + 1];
+				int num3 = m_Job.indices[i + 2];
+				if (num != 0 && num2 != 0 && num3 != 0)
+				{
+					list.Add(num);
+					list.Add(num2);
+					list.Add(num3);
+				}
+			}
+			if (list.Count == 0)
+			{
+				list.Add(0);
+				list.Add(0);
+				list.Add(0);
+			}
+			return list;
+		}
+	}
+}

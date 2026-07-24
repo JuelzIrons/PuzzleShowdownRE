@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K003B
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: a4fff4da6bcfc92498a249af4bebd1af, type: 3}
+  Timestamps: "0.036\n2.705\n6.442\n11.147\n13.716\n18.254\n19.389\n22.091\n24.327\n31.067\n32.602"
+  WrittenDialogue: "This is what I get for trying to save that dumbass.\nI’m pretty sure we both failed CPR class I don’t get why we even tried.\nGiving him mouth-to-mouth only left our DNA on him so now it looks like we drowned him.\nOh shit I think they’re coming in. Stay cool.\nWell well well, is this a, Kelly?\nWhen do I get a lawyer?\nYou aren’t gettin’ shit shut the fuck up!\nI really don’t think you’re allowed to do that.\nI’m not leaving until you get your story straight.  We have all day to figure it out.\nHelp me clear this up."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nCOP\nKELLY\nCOP\nKELLY\nCOP\nKELLY"

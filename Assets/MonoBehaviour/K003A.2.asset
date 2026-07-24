@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K003A.2
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: c5dc2cc9645b46342859cce1c206414e, type: 3}
+  Timestamps: "0.033\n5.405"
+  WrittenDialogue: Do I look fat? Maybe I should get that cosmetic surgery to shave my liver down.
+  DialogueCharacterNames: KELLY

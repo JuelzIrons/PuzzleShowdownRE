@@ -1,0 +1,8 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Core.Registration")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Core.TestUtils")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Core.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Core.Networking")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Core.Internal")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Core.Configuration")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Services.Core.Threading")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

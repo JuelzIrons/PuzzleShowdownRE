@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004A.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 2d130db606523744890fdfdec6061551, type: 3}
+  Timestamps: "0.013\n2.949\n10.223\n13.96\n18.498\n22.869\n26.406\n29.575\n32.812\n37.317"
+  WrittenDialogue: "That’s a wrap! What a hard day.\nThey’re saying this is gonna be the first ever Hallmark movie to get an Oscar nomination. 2014 is the year!\nThen again they said that for the other 3 Hallmark pictures I did.\nI’m gonna start doing religious movies, the fanbase for those is way more intense.\nMy agent says I need my autograph to be desirable after I’m old and worthless.\nPlus my 22nd birthday’s coming up so that could be any day now.\nHey have you heard of this new “social media” thing?\nI should try building a stronger connection with my audience.\nThey say people are mean online but what could possibly go wrong?"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

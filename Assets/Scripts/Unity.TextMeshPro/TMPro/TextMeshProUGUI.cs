@@ -1,0 +1,3425 @@
+namespace TMPro
+{
+	[global::UnityEngine.DisallowMultipleComponent]
+	[global::UnityEngine.RequireComponent(typeof(global::UnityEngine.RectTransform))]
+	[global::UnityEngine.RequireComponent(typeof(global::UnityEngine.CanvasRenderer))]
+	[global::UnityEngine.AddComponentMenu("UI (Canvas)/TextMeshPro - Text (UI)", 11)]
+	[global::UnityEngine.ExecuteAlways]
+	[global::UnityEngine.HelpURL("https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/TextMeshPro/index.html")]
+	public class TextMeshProUGUI : global::TMPro.TMP_Text, global::UnityEngine.UI.ILayoutElement
+	{
+		private bool m_isRebuildingLayout;
+
+		private global::UnityEngine.Coroutine m_DelayedGraphicRebuild;
+
+		private global::UnityEngine.Coroutine m_DelayedMaterialRebuild;
+
+		private bool m_ShouldUpdateCulling;
+
+		private global::UnityEngine.Rect m_ClipRect;
+
+		private bool m_ValidRect;
+
+		[global::UnityEngine.SerializeField]
+		private bool m_hasFontAssetChanged;
+
+		protected global::TMPro.TMP_SubMeshUI[] m_subTextObjects = new global::TMPro.TMP_SubMeshUI[8];
+
+		private float m_previousLossyScaleY = -1f;
+
+		private global::UnityEngine.Vector3[] m_RectTransformCorners = new global::UnityEngine.Vector3[4];
+
+		private global::UnityEngine.CanvasRenderer m_canvasRenderer;
+
+		private global::UnityEngine.Canvas m_canvas;
+
+		private float m_CanvasScaleFactor;
+
+		private bool m_isFirstAllocation;
+
+		private int m_max_characters = 8;
+
+		[global::UnityEngine.SerializeField]
+		private global::UnityEngine.Material m_baseMaterial;
+
+		private bool m_isScrollRegionSet;
+
+		[global::UnityEngine.SerializeField]
+		private global::UnityEngine.Vector4 m_maskOffset;
+
+		private global::UnityEngine.Matrix4x4 m_EnvMapMatrix;
+
+		[global::System.NonSerialized]
+		private bool m_isRegisteredForEvents;
+
+		private static global::Unity.Profiling.ProfilerMarker k_GenerateTextMarker = new global::Unity.Profiling.ProfilerMarker("TMP.GenerateText");
+
+		private static global::Unity.Profiling.ProfilerMarker k_SetArraySizesMarker = new global::Unity.Profiling.ProfilerMarker("TMP.SetArraySizes");
+
+		private static global::Unity.Profiling.ProfilerMarker k_GenerateTextPhaseIMarker = new global::Unity.Profiling.ProfilerMarker("TMP GenerateText - Phase I");
+
+		private static global::Unity.Profiling.ProfilerMarker k_ParseMarkupTextMarker = new global::Unity.Profiling.ProfilerMarker("TMP Parse Markup Text");
+
+		private static global::Unity.Profiling.ProfilerMarker k_CharacterLookupMarker = new global::Unity.Profiling.ProfilerMarker("TMP Lookup Character & Glyph Data");
+
+		private static global::Unity.Profiling.ProfilerMarker k_HandleGPOSFeaturesMarker = new global::Unity.Profiling.ProfilerMarker("TMP Handle GPOS Features");
+
+		private static global::Unity.Profiling.ProfilerMarker k_CalculateVerticesPositionMarker = new global::Unity.Profiling.ProfilerMarker("TMP Calculate Vertices Position");
+
+		private static global::Unity.Profiling.ProfilerMarker k_ComputeTextMetricsMarker = new global::Unity.Profiling.ProfilerMarker("TMP Compute Text Metrics");
+
+		private static global::Unity.Profiling.ProfilerMarker k_HandleVisibleCharacterMarker = new global::Unity.Profiling.ProfilerMarker("TMP Handle Visible Character");
+
+		private static global::Unity.Profiling.ProfilerMarker k_HandleWhiteSpacesMarker = new global::Unity.Profiling.ProfilerMarker("TMP Handle White Space & Control Character");
+
+		private static global::Unity.Profiling.ProfilerMarker k_HandleHorizontalLineBreakingMarker = new global::Unity.Profiling.ProfilerMarker("TMP Handle Horizontal Line Breaking");
+
+		private static global::Unity.Profiling.ProfilerMarker k_HandleVerticalLineBreakingMarker = new global::Unity.Profiling.ProfilerMarker("TMP Handle Vertical Line Breaking");
+
+		private static global::Unity.Profiling.ProfilerMarker k_SaveGlyphVertexDataMarker = new global::Unity.Profiling.ProfilerMarker("TMP Save Glyph Vertex Data");
+
+		private static global::Unity.Profiling.ProfilerMarker k_ComputeCharacterAdvanceMarker = new global::Unity.Profiling.ProfilerMarker("TMP Compute Character Advance");
+
+		private static global::Unity.Profiling.ProfilerMarker k_HandleCarriageReturnMarker = new global::Unity.Profiling.ProfilerMarker("TMP Handle Carriage Return");
+
+		private static global::Unity.Profiling.ProfilerMarker k_HandleLineTerminationMarker = new global::Unity.Profiling.ProfilerMarker("TMP Handle Line Termination");
+
+		private static global::Unity.Profiling.ProfilerMarker k_SavePageInfoMarker = new global::Unity.Profiling.ProfilerMarker("TMP Save Page Info");
+
+		private static global::Unity.Profiling.ProfilerMarker k_SaveTextExtentMarker = new global::Unity.Profiling.ProfilerMarker("TMP Save Text Extent");
+
+		private static global::Unity.Profiling.ProfilerMarker k_SaveProcessingStatesMarker = new global::Unity.Profiling.ProfilerMarker("TMP Save Processing States");
+
+		private static global::Unity.Profiling.ProfilerMarker k_GenerateTextPhaseIIMarker = new global::Unity.Profiling.ProfilerMarker("TMP GenerateText - Phase II");
+
+		private static global::Unity.Profiling.ProfilerMarker k_GenerateTextPhaseIIIMarker = new global::Unity.Profiling.ProfilerMarker("TMP GenerateText - Phase III");
+
+		private global::System.Collections.Generic.Dictionary<int, int> materialIndexPairs = new global::System.Collections.Generic.Dictionary<int, int>();
+
+		public override global::UnityEngine.Material materialForRendering => global::TMPro.TMP_MaterialManager.GetMaterialForRendering(this, m_sharedMaterial);
+
+		public override bool autoSizeTextContainer
+		{
+			get
+			{
+				return m_autoSizeTextContainer;
+			}
+			set
+			{
+				if (m_autoSizeTextContainer != value)
+				{
+					m_autoSizeTextContainer = value;
+					if (m_autoSizeTextContainer)
+					{
+						global::UnityEngine.UI.CanvasUpdateRegistry.RegisterCanvasElementForLayoutRebuild(this);
+						SetLayoutDirty();
+					}
+				}
+			}
+		}
+
+		public override global::UnityEngine.Mesh mesh => m_mesh;
+
+		public new global::UnityEngine.CanvasRenderer canvasRenderer
+		{
+			get
+			{
+				if (m_canvasRenderer == null)
+				{
+					m_canvasRenderer = GetComponent<global::UnityEngine.CanvasRenderer>();
+				}
+				return m_canvasRenderer;
+			}
+		}
+
+		public global::UnityEngine.Vector4 maskOffset
+		{
+			get
+			{
+				return m_maskOffset;
+			}
+			set
+			{
+				m_maskOffset = value;
+				UpdateMask();
+				m_havePropertiesChanged = true;
+			}
+		}
+
+		public override event global::System.Action<global::TMPro.TMP_TextInfo> OnPreRenderText;
+
+		public void CalculateLayoutInputHorizontal()
+		{
+		}
+
+		public void CalculateLayoutInputVertical()
+		{
+		}
+
+		public override void SetVerticesDirty()
+		{
+			if (!(this == null) && IsActive() && !global::UnityEngine.UI.CanvasUpdateRegistry.IsRebuildingGraphics())
+			{
+				global::UnityEngine.UI.CanvasUpdateRegistry.RegisterCanvasElementForGraphicRebuild(this);
+				this.MarkDirty();
+				if (m_OnDirtyVertsCallback != null)
+				{
+					m_OnDirtyVertsCallback();
+				}
+			}
+		}
+
+		public override void SetLayoutDirty()
+		{
+			m_isPreferredWidthDirty = true;
+			m_isPreferredHeightDirty = true;
+			if (!(this == null) && IsActive())
+			{
+				global::UnityEngine.UI.LayoutRebuilder.MarkLayoutForRebuild(base.rectTransform);
+				m_isLayoutDirty = true;
+				if (m_OnDirtyLayoutCallback != null)
+				{
+					m_OnDirtyLayoutCallback();
+				}
+			}
+		}
+
+		public override void SetMaterialDirty()
+		{
+			if (!(this == null) && IsActive() && !global::UnityEngine.UI.CanvasUpdateRegistry.IsRebuildingGraphics())
+			{
+				m_isMaterialDirty = true;
+				global::UnityEngine.UI.CanvasUpdateRegistry.RegisterCanvasElementForGraphicRebuild(this);
+				if (m_OnDirtyMaterialCallback != null)
+				{
+					m_OnDirtyMaterialCallback();
+				}
+			}
+		}
+
+		public override void SetAllDirty()
+		{
+			SetLayoutDirty();
+			SetVerticesDirty();
+			SetMaterialDirty();
+		}
+
+		private global::System.Collections.IEnumerator DelayedGraphicRebuild()
+		{
+			yield return null;
+			global::UnityEngine.UI.CanvasUpdateRegistry.RegisterCanvasElementForGraphicRebuild(this);
+			if (m_OnDirtyVertsCallback != null)
+			{
+				m_OnDirtyVertsCallback();
+			}
+			m_DelayedGraphicRebuild = null;
+		}
+
+		private global::System.Collections.IEnumerator DelayedMaterialRebuild()
+		{
+			yield return null;
+			m_isMaterialDirty = true;
+			global::UnityEngine.UI.CanvasUpdateRegistry.RegisterCanvasElementForGraphicRebuild(this);
+			if (m_OnDirtyMaterialCallback != null)
+			{
+				m_OnDirtyMaterialCallback();
+			}
+			m_DelayedMaterialRebuild = null;
+		}
+
+		public override void Rebuild(global::UnityEngine.UI.CanvasUpdate update)
+		{
+			if (this == null)
+			{
+				return;
+			}
+			switch (update)
+			{
+			case global::UnityEngine.UI.CanvasUpdate.Prelayout:
+				if (m_autoSizeTextContainer)
+				{
+					m_rectTransform.sizeDelta = GetPreferredValues(float.PositiveInfinity, float.PositiveInfinity);
+				}
+				break;
+			case global::UnityEngine.UI.CanvasUpdate.PreRender:
+				OnPreRenderCanvas();
+				if (m_isMaterialDirty)
+				{
+					UpdateMaterial();
+					m_isMaterialDirty = false;
+				}
+				break;
+			}
+		}
+
+		private void UpdateSubObjectPivot()
+		{
+			if (m_textInfo != null)
+			{
+				for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+				{
+					m_subTextObjects[i].SetPivotDirty();
+				}
+			}
+		}
+
+		public override global::UnityEngine.Material GetModifiedMaterial(global::UnityEngine.Material baseMaterial)
+		{
+			global::UnityEngine.Material material = baseMaterial;
+			if (m_ShouldRecalculateStencil)
+			{
+				global::UnityEngine.Transform stopAfter = global::UnityEngine.UI.MaskUtilities.FindRootSortOverrideCanvas(base.transform);
+				m_StencilValue = (base.maskable ? global::UnityEngine.UI.MaskUtilities.GetStencilDepth(base.transform, stopAfter) : 0);
+				m_ShouldRecalculateStencil = false;
+			}
+			if (m_StencilValue > 0)
+			{
+				global::UnityEngine.Material maskMaterial = global::UnityEngine.UI.StencilMaterial.Add(material, (1 << m_StencilValue) - 1, global::UnityEngine.Rendering.StencilOp.Keep, global::UnityEngine.Rendering.CompareFunction.Equal, global::UnityEngine.Rendering.ColorWriteMask.All, (1 << m_StencilValue) - 1, 0);
+				global::UnityEngine.UI.StencilMaterial.Remove(m_MaskMaterial);
+				m_MaskMaterial = maskMaterial;
+				material = m_MaskMaterial;
+			}
+			return material;
+		}
+
+		protected override void UpdateMaterial()
+		{
+			if (!(m_sharedMaterial == null) && !(canvasRenderer == null))
+			{
+				m_canvasRenderer.materialCount = 1;
+				m_canvasRenderer.SetMaterial(materialForRendering, 0);
+			}
+		}
+
+		public override void RecalculateClipping()
+		{
+			base.RecalculateClipping();
+		}
+
+		public override void Cull(global::UnityEngine.Rect clipRect, bool validRect)
+		{
+			m_ShouldUpdateCulling = false;
+			if (m_isLayoutDirty)
+			{
+				m_ShouldUpdateCulling = true;
+				m_ClipRect = clipRect;
+				m_ValidRect = validRect;
+				return;
+			}
+			global::UnityEngine.Rect canvasSpaceClippingRect = GetCanvasSpaceClippingRect();
+			bool flag = !validRect || !clipRect.Overlaps(canvasSpaceClippingRect, allowInverse: true);
+			if (m_canvasRenderer.cull != flag)
+			{
+				m_canvasRenderer.cull = flag;
+				base.onCullStateChanged.Invoke(flag);
+				OnCullingChanged();
+				for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+				{
+					m_subTextObjects[i].canvasRenderer.cull = flag;
+				}
+			}
+		}
+
+		internal override void UpdateCulling()
+		{
+			global::UnityEngine.Rect canvasSpaceClippingRect = GetCanvasSpaceClippingRect();
+			bool flag = !m_ValidRect || !m_ClipRect.Overlaps(canvasSpaceClippingRect, allowInverse: true);
+			if (m_canvasRenderer.cull != flag)
+			{
+				m_canvasRenderer.cull = flag;
+				base.onCullStateChanged.Invoke(flag);
+				OnCullingChanged();
+				for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+				{
+					m_subTextObjects[i].canvasRenderer.cull = flag;
+				}
+			}
+			m_ShouldUpdateCulling = false;
+		}
+
+		public override void UpdateMeshPadding()
+		{
+			m_padding = global::TMPro.ShaderUtilities.GetPadding(m_sharedMaterial, m_enableExtraPadding, m_isUsingBold);
+			m_isMaskingEnabled = global::TMPro.ShaderUtilities.IsMaskingEnabled(m_sharedMaterial);
+			m_havePropertiesChanged = true;
+			checkPaddingRequired = false;
+			if (m_textInfo != null)
+			{
+				for (int i = 1; i < m_textInfo.materialCount; i++)
+				{
+					m_subTextObjects[i].UpdateMeshPadding(m_enableExtraPadding, m_isUsingBold);
+				}
+			}
+		}
+
+		protected override void InternalCrossFadeColor(global::UnityEngine.Color targetColor, float duration, bool ignoreTimeScale, bool useAlpha)
+		{
+			if (m_textInfo != null)
+			{
+				int materialCount = m_textInfo.materialCount;
+				for (int i = 1; i < materialCount; i++)
+				{
+					m_subTextObjects[i].CrossFadeColor(targetColor, duration, ignoreTimeScale, useAlpha);
+				}
+			}
+		}
+
+		protected override void InternalCrossFadeAlpha(float alpha, float duration, bool ignoreTimeScale)
+		{
+			if (m_textInfo != null)
+			{
+				int materialCount = m_textInfo.materialCount;
+				for (int i = 1; i < materialCount; i++)
+				{
+					m_subTextObjects[i].CrossFadeAlpha(alpha, duration, ignoreTimeScale);
+				}
+			}
+		}
+
+		public override void ForceMeshUpdate(bool ignoreActiveState = false, bool forceTextReparsing = false)
+		{
+			m_havePropertiesChanged = true;
+			m_ignoreActiveState = ignoreActiveState;
+			if (m_canvas == null)
+			{
+				m_canvas = GetComponentInParent<global::UnityEngine.Canvas>();
+			}
+			OnPreRenderCanvas();
+		}
+
+		public override global::TMPro.TMP_TextInfo GetTextInfo(string text)
+		{
+			SetText(text);
+			SetArraySizes(m_TextProcessingArray);
+			m_renderMode = global::TMPro.TextRenderFlags.DontRender;
+			ComputeMarginSize();
+			if (m_canvas == null)
+			{
+				m_canvas = base.canvas;
+			}
+			GenerateTextMesh();
+			m_renderMode = global::TMPro.TextRenderFlags.Render;
+			return base.textInfo;
+		}
+
+		public override void ClearMesh()
+		{
+			m_canvasRenderer.SetMesh(null);
+			for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+			{
+				m_subTextObjects[i].canvasRenderer.SetMesh(null);
+			}
+		}
+
+		public override void UpdateGeometry(global::UnityEngine.Mesh mesh, int index)
+		{
+			mesh.RecalculateBounds();
+			if (index == 0)
+			{
+				m_canvasRenderer.SetMesh(mesh);
+			}
+			else
+			{
+				m_subTextObjects[index].canvasRenderer.SetMesh(mesh);
+			}
+		}
+
+		public override void UpdateVertexData(global::TMPro.TMP_VertexDataUpdateFlags flags)
+		{
+			int materialCount = m_textInfo.materialCount;
+			for (int i = 0; i < materialCount; i++)
+			{
+				global::UnityEngine.Mesh mesh = ((i != 0) ? m_subTextObjects[i].mesh : m_mesh);
+				if ((flags & global::TMPro.TMP_VertexDataUpdateFlags.Vertices) == global::TMPro.TMP_VertexDataUpdateFlags.Vertices)
+				{
+					mesh.vertices = m_textInfo.meshInfo[i].vertices;
+				}
+				if ((flags & global::TMPro.TMP_VertexDataUpdateFlags.Uv0) == global::TMPro.TMP_VertexDataUpdateFlags.Uv0)
+				{
+					mesh.SetUVs(0, m_textInfo.meshInfo[i].uvs0);
+				}
+				if ((flags & global::TMPro.TMP_VertexDataUpdateFlags.Uv2) == global::TMPro.TMP_VertexDataUpdateFlags.Uv2)
+				{
+					mesh.uv2 = m_textInfo.meshInfo[i].uvs2;
+				}
+				if ((flags & global::TMPro.TMP_VertexDataUpdateFlags.Colors32) == global::TMPro.TMP_VertexDataUpdateFlags.Colors32)
+				{
+					mesh.colors32 = m_textInfo.meshInfo[i].colors32;
+				}
+				mesh.RecalculateBounds();
+				if (i == 0)
+				{
+					m_canvasRenderer.SetMesh(mesh);
+				}
+				else
+				{
+					m_subTextObjects[i].canvasRenderer.SetMesh(mesh);
+				}
+			}
+		}
+
+		public override void UpdateVertexData()
+		{
+			int materialCount = m_textInfo.materialCount;
+			for (int i = 0; i < materialCount; i++)
+			{
+				global::UnityEngine.Mesh mesh;
+				if (i == 0)
+				{
+					mesh = m_mesh;
+				}
+				else
+				{
+					m_textInfo.meshInfo[i].ClearUnusedVertices();
+					mesh = m_subTextObjects[i].mesh;
+				}
+				mesh.vertices = m_textInfo.meshInfo[i].vertices;
+				mesh.SetUVs(0, m_textInfo.meshInfo[i].uvs0);
+				mesh.uv2 = m_textInfo.meshInfo[i].uvs2;
+				mesh.colors32 = m_textInfo.meshInfo[i].colors32;
+				mesh.RecalculateBounds();
+				if (i == 0)
+				{
+					m_canvasRenderer.SetMesh(mesh);
+				}
+				else
+				{
+					m_subTextObjects[i].canvasRenderer.SetMesh(mesh);
+				}
+			}
+		}
+
+		public void UpdateFontAsset()
+		{
+			LoadFontAsset();
+		}
+
+		protected override void Awake()
+		{
+			m_canvas = base.canvas;
+			m_isOrthographic = true;
+			m_rectTransform = base.gameObject.GetComponent<global::UnityEngine.RectTransform>();
+			if (m_rectTransform == null)
+			{
+				m_rectTransform = base.gameObject.AddComponent<global::UnityEngine.RectTransform>();
+			}
+			m_canvasRenderer = GetComponent<global::UnityEngine.CanvasRenderer>();
+			if (m_canvasRenderer == null)
+			{
+				m_canvasRenderer = base.gameObject.AddComponent<global::UnityEngine.CanvasRenderer>();
+			}
+			if (m_mesh == null)
+			{
+				m_mesh = new global::UnityEngine.Mesh();
+				m_mesh.hideFlags = global::UnityEngine.HideFlags.HideAndDontSave;
+				m_textInfo = new global::TMPro.TMP_TextInfo(this);
+			}
+			LoadDefaultSettings();
+			LoadFontAsset();
+			if (m_TextProcessingArray == null)
+			{
+				m_TextProcessingArray = new global::TMPro.TMP_Text.TextProcessingElement[m_max_characters];
+			}
+			m_cached_TextElement = new global::TMPro.TMP_Character();
+			m_isFirstAllocation = true;
+			m_havePropertiesChanged = true;
+			m_isAwake = true;
+		}
+
+		protected override void OnEnable()
+		{
+			if (m_isAwake)
+			{
+				if (!m_isRegisteredForEvents)
+				{
+					m_isRegisteredForEvents = true;
+				}
+				m_canvas = GetCanvas();
+				SetActiveSubMeshes(state: true);
+				global::UnityEngine.UI.GraphicRegistry.RegisterGraphicForCanvas(m_canvas, this);
+				if (!m_IsTextObjectScaleStatic)
+				{
+					global::TMPro.TMP_UpdateManager.RegisterTextObjectForUpdate(this);
+				}
+				ComputeMarginSize();
+				SetAllDirty();
+				RecalculateClipping();
+				RecalculateMasking();
+			}
+		}
+
+		protected override void OnDisable()
+		{
+			if (m_isAwake)
+			{
+				global::UnityEngine.UI.GraphicRegistry.UnregisterGraphicForCanvas(m_canvas, this);
+				global::UnityEngine.UI.CanvasUpdateRegistry.UnRegisterCanvasElementForRebuild(this);
+				global::TMPro.TMP_UpdateManager.UnRegisterTextObjectForUpdate(this);
+				if (m_canvasRenderer != null)
+				{
+					m_canvasRenderer.Clear();
+				}
+				SetActiveSubMeshes(state: false);
+				global::UnityEngine.UI.LayoutRebuilder.MarkLayoutForRebuild(m_rectTransform);
+				RecalculateClipping();
+				RecalculateMasking();
+			}
+		}
+
+		protected override void OnDestroy()
+		{
+			global::UnityEngine.UI.GraphicRegistry.UnregisterGraphicForCanvas(m_canvas, this);
+			global::TMPro.TMP_UpdateManager.UnRegisterTextObjectForUpdate(this);
+			if (m_mesh != null)
+			{
+				global::UnityEngine.Object.DestroyImmediate(m_mesh);
+			}
+			if (m_MaskMaterial != null)
+			{
+				global::TMPro.TMP_MaterialManager.ReleaseStencilMaterial(m_MaskMaterial);
+				m_MaskMaterial = null;
+			}
+			m_isRegisteredForEvents = false;
+		}
+
+		protected override void LoadFontAsset()
+		{
+			global::TMPro.ShaderUtilities.GetShaderPropertyIDs();
+			if (m_fontAsset == null)
+			{
+				if (global::TMPro.TMP_Settings.defaultFontAsset != null)
+				{
+					m_fontAsset = global::TMPro.TMP_Settings.defaultFontAsset;
+				}
+				if (m_fontAsset == null)
+				{
+					global::UnityEngine.Debug.LogWarning("The LiberationSans SDF Font Asset was not found. There is no Font Asset assigned to " + base.gameObject.name + ".", this);
+					return;
+				}
+				if (m_fontAsset.characterLookupTable == null)
+				{
+					global::UnityEngine.Debug.Log("Dictionary is Null!");
+				}
+				m_sharedMaterial = m_fontAsset.material;
+			}
+			else
+			{
+				if (m_fontAsset.characterLookupTable == null)
+				{
+					m_fontAsset.ReadFontAssetDefinition();
+				}
+				if (m_sharedMaterial == null && m_baseMaterial != null)
+				{
+					m_sharedMaterial = m_baseMaterial;
+					m_baseMaterial = null;
+				}
+				if (m_sharedMaterial == null || m_sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_MainTex) == null || m_fontAsset.atlasTexture.GetInstanceID() != m_sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_MainTex).GetInstanceID())
+				{
+					if (m_fontAsset.material == null)
+					{
+						global::UnityEngine.Debug.LogWarning("The Font Atlas Texture of the Font Asset " + m_fontAsset.name + " assigned to " + base.gameObject.name + " is missing.", this);
+					}
+					else
+					{
+						m_sharedMaterial = m_fontAsset.material;
+					}
+				}
+			}
+			ValidateEnvMapProperty();
+			GetSpecialCharacters(m_fontAsset);
+			m_padding = GetPaddingForMaterial();
+			SetMaterialDirty();
+		}
+
+		private global::UnityEngine.Canvas GetCanvas()
+		{
+			global::UnityEngine.Canvas result = null;
+			global::System.Collections.Generic.List<global::UnityEngine.Canvas> list = global::TMPro.TMP_ListPool<global::UnityEngine.Canvas>.Get();
+			base.gameObject.GetComponentsInParent(includeInactive: false, list);
+			if (list.Count > 0)
+			{
+				for (int i = 0; i < list.Count; i++)
+				{
+					if (list[i].isActiveAndEnabled)
+					{
+						result = list[i];
+						break;
+					}
+				}
+			}
+			global::TMPro.TMP_ListPool<global::UnityEngine.Canvas>.Release(list);
+			return result;
+		}
+
+		private void ValidateEnvMapProperty()
+		{
+			if (m_sharedMaterial != null)
+			{
+				m_hasEnvMapProperty = m_sharedMaterial.HasProperty(global::TMPro.ShaderUtilities.ID_EnvMap) && m_sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_EnvMap) != null;
+			}
+			else
+			{
+				m_hasEnvMapProperty = false;
+			}
+		}
+
+		private void UpdateEnvMapMatrix()
+		{
+			if (m_hasEnvMapProperty)
+			{
+				global::UnityEngine.Vector3 vector = m_sharedMaterial.GetVector(global::TMPro.ShaderUtilities.ID_EnvMatrixRotation);
+				if (!(m_currentEnvMapRotation == vector))
+				{
+					m_currentEnvMapRotation = vector;
+					m_EnvMapMatrix = global::UnityEngine.Matrix4x4.TRS(global::UnityEngine.Vector3.zero, global::UnityEngine.Quaternion.Euler(m_currentEnvMapRotation), global::UnityEngine.Vector3.one);
+					m_sharedMaterial.SetMatrix(global::TMPro.ShaderUtilities.ID_EnvMatrix, m_EnvMapMatrix);
+				}
+			}
+		}
+
+		private void EnableMasking()
+		{
+			if (m_fontMaterial == null)
+			{
+				m_fontMaterial = CreateMaterialInstance(m_sharedMaterial);
+				m_canvasRenderer.SetMaterial(m_fontMaterial, m_sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_MainTex));
+			}
+			m_sharedMaterial = m_fontMaterial;
+			if (m_sharedMaterial.HasProperty(global::TMPro.ShaderUtilities.ID_ClipRect))
+			{
+				m_sharedMaterial.EnableKeyword(global::TMPro.ShaderUtilities.Keyword_MASK_SOFT);
+				m_sharedMaterial.DisableKeyword(global::TMPro.ShaderUtilities.Keyword_MASK_HARD);
+				m_sharedMaterial.DisableKeyword(global::TMPro.ShaderUtilities.Keyword_MASK_TEX);
+				UpdateMask();
+			}
+			m_isMaskingEnabled = true;
+		}
+
+		private void DisableMasking()
+		{
+		}
+
+		private void UpdateMask()
+		{
+			if (m_rectTransform != null)
+			{
+				if (!global::TMPro.ShaderUtilities.isInitialized)
+				{
+					global::TMPro.ShaderUtilities.GetShaderPropertyIDs();
+				}
+				m_isScrollRegionSet = true;
+				float num = global::UnityEngine.Mathf.Min(global::UnityEngine.Mathf.Min(m_margin.x, m_margin.z), m_sharedMaterial.GetFloat(global::TMPro.ShaderUtilities.ID_MaskSoftnessX));
+				float num2 = global::UnityEngine.Mathf.Min(global::UnityEngine.Mathf.Min(m_margin.y, m_margin.w), m_sharedMaterial.GetFloat(global::TMPro.ShaderUtilities.ID_MaskSoftnessY));
+				num = ((num > 0f) ? num : 0f);
+				num2 = ((num2 > 0f) ? num2 : 0f);
+				float z = (m_rectTransform.rect.width - global::UnityEngine.Mathf.Max(m_margin.x, 0f) - global::UnityEngine.Mathf.Max(m_margin.z, 0f)) / 2f + num;
+				float w = (m_rectTransform.rect.height - global::UnityEngine.Mathf.Max(m_margin.y, 0f) - global::UnityEngine.Mathf.Max(m_margin.w, 0f)) / 2f + num2;
+				global::UnityEngine.Vector2 vector = m_rectTransform.localPosition + new global::UnityEngine.Vector3((0.5f - m_rectTransform.pivot.x) * m_rectTransform.rect.width + (global::UnityEngine.Mathf.Max(m_margin.x, 0f) - global::UnityEngine.Mathf.Max(m_margin.z, 0f)) / 2f, (0.5f - m_rectTransform.pivot.y) * m_rectTransform.rect.height + (0f - global::UnityEngine.Mathf.Max(m_margin.y, 0f) + global::UnityEngine.Mathf.Max(m_margin.w, 0f)) / 2f);
+				global::UnityEngine.Vector4 value = new global::UnityEngine.Vector4(vector.x, vector.y, z, w);
+				m_sharedMaterial.SetVector(global::TMPro.ShaderUtilities.ID_ClipRect, value);
+			}
+		}
+
+		protected override global::UnityEngine.Material GetMaterial(global::UnityEngine.Material mat)
+		{
+			global::TMPro.ShaderUtilities.GetShaderPropertyIDs();
+			if (m_fontMaterial == null || m_fontMaterial.GetInstanceID() != mat.GetInstanceID())
+			{
+				m_fontMaterial = CreateMaterialInstance(mat);
+			}
+			m_sharedMaterial = m_fontMaterial;
+			m_padding = GetPaddingForMaterial();
+			m_ShouldRecalculateStencil = true;
+			SetVerticesDirty();
+			SetMaterialDirty();
+			return m_sharedMaterial;
+		}
+
+		protected override global::UnityEngine.Material[] GetMaterials(global::UnityEngine.Material[] mats)
+		{
+			int materialCount = m_textInfo.materialCount;
+			if (m_fontMaterials == null)
+			{
+				m_fontMaterials = new global::UnityEngine.Material[materialCount];
+			}
+			else if (m_fontMaterials.Length != materialCount)
+			{
+				global::TMPro.TMP_TextInfo.Resize(ref m_fontMaterials, materialCount, isBlockAllocated: false);
+			}
+			for (int i = 0; i < materialCount; i++)
+			{
+				if (i == 0)
+				{
+					m_fontMaterials[i] = base.fontMaterial;
+				}
+				else
+				{
+					m_fontMaterials[i] = m_subTextObjects[i].material;
+				}
+			}
+			m_fontSharedMaterials = m_fontMaterials;
+			return m_fontMaterials;
+		}
+
+		protected override void SetSharedMaterial(global::UnityEngine.Material mat)
+		{
+			m_sharedMaterial = mat;
+			m_padding = GetPaddingForMaterial();
+			SetMaterialDirty();
+		}
+
+		protected override global::UnityEngine.Material[] GetSharedMaterials()
+		{
+			int materialCount = m_textInfo.materialCount;
+			if (m_fontSharedMaterials == null)
+			{
+				m_fontSharedMaterials = new global::UnityEngine.Material[materialCount];
+			}
+			else if (m_fontSharedMaterials.Length != materialCount)
+			{
+				global::TMPro.TMP_TextInfo.Resize(ref m_fontSharedMaterials, materialCount, isBlockAllocated: false);
+			}
+			for (int i = 0; i < materialCount; i++)
+			{
+				if (i == 0)
+				{
+					m_fontSharedMaterials[i] = m_sharedMaterial;
+				}
+				else
+				{
+					m_fontSharedMaterials[i] = m_subTextObjects[i].sharedMaterial;
+				}
+			}
+			return m_fontSharedMaterials;
+		}
+
+		protected override void SetSharedMaterials(global::UnityEngine.Material[] materials)
+		{
+			int materialCount = m_textInfo.materialCount;
+			if (m_fontSharedMaterials == null)
+			{
+				m_fontSharedMaterials = new global::UnityEngine.Material[materialCount];
+			}
+			else if (m_fontSharedMaterials.Length != materialCount)
+			{
+				global::TMPro.TMP_TextInfo.Resize(ref m_fontSharedMaterials, materialCount, isBlockAllocated: false);
+			}
+			for (int i = 0; i < materialCount; i++)
+			{
+				if (i == 0)
+				{
+					if (!(materials[i].GetTexture(global::TMPro.ShaderUtilities.ID_MainTex) == null) && materials[i].GetTexture(global::TMPro.ShaderUtilities.ID_MainTex).GetInstanceID() == m_sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_MainTex).GetInstanceID())
+					{
+						m_sharedMaterial = (m_fontSharedMaterials[i] = materials[i]);
+						m_padding = GetPaddingForMaterial(m_sharedMaterial);
+					}
+				}
+				else if (!(materials[i].GetTexture(global::TMPro.ShaderUtilities.ID_MainTex) == null) && materials[i].GetTexture(global::TMPro.ShaderUtilities.ID_MainTex).GetInstanceID() == m_subTextObjects[i].sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_MainTex).GetInstanceID() && m_subTextObjects[i].isDefaultMaterial)
+				{
+					m_subTextObjects[i].sharedMaterial = (m_fontSharedMaterials[i] = materials[i]);
+				}
+			}
+		}
+
+		protected override void SetOutlineThickness(float thickness)
+		{
+			if (m_fontMaterial != null && m_sharedMaterial.GetInstanceID() != m_fontMaterial.GetInstanceID())
+			{
+				m_sharedMaterial = m_fontMaterial;
+				m_canvasRenderer.SetMaterial(m_sharedMaterial, m_sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_MainTex));
+			}
+			else if (m_fontMaterial == null)
+			{
+				m_fontMaterial = CreateMaterialInstance(m_sharedMaterial);
+				m_sharedMaterial = m_fontMaterial;
+				m_canvasRenderer.SetMaterial(m_sharedMaterial, m_sharedMaterial.GetTexture(global::TMPro.ShaderUtilities.ID_MainTex));
+			}
+			thickness = global::UnityEngine.Mathf.Clamp01(thickness);
+			m_sharedMaterial.SetFloat(global::TMPro.ShaderUtilities.ID_OutlineWidth, thickness);
+			m_padding = GetPaddingForMaterial();
+		}
+
+		protected override void SetFaceColor(global::UnityEngine.Color32 color)
+		{
+			if (m_fontMaterial == null)
+			{
+				m_fontMaterial = CreateMaterialInstance(m_sharedMaterial);
+			}
+			m_sharedMaterial = m_fontMaterial;
+			m_padding = GetPaddingForMaterial();
+			m_sharedMaterial.SetColor(global::TMPro.ShaderUtilities.ID_FaceColor, color);
+		}
+
+		protected override void SetOutlineColor(global::UnityEngine.Color32 color)
+		{
+			if (m_fontMaterial == null)
+			{
+				m_fontMaterial = CreateMaterialInstance(m_sharedMaterial);
+			}
+			m_sharedMaterial = m_fontMaterial;
+			m_padding = GetPaddingForMaterial();
+			m_sharedMaterial.SetColor(global::TMPro.ShaderUtilities.ID_OutlineColor, color);
+		}
+
+		protected override void SetShaderDepth()
+		{
+			if (!(m_canvas == null) && !(m_sharedMaterial == null) && m_canvas.renderMode != global::UnityEngine.RenderMode.ScreenSpaceOverlay)
+			{
+				_ = m_isOverlay;
+			}
+		}
+
+		protected override void SetCulling()
+		{
+			if (m_isCullingEnabled)
+			{
+				global::UnityEngine.Material material = materialForRendering;
+				if (material != null)
+				{
+					material.SetFloat("_CullMode", 2f);
+				}
+				for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+				{
+					material = m_subTextObjects[i].materialForRendering;
+					if (material != null)
+					{
+						material.SetFloat(global::TMPro.ShaderUtilities.ShaderTag_CullMode, 2f);
+					}
+				}
+				return;
+			}
+			global::UnityEngine.Material material2 = materialForRendering;
+			if (material2 != null)
+			{
+				material2.SetFloat("_CullMode", 0f);
+			}
+			for (int j = 1; j < m_subTextObjects.Length && m_subTextObjects[j] != null; j++)
+			{
+				material2 = m_subTextObjects[j].materialForRendering;
+				if (material2 != null)
+				{
+					material2.SetFloat(global::TMPro.ShaderUtilities.ShaderTag_CullMode, 0f);
+				}
+			}
+		}
+
+		private void SetPerspectiveCorrection()
+		{
+			if (m_isOrthographic)
+			{
+				m_sharedMaterial.SetFloat(global::TMPro.ShaderUtilities.ID_PerspectiveFilter, 0f);
+			}
+			else
+			{
+				m_sharedMaterial.SetFloat(global::TMPro.ShaderUtilities.ID_PerspectiveFilter, 0.875f);
+			}
+		}
+
+		private void SetMeshArrays(int size)
+		{
+			m_textInfo.meshInfo[0].ResizeMeshInfo(size);
+			m_canvasRenderer.SetMesh(m_textInfo.meshInfo[0].mesh);
+		}
+
+		internal override int SetArraySizes(global::TMPro.TMP_Text.TextProcessingElement[] textProcessingArray)
+		{
+			int num = 0;
+			m_totalCharacterCount = 0;
+			m_isUsingBold = false;
+			m_isTextLayoutPhase = false;
+			tag_NoParsing = false;
+			m_FontStyleInternal = m_fontStyle;
+			m_fontStyleStack.Clear();
+			m_FontWeightInternal = (((m_FontStyleInternal & global::TMPro.FontStyles.Bold) == global::TMPro.FontStyles.Bold) ? global::TMPro.FontWeight.Bold : m_fontWeight);
+			m_FontWeightStack.SetDefault(m_FontWeightInternal);
+			m_currentFontAsset = m_fontAsset;
+			m_currentMaterial = m_sharedMaterial;
+			m_currentMaterialIndex = 0;
+			materialIndexPairs.Clear();
+			global::TMPro.TMP_Text.m_materialReferenceStack.SetDefault(new global::TMPro.MaterialReference(m_currentMaterialIndex, m_currentFontAsset, null, m_currentMaterial, m_padding));
+			global::TMPro.TMP_Text.m_materialReferenceIndexLookup.Clear();
+			global::TMPro.MaterialReference.AddMaterialReference(m_currentMaterial, m_currentFontAsset, ref global::TMPro.TMP_Text.m_materialReferences, global::TMPro.TMP_Text.m_materialReferenceIndexLookup);
+			if (m_textInfo == null)
+			{
+				m_textInfo = new global::TMPro.TMP_TextInfo(m_InternalTextProcessingArraySize);
+			}
+			else if (m_textInfo.characterInfo.Length < m_InternalTextProcessingArraySize)
+			{
+				global::TMPro.TMP_TextInfo.Resize(ref m_textInfo.characterInfo, m_InternalTextProcessingArraySize, isBlockAllocated: false);
+			}
+			m_textElementType = global::TMPro.TMP_TextElementType.Character;
+			if (m_overflowMode == global::TMPro.TextOverflowModes.Ellipsis)
+			{
+				GetEllipsisSpecialCharacter(m_currentFontAsset);
+				if (m_Ellipsis.character != null)
+				{
+					if (m_Ellipsis.fontAsset.GetInstanceID() != m_currentFontAsset.GetInstanceID())
+					{
+						if (global::TMPro.TMP_Settings.matchMaterialPreset && m_currentMaterial.GetInstanceID() != m_Ellipsis.fontAsset.material.GetInstanceID())
+						{
+							m_Ellipsis.material = global::TMPro.TMP_MaterialManager.GetFallbackMaterial(m_currentMaterial, m_Ellipsis.fontAsset.material);
+						}
+						else
+						{
+							m_Ellipsis.material = m_Ellipsis.fontAsset.material;
+						}
+						m_Ellipsis.materialIndex = global::TMPro.MaterialReference.AddMaterialReference(m_Ellipsis.material, m_Ellipsis.fontAsset, ref global::TMPro.TMP_Text.m_materialReferences, global::TMPro.TMP_Text.m_materialReferenceIndexLookup);
+						global::TMPro.TMP_Text.m_materialReferences[m_Ellipsis.materialIndex].referenceCount = 0;
+					}
+				}
+				else
+				{
+					m_overflowMode = global::TMPro.TextOverflowModes.Truncate;
+					if (!global::TMPro.TMP_Settings.warningsDisabled)
+					{
+						global::UnityEngine.Debug.LogWarning("The character used for Ellipsis is not available in font asset [" + m_currentFontAsset.name + "] or any potential fallbacks. Switching Text Overflow mode to Truncate.", this);
+					}
+				}
+			}
+			bool flag = m_ActiveFontFeatures.Contains(global::UnityEngine.TextCore.OTL_FeatureTag.liga);
+			if (m_overflowMode == global::TMPro.TextOverflowModes.Linked && m_linkedTextComponent != null && !m_isCalculatingPreferredValues)
+			{
+				global::TMPro.TMP_Text tMP_Text = m_linkedTextComponent;
+				while (tMP_Text != null)
+				{
+					tMP_Text.text = string.Empty;
+					tMP_Text.ClearMesh();
+					tMP_Text.textInfo.Clear();
+					tMP_Text = tMP_Text.linkedTextComponent;
+				}
+			}
+			for (int i = 0; i < textProcessingArray.Length && textProcessingArray[i].unicode != 0; i++)
+			{
+				if (m_textInfo.characterInfo == null || m_totalCharacterCount >= m_textInfo.characterInfo.Length)
+				{
+					global::TMPro.TMP_TextInfo.Resize(ref m_textInfo.characterInfo, m_totalCharacterCount + 1, isBlockAllocated: true);
+				}
+				uint num2 = textProcessingArray[i].unicode;
+				if (m_isRichText && num2 == 60)
+				{
+					int currentMaterialIndex = m_currentMaterialIndex;
+					if (ValidateHtmlTag(textProcessingArray, i + 1, out var endIndex))
+					{
+						int stringIndex = textProcessingArray[i].stringIndex;
+						i = endIndex;
+						if ((m_FontStyleInternal & global::TMPro.FontStyles.Bold) == global::TMPro.FontStyles.Bold)
+						{
+							m_isUsingBold = true;
+						}
+						if (m_textElementType == global::TMPro.TMP_TextElementType.Sprite)
+						{
+							global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].referenceCount++;
+							m_textInfo.characterInfo[m_totalCharacterCount].character = (char)(57344 + m_spriteIndex);
+							m_textInfo.characterInfo[m_totalCharacterCount].fontAsset = m_currentFontAsset;
+							m_textInfo.characterInfo[m_totalCharacterCount].materialReferenceIndex = m_currentMaterialIndex;
+							m_textInfo.characterInfo[m_totalCharacterCount].textElement = m_currentSpriteAsset.spriteCharacterTable[m_spriteIndex];
+							m_textInfo.characterInfo[m_totalCharacterCount].elementType = m_textElementType;
+							m_textInfo.characterInfo[m_totalCharacterCount].index = stringIndex;
+							m_textInfo.characterInfo[m_totalCharacterCount].stringLength = textProcessingArray[i].stringIndex - stringIndex + 1;
+							m_textElementType = global::TMPro.TMP_TextElementType.Character;
+							m_currentMaterialIndex = currentMaterialIndex;
+							num++;
+							m_totalCharacterCount++;
+						}
+						continue;
+					}
+				}
+				bool isAlternativeTypeface = false;
+				bool flag2 = false;
+				global::TMPro.TMP_FontAsset currentFontAsset = m_currentFontAsset;
+				global::UnityEngine.Material currentMaterial = m_currentMaterial;
+				int currentMaterialIndex2 = m_currentMaterialIndex;
+				if (m_textElementType == global::TMPro.TMP_TextElementType.Character)
+				{
+					if ((m_FontStyleInternal & global::TMPro.FontStyles.UpperCase) == global::TMPro.FontStyles.UpperCase)
+					{
+						if (char.IsLower((char)num2))
+						{
+							num2 = char.ToUpper((char)num2);
+						}
+					}
+					else if ((m_FontStyleInternal & global::TMPro.FontStyles.LowerCase) == global::TMPro.FontStyles.LowerCase)
+					{
+						if (char.IsUpper((char)num2))
+						{
+							num2 = char.ToLower((char)num2);
+						}
+					}
+					else if ((m_FontStyleInternal & global::TMPro.FontStyles.SmallCaps) == global::TMPro.FontStyles.SmallCaps && char.IsLower((char)num2))
+					{
+						num2 = char.ToUpper((char)num2);
+					}
+				}
+				global::TMPro.TMP_TextElement tMP_TextElement = null;
+				uint num3 = ((i + 1 < textProcessingArray.Length) ? textProcessingArray[i + 1].unicode : 0u);
+				if (base.emojiFallbackSupport && ((global::TMPro.TMP_TextParsingUtilities.IsEmojiPresentationForm(num2) && num3 != 65038) || (global::TMPro.TMP_TextParsingUtilities.IsEmoji(num2) && num3 == 65039)) && global::TMPro.TMP_Settings.emojiFallbackTextAssets != null && global::TMPro.TMP_Settings.emojiFallbackTextAssets.Count > 0)
+				{
+					tMP_TextElement = global::TMPro.TMP_FontAssetUtilities.GetTextElementFromTextAssets(num2, m_currentFontAsset, global::TMPro.TMP_Settings.emojiFallbackTextAssets, includeFallbacks: true, base.fontStyle, base.fontWeight, out isAlternativeTypeface);
+				}
+				if (tMP_TextElement == null)
+				{
+					tMP_TextElement = GetTextElement(num2, m_currentFontAsset, m_FontStyleInternal, m_FontWeightInternal, out isAlternativeTypeface);
+				}
+				if (tMP_TextElement == null)
+				{
+					DoMissingGlyphCallback((int)num2, textProcessingArray[i].stringIndex, m_currentFontAsset);
+					uint num4 = num2;
+					num2 = (textProcessingArray[i].unicode = ((global::TMPro.TMP_Settings.missingGlyphCharacter == 0) ? 9633u : ((uint)global::TMPro.TMP_Settings.missingGlyphCharacter)));
+					tMP_TextElement = global::TMPro.TMP_FontAssetUtilities.GetCharacterFromFontAsset(num2, m_currentFontAsset, includeFallbacks: true, global::TMPro.FontStyles.Normal, global::TMPro.FontWeight.Regular, out isAlternativeTypeface);
+					if (tMP_TextElement == null && global::TMPro.TMP_Settings.fallbackFontAssets != null && global::TMPro.TMP_Settings.fallbackFontAssets.Count > 0)
+					{
+						tMP_TextElement = global::TMPro.TMP_FontAssetUtilities.GetCharacterFromFontAssets(num2, m_currentFontAsset, global::TMPro.TMP_Settings.fallbackFontAssets, includeFallbacks: true, global::TMPro.FontStyles.Normal, global::TMPro.FontWeight.Regular, out isAlternativeTypeface);
+					}
+					if (tMP_TextElement == null && global::TMPro.TMP_Settings.defaultFontAsset != null)
+					{
+						tMP_TextElement = global::TMPro.TMP_FontAssetUtilities.GetCharacterFromFontAsset(num2, global::TMPro.TMP_Settings.defaultFontAsset, includeFallbacks: true, global::TMPro.FontStyles.Normal, global::TMPro.FontWeight.Regular, out isAlternativeTypeface);
+					}
+					if (tMP_TextElement == null)
+					{
+						num2 = (textProcessingArray[i].unicode = 32u);
+						tMP_TextElement = global::TMPro.TMP_FontAssetUtilities.GetCharacterFromFontAsset(num2, m_currentFontAsset, includeFallbacks: true, global::TMPro.FontStyles.Normal, global::TMPro.FontWeight.Regular, out isAlternativeTypeface);
+					}
+					if (tMP_TextElement == null)
+					{
+						num2 = (textProcessingArray[i].unicode = 3u);
+						tMP_TextElement = global::TMPro.TMP_FontAssetUtilities.GetCharacterFromFontAsset(num2, m_currentFontAsset, includeFallbacks: true, global::TMPro.FontStyles.Normal, global::TMPro.FontWeight.Regular, out isAlternativeTypeface);
+					}
+					if (!global::TMPro.TMP_Settings.warningsDisabled)
+					{
+						global::UnityEngine.Debug.LogWarning((num4 > 65535) ? $"The character with Unicode value \\U{num4:X8} was not found in the [{m_fontAsset.name}] font asset or any potential fallbacks. It was replaced by Unicode character \\u{tMP_TextElement.unicode:X4} in text object [{base.name}]." : $"The character with Unicode value \\u{num4:X4} was not found in the [{m_fontAsset.name}] font asset or any potential fallbacks. It was replaced by Unicode character \\u{tMP_TextElement.unicode:X4} in text object [{base.name}].", this);
+					}
+				}
+				m_textInfo.characterInfo[m_totalCharacterCount].alternativeGlyph = null;
+				if (tMP_TextElement.elementType == global::TMPro.TextElementType.Character)
+				{
+					if (tMP_TextElement.textAsset.instanceID != m_currentFontAsset.instanceID)
+					{
+						flag2 = true;
+						m_currentFontAsset = tMP_TextElement.textAsset as global::TMPro.TMP_FontAsset;
+					}
+					if ((num3 >= 65024 && num3 <= 65039) || (num3 >= 917760 && num3 <= 917999))
+					{
+						uint glyphVariantIndex = m_currentFontAsset.GetGlyphVariantIndex(num2, num3);
+						if (glyphVariantIndex != 0 && m_currentFontAsset.TryAddGlyphInternal(glyphVariantIndex, out var glyph))
+						{
+							m_textInfo.characterInfo[m_totalCharacterCount].alternativeGlyph = glyph;
+						}
+						textProcessingArray[i + 1].unicode = 26u;
+						i++;
+					}
+					if (flag && m_currentFontAsset.fontFeatureTable.m_LigatureSubstitutionRecordLookup.TryGetValue(tMP_TextElement.glyphIndex, out var value))
+					{
+						if (value == null)
+						{
+							break;
+						}
+						for (int j = 0; j < value.Count; j++)
+						{
+							global::TMPro.LigatureSubstitutionRecord ligatureSubstitutionRecord = value[j];
+							uint[] componentGlyphIDs = ligatureSubstitutionRecord.componentGlyphIDs;
+							int num5 = ligatureSubstitutionRecord.componentGlyphIDs.Length;
+							uint num6 = ligatureSubstitutionRecord.ligatureGlyphID;
+							int num7 = i + 1;
+							int num8 = 1;
+							while (num6 != 0 && num8 < num5)
+							{
+								if (num7 >= textProcessingArray.Length)
+								{
+									num6 = 0u;
+									break;
+								}
+								uint unicode = textProcessingArray[num7].unicode;
+								uint glyphIndex = m_currentFontAsset.GetGlyphIndex(unicode);
+								uint num9 = componentGlyphIDs[num8];
+								if (glyphIndex != num9 && global::TMPro.TMP_TextParsingUtilities.IsIgnorableForLigature(unicode))
+								{
+									num7++;
+									continue;
+								}
+								if (glyphIndex == num9)
+								{
+									num8++;
+									num7++;
+									continue;
+								}
+								num6 = 0u;
+								break;
+							}
+							if (num6 == 0 || num8 != num5)
+							{
+								continue;
+							}
+							if (num7 < textProcessingArray.Length && global::TMPro.TMP_TextParsingUtilities.IsIgnorableForLigature(textProcessingArray[num7].unicode))
+							{
+								num7++;
+							}
+							int num10 = num7 - i;
+							if (m_currentFontAsset.TryAddGlyphInternal(num6, out var glyph2))
+							{
+								m_textInfo.characterInfo[m_totalCharacterCount].alternativeGlyph = glyph2;
+								textProcessingArray[i].length = num10;
+								for (int k = 1; k < num10; k++)
+								{
+									textProcessingArray[i + k].unicode = 26u;
+								}
+								i += num10 - 1;
+								break;
+							}
+						}
+					}
+				}
+				m_textInfo.characterInfo[m_totalCharacterCount].elementType = global::TMPro.TMP_TextElementType.Character;
+				m_textInfo.characterInfo[m_totalCharacterCount].textElement = tMP_TextElement;
+				m_textInfo.characterInfo[m_totalCharacterCount].isUsingAlternateTypeface = isAlternativeTypeface;
+				m_textInfo.characterInfo[m_totalCharacterCount].character = (char)num2;
+				m_textInfo.characterInfo[m_totalCharacterCount].index = textProcessingArray[i].stringIndex;
+				m_textInfo.characterInfo[m_totalCharacterCount].stringLength = textProcessingArray[i].length;
+				m_textInfo.characterInfo[m_totalCharacterCount].fontAsset = m_currentFontAsset;
+				if (tMP_TextElement.elementType == global::TMPro.TextElementType.Sprite)
+				{
+					global::TMPro.TMP_SpriteAsset tMP_SpriteAsset = tMP_TextElement.textAsset as global::TMPro.TMP_SpriteAsset;
+					m_currentMaterialIndex = global::TMPro.MaterialReference.AddMaterialReference(tMP_SpriteAsset.material, tMP_SpriteAsset, ref global::TMPro.TMP_Text.m_materialReferences, global::TMPro.TMP_Text.m_materialReferenceIndexLookup);
+					global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].referenceCount++;
+					m_textInfo.characterInfo[m_totalCharacterCount].elementType = global::TMPro.TMP_TextElementType.Sprite;
+					m_textInfo.characterInfo[m_totalCharacterCount].materialReferenceIndex = m_currentMaterialIndex;
+					m_textElementType = global::TMPro.TMP_TextElementType.Character;
+					m_currentMaterialIndex = currentMaterialIndex2;
+					num++;
+					m_totalCharacterCount++;
+					continue;
+				}
+				if (flag2 && m_currentFontAsset.instanceID != m_fontAsset.instanceID)
+				{
+					if (global::TMPro.TMP_Settings.matchMaterialPreset)
+					{
+						m_currentMaterial = global::TMPro.TMP_MaterialManager.GetFallbackMaterial(m_currentMaterial, m_currentFontAsset.material);
+					}
+					else
+					{
+						m_currentMaterial = m_currentFontAsset.material;
+					}
+					m_currentMaterialIndex = global::TMPro.MaterialReference.AddMaterialReference(m_currentMaterial, m_currentFontAsset, ref global::TMPro.TMP_Text.m_materialReferences, global::TMPro.TMP_Text.m_materialReferenceIndexLookup);
+				}
+				int num11 = ((m_textInfo.characterInfo[m_totalCharacterCount].alternativeGlyph != null) ? m_textInfo.characterInfo[m_totalCharacterCount].alternativeGlyph.atlasIndex : (tMP_TextElement?.glyph.atlasIndex ?? 0));
+				if (tMP_TextElement != null && num11 > 0)
+				{
+					m_currentMaterial = global::TMPro.TMP_MaterialManager.GetFallbackMaterial(m_currentFontAsset, m_currentMaterial, num11);
+					m_currentMaterialIndex = global::TMPro.MaterialReference.AddMaterialReference(m_currentMaterial, m_currentFontAsset, ref global::TMPro.TMP_Text.m_materialReferences, global::TMPro.TMP_Text.m_materialReferenceIndexLookup);
+					flag2 = true;
+				}
+				if (!char.IsWhiteSpace((char)num2) && num2 != 8203)
+				{
+					if (global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].referenceCount < 16383)
+					{
+						global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].referenceCount++;
+					}
+					else if (flag2)
+					{
+						if (materialIndexPairs.TryGetValue(m_currentMaterialIndex, out var value2) && global::TMPro.TMP_Text.m_materialReferences[value2].referenceCount < 16383)
+						{
+							m_currentMaterialIndex = value2;
+						}
+						else
+						{
+							int num12 = global::TMPro.MaterialReference.AddMaterialReference(new global::UnityEngine.Material(m_currentMaterial), m_currentFontAsset, ref global::TMPro.TMP_Text.m_materialReferences, global::TMPro.TMP_Text.m_materialReferenceIndexLookup);
+							materialIndexPairs[m_currentMaterialIndex] = num12;
+							m_currentMaterialIndex = num12;
+						}
+						global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].referenceCount++;
+					}
+					else
+					{
+						m_currentMaterialIndex = global::TMPro.MaterialReference.AddMaterialReference(new global::UnityEngine.Material(m_currentMaterial), m_currentFontAsset, ref global::TMPro.TMP_Text.m_materialReferences, global::TMPro.TMP_Text.m_materialReferenceIndexLookup);
+						global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].referenceCount++;
+					}
+				}
+				m_textInfo.characterInfo[m_totalCharacterCount].material = m_currentMaterial;
+				m_textInfo.characterInfo[m_totalCharacterCount].materialReferenceIndex = m_currentMaterialIndex;
+				global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].isFallbackMaterial = flag2;
+				if (flag2)
+				{
+					global::TMPro.TMP_Text.m_materialReferences[m_currentMaterialIndex].fallbackMaterial = currentMaterial;
+					m_currentFontAsset = currentFontAsset;
+					m_currentMaterial = currentMaterial;
+					m_currentMaterialIndex = currentMaterialIndex2;
+				}
+				m_totalCharacterCount++;
+			}
+			if (m_isCalculatingPreferredValues)
+			{
+				m_isCalculatingPreferredValues = false;
+				return m_totalCharacterCount;
+			}
+			m_textInfo.spriteCount = num;
+			int num13 = (m_textInfo.materialCount = global::TMPro.TMP_Text.m_materialReferenceIndexLookup.Count);
+			if (num13 > m_textInfo.meshInfo.Length)
+			{
+				global::TMPro.TMP_TextInfo.Resize(ref m_textInfo.meshInfo, num13, isBlockAllocated: false);
+			}
+			if (num13 > m_subTextObjects.Length)
+			{
+				global::TMPro.TMP_TextInfo.Resize(ref m_subTextObjects, global::UnityEngine.Mathf.NextPowerOfTwo(num13 + 1));
+			}
+			if (m_VertexBufferAutoSizeReduction && m_textInfo.characterInfo.Length - m_totalCharacterCount > 256)
+			{
+				global::TMPro.TMP_TextInfo.Resize(ref m_textInfo.characterInfo, global::UnityEngine.Mathf.Max(m_totalCharacterCount + 1, 256), isBlockAllocated: true);
+			}
+			for (int l = 0; l < num13; l++)
+			{
+				if (l > 0)
+				{
+					if (m_subTextObjects[l] == null)
+					{
+						m_subTextObjects[l] = global::TMPro.TMP_SubMeshUI.AddSubTextObject(this, global::TMPro.TMP_Text.m_materialReferences[l]);
+						m_textInfo.meshInfo[l].vertices = null;
+					}
+					if (m_rectTransform.pivot != m_subTextObjects[l].rectTransform.pivot)
+					{
+						m_subTextObjects[l].rectTransform.pivot = m_rectTransform.pivot;
+					}
+					if (m_subTextObjects[l].sharedMaterial == null || m_subTextObjects[l].sharedMaterial.GetInstanceID() != global::TMPro.TMP_Text.m_materialReferences[l].material.GetInstanceID())
+					{
+						m_subTextObjects[l].sharedMaterial = global::TMPro.TMP_Text.m_materialReferences[l].material;
+						m_subTextObjects[l].fontAsset = global::TMPro.TMP_Text.m_materialReferences[l].fontAsset;
+						m_subTextObjects[l].spriteAsset = global::TMPro.TMP_Text.m_materialReferences[l].spriteAsset;
+					}
+					if (global::TMPro.TMP_Text.m_materialReferences[l].isFallbackMaterial)
+					{
+						m_subTextObjects[l].fallbackMaterial = global::TMPro.TMP_Text.m_materialReferences[l].material;
+						m_subTextObjects[l].fallbackSourceMaterial = global::TMPro.TMP_Text.m_materialReferences[l].fallbackMaterial;
+					}
+				}
+				int referenceCount = global::TMPro.TMP_Text.m_materialReferences[l].referenceCount;
+				if (m_textInfo.meshInfo[l].vertices == null || m_textInfo.meshInfo[l].vertices.Length < referenceCount * 4)
+				{
+					if (m_textInfo.meshInfo[l].vertices == null)
+					{
+						if (l == 0)
+						{
+							m_textInfo.meshInfo[l] = new global::TMPro.TMP_MeshInfo(m_mesh, referenceCount + 1);
+						}
+						else
+						{
+							m_textInfo.meshInfo[l] = new global::TMPro.TMP_MeshInfo(m_subTextObjects[l].mesh, referenceCount + 1);
+						}
+					}
+					else
+					{
+						m_textInfo.meshInfo[l].ResizeMeshInfo((referenceCount > 1024) ? (referenceCount + 256) : global::UnityEngine.Mathf.NextPowerOfTwo(referenceCount + 1));
+					}
+				}
+				else if (m_VertexBufferAutoSizeReduction && referenceCount > 0 && m_textInfo.meshInfo[l].vertices.Length / 4 - referenceCount > 256)
+				{
+					m_textInfo.meshInfo[l].ResizeMeshInfo((referenceCount > 1024) ? (referenceCount + 256) : global::UnityEngine.Mathf.NextPowerOfTwo(referenceCount + 1));
+				}
+				m_textInfo.meshInfo[l].material = global::TMPro.TMP_Text.m_materialReferences[l].material;
+			}
+			for (int m = num13; m < m_subTextObjects.Length && m_subTextObjects[m] != null; m++)
+			{
+				if (m < m_textInfo.meshInfo.Length)
+				{
+					m_subTextObjects[m].canvasRenderer.SetMesh(null);
+				}
+			}
+			return m_totalCharacterCount;
+		}
+
+		public override void ComputeMarginSize()
+		{
+			if (base.rectTransform != null)
+			{
+				global::UnityEngine.Rect rect = m_rectTransform.rect;
+				m_marginWidth = rect.width - m_margin.x - m_margin.z;
+				m_marginHeight = rect.height - m_margin.y - m_margin.w;
+				m_PreviousRectTransformSize = rect.size;
+				m_PreviousPivotPosition = m_rectTransform.pivot;
+				m_RectTransformCorners = GetTextContainerLocalCorners();
+			}
+		}
+
+		protected override void OnDidApplyAnimationProperties()
+		{
+			m_havePropertiesChanged = true;
+			SetVerticesDirty();
+			SetLayoutDirty();
+		}
+
+		protected override void OnCanvasHierarchyChanged()
+		{
+			base.OnCanvasHierarchyChanged();
+			m_canvas = base.canvas;
+			if (m_isAwake && base.isActiveAndEnabled)
+			{
+				if (m_canvas == null || !m_canvas.enabled)
+				{
+					global::TMPro.TMP_UpdateManager.UnRegisterTextObjectForUpdate(this);
+				}
+				else if (!m_IsTextObjectScaleStatic)
+				{
+					global::TMPro.TMP_UpdateManager.RegisterTextObjectForUpdate(this);
+				}
+			}
+		}
+
+		protected override void OnTransformParentChanged()
+		{
+			base.OnTransformParentChanged();
+			m_canvas = base.canvas;
+			ComputeMarginSize();
+			m_havePropertiesChanged = true;
+		}
+
+		protected override void OnRectTransformDimensionsChange()
+		{
+			if (base.gameObject.activeInHierarchy)
+			{
+				bool flag = false;
+				if (m_canvas != null && !global::UnityEngine.Mathf.Approximately(m_CanvasScaleFactor, m_canvas.scaleFactor))
+				{
+					m_CanvasScaleFactor = m_canvas.scaleFactor;
+					flag = true;
+				}
+				if (flag || !(base.rectTransform != null) || !(global::UnityEngine.Mathf.Abs(m_rectTransform.rect.width - m_PreviousRectTransformSize.x) < 0.0001f) || !(global::UnityEngine.Mathf.Abs(m_rectTransform.rect.height - m_PreviousRectTransformSize.y) < 0.0001f) || !(global::UnityEngine.Mathf.Abs(m_rectTransform.pivot.x - m_PreviousPivotPosition.x) < 0.0001f) || !(global::UnityEngine.Mathf.Abs(m_rectTransform.pivot.y - m_PreviousPivotPosition.y) < 0.0001f))
+				{
+					ComputeMarginSize();
+					UpdateSubObjectPivot();
+					SetVerticesDirty();
+					SetLayoutDirty();
+				}
+			}
+		}
+
+		internal override void InternalUpdate()
+		{
+			if (!m_havePropertiesChanged)
+			{
+				float y = m_rectTransform.lossyScale.y;
+				if (y != m_previousLossyScaleY && m_TextProcessingArray[0].unicode != 0)
+				{
+					float num = y / m_previousLossyScaleY;
+					if (num < 0.8f || num > 1.25f)
+					{
+						UpdateSDFScale(num);
+						m_previousLossyScaleY = y;
+					}
+				}
+			}
+			if (m_isUsingLegacyAnimationComponent)
+			{
+				m_havePropertiesChanged = true;
+				OnPreRenderCanvas();
+			}
+			UpdateEnvMapMatrix();
+		}
+
+		private void OnPreRenderCanvas()
+		{
+			if (!m_isAwake || (!IsActive() && !m_ignoreActiveState))
+			{
+				return;
+			}
+			if (m_canvas == null)
+			{
+				m_canvas = base.canvas;
+				if (m_canvas == null)
+				{
+					return;
+				}
+			}
+			if (!m_havePropertiesChanged && !m_isLayoutDirty)
+			{
+				return;
+			}
+			if (m_fontAsset == null)
+			{
+				global::UnityEngine.Debug.LogWarning("Please assign a Font Asset to this " + base.transform.name + " gameobject.", this);
+				return;
+			}
+			if (checkPaddingRequired)
+			{
+				UpdateMeshPadding();
+			}
+			ParseInputText();
+			global::TMPro.TMP_FontAsset.UpdateFontAssetsInUpdateQueue();
+			if (m_enableAutoSizing)
+			{
+				m_fontSize = global::UnityEngine.Mathf.Clamp(m_fontSizeBase, m_fontSizeMin, m_fontSizeMax);
+			}
+			m_maxFontSize = m_fontSizeMax;
+			m_minFontSize = m_fontSizeMin;
+			m_lineSpacingDelta = 0f;
+			m_charWidthAdjDelta = 0f;
+			m_isTextTruncated = false;
+			m_havePropertiesChanged = false;
+			m_isLayoutDirty = false;
+			m_ignoreActiveState = false;
+			m_IsAutoSizePointSizeSet = false;
+			m_AutoSizeIterationCount = 0;
+			while (!m_IsAutoSizePointSizeSet)
+			{
+				GenerateTextMesh();
+				m_AutoSizeIterationCount++;
+			}
+		}
+
+		protected virtual void GenerateTextMesh()
+		{
+			if (m_fontAsset == null || m_fontAsset.characterLookupTable == null)
+			{
+				global::UnityEngine.Debug.LogWarning("Can't Generate Mesh! No Font Asset has been assigned to Object ID: " + GetInstanceID());
+				m_IsAutoSizePointSizeSet = true;
+				return;
+			}
+			if (m_textInfo != null)
+			{
+				m_textInfo.Clear();
+			}
+			if (m_TextProcessingArray == null || m_TextProcessingArray.Length == 0 || m_TextProcessingArray[0].unicode == 0)
+			{
+				ClearMesh();
+				m_preferredWidth = 0f;
+				m_preferredHeight = 0f;
+				global::TMPro.TMPro_EventManager.ON_TEXT_CHANGED(this);
+				m_IsAutoSizePointSizeSet = true;
+				return;
+			}
+			m_currentFontAsset = m_fontAsset;
+			m_currentMaterial = m_sharedMaterial;
+			m_currentMaterialIndex = 0;
+			global::TMPro.TMP_Text.m_materialReferenceStack.SetDefault(new global::TMPro.MaterialReference(m_currentMaterialIndex, m_currentFontAsset, null, m_currentMaterial, m_padding));
+			m_currentSpriteAsset = m_spriteAsset;
+			if (m_spriteAnimator != null)
+			{
+				m_spriteAnimator.StopAllAnimations();
+			}
+			int totalCharacterCount = m_totalCharacterCount;
+			float num = (m_isOrthographic ? 1f : 0.1f);
+			float num2 = m_fontSize / m_fontAsset.m_FaceInfo.pointSize * m_fontAsset.m_FaceInfo.scale * num;
+			float num3 = num2;
+			float num4 = m_fontSize * 0.01f * num;
+			m_fontScaleMultiplier = 1f;
+			m_currentFontSize = m_fontSize;
+			m_sizeStack.SetDefault(m_currentFontSize);
+			float num5 = 0f;
+			uint num6 = 0u;
+			m_FontStyleInternal = m_fontStyle;
+			m_FontWeightInternal = (((m_FontStyleInternal & global::TMPro.FontStyles.Bold) == global::TMPro.FontStyles.Bold) ? global::TMPro.FontWeight.Bold : m_fontWeight);
+			m_FontWeightStack.SetDefault(m_FontWeightInternal);
+			m_fontStyleStack.Clear();
+			m_lineJustification = m_HorizontalAlignment;
+			m_lineJustificationStack.SetDefault(m_lineJustification);
+			float num7 = 0f;
+			m_baselineOffset = 0f;
+			m_baselineOffsetStack.Clear();
+			bool flag = false;
+			global::UnityEngine.Vector3 start = global::UnityEngine.Vector3.zero;
+			global::UnityEngine.Vector3 zero = global::UnityEngine.Vector3.zero;
+			bool flag2 = false;
+			global::UnityEngine.Vector3 start2 = global::UnityEngine.Vector3.zero;
+			global::UnityEngine.Vector3 zero2 = global::UnityEngine.Vector3.zero;
+			bool flag3 = false;
+			global::UnityEngine.Vector3 start3 = global::UnityEngine.Vector3.zero;
+			global::UnityEngine.Vector3 end = global::UnityEngine.Vector3.zero;
+			m_fontColor32 = m_fontColor;
+			m_htmlColor = m_fontColor32;
+			m_underlineColor = m_htmlColor;
+			m_strikethroughColor = m_htmlColor;
+			m_colorStack.SetDefault(m_htmlColor);
+			m_underlineColorStack.SetDefault(m_htmlColor);
+			m_strikethroughColorStack.SetDefault(m_htmlColor);
+			m_HighlightStateStack.SetDefault(new global::TMPro.HighlightState(m_htmlColor, global::TMPro.TMP_Offset.zero));
+			m_colorGradientPreset = null;
+			m_colorGradientStack.SetDefault(null);
+			m_ItalicAngle = m_currentFontAsset.italicStyle;
+			m_ItalicAngleStack.SetDefault(m_ItalicAngle);
+			m_actionStack.Clear();
+			m_FXScale = global::UnityEngine.Vector3.one;
+			m_FXRotation = global::UnityEngine.Quaternion.identity;
+			m_lineOffset = 0f;
+			m_lineHeight = -32767f;
+			float num8 = m_currentFontAsset.m_FaceInfo.lineHeight - (m_currentFontAsset.m_FaceInfo.ascentLine - m_currentFontAsset.m_FaceInfo.descentLine);
+			m_cSpacing = 0f;
+			m_monoSpacing = 0f;
+			m_xAdvance = 0f;
+			tag_LineIndent = 0f;
+			tag_Indent = 0f;
+			m_indentStack.SetDefault(0f);
+			tag_NoParsing = false;
+			m_characterCount = 0;
+			m_firstCharacterOfLine = m_firstVisibleCharacter;
+			m_lastCharacterOfLine = 0;
+			m_firstVisibleCharacterOfLine = 0;
+			m_lastVisibleCharacterOfLine = 0;
+			m_maxLineAscender = global::TMPro.TMP_Text.k_LargeNegativeFloat;
+			m_maxLineDescender = global::TMPro.TMP_Text.k_LargePositiveFloat;
+			m_lineNumber = 0;
+			m_startOfLineAscender = 0f;
+			m_startOfLineDescender = 0f;
+			m_lineVisibleCharacterCount = 0;
+			m_lineVisibleSpaceCount = 0;
+			bool flag4 = true;
+			m_IsDrivenLineSpacing = false;
+			m_firstOverflowCharacterIndex = -1;
+			m_LastBaseGlyphIndex = int.MinValue;
+			bool flag5 = m_ActiveFontFeatures.Contains(global::UnityEngine.TextCore.OTL_FeatureTag.kern);
+			bool flag6 = m_ActiveFontFeatures.Contains(global::UnityEngine.TextCore.OTL_FeatureTag.mark);
+			bool flag7 = m_ActiveFontFeatures.Contains(global::UnityEngine.TextCore.OTL_FeatureTag.mkmk);
+			m_pageNumber = 0;
+			int num9 = global::UnityEngine.Mathf.Clamp(m_pageToDisplay - 1, 0, m_textInfo.pageInfo.Length - 1);
+			m_textInfo.ClearPageInfo();
+			global::UnityEngine.Vector4 vector = m_margin;
+			float num10 = ((m_marginWidth > 0f) ? m_marginWidth : 0f);
+			float num11 = ((m_marginHeight > 0f) ? m_marginHeight : 0f);
+			m_marginLeft = 0f;
+			m_marginRight = 0f;
+			m_width = -1f;
+			float num12 = num10 + 0.0001f - m_marginLeft - m_marginRight;
+			m_meshExtents.min = global::TMPro.TMP_Text.k_LargePositiveVector2;
+			m_meshExtents.max = global::TMPro.TMP_Text.k_LargeNegativeVector2;
+			m_textInfo.ClearLineInfo();
+			m_maxCapHeight = 0f;
+			m_maxTextAscender = 0f;
+			m_ElementDescender = 0f;
+			m_PageAscender = 0f;
+			float maxVisibleDescender = 0f;
+			bool isMaxVisibleDescenderSet = false;
+			m_isNewPage = false;
+			bool flag8 = true;
+			m_isNonBreakingSpace = false;
+			bool flag9 = false;
+			int num13 = 0;
+			global::TMPro.TMP_Text.CharacterSubstitution characterSubstitution = new global::TMPro.TMP_Text.CharacterSubstitution(-1, 0u);
+			bool flag10 = false;
+			SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedWordWrapState, -1, -1);
+			SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLineState, -1, -1);
+			SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedEllipsisState, -1, -1);
+			SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLastValidState, -1, -1);
+			SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedSoftLineBreakState, -1, -1);
+			global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Clear();
+			int num14 = 0;
+			global::UnityEngine.Vector3 vector2 = default(global::UnityEngine.Vector3);
+			global::UnityEngine.Vector3 vector3 = default(global::UnityEngine.Vector3);
+			global::UnityEngine.Vector3 vector4 = default(global::UnityEngine.Vector3);
+			global::UnityEngine.Vector3 vector5 = default(global::UnityEngine.Vector3);
+			for (int i = 0; i < m_TextProcessingArray.Length && m_TextProcessingArray[i].unicode != 0; i++)
+			{
+				num6 = m_TextProcessingArray[i].unicode;
+				if (num14 > 5)
+				{
+					global::UnityEngine.Debug.LogError("Line breaking recursion max threshold hit... Character [" + num6 + "] index: " + i);
+					characterSubstitution.index = m_characterCount;
+					characterSubstitution.unicode = 3u;
+				}
+				if (num6 == 26)
+				{
+					continue;
+				}
+				if (m_isRichText && num6 == 60)
+				{
+					m_isTextLayoutPhase = true;
+					m_textElementType = global::TMPro.TMP_TextElementType.Character;
+					if (ValidateHtmlTag(m_TextProcessingArray, i + 1, out var endIndex))
+					{
+						i = endIndex;
+						if (m_textElementType == global::TMPro.TMP_TextElementType.Character)
+						{
+							continue;
+						}
+					}
+				}
+				else
+				{
+					m_textElementType = m_textInfo.characterInfo[m_characterCount].elementType;
+					m_currentMaterialIndex = m_textInfo.characterInfo[m_characterCount].materialReferenceIndex;
+					m_currentFontAsset = m_textInfo.characterInfo[m_characterCount].fontAsset;
+				}
+				int currentMaterialIndex = m_currentMaterialIndex;
+				bool isUsingAlternateTypeface = m_textInfo.characterInfo[m_characterCount].isUsingAlternateTypeface;
+				m_isTextLayoutPhase = false;
+				bool flag11 = false;
+				if (characterSubstitution.index == m_characterCount)
+				{
+					num6 = characterSubstitution.unicode;
+					m_textElementType = global::TMPro.TMP_TextElementType.Character;
+					flag11 = true;
+					switch (num6)
+					{
+					case 3u:
+						m_textInfo.characterInfo[m_characterCount].textElement = m_currentFontAsset.characterLookupTable[3u];
+						m_isTextTruncated = true;
+						break;
+					case 8230u:
+						m_textInfo.characterInfo[m_characterCount].textElement = m_Ellipsis.character;
+						m_textInfo.characterInfo[m_characterCount].elementType = global::TMPro.TMP_TextElementType.Character;
+						m_textInfo.characterInfo[m_characterCount].fontAsset = m_Ellipsis.fontAsset;
+						m_textInfo.characterInfo[m_characterCount].material = m_Ellipsis.material;
+						m_textInfo.characterInfo[m_characterCount].materialReferenceIndex = m_Ellipsis.materialIndex;
+						global::TMPro.TMP_Text.m_materialReferences[m_Underline.materialIndex].referenceCount++;
+						m_isTextTruncated = true;
+						characterSubstitution.index = m_characterCount + 1;
+						characterSubstitution.unicode = 3u;
+						break;
+					}
+				}
+				if (m_characterCount < m_firstVisibleCharacter && num6 != 3)
+				{
+					m_textInfo.characterInfo[m_characterCount].isVisible = false;
+					m_textInfo.characterInfo[m_characterCount].character = '\u200b';
+					m_textInfo.characterInfo[m_characterCount].lineNumber = 0;
+					m_characterCount++;
+					continue;
+				}
+				float num15 = 1f;
+				if (m_textElementType == global::TMPro.TMP_TextElementType.Character)
+				{
+					if ((m_FontStyleInternal & global::TMPro.FontStyles.UpperCase) == global::TMPro.FontStyles.UpperCase)
+					{
+						if (char.IsLower((char)num6))
+						{
+							num6 = char.ToUpper((char)num6);
+						}
+					}
+					else if ((m_FontStyleInternal & global::TMPro.FontStyles.LowerCase) == global::TMPro.FontStyles.LowerCase)
+					{
+						if (char.IsUpper((char)num6))
+						{
+							num6 = char.ToLower((char)num6);
+						}
+					}
+					else if ((m_FontStyleInternal & global::TMPro.FontStyles.SmallCaps) == global::TMPro.FontStyles.SmallCaps && char.IsLower((char)num6))
+					{
+						num15 = 0.8f;
+						num6 = char.ToUpper((char)num6);
+					}
+				}
+				float num16 = 0f;
+				float num17 = 0f;
+				float num18 = 0f;
+				global::UnityEngine.TextCore.FaceInfo faceInfo = m_currentFontAsset.m_FaceInfo;
+				if (m_textElementType == global::TMPro.TMP_TextElementType.Sprite)
+				{
+					global::TMPro.TMP_SpriteCharacter tMP_SpriteCharacter = (global::TMPro.TMP_SpriteCharacter)base.textInfo.characterInfo[m_characterCount].textElement;
+					if (tMP_SpriteCharacter == null)
+					{
+						continue;
+					}
+					m_currentSpriteAsset = tMP_SpriteCharacter.textAsset as global::TMPro.TMP_SpriteAsset;
+					m_spriteIndex = (int)tMP_SpriteCharacter.glyphIndex;
+					if (num6 == 60)
+					{
+						num6 = (uint)(57344 + m_spriteIndex);
+					}
+					else
+					{
+						m_spriteColor = global::TMPro.TMP_Text.s_colorWhite;
+					}
+					float num19 = m_currentFontSize / faceInfo.pointSize * faceInfo.scale * num;
+					global::UnityEngine.TextCore.FaceInfo faceInfo2 = m_currentSpriteAsset.m_FaceInfo;
+					if (faceInfo2.pointSize > 0f)
+					{
+						float num20 = m_currentFontSize / faceInfo2.pointSize * faceInfo2.scale * num;
+						num3 = tMP_SpriteCharacter.m_Scale * tMP_SpriteCharacter.m_Glyph.scale * num20;
+						num17 = faceInfo2.ascentLine;
+						num16 = faceInfo2.baseline * num19 * m_fontScaleMultiplier * faceInfo2.scale;
+						num18 = faceInfo2.descentLine;
+					}
+					else
+					{
+						float num21 = m_currentFontSize / faceInfo.pointSize * faceInfo.scale * num;
+						num3 = faceInfo.ascentLine / tMP_SpriteCharacter.m_Glyph.metrics.height * tMP_SpriteCharacter.m_Scale * tMP_SpriteCharacter.m_Glyph.scale * num21;
+						float num22 = ((num3 != 0f) ? (num21 / num3) : 0f);
+						num17 = faceInfo.ascentLine * num22;
+						num16 = faceInfo.baseline * num19 * m_fontScaleMultiplier * faceInfo.scale;
+						num18 = faceInfo.descentLine * num22;
+					}
+					m_cached_TextElement = tMP_SpriteCharacter;
+					m_textInfo.characterInfo[m_characterCount].elementType = global::TMPro.TMP_TextElementType.Sprite;
+					m_textInfo.characterInfo[m_characterCount].scale = num3;
+					m_textInfo.characterInfo[m_characterCount].fontAsset = m_currentFontAsset;
+					m_textInfo.characterInfo[m_characterCount].materialReferenceIndex = m_currentMaterialIndex;
+					m_currentMaterialIndex = currentMaterialIndex;
+					num7 = 0f;
+				}
+				else if (m_textElementType == global::TMPro.TMP_TextElementType.Character)
+				{
+					m_cached_TextElement = m_textInfo.characterInfo[m_characterCount].textElement;
+					if (m_cached_TextElement == null)
+					{
+						continue;
+					}
+					m_currentFontAsset = m_textInfo.characterInfo[m_characterCount].fontAsset;
+					m_currentMaterial = m_textInfo.characterInfo[m_characterCount].material;
+					m_currentMaterialIndex = m_textInfo.characterInfo[m_characterCount].materialReferenceIndex;
+					float num23 = ((!flag11 || m_TextProcessingArray[i].unicode != 10 || m_characterCount == m_firstCharacterOfLine) ? (m_currentFontSize * num15 / faceInfo.pointSize * faceInfo.scale * num) : (m_textInfo.characterInfo[m_characterCount - 1].pointSize * num15 / faceInfo.pointSize * faceInfo.scale * num));
+					if (flag11 && num6 == 8230)
+					{
+						num17 = 0f;
+						num18 = 0f;
+					}
+					else
+					{
+						num17 = faceInfo.ascentLine;
+						num18 = faceInfo.descentLine;
+					}
+					num3 = num23 * m_fontScaleMultiplier * m_cached_TextElement.m_Scale * m_cached_TextElement.m_Glyph.scale;
+					num16 = faceInfo.baseline * num23 * m_fontScaleMultiplier * faceInfo.scale;
+					m_textInfo.characterInfo[m_characterCount].elementType = global::TMPro.TMP_TextElementType.Character;
+					m_textInfo.characterInfo[m_characterCount].scale = num3;
+					num7 = ((m_currentMaterialIndex == 0) ? m_padding : m_subTextObjects[m_currentMaterialIndex].padding);
+				}
+				float num24 = num3;
+				if (num6 == 173 || num6 == 3)
+				{
+					num3 = 0f;
+				}
+				m_textInfo.characterInfo[m_characterCount].character = (char)num6;
+				m_textInfo.characterInfo[m_characterCount].pointSize = m_currentFontSize;
+				m_textInfo.characterInfo[m_characterCount].color = m_htmlColor;
+				m_textInfo.characterInfo[m_characterCount].underlineColor = m_underlineColor;
+				m_textInfo.characterInfo[m_characterCount].strikethroughColor = m_strikethroughColor;
+				m_textInfo.characterInfo[m_characterCount].highlightState = m_HighlightState;
+				m_textInfo.characterInfo[m_characterCount].style = m_FontStyleInternal;
+				global::UnityEngine.TextCore.GlyphMetrics glyphMetrics = m_textInfo.characterInfo[m_characterCount].alternativeGlyph?.metrics ?? m_cached_TextElement.m_Glyph.metrics;
+				bool flag12 = num6 <= 65535 && char.IsWhiteSpace((char)num6);
+				global::UnityEngine.TextCore.LowLevel.GlyphValueRecord glyphValueRecord = default(global::UnityEngine.TextCore.LowLevel.GlyphValueRecord);
+				float num25 = m_characterSpacing;
+				if (flag5 && m_textElementType == global::TMPro.TMP_TextElementType.Character)
+				{
+					uint glyphIndex = m_cached_TextElement.m_GlyphIndex;
+					global::UnityEngine.TextCore.LowLevel.GlyphPairAdjustmentRecord value;
+					if (m_characterCount < totalCharacterCount - 1 && m_textInfo.characterInfo[m_characterCount + 1].elementType == global::TMPro.TMP_TextElementType.Character)
+					{
+						uint key = (m_textInfo.characterInfo[m_characterCount + 1].textElement.m_GlyphIndex << 16) | glyphIndex;
+						if (m_currentFontAsset.m_FontFeatureTable.m_GlyphPairAdjustmentRecordLookup.TryGetValue(key, out value))
+						{
+							glyphValueRecord = value.firstAdjustmentRecord.glyphValueRecord;
+							num25 = (((value.featureLookupFlags & global::UnityEngine.TextCore.LowLevel.FontFeatureLookupFlags.IgnoreSpacingAdjustments) == global::UnityEngine.TextCore.LowLevel.FontFeatureLookupFlags.IgnoreSpacingAdjustments) ? 0f : num25);
+						}
+					}
+					if (m_characterCount >= 1)
+					{
+						uint glyphIndex2 = m_textInfo.characterInfo[m_characterCount - 1].textElement.m_GlyphIndex;
+						uint key2 = (glyphIndex << 16) | glyphIndex2;
+						if (base.textInfo.characterInfo[m_characterCount - 1].elementType == global::TMPro.TMP_TextElementType.Character && m_currentFontAsset.m_FontFeatureTable.m_GlyphPairAdjustmentRecordLookup.TryGetValue(key2, out value))
+						{
+							glyphValueRecord += value.secondAdjustmentRecord.glyphValueRecord;
+							num25 = (((value.featureLookupFlags & global::UnityEngine.TextCore.LowLevel.FontFeatureLookupFlags.IgnoreSpacingAdjustments) == global::UnityEngine.TextCore.LowLevel.FontFeatureLookupFlags.IgnoreSpacingAdjustments) ? 0f : num25);
+						}
+					}
+				}
+				m_textInfo.characterInfo[m_characterCount].adjustedHorizontalAdvance = glyphValueRecord.xAdvance;
+				bool flag13 = global::TMPro.TMP_TextParsingUtilities.IsBaseGlyph(num6);
+				if (flag13)
+				{
+					m_LastBaseGlyphIndex = m_characterCount;
+				}
+				if (m_characterCount > 0 && !flag13)
+				{
+					if (flag6 && m_LastBaseGlyphIndex != int.MinValue && m_LastBaseGlyphIndex == m_characterCount - 1)
+					{
+						uint index = m_textInfo.characterInfo[m_LastBaseGlyphIndex].textElement.glyph.index;
+						uint key3 = (m_cached_TextElement.glyphIndex << 16) | index;
+						if (m_currentFontAsset.fontFeatureTable.m_MarkToBaseAdjustmentRecordLookup.TryGetValue(key3, out var value2))
+						{
+							float num26 = (m_textInfo.characterInfo[m_LastBaseGlyphIndex].origin - m_xAdvance) / num3;
+							glyphValueRecord.xPlacement = num26 + value2.baseGlyphAnchorPoint.xCoordinate - value2.markPositionAdjustment.xPositionAdjustment;
+							glyphValueRecord.yPlacement = value2.baseGlyphAnchorPoint.yCoordinate - value2.markPositionAdjustment.yPositionAdjustment;
+							num25 = 0f;
+						}
+					}
+					else
+					{
+						bool flag14 = false;
+						if (flag7)
+						{
+							int num27 = m_characterCount - 1;
+							while (num27 >= 0 && num27 != m_LastBaseGlyphIndex)
+							{
+								uint index2 = m_textInfo.characterInfo[num27].textElement.glyph.index;
+								uint key4 = (m_cached_TextElement.glyphIndex << 16) | index2;
+								if (m_currentFontAsset.fontFeatureTable.m_MarkToMarkAdjustmentRecordLookup.TryGetValue(key4, out var value3))
+								{
+									float num28 = (m_textInfo.characterInfo[num27].origin - m_xAdvance) / num3;
+									float num29 = num16 - m_lineOffset + m_baselineOffset;
+									float num30 = (m_textInfo.characterInfo[num27].baseLine - num29) / num3;
+									glyphValueRecord.xPlacement = num28 + value3.baseMarkGlyphAnchorPoint.xCoordinate - value3.combiningMarkPositionAdjustment.xPositionAdjustment;
+									glyphValueRecord.yPlacement = num30 + value3.baseMarkGlyphAnchorPoint.yCoordinate - value3.combiningMarkPositionAdjustment.yPositionAdjustment;
+									num25 = 0f;
+									flag14 = true;
+									break;
+								}
+								num27--;
+							}
+						}
+						if (flag6 && m_LastBaseGlyphIndex != int.MinValue && !flag14)
+						{
+							uint index3 = m_textInfo.characterInfo[m_LastBaseGlyphIndex].textElement.glyph.index;
+							uint key5 = (m_cached_TextElement.glyphIndex << 16) | index3;
+							if (m_currentFontAsset.fontFeatureTable.m_MarkToBaseAdjustmentRecordLookup.TryGetValue(key5, out var value4))
+							{
+								float num31 = (m_textInfo.characterInfo[m_LastBaseGlyphIndex].origin - m_xAdvance) / num3;
+								glyphValueRecord.xPlacement = num31 + value4.baseGlyphAnchorPoint.xCoordinate - value4.markPositionAdjustment.xPositionAdjustment;
+								glyphValueRecord.yPlacement = value4.baseGlyphAnchorPoint.yCoordinate - value4.markPositionAdjustment.yPositionAdjustment;
+								num25 = 0f;
+							}
+						}
+					}
+				}
+				num17 += glyphValueRecord.yPlacement;
+				num18 += glyphValueRecord.yPlacement;
+				if (m_isRightToLeft)
+				{
+					m_xAdvance -= glyphMetrics.horizontalAdvance * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale * num3;
+					if (flag12 || num6 == 8203)
+					{
+						m_xAdvance -= m_wordSpacing * num4;
+					}
+				}
+				float num32 = 0f;
+				if (m_monoSpacing != 0f)
+				{
+					num32 = ((!m_duoSpace || (num6 != 46 && num6 != 58 && num6 != 44)) ? ((m_monoSpacing / 2f - (glyphMetrics.width / 2f + glyphMetrics.horizontalBearingX) * num3) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale) : ((m_monoSpacing / 4f - (glyphMetrics.width / 2f + glyphMetrics.horizontalBearingX) * num3) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale));
+					m_xAdvance += num32;
+				}
+				float num33 = 0f;
+				float num34 = 0f;
+				if (m_textElementType == global::TMPro.TMP_TextElementType.Character)
+				{
+					bool flag15 = !isUsingAlternateTypeface && (m_FontStyleInternal & global::TMPro.FontStyles.Bold) == global::TMPro.FontStyles.Bold;
+					num33 = (flag15 ? m_currentFontAsset.boldSpacing : 0f);
+					if (m_currentMaterial != null && m_currentMaterial.HasProperty(global::TMPro.ShaderUtilities.ID_GradientScale) && m_currentMaterial.HasProperty(global::TMPro.ShaderUtilities.ID_ScaleRatio_A))
+					{
+						float num35 = m_currentMaterial.GetFloat(global::TMPro.ShaderUtilities.ID_GradientScale);
+						float num36 = m_currentMaterial.GetFloat(global::TMPro.ShaderUtilities.ID_ScaleRatio_A);
+						num34 = (flag15 ? m_currentFontAsset.boldStyle : m_currentFontAsset.normalStyle) * 0.25f * num35 * num36;
+						if (num34 + num7 > num35)
+						{
+							num7 = num35 - num34;
+						}
+					}
+				}
+				vector2.x = m_xAdvance + (glyphMetrics.horizontalBearingX * m_FXScale.x - num7 - num34 + glyphValueRecord.xPlacement) * num3 * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale;
+				vector2.y = num16 + (glyphMetrics.horizontalBearingY + num7 + glyphValueRecord.yPlacement) * num3 - m_lineOffset + m_baselineOffset;
+				vector2.z = 0f;
+				vector3.x = vector2.x;
+				vector3.y = vector2.y - (glyphMetrics.height + num7 * 2f) * num3;
+				vector3.z = 0f;
+				vector4.x = vector3.x + (glyphMetrics.width * m_FXScale.x + num7 * 2f + num34 * 2f) * num3 * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale;
+				vector4.y = vector2.y;
+				vector4.z = 0f;
+				vector5.x = vector4.x;
+				vector5.y = vector3.y;
+				vector5.z = 0f;
+				if (m_textElementType == global::TMPro.TMP_TextElementType.Character && !isUsingAlternateTypeface && (m_FontStyleInternal & global::TMPro.FontStyles.Italic) == global::TMPro.FontStyles.Italic)
+				{
+					float num37 = (float)m_ItalicAngle * 0.01f;
+					float num38 = (m_currentFontAsset.m_FaceInfo.capLine - (m_currentFontAsset.m_FaceInfo.baseline + m_baselineOffset)) / 2f * m_fontScaleMultiplier * m_currentFontAsset.m_FaceInfo.scale;
+					global::UnityEngine.Vector3 vector6 = new global::UnityEngine.Vector3(num37 * ((glyphMetrics.horizontalBearingY + num7 + num34 - num38) * num3), 0f, 0f);
+					global::UnityEngine.Vector3 vector7 = new global::UnityEngine.Vector3(num37 * ((glyphMetrics.horizontalBearingY - glyphMetrics.height - num7 - num34 - num38) * num3), 0f, 0f);
+					vector2 += vector6;
+					vector3 += vector7;
+					vector4 += vector6;
+					vector5 += vector7;
+				}
+				if (m_FXRotation != global::UnityEngine.Quaternion.identity)
+				{
+					global::UnityEngine.Matrix4x4 matrix4x = global::UnityEngine.Matrix4x4.Rotate(m_FXRotation);
+					global::UnityEngine.Vector3 vector8 = (vector4 + vector3) / 2f;
+					vector2 = matrix4x.MultiplyPoint3x4(vector2 - vector8) + vector8;
+					vector3 = matrix4x.MultiplyPoint3x4(vector3 - vector8) + vector8;
+					vector4 = matrix4x.MultiplyPoint3x4(vector4 - vector8) + vector8;
+					vector5 = matrix4x.MultiplyPoint3x4(vector5 - vector8) + vector8;
+				}
+				m_textInfo.characterInfo[m_characterCount].bottomLeft = vector3;
+				m_textInfo.characterInfo[m_characterCount].topLeft = vector2;
+				m_textInfo.characterInfo[m_characterCount].topRight = vector4;
+				m_textInfo.characterInfo[m_characterCount].bottomRight = vector5;
+				m_textInfo.characterInfo[m_characterCount].origin = m_xAdvance + glyphValueRecord.xPlacement * num3;
+				m_textInfo.characterInfo[m_characterCount].baseLine = num16 - m_lineOffset + m_baselineOffset + glyphValueRecord.yPlacement * num3;
+				m_textInfo.characterInfo[m_characterCount].aspectRatio = (vector4.x - vector3.x) / (vector2.y - vector3.y);
+				float num39 = ((m_textElementType == global::TMPro.TMP_TextElementType.Character) ? (num17 * num3 / num15 + m_baselineOffset) : (num17 * num3 + m_baselineOffset));
+				float num40 = ((m_textElementType == global::TMPro.TMP_TextElementType.Character) ? (num18 * num3 / num15 + m_baselineOffset) : (num18 * num3 + m_baselineOffset));
+				float num41 = num39;
+				float num42 = num40;
+				bool flag16 = m_characterCount == m_firstCharacterOfLine;
+				if (flag16 || !flag12)
+				{
+					if (m_baselineOffset != 0f)
+					{
+						num41 = global::UnityEngine.Mathf.Max((num39 - m_baselineOffset) / m_fontScaleMultiplier, num41);
+						num42 = global::UnityEngine.Mathf.Min((num40 - m_baselineOffset) / m_fontScaleMultiplier, num42);
+					}
+					m_maxLineAscender = global::UnityEngine.Mathf.Max(num41, m_maxLineAscender);
+					m_maxLineDescender = global::UnityEngine.Mathf.Min(num42, m_maxLineDescender);
+				}
+				if (flag16 || !flag12)
+				{
+					m_textInfo.characterInfo[m_characterCount].adjustedAscender = num41;
+					m_textInfo.characterInfo[m_characterCount].adjustedDescender = num42;
+					m_ElementAscender = (m_textInfo.characterInfo[m_characterCount].ascender = num39 - m_lineOffset);
+					m_ElementDescender = (m_textInfo.characterInfo[m_characterCount].descender = num40 - m_lineOffset);
+				}
+				else
+				{
+					m_textInfo.characterInfo[m_characterCount].adjustedAscender = m_maxLineAscender;
+					m_textInfo.characterInfo[m_characterCount].adjustedDescender = m_maxLineDescender;
+					m_ElementAscender = (m_textInfo.characterInfo[m_characterCount].ascender = m_maxLineAscender - m_lineOffset);
+					m_ElementDescender = (m_textInfo.characterInfo[m_characterCount].descender = m_maxLineDescender - m_lineOffset);
+				}
+				if ((m_lineNumber == 0 || m_isNewPage) && (flag16 || !flag12))
+				{
+					m_maxTextAscender = m_maxLineAscender;
+					m_maxCapHeight = global::UnityEngine.Mathf.Max(m_maxCapHeight, m_currentFontAsset.m_FaceInfo.capLine * num3 / num15);
+				}
+				if (m_lineOffset == 0f && (flag16 || !flag12))
+				{
+					m_PageAscender = ((m_PageAscender > num39) ? m_PageAscender : num39);
+				}
+				m_textInfo.characterInfo[m_characterCount].isVisible = false;
+				bool flag17 = (m_lineJustification & global::TMPro.HorizontalAlignmentOptions.Flush) == global::TMPro.HorizontalAlignmentOptions.Flush || (m_lineJustification & global::TMPro.HorizontalAlignmentOptions.Justified) == global::TMPro.HorizontalAlignmentOptions.Justified;
+				if (num6 == 9 || ((m_TextWrappingMode == global::TMPro.TextWrappingModes.PreserveWhitespace || m_TextWrappingMode == global::TMPro.TextWrappingModes.PreserveWhitespaceNoWrap) && (flag12 || num6 == 8203)) || (!flag12 && num6 != 8203 && num6 != 173 && num6 != 3) || (num6 == 173 && !flag10) || m_textElementType == global::TMPro.TMP_TextElementType.Sprite)
+				{
+					m_textInfo.characterInfo[m_characterCount].isVisible = true;
+					float marginLeft = m_marginLeft;
+					float marginRight = m_marginRight;
+					if (flag11)
+					{
+						marginLeft = m_textInfo.lineInfo[m_lineNumber].marginLeft;
+						marginRight = m_textInfo.lineInfo[m_lineNumber].marginRight;
+					}
+					num12 = ((m_width != -1f) ? global::UnityEngine.Mathf.Min(num10 + 0.0001f - marginLeft - marginRight, m_width) : (num10 + 0.0001f - marginLeft - marginRight));
+					float num43 = global::UnityEngine.Mathf.Abs(m_xAdvance) + ((!m_isRightToLeft) ? glyphMetrics.horizontalAdvance : 0f) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale * ((num6 == 173) ? num24 : num3);
+					float num44 = m_maxTextAscender - (m_maxLineDescender - m_lineOffset) + ((m_lineOffset > 0f && !m_IsDrivenLineSpacing) ? (m_maxLineAscender - m_startOfLineAscender) : 0f);
+					int characterCount = m_characterCount;
+					if (num44 > num11 + 0.0001f)
+					{
+						if (m_firstOverflowCharacterIndex == -1)
+						{
+							m_firstOverflowCharacterIndex = m_characterCount;
+						}
+						if (m_enableAutoSizing)
+						{
+							if (m_lineSpacingDelta > m_lineSpacingMax && m_lineOffset > 0f && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+							{
+								float num45 = (num11 - num44) / (float)m_lineNumber;
+								m_lineSpacingDelta = global::UnityEngine.Mathf.Max(m_lineSpacingDelta + num45 / num2, m_lineSpacingMax);
+								return;
+							}
+							if (m_fontSize > m_fontSizeMin && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+							{
+								m_maxFontSize = m_fontSize;
+								float num46 = global::UnityEngine.Mathf.Max((m_fontSize - m_minFontSize) / 2f, 0.05f);
+								m_fontSize -= num46;
+								m_fontSize = global::UnityEngine.Mathf.Max((float)(int)(m_fontSize * 20f + 0.5f) / 20f, m_fontSizeMin);
+								return;
+							}
+						}
+						switch (m_overflowMode)
+						{
+						case global::TMPro.TextOverflowModes.Truncate:
+							i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLastValidState);
+							characterSubstitution.index = characterCount;
+							characterSubstitution.unicode = 3u;
+							continue;
+						case global::TMPro.TextOverflowModes.Ellipsis:
+							if (global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Count == 0)
+							{
+								i = -1;
+								m_characterCount = 0;
+								characterSubstitution.index = 0;
+								characterSubstitution.unicode = 3u;
+								m_firstCharacterOfLine = 0;
+							}
+							else
+							{
+								global::TMPro.WordWrapState state = global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Pop();
+								i = RestoreWordWrappingState(ref state);
+								i--;
+								m_characterCount--;
+								characterSubstitution.index = m_characterCount;
+								characterSubstitution.unicode = 8230u;
+								num14++;
+							}
+							continue;
+						case global::TMPro.TextOverflowModes.Linked:
+							i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLastValidState);
+							if (m_linkedTextComponent != null)
+							{
+								m_linkedTextComponent.text = text;
+								m_linkedTextComponent.m_inputSource = m_inputSource;
+								m_linkedTextComponent.firstVisibleCharacter = m_characterCount;
+								m_linkedTextComponent.ForceMeshUpdate();
+								m_isTextTruncated = true;
+							}
+							characterSubstitution.index = characterCount;
+							characterSubstitution.unicode = 3u;
+							continue;
+						case global::TMPro.TextOverflowModes.Page:
+							if (i < 0 || characterCount == 0)
+							{
+								i = -1;
+								m_characterCount = 0;
+								characterSubstitution.index = 0;
+								characterSubstitution.unicode = 3u;
+								continue;
+							}
+							if (m_maxLineAscender - m_maxLineDescender > num11 + 0.0001f)
+							{
+								i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLineState);
+								characterSubstitution.index = characterCount;
+								characterSubstitution.unicode = 3u;
+								continue;
+							}
+							i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLineState);
+							m_isNewPage = true;
+							m_firstCharacterOfLine = m_characterCount;
+							m_maxLineAscender = global::TMPro.TMP_Text.k_LargeNegativeFloat;
+							m_maxLineDescender = global::TMPro.TMP_Text.k_LargePositiveFloat;
+							m_startOfLineAscender = 0f;
+							m_xAdvance = 0f + tag_Indent;
+							m_lineOffset = 0f;
+							m_maxTextAscender = 0f;
+							m_PageAscender = 0f;
+							m_lineNumber++;
+							m_pageNumber++;
+							continue;
+						}
+					}
+					if (flag13 && num43 > num12 * (flag17 ? 1.05f : 1f))
+					{
+						if (m_TextWrappingMode != global::TMPro.TextWrappingModes.NoWrap && m_TextWrappingMode != global::TMPro.TextWrappingModes.PreserveWhitespaceNoWrap && m_characterCount != m_firstCharacterOfLine)
+						{
+							i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedWordWrapState);
+							float num47 = 0f;
+							if (m_lineHeight == -32767f)
+							{
+								float adjustedAscender = m_textInfo.characterInfo[m_characterCount].adjustedAscender;
+								num47 = ((m_lineOffset > 0f && !m_IsDrivenLineSpacing) ? (m_maxLineAscender - m_startOfLineAscender) : 0f) - m_maxLineDescender + adjustedAscender + (num8 + m_lineSpacingDelta) * num2 + m_lineSpacing * num4;
+							}
+							else
+							{
+								num47 = m_lineHeight + m_lineSpacing * num4;
+								m_IsDrivenLineSpacing = true;
+							}
+							float num48 = m_maxTextAscender + num47 + m_lineOffset - m_textInfo.characterInfo[m_characterCount].adjustedDescender;
+							if (m_textInfo.characterInfo[m_characterCount - 1].character == '\u00ad' && !flag10 && (m_overflowMode == global::TMPro.TextOverflowModes.Overflow || num48 < num11 + 0.0001f))
+							{
+								characterSubstitution.index = m_characterCount - 1;
+								characterSubstitution.unicode = 45u;
+								i--;
+								m_characterCount--;
+								continue;
+							}
+							flag10 = false;
+							if (m_textInfo.characterInfo[m_characterCount].character == '\u00ad')
+							{
+								flag10 = true;
+								continue;
+							}
+							if (m_enableAutoSizing && flag8)
+							{
+								if (m_charWidthAdjDelta < m_charWidthMaxAdj / 100f && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+								{
+									float num49 = num43;
+									if (m_charWidthAdjDelta > 0f)
+									{
+										num49 /= 1f - m_charWidthAdjDelta;
+									}
+									float num50 = num43 - (num12 - 0.0001f) * (flag17 ? 1.05f : 1f);
+									m_charWidthAdjDelta += num50 / num49;
+									m_charWidthAdjDelta = global::UnityEngine.Mathf.Min(m_charWidthAdjDelta, m_charWidthMaxAdj / 100f);
+									return;
+								}
+								if (m_fontSize > m_fontSizeMin && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+								{
+									m_maxFontSize = m_fontSize;
+									float num51 = global::UnityEngine.Mathf.Max((m_fontSize - m_minFontSize) / 2f, 0.05f);
+									m_fontSize -= num51;
+									m_fontSize = global::UnityEngine.Mathf.Max((float)(int)(m_fontSize * 20f + 0.5f) / 20f, m_fontSizeMin);
+									return;
+								}
+							}
+							int previous_WordBreak = global::TMPro.TMP_Text.m_SavedSoftLineBreakState.previous_WordBreak;
+							if (flag8 && previous_WordBreak != -1 && previous_WordBreak != num13)
+							{
+								i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedSoftLineBreakState);
+								num13 = previous_WordBreak;
+								if (m_textInfo.characterInfo[m_characterCount - 1].character == '\u00ad')
+								{
+									characterSubstitution.index = m_characterCount - 1;
+									characterSubstitution.unicode = 45u;
+									i--;
+									m_characterCount--;
+									continue;
+								}
+							}
+							if (!(num48 > num11 + 0.0001f))
+							{
+								InsertNewLine(i, num2, num3, num4, num33, num25, num12, num8, ref isMaxVisibleDescenderSet, ref maxVisibleDescender);
+								flag4 = true;
+								flag8 = true;
+								continue;
+							}
+							if (m_firstOverflowCharacterIndex == -1)
+							{
+								m_firstOverflowCharacterIndex = m_characterCount;
+							}
+							if (m_enableAutoSizing)
+							{
+								if (m_lineSpacingDelta > m_lineSpacingMax && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+								{
+									float num52 = (num11 - num48) / (float)(m_lineNumber + 1);
+									m_lineSpacingDelta = global::UnityEngine.Mathf.Max(m_lineSpacingDelta + num52 / num2, m_lineSpacingMax);
+									return;
+								}
+								if (m_charWidthAdjDelta < m_charWidthMaxAdj / 100f && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+								{
+									float num53 = num43;
+									if (m_charWidthAdjDelta > 0f)
+									{
+										num53 /= 1f - m_charWidthAdjDelta;
+									}
+									float num54 = num43 - (num12 - 0.0001f) * (flag17 ? 1.05f : 1f);
+									m_charWidthAdjDelta += num54 / num53;
+									m_charWidthAdjDelta = global::UnityEngine.Mathf.Min(m_charWidthAdjDelta, m_charWidthMaxAdj / 100f);
+									return;
+								}
+								if (m_fontSize > m_fontSizeMin && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+								{
+									m_maxFontSize = m_fontSize;
+									float num55 = global::UnityEngine.Mathf.Max((m_fontSize - m_minFontSize) / 2f, 0.05f);
+									m_fontSize -= num55;
+									m_fontSize = global::UnityEngine.Mathf.Max((float)(int)(m_fontSize * 20f + 0.5f) / 20f, m_fontSizeMin);
+									return;
+								}
+							}
+							switch (m_overflowMode)
+							{
+							case global::TMPro.TextOverflowModes.Overflow:
+							case global::TMPro.TextOverflowModes.Masking:
+							case global::TMPro.TextOverflowModes.ScrollRect:
+								InsertNewLine(i, num2, num3, num4, num33, num25, num12, num8, ref isMaxVisibleDescenderSet, ref maxVisibleDescender);
+								flag4 = true;
+								flag8 = true;
+								continue;
+							case global::TMPro.TextOverflowModes.Truncate:
+								i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLastValidState);
+								characterSubstitution.index = characterCount;
+								characterSubstitution.unicode = 3u;
+								continue;
+							case global::TMPro.TextOverflowModes.Ellipsis:
+								if (global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Count == 0)
+								{
+									i = -1;
+									m_characterCount = 0;
+									characterSubstitution.index = 0;
+									characterSubstitution.unicode = 3u;
+									m_firstCharacterOfLine = 0;
+								}
+								else
+								{
+									global::TMPro.WordWrapState state2 = global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Pop();
+									i = RestoreWordWrappingState(ref state2);
+									i--;
+									m_characterCount--;
+									characterSubstitution.index = m_characterCount;
+									characterSubstitution.unicode = 8230u;
+									num14++;
+								}
+								continue;
+							case global::TMPro.TextOverflowModes.Linked:
+								if (m_linkedTextComponent != null)
+								{
+									m_linkedTextComponent.text = text;
+									m_linkedTextComponent.m_inputSource = m_inputSource;
+									m_linkedTextComponent.firstVisibleCharacter = m_characterCount;
+									m_linkedTextComponent.ForceMeshUpdate();
+									m_isTextTruncated = true;
+								}
+								characterSubstitution.index = m_characterCount;
+								characterSubstitution.unicode = 3u;
+								continue;
+							case global::TMPro.TextOverflowModes.Page:
+								m_isNewPage = true;
+								InsertNewLine(i, num2, num3, num4, num33, num25, num12, num8, ref isMaxVisibleDescenderSet, ref maxVisibleDescender);
+								m_startOfLineAscender = 0f;
+								m_lineOffset = 0f;
+								m_maxTextAscender = 0f;
+								m_PageAscender = 0f;
+								m_pageNumber++;
+								flag4 = true;
+								flag8 = true;
+								continue;
+							}
+						}
+						else
+						{
+							if (m_enableAutoSizing && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+							{
+								if (m_charWidthAdjDelta < m_charWidthMaxAdj / 100f)
+								{
+									float num56 = num43;
+									if (m_charWidthAdjDelta > 0f)
+									{
+										num56 /= 1f - m_charWidthAdjDelta;
+									}
+									float num57 = num43 - (num12 - 0.0001f) * (flag17 ? 1.05f : 1f);
+									m_charWidthAdjDelta += num57 / num56;
+									m_charWidthAdjDelta = global::UnityEngine.Mathf.Min(m_charWidthAdjDelta, m_charWidthMaxAdj / 100f);
+									return;
+								}
+								if (m_fontSize > m_fontSizeMin)
+								{
+									m_maxFontSize = m_fontSize;
+									float num58 = global::UnityEngine.Mathf.Max((m_fontSize - m_minFontSize) / 2f, 0.05f);
+									m_fontSize -= num58;
+									m_fontSize = global::UnityEngine.Mathf.Max((float)(int)(m_fontSize * 20f + 0.5f) / 20f, m_fontSizeMin);
+									return;
+								}
+							}
+							switch (m_overflowMode)
+							{
+							case global::TMPro.TextOverflowModes.Truncate:
+								i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedWordWrapState);
+								characterSubstitution.index = characterCount;
+								characterSubstitution.unicode = 3u;
+								continue;
+							case global::TMPro.TextOverflowModes.Ellipsis:
+								if (global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Count == 0)
+								{
+									i = -1;
+									m_characterCount = 0;
+									characterSubstitution.index = 0;
+									characterSubstitution.unicode = 3u;
+									m_firstCharacterOfLine = 0;
+								}
+								else
+								{
+									global::TMPro.WordWrapState state3 = global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Pop();
+									i = RestoreWordWrappingState(ref state3);
+									i--;
+									m_characterCount--;
+									characterSubstitution.index = m_characterCount;
+									characterSubstitution.unicode = 8230u;
+									num14++;
+								}
+								continue;
+							case global::TMPro.TextOverflowModes.Linked:
+								i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedWordWrapState);
+								if (m_linkedTextComponent != null)
+								{
+									m_linkedTextComponent.text = text;
+									m_linkedTextComponent.m_inputSource = m_inputSource;
+									m_linkedTextComponent.firstVisibleCharacter = m_characterCount;
+									m_linkedTextComponent.ForceMeshUpdate();
+									m_isTextTruncated = true;
+								}
+								characterSubstitution.index = m_characterCount;
+								characterSubstitution.unicode = 3u;
+								continue;
+							}
+						}
+					}
+					if (flag12)
+					{
+						m_textInfo.characterInfo[m_characterCount].isVisible = false;
+						m_lastVisibleCharacterOfLine = m_characterCount;
+						m_lineVisibleSpaceCount = ++m_textInfo.lineInfo[m_lineNumber].spaceCount;
+						m_textInfo.lineInfo[m_lineNumber].marginLeft = marginLeft;
+						m_textInfo.lineInfo[m_lineNumber].marginRight = marginRight;
+						m_textInfo.spaceCount++;
+						if (num6 == 160)
+						{
+							m_textInfo.lineInfo[m_lineNumber].controlCharacterCount++;
+						}
+					}
+					else if (num6 == 173)
+					{
+						m_textInfo.characterInfo[m_characterCount].isVisible = false;
+					}
+					else
+					{
+						global::UnityEngine.Color32 vertexColor = ((!m_overrideHtmlColors) ? m_htmlColor : m_fontColor32);
+						if (m_textElementType == global::TMPro.TMP_TextElementType.Character)
+						{
+							SaveGlyphVertexInfo(num7, num34, vertexColor);
+						}
+						else if (m_textElementType == global::TMPro.TMP_TextElementType.Sprite)
+						{
+							SaveSpriteVertexInfo(vertexColor);
+						}
+						if (flag4)
+						{
+							flag4 = false;
+							m_firstVisibleCharacterOfLine = m_characterCount;
+						}
+						m_lineVisibleCharacterCount++;
+						m_lastVisibleCharacterOfLine = m_characterCount;
+						m_textInfo.lineInfo[m_lineNumber].marginLeft = marginLeft;
+						m_textInfo.lineInfo[m_lineNumber].marginRight = marginRight;
+					}
+				}
+				else
+				{
+					if (m_overflowMode == global::TMPro.TextOverflowModes.Linked && (num6 == 10 || num6 == 11))
+					{
+						float num59 = m_maxTextAscender - (m_maxLineDescender - m_lineOffset) + ((m_lineOffset > 0f && !m_IsDrivenLineSpacing) ? (m_maxLineAscender - m_startOfLineAscender) : 0f);
+						int characterCount2 = m_characterCount;
+						if (num59 > num11 + 0.0001f)
+						{
+							if (m_firstOverflowCharacterIndex == -1)
+							{
+								m_firstOverflowCharacterIndex = m_characterCount;
+							}
+							i = RestoreWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLastValidState);
+							if (m_linkedTextComponent != null)
+							{
+								m_linkedTextComponent.text = text;
+								m_linkedTextComponent.m_inputSource = m_inputSource;
+								m_linkedTextComponent.firstVisibleCharacter = m_characterCount;
+								m_linkedTextComponent.ForceMeshUpdate();
+								m_isTextTruncated = true;
+							}
+							characterSubstitution.index = characterCount2;
+							characterSubstitution.unicode = 3u;
+							continue;
+						}
+					}
+					if ((num6 == 10 || num6 == 11 || num6 == 160 || num6 == 8199 || num6 == 8232 || num6 == 8233 || char.IsSeparator((char)num6)) && num6 != 173 && num6 != 8203 && num6 != 8288)
+					{
+						m_textInfo.lineInfo[m_lineNumber].spaceCount++;
+						m_textInfo.spaceCount++;
+					}
+					if (num6 == 160)
+					{
+						m_textInfo.lineInfo[m_lineNumber].controlCharacterCount++;
+					}
+				}
+				if (m_overflowMode == global::TMPro.TextOverflowModes.Ellipsis && (!flag11 || num6 == 45))
+				{
+					float num60 = m_currentFontSize / m_Ellipsis.fontAsset.m_FaceInfo.pointSize * m_Ellipsis.fontAsset.m_FaceInfo.scale * num * m_fontScaleMultiplier * m_Ellipsis.character.m_Scale * m_Ellipsis.character.m_Glyph.scale;
+					float marginLeft2 = m_marginLeft;
+					float marginRight2 = m_marginRight;
+					if (num6 == 10 && m_characterCount != m_firstCharacterOfLine)
+					{
+						num60 = m_textInfo.characterInfo[m_characterCount - 1].pointSize / m_Ellipsis.fontAsset.m_FaceInfo.pointSize * m_Ellipsis.fontAsset.m_FaceInfo.scale * num * m_fontScaleMultiplier * m_Ellipsis.character.m_Scale * m_Ellipsis.character.m_Glyph.scale;
+						marginLeft2 = m_textInfo.lineInfo[m_lineNumber].marginLeft;
+						marginRight2 = m_textInfo.lineInfo[m_lineNumber].marginRight;
+					}
+					float num61 = m_maxTextAscender - (m_maxLineDescender - m_lineOffset) + ((m_lineOffset > 0f && !m_IsDrivenLineSpacing) ? (m_maxLineAscender - m_startOfLineAscender) : 0f);
+					float num62 = global::UnityEngine.Mathf.Abs(m_xAdvance) + ((!m_isRightToLeft) ? m_Ellipsis.character.m_Glyph.metrics.horizontalAdvance : 0f) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale * num60;
+					float num63 = ((m_width != -1f) ? global::UnityEngine.Mathf.Min(num10 + 0.0001f - marginLeft2 - marginRight2, m_width) : (num10 + 0.0001f - marginLeft2 - marginRight2));
+					if (num62 < num63 * (flag17 ? 1.05f : 1f) && num61 < num11 + 0.0001f)
+					{
+						SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedEllipsisState, i, m_characterCount);
+						global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Push(global::TMPro.TMP_Text.m_SavedEllipsisState);
+					}
+				}
+				m_textInfo.characterInfo[m_characterCount].lineNumber = m_lineNumber;
+				m_textInfo.characterInfo[m_characterCount].pageNumber = m_pageNumber;
+				if ((num6 != 10 && num6 != 11 && num6 != 13 && !flag11) || m_textInfo.lineInfo[m_lineNumber].characterCount == 1)
+				{
+					m_textInfo.lineInfo[m_lineNumber].alignment = m_lineJustification;
+				}
+				if (num6 == 9)
+				{
+					float num64 = m_currentFontAsset.m_FaceInfo.tabWidth * (float)(int)m_currentFontAsset.tabSize * num3;
+					if (m_isRightToLeft)
+					{
+						float num65 = global::UnityEngine.Mathf.Floor(m_xAdvance / num64) * num64;
+						m_xAdvance = ((num65 < m_xAdvance) ? num65 : (m_xAdvance - num64));
+					}
+					else
+					{
+						float num66 = global::UnityEngine.Mathf.Ceil(m_xAdvance / num64) * num64;
+						m_xAdvance = ((num66 > m_xAdvance) ? num66 : (m_xAdvance + num64));
+					}
+				}
+				else if (m_monoSpacing != 0f)
+				{
+					float num67 = ((!m_duoSpace || (num6 != 46 && num6 != 58 && num6 != 44)) ? (m_monoSpacing - num32) : (m_monoSpacing / 2f - num32));
+					m_xAdvance += (num67 + (m_currentFontAsset.normalSpacingOffset + num25) * num4 + m_cSpacing) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale;
+					if (flag12 || num6 == 8203)
+					{
+						m_xAdvance += m_wordSpacing * num4;
+					}
+				}
+				else if (m_isRightToLeft)
+				{
+					m_xAdvance -= (glyphValueRecord.xAdvance * num3 + (m_currentFontAsset.normalSpacingOffset + num25 + num33) * num4 + m_cSpacing) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale;
+					if (flag12 || num6 == 8203)
+					{
+						m_xAdvance -= m_wordSpacing * num4;
+					}
+				}
+				else
+				{
+					m_xAdvance += ((glyphMetrics.horizontalAdvance * m_FXScale.x + glyphValueRecord.xAdvance) * num3 + (m_currentFontAsset.normalSpacingOffset + num25 + num33) * num4 + m_cSpacing) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale;
+					if (flag12 || num6 == 8203)
+					{
+						m_xAdvance += m_wordSpacing * num4;
+					}
+				}
+				m_textInfo.characterInfo[m_characterCount].xAdvance = m_xAdvance;
+				if (num6 == 13)
+				{
+					m_xAdvance = 0f + tag_Indent;
+				}
+				if (m_overflowMode == global::TMPro.TextOverflowModes.Page && num6 != 10 && num6 != 11 && num6 != 13 && num6 != 8232 && num6 != 8233)
+				{
+					if (m_pageNumber + 1 > m_textInfo.pageInfo.Length)
+					{
+						global::TMPro.TMP_TextInfo.Resize(ref m_textInfo.pageInfo, m_pageNumber + 1, isBlockAllocated: true);
+					}
+					m_textInfo.pageInfo[m_pageNumber].ascender = m_PageAscender;
+					m_textInfo.pageInfo[m_pageNumber].descender = ((m_ElementDescender < m_textInfo.pageInfo[m_pageNumber].descender) ? m_ElementDescender : m_textInfo.pageInfo[m_pageNumber].descender);
+					if (m_isNewPage)
+					{
+						m_isNewPage = false;
+						m_textInfo.pageInfo[m_pageNumber].firstCharacterIndex = m_characterCount;
+					}
+					m_textInfo.pageInfo[m_pageNumber].lastCharacterIndex = m_characterCount;
+				}
+				if (num6 == 10 || num6 == 11 || num6 == 3 || num6 == 8232 || num6 == 8233 || (num6 == 45 && flag11) || m_characterCount == totalCharacterCount - 1)
+				{
+					float num68 = m_maxLineAscender - m_startOfLineAscender;
+					if (m_lineOffset > 0f && global::System.Math.Abs(num68) > 0.01f && !m_IsDrivenLineSpacing && !m_isNewPage)
+					{
+						AdjustLineOffset(m_firstCharacterOfLine, m_characterCount, num68);
+						m_ElementDescender -= num68;
+						m_lineOffset += num68;
+						if (global::TMPro.TMP_Text.m_SavedEllipsisState.lineNumber == m_lineNumber)
+						{
+							global::TMPro.TMP_Text.m_SavedEllipsisState = global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Pop();
+							global::TMPro.TMP_Text.m_SavedEllipsisState.startOfLineAscender += num68;
+							global::TMPro.TMP_Text.m_SavedEllipsisState.lineOffset += num68;
+							global::TMPro.TMP_Text.m_EllipsisInsertionCandidateStack.Push(global::TMPro.TMP_Text.m_SavedEllipsisState);
+						}
+					}
+					m_isNewPage = false;
+					float num69 = m_maxLineAscender - m_lineOffset;
+					float num70 = m_maxLineDescender - m_lineOffset;
+					m_ElementDescender = ((m_ElementDescender < num70) ? m_ElementDescender : num70);
+					if (!isMaxVisibleDescenderSet)
+					{
+						maxVisibleDescender = m_ElementDescender;
+					}
+					if (m_useMaxVisibleDescender && (m_characterCount >= m_maxVisibleCharacters || m_lineNumber >= m_maxVisibleLines))
+					{
+						isMaxVisibleDescenderSet = true;
+					}
+					m_textInfo.lineInfo[m_lineNumber].firstCharacterIndex = m_firstCharacterOfLine;
+					m_textInfo.lineInfo[m_lineNumber].firstVisibleCharacterIndex = (m_firstVisibleCharacterOfLine = ((m_firstCharacterOfLine > m_firstVisibleCharacterOfLine) ? m_firstCharacterOfLine : m_firstVisibleCharacterOfLine));
+					m_textInfo.lineInfo[m_lineNumber].lastCharacterIndex = (m_lastCharacterOfLine = m_characterCount);
+					m_textInfo.lineInfo[m_lineNumber].lastVisibleCharacterIndex = (m_lastVisibleCharacterOfLine = ((m_lastVisibleCharacterOfLine < m_firstVisibleCharacterOfLine) ? m_firstVisibleCharacterOfLine : m_lastVisibleCharacterOfLine));
+					m_textInfo.lineInfo[m_lineNumber].characterCount = m_textInfo.lineInfo[m_lineNumber].lastCharacterIndex - m_textInfo.lineInfo[m_lineNumber].firstCharacterIndex + 1;
+					m_textInfo.lineInfo[m_lineNumber].visibleCharacterCount = m_lineVisibleCharacterCount;
+					m_textInfo.lineInfo[m_lineNumber].visibleSpaceCount = m_textInfo.lineInfo[m_lineNumber].lastVisibleCharacterIndex + 1 - m_textInfo.lineInfo[m_lineNumber].firstCharacterIndex - m_lineVisibleCharacterCount;
+					m_textInfo.lineInfo[m_lineNumber].lineExtents.min = new global::UnityEngine.Vector2(m_textInfo.characterInfo[m_firstVisibleCharacterOfLine].bottomLeft.x, num70);
+					m_textInfo.lineInfo[m_lineNumber].lineExtents.max = new global::UnityEngine.Vector2(m_textInfo.characterInfo[m_lastVisibleCharacterOfLine].topRight.x, num69);
+					m_textInfo.lineInfo[m_lineNumber].length = m_textInfo.lineInfo[m_lineNumber].lineExtents.max.x - num7 * num3;
+					m_textInfo.lineInfo[m_lineNumber].width = num12;
+					if (m_textInfo.lineInfo[m_lineNumber].characterCount == 1)
+					{
+						m_textInfo.lineInfo[m_lineNumber].alignment = m_lineJustification;
+					}
+					float num71 = ((m_currentFontAsset.normalSpacingOffset + num25 + num33) * num4 + m_cSpacing) * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale;
+					if (m_textInfo.characterInfo[m_lastVisibleCharacterOfLine].isVisible)
+					{
+						m_textInfo.lineInfo[m_lineNumber].maxAdvance = m_textInfo.characterInfo[m_lastVisibleCharacterOfLine].xAdvance + (m_isRightToLeft ? num71 : (0f - num71));
+					}
+					else
+					{
+						m_textInfo.lineInfo[m_lineNumber].maxAdvance = m_textInfo.characterInfo[m_lastCharacterOfLine].xAdvance + (m_isRightToLeft ? num71 : (0f - num71));
+					}
+					m_textInfo.lineInfo[m_lineNumber].baseline = 0f - m_lineOffset;
+					m_textInfo.lineInfo[m_lineNumber].ascender = num69;
+					m_textInfo.lineInfo[m_lineNumber].descender = num70;
+					m_textInfo.lineInfo[m_lineNumber].lineHeight = num69 - num70 + num8 * num2;
+					if (num6 == 10 || num6 == 11 || (num6 == 45 && flag11) || num6 == 8232 || num6 == 8233)
+					{
+						SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLineState, i, m_characterCount);
+						m_lineNumber++;
+						flag4 = true;
+						flag9 = false;
+						flag8 = true;
+						m_firstCharacterOfLine = m_characterCount + 1;
+						m_lineVisibleCharacterCount = 0;
+						m_lineVisibleSpaceCount = 0;
+						if (m_lineNumber >= m_textInfo.lineInfo.Length)
+						{
+							ResizeLineExtents(m_lineNumber);
+						}
+						float adjustedAscender2 = m_textInfo.characterInfo[m_characterCount].adjustedAscender;
+						if (m_lineHeight == -32767f)
+						{
+							float num72 = 0f - m_maxLineDescender + adjustedAscender2 + (num8 + m_lineSpacingDelta) * num2 + (m_lineSpacing + ((num6 == 10 || num6 == 8233) ? m_paragraphSpacing : 0f)) * num4;
+							m_lineOffset += num72;
+							m_IsDrivenLineSpacing = false;
+						}
+						else
+						{
+							m_lineOffset += m_lineHeight + (m_lineSpacing + ((num6 == 10 || num6 == 8233) ? m_paragraphSpacing : 0f)) * num4;
+							m_IsDrivenLineSpacing = true;
+						}
+						m_maxLineAscender = global::TMPro.TMP_Text.k_LargeNegativeFloat;
+						m_maxLineDescender = global::TMPro.TMP_Text.k_LargePositiveFloat;
+						m_startOfLineAscender = adjustedAscender2;
+						m_xAdvance = 0f + tag_LineIndent + tag_Indent;
+						SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedWordWrapState, i, m_characterCount);
+						SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLastValidState, i, m_characterCount);
+						m_characterCount++;
+						continue;
+					}
+					if (num6 == 3)
+					{
+						i = m_TextProcessingArray.Length;
+					}
+				}
+				if (m_textInfo.characterInfo[m_characterCount].isVisible)
+				{
+					m_meshExtents.min.x = global::UnityEngine.Mathf.Min(m_meshExtents.min.x, m_textInfo.characterInfo[m_characterCount].bottomLeft.x);
+					m_meshExtents.min.y = global::UnityEngine.Mathf.Min(m_meshExtents.min.y, m_textInfo.characterInfo[m_characterCount].bottomLeft.y);
+					m_meshExtents.max.x = global::UnityEngine.Mathf.Max(m_meshExtents.max.x, m_textInfo.characterInfo[m_characterCount].topRight.x);
+					m_meshExtents.max.y = global::UnityEngine.Mathf.Max(m_meshExtents.max.y, m_textInfo.characterInfo[m_characterCount].topRight.y);
+				}
+				if ((m_TextWrappingMode != global::TMPro.TextWrappingModes.NoWrap && m_TextWrappingMode != global::TMPro.TextWrappingModes.PreserveWhitespaceNoWrap) || m_overflowMode == global::TMPro.TextOverflowModes.Truncate || m_overflowMode == global::TMPro.TextOverflowModes.Ellipsis || m_overflowMode == global::TMPro.TextOverflowModes.Linked)
+				{
+					bool flag18 = false;
+					bool flag19 = false;
+					uint num73 = ((m_characterCount + 1 < totalCharacterCount) ? m_textInfo.characterInfo[m_characterCount + 1].character : '\0');
+					if ((flag12 || num6 == 8203 || num6 == 45 || num6 == 173) && (!m_isNonBreakingSpace || flag9) && num6 != 160 && num6 != 8199 && num6 != 8209 && num6 != 8239 && num6 != 8288)
+					{
+						if (num6 != 45 || m_characterCount <= 0 || !char.IsWhiteSpace(m_textInfo.characterInfo[m_characterCount - 1].character) || m_textInfo.characterInfo[m_characterCount - 1].lineNumber != m_lineNumber)
+						{
+							flag8 = false;
+							flag18 = true;
+							global::TMPro.TMP_Text.m_SavedSoftLineBreakState.previous_WordBreak = -1;
+						}
+					}
+					else if (!m_isNonBreakingSpace && ((global::TMPro.TMP_TextParsingUtilities.IsHangul(num6) && !global::TMPro.TMP_Settings.useModernHangulLineBreakingRules) || global::TMPro.TMP_TextParsingUtilities.IsCJK(num6)))
+					{
+						bool num74 = global::TMPro.TMP_Settings.linebreakingRules.leadingCharacters.Contains(num6);
+						bool flag20 = m_characterCount < totalCharacterCount - 1 && global::TMPro.TMP_Settings.linebreakingRules.followingCharacters.Contains(num73);
+						if (!num74)
+						{
+							if (!flag20)
+							{
+								flag8 = false;
+								flag18 = true;
+							}
+							if (flag8)
+							{
+								if (flag12)
+								{
+									flag19 = true;
+								}
+								flag18 = true;
+							}
+						}
+						else if (flag8 && flag16)
+						{
+							if (flag12)
+							{
+								flag19 = true;
+							}
+							flag18 = true;
+						}
+					}
+					else if (!m_isNonBreakingSpace && global::TMPro.TMP_TextParsingUtilities.IsCJK(num73) && !global::TMPro.TMP_Settings.linebreakingRules.followingCharacters.Contains(num73))
+					{
+						flag18 = true;
+					}
+					else if (flag8)
+					{
+						if ((flag12 && num6 != 160) || (num6 == 173 && !flag10))
+						{
+							flag19 = true;
+						}
+						flag18 = true;
+					}
+					if (flag18)
+					{
+						SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedWordWrapState, i, m_characterCount);
+					}
+					if (flag19)
+					{
+						SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedSoftLineBreakState, i, m_characterCount);
+					}
+				}
+				SaveWordWrappingState(ref global::TMPro.TMP_Text.m_SavedLastValidState, i, m_characterCount);
+				m_characterCount++;
+			}
+			num5 = m_maxFontSize - m_minFontSize;
+			if (m_enableAutoSizing && num5 > 0.051f && m_fontSize < m_fontSizeMax && m_AutoSizeIterationCount < m_AutoSizeMaxIterationCount)
+			{
+				if (m_charWidthAdjDelta < m_charWidthMaxAdj / 100f)
+				{
+					m_charWidthAdjDelta = 0f;
+				}
+				m_minFontSize = m_fontSize;
+				float num75 = global::UnityEngine.Mathf.Max((m_maxFontSize - m_fontSize) / 2f, 0.05f);
+				m_fontSize += num75;
+				m_fontSize = global::UnityEngine.Mathf.Min((float)(int)(m_fontSize * 20f + 0.5f) / 20f, m_fontSizeMax);
+				return;
+			}
+			m_IsAutoSizePointSizeSet = true;
+			if (m_AutoSizeIterationCount >= m_AutoSizeMaxIterationCount)
+			{
+				global::UnityEngine.Debug.Log("Auto Size Iteration Count: " + m_AutoSizeIterationCount + ". Final Point Size: " + m_fontSize);
+			}
+			if (m_characterCount == 0 || (m_characterCount == 1 && num6 == 3))
+			{
+				ClearMesh();
+				global::TMPro.TMPro_EventManager.ON_TEXT_CHANGED(this);
+				return;
+			}
+			int index4 = global::TMPro.TMP_Text.m_materialReferences[m_Underline.materialIndex].referenceCount * 4;
+			m_textInfo.meshInfo[0].Clear(uploadChanges: false);
+			global::UnityEngine.Vector3 vector9 = global::UnityEngine.Vector3.zero;
+			global::UnityEngine.Vector3[] rectTransformCorners = m_RectTransformCorners;
+			switch (m_VerticalAlignment)
+			{
+			case global::TMPro.VerticalAlignmentOptions.Top:
+				vector9 = ((m_overflowMode == global::TMPro.TextOverflowModes.Page) ? (rectTransformCorners[1] + new global::UnityEngine.Vector3(0f + vector.x, 0f - m_textInfo.pageInfo[num9].ascender - vector.y, 0f)) : (rectTransformCorners[1] + new global::UnityEngine.Vector3(0f + vector.x, 0f - m_maxTextAscender - vector.y, 0f)));
+				break;
+			case global::TMPro.VerticalAlignmentOptions.Middle:
+				vector9 = ((m_overflowMode == global::TMPro.TextOverflowModes.Page) ? ((rectTransformCorners[0] + rectTransformCorners[1]) / 2f + new global::UnityEngine.Vector3(0f + vector.x, 0f - (m_textInfo.pageInfo[num9].ascender + vector.y + m_textInfo.pageInfo[num9].descender - vector.w) / 2f, 0f)) : ((rectTransformCorners[0] + rectTransformCorners[1]) / 2f + new global::UnityEngine.Vector3(0f + vector.x, 0f - (m_maxTextAscender + vector.y + maxVisibleDescender - vector.w) / 2f, 0f)));
+				break;
+			case global::TMPro.VerticalAlignmentOptions.Bottom:
+				vector9 = ((m_overflowMode == global::TMPro.TextOverflowModes.Page) ? (rectTransformCorners[0] + new global::UnityEngine.Vector3(0f + vector.x, 0f - m_textInfo.pageInfo[num9].descender + vector.w, 0f)) : (rectTransformCorners[0] + new global::UnityEngine.Vector3(0f + vector.x, 0f - maxVisibleDescender + vector.w, 0f)));
+				break;
+			case global::TMPro.VerticalAlignmentOptions.Baseline:
+				vector9 = (rectTransformCorners[0] + rectTransformCorners[1]) / 2f + new global::UnityEngine.Vector3(0f + vector.x, 0f, 0f);
+				break;
+			case global::TMPro.VerticalAlignmentOptions.Geometry:
+				vector9 = (rectTransformCorners[0] + rectTransformCorners[1]) / 2f + new global::UnityEngine.Vector3(0f + vector.x, 0f - (m_meshExtents.max.y + vector.y + m_meshExtents.min.y - vector.w) / 2f, 0f);
+				break;
+			case global::TMPro.VerticalAlignmentOptions.Capline:
+				vector9 = (rectTransformCorners[0] + rectTransformCorners[1]) / 2f + new global::UnityEngine.Vector3(0f + vector.x, 0f - (m_maxCapHeight - vector.y - vector.w) / 2f, 0f);
+				break;
+			}
+			global::UnityEngine.Vector3 vector10 = global::UnityEngine.Vector3.zero;
+			global::UnityEngine.Vector3 zero3 = global::UnityEngine.Vector3.zero;
+			int num76 = 0;
+			int lineCount = 0;
+			int num77 = 0;
+			bool flag21 = false;
+			bool flag22 = false;
+			int num78 = 0;
+			int num79 = 0;
+			bool flag23 = !(m_canvas.worldCamera == null);
+			float f = (m_previousLossyScaleY = base.transform.lossyScale.y);
+			global::UnityEngine.RenderMode renderMode = m_canvas.renderMode;
+			float scaleFactor = m_canvas.scaleFactor;
+			global::UnityEngine.Color32 color = global::UnityEngine.Color.white;
+			global::UnityEngine.Color32 underlineColor = global::UnityEngine.Color.white;
+			global::TMPro.HighlightState highlightState = new global::TMPro.HighlightState(new global::UnityEngine.Color32(byte.MaxValue, byte.MaxValue, 0, 64), global::TMPro.TMP_Offset.zero);
+			float num80 = 0f;
+			float num81 = 0f;
+			float num82 = 0f;
+			float num83 = 0f;
+			float num84 = 0f;
+			float num85 = global::TMPro.TMP_Text.k_LargePositiveFloat;
+			int num86 = 0;
+			float num87 = 0f;
+			float num88 = 0f;
+			float b = 0f;
+			global::TMPro.TMP_CharacterInfo[] characterInfo = m_textInfo.characterInfo;
+			for (int j = 0; j < m_characterCount; j++)
+			{
+				global::TMPro.TMP_FontAsset fontAsset = characterInfo[j].fontAsset;
+				char character = characterInfo[j].character;
+				bool flag24 = char.IsWhiteSpace(character);
+				int lineNumber = characterInfo[j].lineNumber;
+				global::TMPro.TMP_LineInfo tMP_LineInfo = m_textInfo.lineInfo[lineNumber];
+				lineCount = lineNumber + 1;
+				global::TMPro.HorizontalAlignmentOptions horizontalAlignmentOptions = tMP_LineInfo.alignment;
+				switch (horizontalAlignmentOptions)
+				{
+				case global::TMPro.HorizontalAlignmentOptions.Left:
+					vector10 = (m_isRightToLeft ? new global::UnityEngine.Vector3(0f - tMP_LineInfo.maxAdvance, 0f, 0f) : new global::UnityEngine.Vector3(0f + tMP_LineInfo.marginLeft, 0f, 0f));
+					break;
+				case global::TMPro.HorizontalAlignmentOptions.Center:
+					vector10 = new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft + tMP_LineInfo.width / 2f - tMP_LineInfo.maxAdvance / 2f, 0f, 0f);
+					break;
+				case global::TMPro.HorizontalAlignmentOptions.Geometry:
+					vector10 = new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft + tMP_LineInfo.width / 2f - (tMP_LineInfo.lineExtents.min.x + tMP_LineInfo.lineExtents.max.x) / 2f, 0f, 0f);
+					break;
+				case global::TMPro.HorizontalAlignmentOptions.Right:
+					vector10 = (m_isRightToLeft ? new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft + tMP_LineInfo.width, 0f, 0f) : new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft + tMP_LineInfo.width - tMP_LineInfo.maxAdvance, 0f, 0f));
+					break;
+				case global::TMPro.HorizontalAlignmentOptions.Justified:
+				case global::TMPro.HorizontalAlignmentOptions.Flush:
+				{
+					if (j > tMP_LineInfo.lastVisibleCharacterIndex || character == '\n' || character == '\u00ad' || character == '\u200b' || character == '\u2060' || character == '\u0003')
+					{
+						break;
+					}
+					char character2 = characterInfo[tMP_LineInfo.lastCharacterIndex].character;
+					bool flag25 = (horizontalAlignmentOptions & global::TMPro.HorizontalAlignmentOptions.Flush) == global::TMPro.HorizontalAlignmentOptions.Flush;
+					if ((!char.IsControl(character2) && lineNumber < m_lineNumber) || flag25 || tMP_LineInfo.maxAdvance > tMP_LineInfo.width)
+					{
+						if (lineNumber != num77 || j == 0 || j == m_firstVisibleCharacter)
+						{
+							vector10 = (m_isRightToLeft ? new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft + tMP_LineInfo.width, 0f, 0f) : new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft, 0f, 0f));
+							flag21 = (char.IsSeparator(character) ? true : false);
+							break;
+						}
+						float num89 = ((!m_isRightToLeft) ? (tMP_LineInfo.width - tMP_LineInfo.maxAdvance) : (tMP_LineInfo.width + tMP_LineInfo.maxAdvance));
+						int num90 = tMP_LineInfo.visibleCharacterCount - 1 + tMP_LineInfo.controlCharacterCount;
+						int num91 = tMP_LineInfo.visibleSpaceCount - tMP_LineInfo.controlCharacterCount;
+						if (flag21)
+						{
+							num91--;
+							num90++;
+						}
+						float num92 = ((num91 > 0) ? m_wordWrappingRatios : 1f);
+						if (num91 < 1)
+						{
+							num91 = 1;
+						}
+						if (character != '\u00a0' && (character == '\t' || char.IsSeparator(character)))
+						{
+							if (!m_isRightToLeft)
+							{
+								vector10 += new global::UnityEngine.Vector3(num89 * (1f - num92) / (float)num91, 0f, 0f);
+							}
+							else
+							{
+								vector10 -= new global::UnityEngine.Vector3(num89 * (1f - num92) / (float)num91, 0f, 0f);
+							}
+						}
+						else if (!m_isRightToLeft)
+						{
+							vector10 += new global::UnityEngine.Vector3(num89 * num92 / (float)num90, 0f, 0f);
+						}
+						else
+						{
+							vector10 -= new global::UnityEngine.Vector3(num89 * num92 / (float)num90, 0f, 0f);
+						}
+					}
+					else
+					{
+						vector10 = (m_isRightToLeft ? new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft + tMP_LineInfo.width, 0f, 0f) : new global::UnityEngine.Vector3(tMP_LineInfo.marginLeft, 0f, 0f));
+					}
+					break;
+				}
+				}
+				zero3 = vector9 + vector10;
+				if (characterInfo[j].isVisible)
+				{
+					global::TMPro.TMP_TextElementType elementType = characterInfo[j].elementType;
+					switch (elementType)
+					{
+					case global::TMPro.TMP_TextElementType.Character:
+					{
+						global::TMPro.Extents lineExtents = tMP_LineInfo.lineExtents;
+						float num93 = m_uvLineOffset * (float)lineNumber % 1f;
+						switch (m_horizontalMapping)
+						{
+						case global::TMPro.TextureMappingOptions.Character:
+							characterInfo[j].vertex_BL.uv2.x = 0f;
+							characterInfo[j].vertex_TL.uv2.x = 0f;
+							characterInfo[j].vertex_TR.uv2.x = 1f;
+							characterInfo[j].vertex_BR.uv2.x = 1f;
+							break;
+						case global::TMPro.TextureMappingOptions.Line:
+							if (m_textAlignment != global::TMPro.TextAlignmentOptions.Justified)
+							{
+								characterInfo[j].vertex_BL.uv2.x = (characterInfo[j].vertex_BL.position.x - lineExtents.min.x) / (lineExtents.max.x - lineExtents.min.x) + num93;
+								characterInfo[j].vertex_TL.uv2.x = (characterInfo[j].vertex_TL.position.x - lineExtents.min.x) / (lineExtents.max.x - lineExtents.min.x) + num93;
+								characterInfo[j].vertex_TR.uv2.x = (characterInfo[j].vertex_TR.position.x - lineExtents.min.x) / (lineExtents.max.x - lineExtents.min.x) + num93;
+								characterInfo[j].vertex_BR.uv2.x = (characterInfo[j].vertex_BR.position.x - lineExtents.min.x) / (lineExtents.max.x - lineExtents.min.x) + num93;
+							}
+							else
+							{
+								characterInfo[j].vertex_BL.uv2.x = (characterInfo[j].vertex_BL.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+								characterInfo[j].vertex_TL.uv2.x = (characterInfo[j].vertex_TL.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+								characterInfo[j].vertex_TR.uv2.x = (characterInfo[j].vertex_TR.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+								characterInfo[j].vertex_BR.uv2.x = (characterInfo[j].vertex_BR.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+							}
+							break;
+						case global::TMPro.TextureMappingOptions.Paragraph:
+							characterInfo[j].vertex_BL.uv2.x = (characterInfo[j].vertex_BL.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+							characterInfo[j].vertex_TL.uv2.x = (characterInfo[j].vertex_TL.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+							characterInfo[j].vertex_TR.uv2.x = (characterInfo[j].vertex_TR.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+							characterInfo[j].vertex_BR.uv2.x = (characterInfo[j].vertex_BR.position.x + vector10.x - m_meshExtents.min.x) / (m_meshExtents.max.x - m_meshExtents.min.x) + num93;
+							break;
+						case global::TMPro.TextureMappingOptions.MatchAspect:
+						{
+							switch (m_verticalMapping)
+							{
+							case global::TMPro.TextureMappingOptions.Character:
+								characterInfo[j].vertex_BL.uv2.y = 0f;
+								characterInfo[j].vertex_TL.uv2.y = 1f;
+								characterInfo[j].vertex_TR.uv2.y = 0f;
+								characterInfo[j].vertex_BR.uv2.y = 1f;
+								break;
+							case global::TMPro.TextureMappingOptions.Line:
+								characterInfo[j].vertex_BL.uv2.y = (characterInfo[j].vertex_BL.position.y - lineExtents.min.y) / (lineExtents.max.y - lineExtents.min.y) + num93;
+								characterInfo[j].vertex_TL.uv2.y = (characterInfo[j].vertex_TL.position.y - lineExtents.min.y) / (lineExtents.max.y - lineExtents.min.y) + num93;
+								characterInfo[j].vertex_TR.uv2.y = characterInfo[j].vertex_BL.uv2.y;
+								characterInfo[j].vertex_BR.uv2.y = characterInfo[j].vertex_TL.uv2.y;
+								break;
+							case global::TMPro.TextureMappingOptions.Paragraph:
+								characterInfo[j].vertex_BL.uv2.y = (characterInfo[j].vertex_BL.position.y - m_meshExtents.min.y) / (m_meshExtents.max.y - m_meshExtents.min.y) + num93;
+								characterInfo[j].vertex_TL.uv2.y = (characterInfo[j].vertex_TL.position.y - m_meshExtents.min.y) / (m_meshExtents.max.y - m_meshExtents.min.y) + num93;
+								characterInfo[j].vertex_TR.uv2.y = characterInfo[j].vertex_BL.uv2.y;
+								characterInfo[j].vertex_BR.uv2.y = characterInfo[j].vertex_TL.uv2.y;
+								break;
+							case global::TMPro.TextureMappingOptions.MatchAspect:
+								global::UnityEngine.Debug.Log("ERROR: Cannot Match both Vertical & Horizontal.");
+								break;
+							}
+							float num94 = (1f - (characterInfo[j].vertex_BL.uv2.y + characterInfo[j].vertex_TL.uv2.y) * characterInfo[j].aspectRatio) / 2f;
+							characterInfo[j].vertex_BL.uv2.x = characterInfo[j].vertex_BL.uv2.y * characterInfo[j].aspectRatio + num94 + num93;
+							characterInfo[j].vertex_TL.uv2.x = characterInfo[j].vertex_BL.uv2.x;
+							characterInfo[j].vertex_TR.uv2.x = characterInfo[j].vertex_TL.uv2.y * characterInfo[j].aspectRatio + num94 + num93;
+							characterInfo[j].vertex_BR.uv2.x = characterInfo[j].vertex_TR.uv2.x;
+							break;
+						}
+						}
+						switch (m_verticalMapping)
+						{
+						case global::TMPro.TextureMappingOptions.Character:
+							characterInfo[j].vertex_BL.uv2.y = 0f;
+							characterInfo[j].vertex_TL.uv2.y = 1f;
+							characterInfo[j].vertex_TR.uv2.y = 1f;
+							characterInfo[j].vertex_BR.uv2.y = 0f;
+							break;
+						case global::TMPro.TextureMappingOptions.Line:
+							characterInfo[j].vertex_BL.uv2.y = (characterInfo[j].vertex_BL.position.y - tMP_LineInfo.descender) / (tMP_LineInfo.ascender - tMP_LineInfo.descender);
+							characterInfo[j].vertex_TL.uv2.y = (characterInfo[j].vertex_TL.position.y - tMP_LineInfo.descender) / (tMP_LineInfo.ascender - tMP_LineInfo.descender);
+							characterInfo[j].vertex_TR.uv2.y = characterInfo[j].vertex_TL.uv2.y;
+							characterInfo[j].vertex_BR.uv2.y = characterInfo[j].vertex_BL.uv2.y;
+							break;
+						case global::TMPro.TextureMappingOptions.Paragraph:
+							characterInfo[j].vertex_BL.uv2.y = (characterInfo[j].vertex_BL.position.y - m_meshExtents.min.y) / (m_meshExtents.max.y - m_meshExtents.min.y);
+							characterInfo[j].vertex_TL.uv2.y = (characterInfo[j].vertex_TL.position.y - m_meshExtents.min.y) / (m_meshExtents.max.y - m_meshExtents.min.y);
+							characterInfo[j].vertex_TR.uv2.y = characterInfo[j].vertex_TL.uv2.y;
+							characterInfo[j].vertex_BR.uv2.y = characterInfo[j].vertex_BL.uv2.y;
+							break;
+						case global::TMPro.TextureMappingOptions.MatchAspect:
+						{
+							float num95 = (1f - (characterInfo[j].vertex_BL.uv2.x + characterInfo[j].vertex_TR.uv2.x) / characterInfo[j].aspectRatio) / 2f;
+							characterInfo[j].vertex_BL.uv2.y = num95 + characterInfo[j].vertex_BL.uv2.x / characterInfo[j].aspectRatio;
+							characterInfo[j].vertex_TL.uv2.y = num95 + characterInfo[j].vertex_TR.uv2.x / characterInfo[j].aspectRatio;
+							characterInfo[j].vertex_BR.uv2.y = characterInfo[j].vertex_BL.uv2.y;
+							characterInfo[j].vertex_TR.uv2.y = characterInfo[j].vertex_TL.uv2.y;
+							break;
+						}
+						}
+						num80 = characterInfo[j].scale * (1f - m_charWidthAdjDelta) * m_characterHorizontalScale;
+						if (!characterInfo[j].isUsingAlternateTypeface && (characterInfo[j].style & global::TMPro.FontStyles.Bold) == global::TMPro.FontStyles.Bold)
+						{
+							num80 *= -1f;
+						}
+						switch (renderMode)
+						{
+						case global::UnityEngine.RenderMode.ScreenSpaceOverlay:
+							num80 *= global::UnityEngine.Mathf.Abs(f) / scaleFactor;
+							break;
+						case global::UnityEngine.RenderMode.ScreenSpaceCamera:
+							num80 *= (flag23 ? global::UnityEngine.Mathf.Abs(f) : 1f);
+							break;
+						case global::UnityEngine.RenderMode.WorldSpace:
+							num80 *= global::UnityEngine.Mathf.Abs(f);
+							break;
+						}
+						characterInfo[j].vertex_BL.uv.w = num80;
+						characterInfo[j].vertex_TL.uv.w = num80;
+						characterInfo[j].vertex_TR.uv.w = num80;
+						characterInfo[j].vertex_BR.uv.w = num80;
+						break;
+					}
+					}
+					if (j < m_maxVisibleCharacters && num76 < m_maxVisibleWords && lineNumber < m_maxVisibleLines && m_overflowMode != global::TMPro.TextOverflowModes.Page)
+					{
+						characterInfo[j].vertex_BL.position += zero3;
+						characterInfo[j].vertex_TL.position += zero3;
+						characterInfo[j].vertex_TR.position += zero3;
+						characterInfo[j].vertex_BR.position += zero3;
+					}
+					else if (j < m_maxVisibleCharacters && num76 < m_maxVisibleWords && lineNumber < m_maxVisibleLines && m_overflowMode == global::TMPro.TextOverflowModes.Page && characterInfo[j].pageNumber == num9)
+					{
+						characterInfo[j].vertex_BL.position += zero3;
+						characterInfo[j].vertex_TL.position += zero3;
+						characterInfo[j].vertex_TR.position += zero3;
+						characterInfo[j].vertex_BR.position += zero3;
+					}
+					else
+					{
+						characterInfo[j].vertex_BL.position = global::UnityEngine.Vector3.zero;
+						characterInfo[j].vertex_TL.position = global::UnityEngine.Vector3.zero;
+						characterInfo[j].vertex_TR.position = global::UnityEngine.Vector3.zero;
+						characterInfo[j].vertex_BR.position = global::UnityEngine.Vector3.zero;
+						characterInfo[j].isVisible = false;
+					}
+					switch (elementType)
+					{
+					case global::TMPro.TMP_TextElementType.Character:
+						FillCharacterVertexBuffers(j);
+						break;
+					case global::TMPro.TMP_TextElementType.Sprite:
+						FillSpriteVertexBuffers(j);
+						break;
+					}
+				}
+				m_textInfo.characterInfo[j].bottomLeft += zero3;
+				m_textInfo.characterInfo[j].topLeft += zero3;
+				m_textInfo.characterInfo[j].topRight += zero3;
+				m_textInfo.characterInfo[j].bottomRight += zero3;
+				m_textInfo.characterInfo[j].origin += zero3.x;
+				m_textInfo.characterInfo[j].xAdvance += zero3.x;
+				m_textInfo.characterInfo[j].ascender += zero3.y;
+				m_textInfo.characterInfo[j].descender += zero3.y;
+				m_textInfo.characterInfo[j].baseLine += zero3.y;
+				if (lineNumber != num77 || j == m_characterCount - 1)
+				{
+					if (lineNumber != num77)
+					{
+						m_textInfo.lineInfo[num77].baseline += zero3.y;
+						m_textInfo.lineInfo[num77].ascender += zero3.y;
+						m_textInfo.lineInfo[num77].descender += zero3.y;
+						m_textInfo.lineInfo[num77].maxAdvance += zero3.x;
+						m_textInfo.lineInfo[num77].lineExtents.min = new global::UnityEngine.Vector2(m_textInfo.characterInfo[m_textInfo.lineInfo[num77].firstCharacterIndex].bottomLeft.x, m_textInfo.lineInfo[num77].descender);
+						m_textInfo.lineInfo[num77].lineExtents.max = new global::UnityEngine.Vector2(m_textInfo.characterInfo[m_textInfo.lineInfo[num77].lastVisibleCharacterIndex].topRight.x, m_textInfo.lineInfo[num77].ascender);
+					}
+					if (j == m_characterCount - 1)
+					{
+						m_textInfo.lineInfo[lineNumber].baseline += zero3.y;
+						m_textInfo.lineInfo[lineNumber].ascender += zero3.y;
+						m_textInfo.lineInfo[lineNumber].descender += zero3.y;
+						m_textInfo.lineInfo[lineNumber].maxAdvance += zero3.x;
+						m_textInfo.lineInfo[lineNumber].lineExtents.min = new global::UnityEngine.Vector2(m_textInfo.characterInfo[m_textInfo.lineInfo[lineNumber].firstCharacterIndex].bottomLeft.x, m_textInfo.lineInfo[lineNumber].descender);
+						m_textInfo.lineInfo[lineNumber].lineExtents.max = new global::UnityEngine.Vector2(m_textInfo.characterInfo[m_textInfo.lineInfo[lineNumber].lastVisibleCharacterIndex].topRight.x, m_textInfo.lineInfo[lineNumber].ascender);
+					}
+				}
+				if (char.IsLetterOrDigit(character) || character == '-' || character == '\u00ad' || character == '‐' || character == '‑')
+				{
+					if (!flag22)
+					{
+						flag22 = true;
+						num78 = j;
+					}
+					if (flag22 && j == m_characterCount - 1)
+					{
+						int num96 = m_textInfo.wordInfo.Length;
+						int wordCount = m_textInfo.wordCount;
+						if (m_textInfo.wordCount + 1 > num96)
+						{
+							global::TMPro.TMP_TextInfo.Resize(ref m_textInfo.wordInfo, num96 + 1);
+						}
+						num79 = j;
+						m_textInfo.wordInfo[wordCount].firstCharacterIndex = num78;
+						m_textInfo.wordInfo[wordCount].lastCharacterIndex = num79;
+						m_textInfo.wordInfo[wordCount].characterCount = num79 - num78 + 1;
+						m_textInfo.wordInfo[wordCount].textComponent = this;
+						num76++;
+						m_textInfo.wordCount++;
+						m_textInfo.lineInfo[lineNumber].wordCount++;
+					}
+				}
+				else if ((flag22 || (j == 0 && (!char.IsPunctuation(character) || flag24 || character == '\u200b' || j == m_characterCount - 1))) && (j <= 0 || j >= characterInfo.Length - 1 || j >= m_characterCount || (character != '\'' && character != '’') || !char.IsLetterOrDigit(characterInfo[j - 1].character) || !char.IsLetterOrDigit(characterInfo[j + 1].character)))
+				{
+					num79 = ((j == m_characterCount - 1 && char.IsLetterOrDigit(character)) ? j : (j - 1));
+					flag22 = false;
+					int num97 = m_textInfo.wordInfo.Length;
+					int wordCount2 = m_textInfo.wordCount;
+					if (m_textInfo.wordCount + 1 > num97)
+					{
+						global::TMPro.TMP_TextInfo.Resize(ref m_textInfo.wordInfo, num97 + 1);
+					}
+					m_textInfo.wordInfo[wordCount2].firstCharacterIndex = num78;
+					m_textInfo.wordInfo[wordCount2].lastCharacterIndex = num79;
+					m_textInfo.wordInfo[wordCount2].characterCount = num79 - num78 + 1;
+					m_textInfo.wordInfo[wordCount2].textComponent = this;
+					num76++;
+					m_textInfo.wordCount++;
+					m_textInfo.lineInfo[lineNumber].wordCount++;
+				}
+				if ((m_textInfo.characterInfo[j].style & global::TMPro.FontStyles.Underline) == global::TMPro.FontStyles.Underline)
+				{
+					bool flag26 = true;
+					int pageNumber = m_textInfo.characterInfo[j].pageNumber;
+					m_textInfo.characterInfo[j].underlineVertexIndex = index4;
+					if (j > m_maxVisibleCharacters || lineNumber > m_maxVisibleLines || (m_overflowMode == global::TMPro.TextOverflowModes.Page && pageNumber + 1 != m_pageToDisplay))
+					{
+						flag26 = false;
+					}
+					if (!flag24 && character != '\u200b')
+					{
+						num84 = global::UnityEngine.Mathf.Max(num84, m_textInfo.characterInfo[j].scale);
+						num81 = global::UnityEngine.Mathf.Max(num81, global::UnityEngine.Mathf.Abs(num80));
+						num85 = global::UnityEngine.Mathf.Min((pageNumber == num86) ? num85 : global::TMPro.TMP_Text.k_LargePositiveFloat, m_textInfo.characterInfo[j].baseLine + base.font.m_FaceInfo.underlineOffset * num84);
+						num86 = pageNumber;
+					}
+					if (!flag && flag26 && j <= tMP_LineInfo.lastVisibleCharacterIndex && character != '\n' && character != '\v' && character != '\r' && (j != tMP_LineInfo.lastVisibleCharacterIndex || !char.IsSeparator(character)))
+					{
+						flag = true;
+						num82 = m_textInfo.characterInfo[j].scale;
+						if (num84 == 0f)
+						{
+							num84 = num82;
+							num81 = num80;
+						}
+						start = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].bottomLeft.x, num85, 0f);
+						color = m_textInfo.characterInfo[j].underlineColor;
+					}
+					if (flag && m_characterCount == 1)
+					{
+						flag = false;
+						zero = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].topRight.x, num85, 0f);
+						num83 = m_textInfo.characterInfo[j].scale;
+						DrawUnderlineMesh(start, zero, ref index4, num82, num83, num84, num81, color);
+						num84 = 0f;
+						num81 = 0f;
+						num85 = global::TMPro.TMP_Text.k_LargePositiveFloat;
+					}
+					else if (flag && (j == tMP_LineInfo.lastCharacterIndex || j >= tMP_LineInfo.lastVisibleCharacterIndex))
+					{
+						if (flag24 || character == '\u200b')
+						{
+							int lastVisibleCharacterIndex = tMP_LineInfo.lastVisibleCharacterIndex;
+							zero = new global::UnityEngine.Vector3(m_textInfo.characterInfo[lastVisibleCharacterIndex].topRight.x, num85, 0f);
+							num83 = m_textInfo.characterInfo[lastVisibleCharacterIndex].scale;
+						}
+						else
+						{
+							zero = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].topRight.x, num85, 0f);
+							num83 = m_textInfo.characterInfo[j].scale;
+						}
+						flag = false;
+						DrawUnderlineMesh(start, zero, ref index4, num82, num83, num84, num81, color);
+						num84 = 0f;
+						num81 = 0f;
+						num85 = global::TMPro.TMP_Text.k_LargePositiveFloat;
+					}
+					else if (flag && !flag26)
+					{
+						flag = false;
+						zero = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j - 1].topRight.x, num85, 0f);
+						num83 = m_textInfo.characterInfo[j - 1].scale;
+						DrawUnderlineMesh(start, zero, ref index4, num82, num83, num84, num81, color);
+						num84 = 0f;
+						num81 = 0f;
+						num85 = global::TMPro.TMP_Text.k_LargePositiveFloat;
+					}
+					else if (flag && j < m_characterCount - 1 && !color.Compare(m_textInfo.characterInfo[j + 1].underlineColor))
+					{
+						flag = false;
+						zero = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].topRight.x, num85, 0f);
+						num83 = m_textInfo.characterInfo[j].scale;
+						DrawUnderlineMesh(start, zero, ref index4, num82, num83, num84, num81, color);
+						num84 = 0f;
+						num81 = 0f;
+						num85 = global::TMPro.TMP_Text.k_LargePositiveFloat;
+					}
+				}
+				else if (flag)
+				{
+					flag = false;
+					zero = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j - 1].topRight.x, num85, 0f);
+					num83 = m_textInfo.characterInfo[j - 1].scale;
+					DrawUnderlineMesh(start, zero, ref index4, num82, num83, num84, num81, color);
+					num84 = 0f;
+					num81 = 0f;
+					num85 = global::TMPro.TMP_Text.k_LargePositiveFloat;
+				}
+				bool num98 = (m_textInfo.characterInfo[j].style & global::TMPro.FontStyles.Strikethrough) == global::TMPro.FontStyles.Strikethrough;
+				float strikethroughOffset = fontAsset.m_FaceInfo.strikethroughOffset;
+				if (num98)
+				{
+					bool flag27 = true;
+					m_textInfo.characterInfo[j].strikethroughVertexIndex = index4;
+					if (j > m_maxVisibleCharacters || lineNumber > m_maxVisibleLines || (m_overflowMode == global::TMPro.TextOverflowModes.Page && m_textInfo.characterInfo[j].pageNumber + 1 != m_pageToDisplay))
+					{
+						flag27 = false;
+					}
+					if (!flag2 && flag27 && j <= tMP_LineInfo.lastVisibleCharacterIndex && character != '\n' && character != '\v' && character != '\r' && (j != tMP_LineInfo.lastVisibleCharacterIndex || !char.IsSeparator(character)))
+					{
+						flag2 = true;
+						num87 = m_textInfo.characterInfo[j].pointSize;
+						num88 = m_textInfo.characterInfo[j].scale;
+						start2 = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].bottomLeft.x, m_textInfo.characterInfo[j].baseLine + strikethroughOffset * num88, 0f);
+						underlineColor = m_textInfo.characterInfo[j].strikethroughColor;
+						b = m_textInfo.characterInfo[j].baseLine;
+					}
+					if (flag2 && m_characterCount == 1)
+					{
+						flag2 = false;
+						zero2 = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].topRight.x, m_textInfo.characterInfo[j].baseLine + strikethroughOffset * num88, 0f);
+						DrawUnderlineMesh(start2, zero2, ref index4, num88, num88, num88, num80, underlineColor);
+					}
+					else if (flag2 && j == tMP_LineInfo.lastCharacterIndex)
+					{
+						if (flag24 || character == '\u200b')
+						{
+							int lastVisibleCharacterIndex2 = tMP_LineInfo.lastVisibleCharacterIndex;
+							zero2 = new global::UnityEngine.Vector3(m_textInfo.characterInfo[lastVisibleCharacterIndex2].topRight.x, m_textInfo.characterInfo[lastVisibleCharacterIndex2].baseLine + strikethroughOffset * num88, 0f);
+						}
+						else
+						{
+							zero2 = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].topRight.x, m_textInfo.characterInfo[j].baseLine + strikethroughOffset * num88, 0f);
+						}
+						flag2 = false;
+						DrawUnderlineMesh(start2, zero2, ref index4, num88, num88, num88, num80, underlineColor);
+					}
+					else if (flag2 && j < m_characterCount && (m_textInfo.characterInfo[j + 1].pointSize != num87 || !global::TMPro.TMP_Math.Approximately(m_textInfo.characterInfo[j + 1].baseLine + zero3.y, b)))
+					{
+						flag2 = false;
+						int lastVisibleCharacterIndex3 = tMP_LineInfo.lastVisibleCharacterIndex;
+						zero2 = ((j <= lastVisibleCharacterIndex3) ? new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].topRight.x, m_textInfo.characterInfo[j].baseLine + strikethroughOffset * num88, 0f) : new global::UnityEngine.Vector3(m_textInfo.characterInfo[lastVisibleCharacterIndex3].topRight.x, m_textInfo.characterInfo[lastVisibleCharacterIndex3].baseLine + strikethroughOffset * num88, 0f));
+						DrawUnderlineMesh(start2, zero2, ref index4, num88, num88, num88, num80, underlineColor);
+					}
+					else if (flag2 && j < m_characterCount && fontAsset.GetInstanceID() != characterInfo[j + 1].fontAsset.GetInstanceID())
+					{
+						flag2 = false;
+						zero2 = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j].topRight.x, m_textInfo.characterInfo[j].baseLine + strikethroughOffset * num88, 0f);
+						DrawUnderlineMesh(start2, zero2, ref index4, num88, num88, num88, num80, underlineColor);
+					}
+					else if (flag2 && !flag27)
+					{
+						flag2 = false;
+						zero2 = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j - 1].topRight.x, m_textInfo.characterInfo[j - 1].baseLine + strikethroughOffset * num88, 0f);
+						DrawUnderlineMesh(start2, zero2, ref index4, num88, num88, num88, num80, underlineColor);
+					}
+				}
+				else if (flag2)
+				{
+					flag2 = false;
+					zero2 = new global::UnityEngine.Vector3(m_textInfo.characterInfo[j - 1].topRight.x, m_textInfo.characterInfo[j - 1].baseLine + strikethroughOffset * num88, 0f);
+					DrawUnderlineMesh(start2, zero2, ref index4, num88, num88, num88, num80, underlineColor);
+				}
+				if ((m_textInfo.characterInfo[j].style & global::TMPro.FontStyles.Highlight) == global::TMPro.FontStyles.Highlight)
+				{
+					bool flag28 = true;
+					int pageNumber2 = m_textInfo.characterInfo[j].pageNumber;
+					if (j > m_maxVisibleCharacters || lineNumber > m_maxVisibleLines || (m_overflowMode == global::TMPro.TextOverflowModes.Page && pageNumber2 + 1 != m_pageToDisplay))
+					{
+						flag28 = false;
+					}
+					if (!flag3 && flag28 && j <= tMP_LineInfo.lastVisibleCharacterIndex && character != '\n' && character != '\v' && character != '\r' && (j != tMP_LineInfo.lastVisibleCharacterIndex || !char.IsSeparator(character)))
+					{
+						flag3 = true;
+						start3 = global::TMPro.TMP_Text.k_LargePositiveVector2;
+						end = global::TMPro.TMP_Text.k_LargeNegativeVector2;
+						highlightState = m_textInfo.characterInfo[j].highlightState;
+					}
+					if (flag3)
+					{
+						global::TMPro.TMP_CharacterInfo tMP_CharacterInfo = m_textInfo.characterInfo[j];
+						global::TMPro.HighlightState highlightState2 = tMP_CharacterInfo.highlightState;
+						bool flag29 = false;
+						if (highlightState != highlightState2)
+						{
+							if (flag24)
+							{
+								end.x = (end.x - highlightState.padding.right + tMP_CharacterInfo.origin) / 2f;
+							}
+							else
+							{
+								end.x = (end.x - highlightState.padding.right + tMP_CharacterInfo.bottomLeft.x) / 2f;
+							}
+							start3.y = global::UnityEngine.Mathf.Min(start3.y, tMP_CharacterInfo.descender);
+							end.y = global::UnityEngine.Mathf.Max(end.y, tMP_CharacterInfo.ascender);
+							DrawTextHighlight(start3, end, ref index4, highlightState.color);
+							flag3 = true;
+							start3 = new global::UnityEngine.Vector2(end.x, tMP_CharacterInfo.descender - highlightState2.padding.bottom);
+							end = ((!flag24) ? ((global::UnityEngine.Vector3)new global::UnityEngine.Vector2(tMP_CharacterInfo.topRight.x + highlightState2.padding.right, tMP_CharacterInfo.ascender + highlightState2.padding.top)) : ((global::UnityEngine.Vector3)new global::UnityEngine.Vector2(tMP_CharacterInfo.xAdvance + highlightState2.padding.right, tMP_CharacterInfo.ascender + highlightState2.padding.top)));
+							highlightState = highlightState2;
+							flag29 = true;
+						}
+						if (!flag29)
+						{
+							if (flag24)
+							{
+								start3.x = global::UnityEngine.Mathf.Min(start3.x, tMP_CharacterInfo.origin - highlightState.padding.left);
+								end.x = global::UnityEngine.Mathf.Max(end.x, tMP_CharacterInfo.xAdvance + highlightState.padding.right);
+							}
+							else
+							{
+								start3.x = global::UnityEngine.Mathf.Min(start3.x, tMP_CharacterInfo.bottomLeft.x - highlightState.padding.left);
+								end.x = global::UnityEngine.Mathf.Max(end.x, tMP_CharacterInfo.topRight.x + highlightState.padding.right);
+							}
+							start3.y = global::UnityEngine.Mathf.Min(start3.y, tMP_CharacterInfo.descender - highlightState.padding.bottom);
+							end.y = global::UnityEngine.Mathf.Max(end.y, tMP_CharacterInfo.ascender + highlightState.padding.top);
+						}
+					}
+					if (flag3 && m_characterCount == 1)
+					{
+						flag3 = false;
+						DrawTextHighlight(start3, end, ref index4, highlightState.color);
+					}
+					else if (flag3 && (j == tMP_LineInfo.lastCharacterIndex || j >= tMP_LineInfo.lastVisibleCharacterIndex))
+					{
+						flag3 = false;
+						DrawTextHighlight(start3, end, ref index4, highlightState.color);
+					}
+					else if (flag3 && !flag28)
+					{
+						flag3 = false;
+						DrawTextHighlight(start3, end, ref index4, highlightState.color);
+					}
+				}
+				else if (flag3)
+				{
+					flag3 = false;
+					DrawTextHighlight(start3, end, ref index4, highlightState.color);
+				}
+				num77 = lineNumber;
+			}
+			m_textInfo.meshInfo[m_Underline.materialIndex].vertexCount = index4;
+			m_textInfo.characterCount = m_characterCount;
+			m_textInfo.spriteCount = m_spriteCount;
+			m_textInfo.lineCount = lineCount;
+			m_textInfo.wordCount = ((num76 == 0 || m_characterCount <= 0) ? 1 : num76);
+			m_textInfo.pageCount = m_pageNumber + 1;
+			if (m_renderMode == global::TMPro.TextRenderFlags.Render && IsActive())
+			{
+				OnPreRenderText?.Invoke(m_textInfo);
+				if (m_canvas.additionalShaderChannels != (global::UnityEngine.AdditionalCanvasShaderChannels.TexCoord1 | global::UnityEngine.AdditionalCanvasShaderChannels.Normal | global::UnityEngine.AdditionalCanvasShaderChannels.Tangent))
+				{
+					m_canvas.additionalShaderChannels |= global::UnityEngine.AdditionalCanvasShaderChannels.TexCoord1 | global::UnityEngine.AdditionalCanvasShaderChannels.Normal | global::UnityEngine.AdditionalCanvasShaderChannels.Tangent;
+				}
+				if (m_geometrySortingOrder != global::TMPro.VertexSortingOrder.Normal)
+				{
+					m_textInfo.meshInfo[0].SortGeometry(global::TMPro.VertexSortingOrder.Reverse);
+				}
+				m_mesh.MarkDynamic();
+				m_mesh.vertices = m_textInfo.meshInfo[0].vertices;
+				m_mesh.SetUVs(0, m_textInfo.meshInfo[0].uvs0);
+				m_mesh.uv2 = m_textInfo.meshInfo[0].uvs2;
+				m_mesh.colors32 = m_textInfo.meshInfo[0].colors32;
+				m_mesh.RecalculateBounds();
+				m_canvasRenderer.SetMesh(m_mesh);
+				global::UnityEngine.Color color2 = m_canvasRenderer.GetColor();
+				bool cullTransparentMesh = m_canvasRenderer.cullTransparentMesh;
+				for (int k = 1; k < m_textInfo.materialCount; k++)
+				{
+					m_textInfo.meshInfo[k].ClearUnusedVertices();
+					global::TMPro.TMP_SubMeshUI tMP_SubMeshUI = m_subTextObjects[k];
+					if (!(tMP_SubMeshUI == null))
+					{
+						if (m_geometrySortingOrder != global::TMPro.VertexSortingOrder.Normal)
+						{
+							m_textInfo.meshInfo[k].SortGeometry(global::TMPro.VertexSortingOrder.Reverse);
+						}
+						tMP_SubMeshUI.mesh.vertices = m_textInfo.meshInfo[k].vertices;
+						tMP_SubMeshUI.mesh.SetUVs(0, m_textInfo.meshInfo[k].uvs0);
+						tMP_SubMeshUI.mesh.uv2 = m_textInfo.meshInfo[k].uvs2;
+						tMP_SubMeshUI.mesh.colors32 = m_textInfo.meshInfo[k].colors32;
+						tMP_SubMeshUI.mesh.RecalculateBounds();
+						tMP_SubMeshUI.canvasRenderer.SetMesh(tMP_SubMeshUI.mesh);
+						tMP_SubMeshUI.canvasRenderer.SetColor(color2);
+						tMP_SubMeshUI.canvasRenderer.cullTransparentMesh = cullTransparentMesh;
+						tMP_SubMeshUI.raycastTarget = raycastTarget;
+						if (tMP_SubMeshUI.maskable != base.maskable)
+						{
+							tMP_SubMeshUI.maskable = base.maskable;
+							tMP_SubMeshUI.RecalculateClipping();
+						}
+					}
+				}
+			}
+			if (m_ShouldUpdateCulling)
+			{
+				UpdateCulling();
+			}
+			global::TMPro.TMPro_EventManager.ON_TEXT_CHANGED(this);
+		}
+
+		protected override global::UnityEngine.Vector3[] GetTextContainerLocalCorners()
+		{
+			if (m_rectTransform == null)
+			{
+				m_rectTransform = base.rectTransform;
+			}
+			m_rectTransform.GetLocalCorners(m_RectTransformCorners);
+			return m_RectTransformCorners;
+		}
+
+		protected override void SetActiveSubMeshes(bool state)
+		{
+			for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+			{
+				if (m_subTextObjects[i].enabled != state)
+				{
+					m_subTextObjects[i].enabled = state;
+				}
+			}
+		}
+
+		protected override void DestroySubMeshObjects()
+		{
+			for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+			{
+				global::UnityEngine.Object.DestroyImmediate(m_subTextObjects[i]);
+			}
+		}
+
+		protected override global::UnityEngine.Bounds GetCompoundBounds()
+		{
+			global::UnityEngine.Bounds bounds = m_mesh.bounds;
+			global::UnityEngine.Vector3 min = bounds.min;
+			global::UnityEngine.Vector3 max = bounds.max;
+			for (int i = 1; i < m_subTextObjects.Length && m_subTextObjects[i] != null; i++)
+			{
+				global::UnityEngine.Bounds bounds2 = m_subTextObjects[i].mesh.bounds;
+				min.x = ((min.x < bounds2.min.x) ? min.x : bounds2.min.x);
+				min.y = ((min.y < bounds2.min.y) ? min.y : bounds2.min.y);
+				max.x = ((max.x > bounds2.max.x) ? max.x : bounds2.max.x);
+				max.y = ((max.y > bounds2.max.y) ? max.y : bounds2.max.y);
+			}
+			global::UnityEngine.Vector3 center = (min + max) / 2f;
+			global::UnityEngine.Vector2 vector = max - min;
+			return new global::UnityEngine.Bounds(center, vector);
+		}
+
+		internal override global::UnityEngine.Rect GetCanvasSpaceClippingRect()
+		{
+			if (m_canvas == null || m_canvas.rootCanvas == null || m_mesh == null)
+			{
+				return global::UnityEngine.Rect.zero;
+			}
+			global::UnityEngine.Transform obj = m_canvas.rootCanvas.transform;
+			global::UnityEngine.Bounds compoundBounds = GetCompoundBounds();
+			global::UnityEngine.Vector2 vector = obj.InverseTransformPoint(m_rectTransform.position);
+			global::UnityEngine.Vector2 vector2 = obj.lossyScale;
+			global::UnityEngine.Vector2 vector3 = m_rectTransform.lossyScale / vector2;
+			return new global::UnityEngine.Rect(vector + compoundBounds.min * vector3, compoundBounds.size * vector3);
+		}
+
+		private void UpdateSDFScale(float scaleDelta)
+		{
+			if (scaleDelta == 0f || scaleDelta == float.PositiveInfinity || scaleDelta == float.NegativeInfinity)
+			{
+				m_havePropertiesChanged = true;
+				OnPreRenderCanvas();
+				return;
+			}
+			for (int i = 0; i < m_textInfo.materialCount; i++)
+			{
+				global::TMPro.TMP_MeshInfo tMP_MeshInfo = m_textInfo.meshInfo[i];
+				for (int j = 0; j < tMP_MeshInfo.uvs0.Length; j++)
+				{
+					tMP_MeshInfo.uvs0[j].w *= global::UnityEngine.Mathf.Abs(scaleDelta);
+				}
+			}
+			for (int k = 0; k < m_textInfo.materialCount; k++)
+			{
+				if (k == 0)
+				{
+					m_mesh.SetUVs(0, m_textInfo.meshInfo[0].uvs0);
+					m_canvasRenderer.SetMesh(m_mesh);
+				}
+				else
+				{
+					m_subTextObjects[k].mesh.SetUVs(0, m_textInfo.meshInfo[k].uvs0);
+					m_subTextObjects[k].canvasRenderer.SetMesh(m_subTextObjects[k].mesh);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a895ccc9707dab3da44b60e732524bd, type: 3}
+  m_Name: K001
+  m_EditorClassIdentifier:
+  LevelSpeechData:
+  - {fileID: 11400000, guid: 41a863001929e7d4aac3f3e64d9eb044, type: 2}
+  - {fileID: 11400000, guid: bdde75dc72f4f0c4aa4693342b04c322, type: 2}
+  - {fileID: 11400000, guid: 34c3e52a785e86948a169ea198c2e7db, type: 2}
+  - {fileID: 11400000, guid: 349ecf982fb79784d8f8ac2572cbd386, type: 2}
+  - {fileID: 11400000, guid: d52564993911b2b43861d1202048f9a5, type: 2}
+  - {fileID: 11400000, guid: b771546e2fb14664a896326594b0f672, type: 2}
+  LevelDepth: 020000000100000000000000ffffff/ffeffff/f
+  LevelSpeed: 0100000003000000050000000600000007000000
+  LevelCG: {fileID: 21300000, guid: 93cd438e1aac40e478ce3d9b289ae1ab, type: 2}
+  Choices:
+  - Binge Drink Next To Pool
+  - Eat some fine-ass Christian chicken
+  NextLevels:
+  - {fileID: 11400000, guid: b48d4399f9df5944483574ea3806fe27, type: 2}
+  - {fileID: 11400000, guid: e6a5c2732c5398440b74032dbdd9f4b4, type: 2}
+  PlayersChar: 0
+  EnemyChar: 0
+  AiDifficultyLevel: 0
+  AmbienceTrack: {fileID: 8300000, guid: ee430f9294e3fc94086c2f4bbb960397, type: 3}
+  WAKTrack: 2
+  ReverbPreset: 0
+  CustomReverbPreset: {fileID: 0}

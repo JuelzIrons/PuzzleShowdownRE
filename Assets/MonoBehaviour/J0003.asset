@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: J0003
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: ce9e83996e1f4e24288fb32e53c8f092, type: 3}
+  Timestamps: "0.039\n1.507\n2.575\n8.014\n10.717\n18.892\n20.093\n23.596\n24.931\n30.336\n33.473\n42.849\n46.819\n54.527\n56.596\n66.639\n71.277\n78.084\n80.52\n82.488\n90.029\n93.9"
+  WrittenDialogue: "Oh hello, Jecka.\nLeave me alone.\nSorry. I’d take it you’re not to keen on competing in this puzzle showdown, are you?\n“Not too keen”? I just don’t wanna do it.\nI understand. It’s really not for everybody y’know. Requires a lot of quick thinking and forethought to align chain combos.\nWhat’re you trying to say?\nI’m saying your mind might not be suited for it is all.\nAre you calling me stupid?\nYou’re not stupid, you’re just not intellectually equipped to meet a certain standard.\nWhat the fuck are you equipped to do? Don’t you pay women to step on you!?\nHey that is ad hominem and totally uncalled for! That’s like if I said you can’t do something cause you believe in God or a similar deity.\nDid you just equate religion to being an absolute virgin doormat piece of shit?\nAll I said was your IQ isn’t as high as mine! It’s not even totally your fault. You can’t help you were born a girl.\nOh well when you say it like that it makes it better!\nIt’s not my opinion, just research the intelligence data found online which shows geniuses are mostly male despite women being the majority of the population.\nYeah you throw your money away on anime girls and bitches stepping on you, real fuckin’ genius here.\nPerhaps it is just time I show you with empirical data. Care to put your phone up for a puzzle round?\nWell it’s not like I can use it to call the police on you.\nWhy would you call the police on me?\nI was reading some male statistics and men who play video games make up the majority of pedophiles despite being the minority of the population.\nOnce you brought gamers into this...{0.75} It’s on!"
+  DialogueCharacterNames: "JEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY\nJECKA\nJEFFERY"

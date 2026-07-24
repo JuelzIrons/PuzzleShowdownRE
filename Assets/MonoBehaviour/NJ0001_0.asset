@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a895ccc9707dab3da44b60e732524bd, type: 3}
+  m_Name: NJ0001
+  m_EditorClassIdentifier:
+  LevelSpeechData:
+  - {fileID: 11400000, guid: 86ced61e606247b478fe67f7c9fcf552, type: 2}
+  LevelDepth:
+  LevelSpeed: 0f000000
+  LevelCG: {fileID: 21300000, guid: 64cb19ba4537d8944a261490be17d050, type: 2}
+  Choices: []
+  NextLevels: []
+  PlayersChar: 16
+  EnemyChar: 14
+  AiDifficultyLevel: 45
+  AmbienceTrack: {fileID: 8300000, guid: 8dddefb97b1c12e428e87ae2974d43eb, type: 3}
+  WAKTrack: 0
+  ReverbPreset: 0
+  CustomReverbPreset: {fileID: 0}

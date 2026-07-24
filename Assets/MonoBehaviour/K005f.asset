@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005f
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 3f6ac859c11b9ef4f843de84ca6b643b, type: 3}
+  Timestamps: "0.199\n3.369\n6.205\n10.643\n12.145"
+  WrittenDialogue: "Who would’ve thought this is my true calling in life?\nI’m going for gold in the Paralympics!\nThey say this is the hardest disability of all but that won’t hold me back!\nLet’s go!"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY"

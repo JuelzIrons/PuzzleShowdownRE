@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004A
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 1b508029686572240a37b34e386e53f2, type: 3}
+  Timestamps: "0.033\n2.235\n6.64\n8.942\n12.346\n15.549\n20.253\n25.258\n30.831\n33.3"
+  WrittenDialogue: "Just another day in the life on set!\nYou’d be amazed how much you can book when you let casting directors sexually harass you.\nI don’t go to the satanist swinger parties though.\nNot that I’m prudish I just don’t know who Satanist is.\nOn this movie I think I’m walking away with like 400 grand.\nI’m so rich now- but don’t worry I still understand your commoner problems.\nHow much is gas now? Like 20 dollars a gallon? That must be so hard for you.\nOh I think the director’s back from Carl’s Jr which is just Hardee’s but for SoCal socialites like me.\nQuiet on set, I gotta do this scene."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

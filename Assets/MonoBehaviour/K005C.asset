@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K005C
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: e7850cfa3b81fd748a24f97d98b80d46, type: 3}
+  Timestamps: "0.072\n2.842\n4.977\n10.416\n12.017\n15.721\n19.058\n24.997\n29.101\n35.441\n36.942"
+  WrittenDialogue: "Oh hey, it’s been some time, huh?\nLike 20 years, right?\nI lost so much of my life behind bars I figured waiting tables was all I had left to do.\nIt’s not so bad though.\nOld people come in for breakfast and tell me how much they hate their kids.\nYoung people come in drunk at 3am and laugh at my job.\nAnd there’s always this pack of Asian ladies wearing white visors and sunglasses. It feels like Atlantic City.\nNot that I’d have a fresh idea cause I’ve been in jail for so long.\nI don’t think I should think about this too much. I’ve been trying to fight the violent urges that come from being institutionalized.\nWhat can I get you?"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

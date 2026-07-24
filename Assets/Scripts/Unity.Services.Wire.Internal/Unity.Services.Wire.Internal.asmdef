@@ -1,0 +1,10 @@
+{
+  "name": "Unity.Services.Wire.Internal",
+  "references": [
+    "Newtonsoft.Json",
+    "Unity.Services.Core.Internal",
+    "Unity.Services.Core",
+    "unity-websocket-sharp"
+  ],
+  "allowUnsafeCode": true
+}

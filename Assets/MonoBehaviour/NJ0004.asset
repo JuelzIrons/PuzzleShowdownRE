@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: NJ0004
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: 40d58d2570efdc54a8b0111a8a59059a, type: 3}
+  Timestamps: "0.027\n1.462\n4.665\n6.334\n12.173\n18.079\n19.914\n22.55\n25.987\n27.855\n33.094\n34.128\n38.199\n39.4\n45.206\n46.307\n51.913\n52.98\n54.582\n58.119\n61.455\n62.924\n65.726\n67.895\n70.998\n72.233\n72.934\n75.603"
+  WrittenDialogue: "They haven’t beat you yet??\nHow are you one of the puzzle shogun guys?\nYou barely know how to use a phone.\nY’know sometimes it’s not all about your skills. You just need the right energy. Remember that when you enter the workforce.\nOh so it’s not about knowing how to do the job, it’s just about being fun enough to sip a Bud and harass women with.\nUh...{0.5} Yeah!\nIs this why businesses get progressively worse over time?\nWho works for business? We’re just trying to enjoy ourselves a little.\nAnd you people call me lazy.\nAlright that’s enough smart mouth out of you, bitch!  I’m gonna kill you in this puzzle like the boss man wanted!\nThis’ll be easy.\nYou sure? There’s a lot of pressure on this one, it might make you choke!\nWhat pressure?\nCause if you lose this one,{1} I’m gonna kidnap ya and sell ya to a trafficking ring in Ohio!\nYou can’t do that!\nThe puzzles control most of our phones still. You can’t call the police, we own the police!\nPlease no!\nAnything but Ohio!!\nWe’re gonna beat your AARP brochure lookin’ ass!\nYeah and then we’re gonna sell you to Ohioan human trafficking!\nWhat would they want with me?\nThe underground of gay old man fetishists.\nYeah and they’re nowhere but Ohio!\nNice try, I ain’t gay!\nThey don’t need you to be.\nUh!\nNow the pressure’s both ways,{0.6} let’s play!"
+  DialogueCharacterNames: "COACH COLBY\nJECKA\nNICOLE\nCOACH COLBY\nNICOLE\nCOACH COLBY\nJECKA\nCOACH COLBY\nNICOLE\nCOACH COLBY\nJECKA\nCOACH COLBY\nJECKA\nCOACH COLBY\nNICOLE\nCOACH COLBY\nJECKA\nJECKA\nNICOLE\nJECKA\nCOACH COLBY\nNICOLE\nJECKA\nCOACH COLBY\nNICOLE\nCOACH COLBY\nJECKA"

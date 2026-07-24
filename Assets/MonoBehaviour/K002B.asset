@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K002B
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: c70c2e4e60ac0a54fac3c3c1b2c35b57, type: 3}
+  Timestamps: "0.033\n3.67\n8.175\n11.344\n13.847\n16.983\n20.353\n25.625\n30.597\n33.233"
+  WrittenDialogue: "Ever since one of these opened near me it’s been literally my favorite place.\nI think I love it even more than Chipotle. I know, sacrilege.\nI’m addicted. It’s like they’re putting MSG in it.\nBut only Chinese food does that, right?\nAnd it’s not offensive to assume that, is it?\nNot that I really give a shit, I only see white people here anyway.\nEverybody who works here’s so kind and religious. Like the 1950s of fast food.\nIt makes you wonder if they have 1950’s opinions on certain groups of people.\nOkay enough talking, let’s dig in."
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

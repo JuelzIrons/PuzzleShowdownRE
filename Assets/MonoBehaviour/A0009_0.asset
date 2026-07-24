@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: A0009
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: b81ebe17bb914384fa88c1398baacee0, type: 3}
+  Timestamps: "0.035\n1.503\n2.404\n4.206\n6.308\n8.176\n8.91\n11.813\n14.716\n17.219\n21.156\n22.724\n26.995\n30.666\n35.737\n40.042\n41.109\n44.046\n45.347\n47.282\n48.95\n52.087\n56.858\n58.694"
+  WrittenDialogue: "That was so weird.\nWhat’s weird?\nThis fuckin’ guy I just ran in to.\nCan’t be more weird than Jeffery right now.\nDid he ask you to step on him?\nNo?\nOh wait- Did he ask you to dress up like a cat and step on him?\nI feel like that’d be included in the first question.\nUh.. So what’s going on with Jeffery?\nWell he really wanted to go out with me and I had to tell him I’m gay.\nThat’s like the ultimate excuse.\nI’m not making it up, it’s just with some guys I take a little longer to mention that.\nBut Jeffery microwaves that homosexuality right up to the surface.\nI’m just confused cause he thought acknowledging my sexuality would get me to change it for him.\nYeah he jacks off to Family Guy characters, you think he understands human beings?\nI guess you’re right...\nWow why is it only other girls who think I’m smart?\nGuys don’t call you smart?\nOnly when they want something from me.\nDo you beat them at these puzzles?\nAll the time and they never want to admit it! Here, play me.\nRight now? But I thought we could just talk. The conversation was going well and--\nBitch fuck that I’m here to win."
+  DialogueCharacterNames: "JECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA\nARI\nJECKA"

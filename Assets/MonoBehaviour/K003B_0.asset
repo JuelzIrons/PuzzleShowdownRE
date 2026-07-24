@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a895ccc9707dab3da44b60e732524bd, type: 3}
+  m_Name: K003B
+  m_EditorClassIdentifier:
+  LevelSpeechData:
+  - {fileID: 11400000, guid: 710d75ebb89bcb84aa749879b10944dc, type: 2}
+  - {fileID: 11400000, guid: da4b8b3e858d8344ca7477453bbe9995, type: 2}
+  - {fileID: 11400000, guid: e0c5af99f95319d458b62617ea8bfd9b, type: 2}
+  - {fileID: 11400000, guid: b049d531b530c5648a82a6268236ea75, type: 2}
+  - {fileID: 11400000, guid: ccd44144a1db74b4c9cf0ca2346c2f7e, type: 2}
+  - {fileID: 11400000, guid: 3d7cd721927869f4888e5f738b567beb, type: 2}
+  LevelDepth: f8ffff/ff8ffff/ff8ffff/ff7ffff/ff6ffff/f
+  LevelSpeed: 190000001a0000001b0000001c00000020000000
+  LevelCG: {fileID: 21300000, guid: 42a114f7138f77e44ae9ea5b08646ef5, type: 2}
+  Choices:
+  - Try getting reward for telling the truth
+  - Fool this dumbass cop
+  NextLevels:
+  - {fileID: 11400000, guid: 7cb26c956d3e55b4594cda40372860f9, type: 2}
+  - {fileID: 11400000, guid: 74d73416773d10346938c1ae3126469f, type: 2}
+  PlayersChar: 0
+  EnemyChar: 0
+  AiDifficultyLevel: 0
+  AmbienceTrack: {fileID: 8300000, guid: 24cd36a0fa18314448ab1e22a53d7f64, type: 3}
+  WAKTrack: 3
+  ReverbPreset: 0
+  CustomReverbPreset: {fileID: 0}

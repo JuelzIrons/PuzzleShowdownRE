@@ -1,0 +1,5 @@
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Tilemap.Extras.Editor")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Tilemap.Extras.Tests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Tilemap.Extras.EditorTests")]
+[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.2D.Tilemap.Extras.RuntimeTests")]
+[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

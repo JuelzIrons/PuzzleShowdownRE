@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004E.5
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: feff583ddc9dfd149a0edb98a585270d, type: 3}
+  Timestamps: "0.036\n2.839\n6.276\n10.113\n14.45\n20.156\n23.193\n26.196"
+  WrittenDialogue: "Woo! Now that was a workout!\nFeel that sweat? That’s your body telling you “good job”!\nWith this new lifestyle I’m always after the next big thing.\nI’ve done more fitness tapes than I could count but my real goal is TV!\nA producer who goes to this gym said he wanted to make me the star of his new talk show!\nI’d be like Oprah but physically desirable.\nMaybe I could get you in to a taping one day!"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9478ee6f682a7b72d4deeea9e66210, type: 3}
+  m_Name: K004e
+  m_EditorClassIdentifier:
+  Clip: {fileID: 8300000, guid: e969f65411d0dcc4188005556246bd59, type: 3}
+  Timestamps: "0.101\n3.171\n9.411\n14.082\n20.221\n24.326\n27.996\n33.568\n40.976\n46.681\n49.517"
+  WrittenDialogue: "Okay hope you had a great workout, guys!\nOh hey, long time no see! It’s been two years and I’ve really gotten my life around.\nI lost 98 pounds and you can too with the power of self!\nThat’s a saying in my new fitness book called “I Was Worthless Too” at Barnes & Noble today!\nYou look like you could use a workout too. Still playing video games?\nI swear those games are making our kids fatter by the day.\nA chubby 9 year old boy told me he likes playing games instead of running outside.\nAnd I told him that he’s a worthless fat piece of shit who only his mother would fuck out of pure pity if he didn’t put those games down.\nOur bodies are temples, and in my classes there’s a zero tolerance policy for sacrilege!\nWhy don’t you get on that spin cycle? Let’s go!"
+  DialogueCharacterNames: "KELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY\nKELLY"
