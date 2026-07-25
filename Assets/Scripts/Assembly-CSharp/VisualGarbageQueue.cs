@@ -48,7 +48,7 @@ public class VisualGarbageQueue : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.GameObject chainEffect = global::UnityEngine.Object.Instantiate(m_ChainGarabgeIcon);
 		chainEffect.transform.position = clearPosition;
 		chainEffect.GetComponentInChildren<global::TMPro.TextMeshPro>().text = (MyPodManager.OpponentManager.GameLoop.SlottedChainCounter[chainIndex] + 1).ToString() ?? "";
-		
+		chainEffect.transform.DOMove(base.transform.position + new global::UnityEngine.Vector3(m_offsetLen * (float)indexToIncrement, 0f), 1f).OnComplete(delegate
 		{
 			m_visualObjects[indexToIncrement].Visual.GetComponentInChildren<global::TMPro.TextMeshPro>().text = (MyPodManager.OpponentManager.GameLoop.SlottedChainCounter[chainIndex] + 1).ToString() ?? "";
 			global::UnityEngine.Object.Destroy(chainEffect);
@@ -61,10 +61,10 @@ public class VisualGarbageQueue : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.GameObject gameObject = global::UnityEngine.Object.Instantiate(m_ChainGarabgeIcon);
 		gameObject.transform.position = clearPosition;
 		gameObject.GetComponentInChildren<global::TMPro.TextMeshPro>().text = (MyPodManager.OpponentManager.GameLoop.SlottedChainCounter[chainIndex] + 1).ToString() ?? "";
-		
+		SimpleTween t = gameObject.transform.DOMove(base.transform.position + new global::UnityEngine.Vector3(m_offsetLen * (float)m_visualObjects.Count, 0f), 1f);
 		GarbageVisualObject newVis = new GarbageVisualObject(chainIndex, -1, gameObject);
 		m_visualObjects.Add(newVis);
-		
+		t.OnComplete(delegate
 		{
 			newVis.HasArrived = true;
 		});
@@ -76,10 +76,10 @@ public class VisualGarbageQueue : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.GameObject gameObject = global::UnityEngine.Object.Instantiate(m_ComboGarabgeIcon);
 		gameObject.transform.position = clearPosition;
 		gameObject.GetComponentInChildren<global::TMPro.TextMeshPro>().text = comboSize.ToString() ?? "";
-		
+		SimpleTween t = gameObject.transform.DOMove(base.transform.position + new global::UnityEngine.Vector3(m_offsetLen * (float)m_visualObjects.Count, 0f), 1f);
 		GarbageVisualObject newVis = new GarbageVisualObject(-1, comboSize, gameObject);
 		m_visualObjects.Add(newVis);
-		
+		t.OnComplete(delegate
 		{
 			newVis.HasArrived = true;
 		});

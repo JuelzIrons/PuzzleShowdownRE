@@ -373,13 +373,13 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 		{
 			LevelDataSO currentLevelDataSO2 = LineClearingManager.Instance.CurrentLevelDataSO;
 			m_isShortWakDialogue = true;
-			
+			m_bottomShadow.DOFade(1f, 0.8f);
 			m_ambienceSource.gameObject.SetActive(value: true);
 			PlayAmbienceLooped(currentLevelDataSO2.AmbienceTrack);
 		}
 		else
 		{
-			
+			m_bottomShadow.DOFade(1f, 0.8f);
 			m_isShortWakDialogue = false;
 			m_ambienceSource.gameObject.SetActive(value: true);
 			if (!m_isCampaignMode)
@@ -545,7 +545,7 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			m_extraButtonsObj.SetActive(value: false);
 		}
 		m_stageText?.gameObject.SetActive(value: false);
-		
+		m_bottomShadow.DOFade(0f, 0.6f);
 		AudioManager.Instance.ChangeSong(MusicTrackType.NoMusic, isFromDialogue: true);
 		PersistentInputReader.Instance.SetSupressAllEvents(shouldSupressEvents: true);
 		m_audioSource?.Stop();
@@ -726,7 +726,7 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			{
 				if (CampaignManager.Instance.CurrentLevelDataSO.EnemyChar == CharacterType.Chustler && CampaignManager.Instance.CurrentLevelDataSO.PlayersChar == CharacterType.Jecka && CampaignPortraits[1].color == global::UnityEngine.Color.black)
 				{
-					
+					CampaignPortraits[1].DOColor(global::UnityEngine.Color.white, 1f);
 				}
 				else
 				{
@@ -840,7 +840,7 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			m_activeAmbienceSource.loop = false;
 			m_activeAmbienceSource.volume = 0f;
 			m_activeAmbienceSource.Play();
-			
+			m_activeAmbienceSource.DOFade(m_ambienceTargetVolume, 1f);
 			if (m_ambienceLoopWatcher != null)
 			{
 				StopCoroutine(m_ambienceLoopWatcher);
@@ -868,8 +868,8 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 				inactiveAmbienceSource.volume = 0f;
 				inactiveAmbienceSource.loop = false;
 				inactiveAmbienceSource.PlayScheduled(time);
-				
-				
+				activeAmbienceSource.DOFade(0f, num);
+				inactiveAmbienceSource.DOFade(m_ambienceTargetVolume, num);
 				m_activeAmbienceSource = inactiveAmbienceSource;
 				m_inactiveAmbienceSource = activeAmbienceSource;
 				StartCoroutine(StopSourceAfter(activeAmbienceSource, num + 0.1f));
@@ -895,16 +895,20 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			StopCoroutine(m_ambienceLoopWatcher);
 			m_ambienceLoopWatcher = null;
 		}
-		
+		float fadeDuration = 0f;
 		if (m_ambienceSource != null && m_ambienceSource.isPlaying)
 		{
-			
+			m_ambienceSource.DOFade(0f, duration);
+			fadeDuration = duration;
 		}
 		if (m_ambienceSourceB != null && m_ambienceSourceB.isPlaying)
 		{
-			
+			m_ambienceSourceB.DOFade(0f, duration);
+			fadeDuration = duration;
 		}
-		
+		// Both fades run in parallel, so a bare timer of the same length stands in
+		// for the sequence that used to own them.
+		SimpleTween.Create(null, fadeDuration, null).OnComplete(delegate
 		{
 			m_ambienceSource?.Stop();
 			m_ambienceSourceB?.Stop();

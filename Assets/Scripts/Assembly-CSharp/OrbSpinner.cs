@@ -14,7 +14,7 @@ public class OrbSpinner : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.Material material = new global::UnityEngine.Material(m_matTemplate);
 		global::System.Collections.Generic.List<global::UnityEngine.Material> materials = new global::System.Collections.Generic.List<global::UnityEngine.Material> { material };
 		m_mr.SetMaterials(materials);
-		
+		material.DOFloat(1f, "TRANS", 2f);
 	}
 
 	private void Update()
