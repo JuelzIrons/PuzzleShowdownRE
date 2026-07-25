@@ -63,7 +63,7 @@ AnimationClip:
     attribute: m_Intensity
     path:
     classID: 114
-    script: {fileID: 11500000, guid: d856b19b20cd26eeff9dcf8732cdefdd, type: 3}
+    script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
     flags: 0
   m_PPtrCurves: []
   m_SampleRate: 60

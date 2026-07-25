@@ -1,8 +1,0 @@
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Universal2DGraphicsTests")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Universal2DEditorTests")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.Universal.Editor")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.Universal.2D.Editor.Overrides")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.Universal.Editor.Tests")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.RenderPipelines.Universal.Runtime.Tests")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.GraphicTests.Performance.Universal.Runtime")]
-[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]

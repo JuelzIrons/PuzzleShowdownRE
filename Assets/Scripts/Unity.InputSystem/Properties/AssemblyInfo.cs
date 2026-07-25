@@ -1,8 +1,0 @@
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.InputSystem.TestFramework")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.InputSystem.Tests.Editor")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.InputSystem.Tests")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.InputSystem.IntegrationTests")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.InputSystem.ForUI")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.AI.Assistant.Editor")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.InputSystem.EditorDevelopmentTools")]
-[assembly: global::System.Reflection.AssemblyVersion("1.18.0.0")]

@@ -86,7 +86,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 			}
 			if (NetworkServerReciever.Instance != null)
 			{
-				NetworkServerReciever.Instance.MoveCursorToPosRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, cursor1.x, cursor1.y, default(global::Unity.Netcode.RpcParams));
+				NetworkServerReciever.Instance.MoveCursorToPosRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, cursor1.x, cursor1.y);
 			}
 		}
 	}
@@ -106,7 +106,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 		{
 			P2_READY = true;
 			m_playerReadyObjs[1].SetActive(value: true);
-			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2?);
+			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2);
 			m_splashColorTweensP2 = global::DG.Tweening.DOTweenModuleUI.DOColor(m_p2Splash.GetComponent<global::UnityEngine.UI.Image>(), m_readySplashColor, 0.1f);
 			CheckForReady();
 		}
@@ -114,7 +114,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 		{
 			P2_READY = false;
 			m_playerReadyObjs[1].SetActive(value: false);
-			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2?);
+			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2);
 			m_splashColorTweensP2 = global::DG.Tweening.DOTweenModuleUI.DOColor(m_p2Splash.GetComponent<global::UnityEngine.UI.Image>(), global::UnityEngine.Color.white, 0.1f);
 		}
 	}
@@ -143,7 +143,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 		{
 			P2_READY = true;
 			m_playerReadyObjs[1].SetActive(value: true);
-			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2?);
+			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2);
 			m_splashColorTweensP2 = global::DG.Tweening.DOTweenModuleUI.DOColor(m_p2Splash.GetComponent<global::UnityEngine.UI.Image>(), m_readySplashColor, 0.1f);
 			base.transform.GetComponent<AudioOnDemandPlayer>().PlayAudioOnDemandIndex(0);
 			CheckForReady();
@@ -161,7 +161,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 			}
 			P2_READY = false;
 			m_playerReadyObjs[1].SetActive(value: false);
-			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2?);
+			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP2);
 			m_splashColorTweensP2 = global::DG.Tweening.DOTweenModuleUI.DOColor(m_p2Splash.GetComponent<global::UnityEngine.UI.Image>(), global::UnityEngine.Color.white, 0.1f);
 		}
 	}
@@ -172,11 +172,11 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 		{
 			P1_READY = true;
 			m_playerReadyObjs[0].SetActive(value: true);
-			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP1?);
+			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP1);
 			m_splashColorTweensP1 = global::DG.Tweening.DOTweenModuleUI.DOColor(m_p1Splash.GetComponent<global::UnityEngine.UI.Image>(), m_readySplashColor, 0.1f);
 			if (NetworkServerReciever.Instance != null)
 			{
-				NetworkServerReciever.Instance.SendReadyUpEventToOpponentRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, isReady: true, default(global::Unity.Netcode.RpcParams));
+				NetworkServerReciever.Instance.SendReadyUpEventToOpponentRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, isReady: true);
 			}
 			base.transform.GetComponent<AudioOnDemandPlayer>().PlayAudioOnDemandIndex(0);
 			CheckForReady();
@@ -200,7 +200,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 			}
 			P1_READY = false;
 			m_playerReadyObjs[0].SetActive(value: false);
-			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP1?);
+			global::DG.Tweening.TweenExtensions.Kill(m_splashColorTweensP1);
 			m_splashColorTweensP1 = global::DG.Tweening.DOTweenModuleUI.DOColor(m_p1Splash.GetComponent<global::UnityEngine.UI.Image>(), global::UnityEngine.Color.white, 0.1f);
 			if (NetworkServerReciever.Instance != null)
 			{
@@ -240,7 +240,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 		{
 			if (m_p1SelectedChar != prevType)
 			{
-				global::DG.Tweening.TweenExtensions.Kill(m_splashTweenP1?);
+				global::DG.Tweening.TweenExtensions.Kill(m_splashTweenP1);
 				m_p1Splash.transform.position = m_p1SplashPos[0].position;
 				m_splashTweenP1 = global::DG.Tweening.ShortcutExtensions.DOMove(m_p1Splash.transform, m_p1SplashPos[1].position, 0.166f);
 				m_p1Splash.GetComponent<global::UnityEngine.UI.Image>().sprite = GetDataByType(m_p1SelectedChar).CharacterSplashSprite;
@@ -256,7 +256,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 		}
 		else if (GameManager.Instance.DefinedGameMode != GameModeType.Marathon && m_p2SelectedChar != prevType)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_splashTweenP2?);
+			global::DG.Tweening.TweenExtensions.Kill(m_splashTweenP2);
 			m_p2Splash.transform.position = m_p2SplashPos[0].position;
 			m_splashTweenP2 = global::DG.Tweening.ShortcutExtensions.DOMove(m_p2Splash.transform, m_p2SplashPos[1].position, 0.166f);
 			m_p2Splash.GetComponent<global::UnityEngine.UI.Image>().sprite = GetDataByType(m_p2SelectedChar).CharacterSplashSprite;

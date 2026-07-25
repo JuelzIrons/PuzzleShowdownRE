@@ -104,144 +104,41 @@ public class NetworkServerReciever : global::Unity.Netcode.NetworkBehaviour
 	}
 
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.ClientsAndHost, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
-	public void MoveCursorToPosRpc(ulong id, int x, int y, global::Unity.Netcode.RpcParams rpcParams)
+	public void MoveCursorToPosRpc(ulong id, int x, int y)
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
+		if (base.NetworkManager.LocalClientId != id)
 		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(322686856u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, id);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, x);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, y);
-			__endSendRpc(ref bufferWriter, 322686856u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage == global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-			if (base.NetworkManager.LocalClientId != id)
-			{
-				RelayManager.Instance.CharGrid.ForceOpponentCursorToPos(new global::UnityEngine.Vector2Int(x, y));
-			}
+			RelayManager.Instance.CharGrid.ForceOpponentCursorToPos(new global::UnityEngine.Vector2Int(x, y));
 		}
 	}
 
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.ClientsAndHost, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
-	public void SendReadyUpEventToOpponentRpc(ulong id, bool isReady, global::Unity.Netcode.RpcParams rpcParams)
+	public void SendReadyUpEventToOpponentRpc(ulong id, bool isReady)
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
+		if (base.NetworkManager.LocalClientId != id)
 		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(289878002u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, id);
-			bufferWriter.WriteValueSafe(in isReady, default(global::Unity.Netcode.FastBufferWriter.ForPrimitives));
-			__endSendRpc(ref bufferWriter, 289878002u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage == global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-			if (base.NetworkManager.LocalClientId != id)
-			{
-				RelayManager.Instance.CharGrid.ForceOpponentReadyState(isReady);
-			}
+			RelayManager.Instance.CharGrid.ForceOpponentReadyState(isReady);
 		}
 	}
 
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.Server, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
-	public void DisconnectAsClientRpc(ulong id, global::Unity.Netcode.RpcParams rpcParams)
+	public void DisconnectAsClientRpc(ulong id)
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
-		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(2130894510u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.Server, global::Unity.Netcode.RpcDelivery.Reliable);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, id);
-			__endSendRpc(ref bufferWriter, 2130894510u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.Server, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage == global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-			global::Unity.Netcode.NetworkManager.Singleton.DisconnectClient(id);
-		}
+		global::Unity.Netcode.NetworkManager.Singleton.DisconnectClient(id);
 	}
 
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.ClientsAndHost, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
 	public void CloseConnectionScreenForAllClientRpc()
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
-		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.RpcParams rpcParams = default(global::Unity.Netcode.RpcParams);
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(1263289019u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-			__endSendRpc(ref bufferWriter, 1263289019u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage == global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-			RelayManager.Instance.LocallyCloseLobbyCanvas(base.IsHost);
-		}
+		RelayManager.Instance.LocallyCloseLobbyCanvas(base.IsHost);
 	}
 
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.Server, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
 	public void SendReadyToServerRpc()
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
+		if (base.IsServer)
 		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.RpcParams rpcParams = default(global::Unity.Netcode.RpcParams);
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(1080371837u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.Server, global::Unity.Netcode.RpcDelivery.Reliable);
-			__endSendRpc(ref bufferWriter, 1080371837u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.Server, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage == global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-			if (base.IsServer)
-			{
-				NetworkReadyCounter.Value++;
-			}
+			NetworkReadyCounter.Value++;
 		}
 	}
 
@@ -253,33 +150,6 @@ public class NetworkServerReciever : global::Unity.Netcode.NetworkBehaviour
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.Server, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
 	public void SendMoveToServerRpc(uint TS, int moveType, ulong playerId, int moveOrder, global::UnityEngine.Vector2 dir = default(global::UnityEngine.Vector2), int scoreAtTimeOfDeath = -1)
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
-		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.RpcParams rpcParams = default(global::Unity.Netcode.RpcParams);
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(960489248u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.Server, global::Unity.Netcode.RpcDelivery.Reliable);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, TS);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, moveType);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, playerId);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, moveOrder);
-			bufferWriter.WriteValueSafe(in dir);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, scoreAtTimeOfDeath);
-			__endSendRpc(ref bufferWriter, 960489248u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.Server, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			return;
-		}
-		__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
 		global::UnityEngine.Debug.Log($"Broadcasting move of type {(Moves)moveType} with TS: {TS} From player with id: {playerId}");
 		BroadcastOpponentMovesRpc(TS + MOVE_LATENCY, moveType, playerId, moveOrder, dir);
 		if (moveType != 3)
@@ -319,72 +189,24 @@ public class NetworkServerReciever : global::Unity.Netcode.NetworkBehaviour
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.ClientsAndHost, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
 	public void BroadcastTimeoutResultRpc(ulong winnerClientId, bool isDraw = false)
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
+		if (!m_gameEndBroadcasted)
 		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.RpcParams rpcParams = default(global::Unity.Netcode.RpcParams);
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(74546731u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, winnerClientId);
-			bufferWriter.WriteValueSafe(in isDraw, default(global::Unity.Netcode.FastBufferWriter.ForPrimitives));
-			__endSendRpc(ref bufferWriter, 74546731u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage == global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-			if (!m_gameEndBroadcasted)
-			{
-				m_gameEndBroadcasted = true;
-				bool flag = global::Unity.Netcode.NetworkManager.Singleton.LocalClientId == winnerClientId;
-				LocalPlayerPodManager.GameLoop.Lost = true;
-				LocalOpponentPodManager.GameLoop.Lost = true;
-				LocalPlayerPodManager.GameLoop.HasLossChecked = false;
-				LocalOpponentPodManager.GameLoop.HasLossChecked = true;
-				LocalPlayerPodManager.GameLoop.EndGame(flag, isDraw);
-				LocalPlayerPodManager.GameLoop.HasLossChecked = true;
-				LocalOpponentPodManager.GameLoop.EndGame(!flag, isDraw);
-				LocalOpponentPodManager.GameLoop.HasLossChecked = true;
-			}
+			m_gameEndBroadcasted = true;
+			bool flag = global::Unity.Netcode.NetworkManager.Singleton.LocalClientId == winnerClientId;
+			LocalPlayerPodManager.GameLoop.Lost = true;
+			LocalOpponentPodManager.GameLoop.Lost = true;
+			LocalPlayerPodManager.GameLoop.HasLossChecked = false;
+			LocalOpponentPodManager.GameLoop.HasLossChecked = true;
+			LocalPlayerPodManager.GameLoop.EndGame(flag, isDraw);
+			LocalPlayerPodManager.GameLoop.HasLossChecked = true;
+			LocalOpponentPodManager.GameLoop.EndGame(!flag, isDraw);
+			LocalOpponentPodManager.GameLoop.HasLossChecked = true;
 		}
 	}
 
 	[global::Unity.Netcode.Rpc(global::Unity.Netcode.SendTo.ClientsAndHost, InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone)]
 	public void BroadcastOpponentMovesRpc(uint TS, int moveType, ulong playerId, int moveOrder, global::UnityEngine.Vector2 dir = default(global::UnityEngine.Vector2))
 	{
-		global::Unity.Netcode.NetworkManager networkManager = base.NetworkManager;
-		if ((object)networkManager == null || !networkManager.IsListening)
-		{
-			global::UnityEngine.Debug.LogError("Rpc methods can only be invoked after starting the NetworkManager!");
-			return;
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			global::Unity.Netcode.RpcAttribute.RpcAttributeParams attributeParams = new global::Unity.Netcode.RpcAttribute.RpcAttributeParams
-			{
-				InvokePermission = global::Unity.Netcode.RpcInvokePermission.Everyone
-			};
-			global::Unity.Netcode.RpcParams rpcParams = default(global::Unity.Netcode.RpcParams);
-			global::Unity.Netcode.FastBufferWriter bufferWriter = __beginSendRpc(692377062u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, TS);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, moveType);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, playerId);
-			global::Unity.Netcode.BytePacker.WriteValueBitPacked(bufferWriter, moveOrder);
-			bufferWriter.WriteValueSafe(in dir);
-			__endSendRpc(ref bufferWriter, 692377062u, rpcParams, attributeParams, global::Unity.Netcode.SendTo.ClientsAndHost, global::Unity.Netcode.RpcDelivery.Reliable);
-		}
-		if (__rpc_exec_stage != global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute)
-		{
-			return;
-		}
-		__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
 		if (base.NetworkManager.LocalClientId == playerId)
 		{
 			return;
@@ -518,194 +340,5 @@ public class NetworkServerReciever : global::Unity.Netcode.NetworkBehaviour
 			LocalOpponentHasDied = true;
 			break;
 		}
-	}
-
-	protected override void __initializeVariables()
-	{
-		if (HostDifficultyLevel == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.HostDifficultyLevel cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		HostDifficultyLevel.Initialize(this);
-		__nameNetworkVariable(HostDifficultyLevel, "HostDifficultyLevel");
-		NetworkVariableFields.Add(HostDifficultyLevel);
-		if (HostHasLaunchedScene == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.HostHasLaunchedScene cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		HostHasLaunchedScene.Initialize(this);
-		__nameNetworkVariable(HostHasLaunchedScene, "HostHasLaunchedScene");
-		NetworkVariableFields.Add(HostHasLaunchedScene);
-		if (NetworkedRandomSeed == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.NetworkedRandomSeed cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		NetworkedRandomSeed.Initialize(this);
-		__nameNetworkVariable(NetworkedRandomSeed, "NetworkedRandomSeed");
-		NetworkVariableFields.Add(NetworkedRandomSeed);
-		if (NetworkReadyCounter == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.NetworkReadyCounter cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		NetworkReadyCounter.Initialize(this);
-		__nameNetworkVariable(NetworkReadyCounter, "NetworkReadyCounter");
-		NetworkVariableFields.Add(NetworkReadyCounter);
-		if (HostCharacter == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.HostCharacter cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		HostCharacter.Initialize(this);
-		__nameNetworkVariable(HostCharacter, "HostCharacter");
-		NetworkVariableFields.Add(HostCharacter);
-		if (ClientCharacter == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.ClientCharacter cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		ClientCharacter.Initialize(this);
-		__nameNetworkVariable(ClientCharacter, "ClientCharacter");
-		NetworkVariableFields.Add(ClientCharacter);
-		if (LetClientSelectChar == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.LetClientSelectChar cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		LetClientSelectChar.Initialize(this);
-		__nameNetworkVariable(LetClientSelectChar, "LetClientSelectChar");
-		NetworkVariableFields.Add(LetClientSelectChar);
-		if (DRAW == null)
-		{
-			throw new global::System.Exception("NetworkServerReciever.DRAW cannot be null. All NetworkVariableBase instances must be initialized.");
-		}
-		DRAW.Initialize(this);
-		__nameNetworkVariable(DRAW, "DRAW");
-		NetworkVariableFields.Add(DRAW);
-		base.__initializeVariables();
-	}
-
-	protected override void __initializeRpcs()
-	{
-		__registerRpc(322686856u, __rpc_handler_322686856, "MoveCursorToPosRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		__registerRpc(289878002u, __rpc_handler_289878002, "SendReadyUpEventToOpponentRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		__registerRpc(2130894510u, __rpc_handler_2130894510, "DisconnectAsClientRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		__registerRpc(1263289019u, __rpc_handler_1263289019, "CloseConnectionScreenForAllClientRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		__registerRpc(1080371837u, __rpc_handler_1080371837, "SendReadyToServerRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		__registerRpc(960489248u, __rpc_handler_960489248, "SendMoveToServerRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		__registerRpc(74546731u, __rpc_handler_74546731, "BroadcastTimeoutResultRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		__registerRpc(692377062u, __rpc_handler_692377062, "BroadcastOpponentMovesRpc", global::Unity.Netcode.RpcInvokePermission.Everyone);
-		base.__initializeRpcs();
-	}
-
-	private static void __rpc_handler_322686856(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out ulong value);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out int value2);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out int value3);
-			global::Unity.Netcode.RpcParams ext = rpcParams.Ext;
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).MoveCursorToPosRpc(value, value2, value3, ext);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	private static void __rpc_handler_289878002(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out ulong value);
-			reader.ReadValueSafe(out bool value2, default(global::Unity.Netcode.FastBufferWriter.ForPrimitives));
-			global::Unity.Netcode.RpcParams ext = rpcParams.Ext;
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).SendReadyUpEventToOpponentRpc(value, value2, ext);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	private static void __rpc_handler_2130894510(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out ulong value);
-			global::Unity.Netcode.RpcParams ext = rpcParams.Ext;
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).DisconnectAsClientRpc(value, ext);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	private static void __rpc_handler_1263289019(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).CloseConnectionScreenForAllClientRpc();
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	private static void __rpc_handler_1080371837(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).SendReadyToServerRpc();
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	private static void __rpc_handler_960489248(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out uint value);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out int value2);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out ulong value3);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out int value4);
-			reader.ReadValueSafe(out global::UnityEngine.Vector2 value5);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out int value6);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).SendMoveToServerRpc(value, value2, value3, value4, value5, value6);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	private static void __rpc_handler_74546731(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out ulong value);
-			reader.ReadValueSafe(out bool value2, default(global::Unity.Netcode.FastBufferWriter.ForPrimitives));
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).BroadcastTimeoutResultRpc(value, value2);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	private static void __rpc_handler_692377062(global::Unity.Netcode.NetworkBehaviour target, global::Unity.Netcode.FastBufferReader reader, global::Unity.Netcode.__RpcParams rpcParams)
-	{
-		global::Unity.Netcode.NetworkManager networkManager = target.NetworkManager;
-		if ((object)networkManager != null && networkManager.IsListening)
-		{
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out uint value);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out int value2);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out ulong value3);
-			global::Unity.Netcode.ByteUnpacker.ReadValueBitPacked(reader, out int value4);
-			reader.ReadValueSafe(out global::UnityEngine.Vector2 value5);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Execute;
-			((NetworkServerReciever)target).BroadcastOpponentMovesRpc(value, value2, value3, value4, value5);
-			target.__rpc_exec_stage = global::Unity.Netcode.NetworkBehaviour.__RpcExecStage.Send;
-		}
-	}
-
-	protected internal override string __getTypeName()
-	{
-		return "NetworkServerReciever";
 	}
 }

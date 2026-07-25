@@ -91,7 +91,7 @@ public class RelayManager : global::UnityEngine.MonoBehaviour
 		else
 		{
 			LoadingCanvas.SetActive(value: true);
-			NetworkServerReciever.Instance.DisconnectAsClientRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, default(global::Unity.Netcode.RpcParams));
+			NetworkServerReciever.Instance.DisconnectAsClientRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId);
 		}
 	}
 
@@ -391,7 +391,7 @@ public class RelayManager : global::UnityEngine.MonoBehaviour
 			}
 			if (NetworkServerReciever.Instance != null)
 			{
-				NetworkServerReciever.Instance.DisconnectAsClientRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, default(global::Unity.Netcode.RpcParams));
+				NetworkServerReciever.Instance.DisconnectAsClientRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId);
 			}
 			global::Unity.Netcode.NetworkManager.Singleton.Shutdown();
 		}

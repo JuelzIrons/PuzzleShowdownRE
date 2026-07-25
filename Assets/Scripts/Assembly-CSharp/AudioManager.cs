@@ -482,7 +482,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingMaster)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_masterFadeTween?);
+			global::DG.Tweening.TweenExtensions.Kill(m_masterFadeTween);
 			m_masterFadeTween = null;
 			m_isFadingMaster = false;
 			if (snapToOriginal)
@@ -545,7 +545,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingGame)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_gameFadeTween?);
+			global::DG.Tweening.TweenExtensions.Kill(m_gameFadeTween);
 			m_gameFadeTween = null;
 			m_isFadingGame = false;
 			if (snapToOriginal)
@@ -608,7 +608,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingStory)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_storyFadeTween?);
+			global::DG.Tweening.TweenExtensions.Kill(m_storyFadeTween);
 			m_storyFadeTween = null;
 			m_isFadingStory = false;
 			if (snapToOriginal)
@@ -679,7 +679,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingMenu)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_menuFadeTween?);
+			global::DG.Tweening.TweenExtensions.Kill(m_menuFadeTween);
 			m_menuFadeTween = null;
 			m_isFadingMenu = false;
 			if (snapToOriginal)
@@ -701,7 +701,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_musicDirector.playableGraph.IsValid())
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_speedTween?);
+			global::DG.Tweening.TweenExtensions.Kill(m_speedTween);
 			m_speedTween = null;
 			m_currentSpeedValue = speedMultiplier;
 			global::UnityEngine.Playables.PlayableExtensions.SetSpeed(m_musicDirector.playableGraph.GetRootPlayable(0), speedMultiplier);
@@ -714,7 +714,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 		{
 			return;
 		}
-		global::DG.Tweening.TweenExtensions.Kill(m_speedTween?);
+		global::DG.Tweening.TweenExtensions.Kill(m_speedTween);
 		m_speedTween = null;
 		if (time <= 0f)
 		{
@@ -739,7 +739,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 
 	public void StopMusicSpeedFade()
 	{
-		global::DG.Tweening.TweenExtensions.Kill(m_speedTween?);
+		global::DG.Tweening.TweenExtensions.Kill(m_speedTween);
 		m_speedTween = null;
 	}
 

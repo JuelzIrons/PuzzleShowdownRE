@@ -1,8 +1,0 @@
-{
-  "name": "Unity.VisualScripting.DocCodeExamples",
-  "references": [
-    "Unity.VisualScripting.Core",
-    "Unity.VisualScripting.Flow"
-  ],
-  "allowUnsafeCode": true
-}

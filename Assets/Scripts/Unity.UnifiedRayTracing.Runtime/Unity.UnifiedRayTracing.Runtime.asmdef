@@ -1,9 +1,0 @@
-{
-  "name": "Unity.UnifiedRayTracing.Runtime",
-  "references": [
-    "Unity.Mathematics",
-    "Unity.Collections",
-    "Unity.Burst"
-  ],
-  "allowUnsafeCode": true
-}
