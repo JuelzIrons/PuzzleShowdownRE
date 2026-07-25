@@ -87,9 +87,9 @@ public class SceneLoader : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
 	}
 
-	public global::DG.Tweening.Sequence DoBlackFade(float inTime = 1f, float holdTime = 0f, float outTime = 1f, bool muteSound = false, global::DG.Tweening.TweenCallback onMiddleReached = null, global::DG.Tweening.TweenCallback onComplete = null, float waitTime = 0f, global::UnityEngine.Color clr = default(global::UnityEngine.Color))
+	public SimpleTween DoBlackFade(float inTime = 1f, float holdTime = 0f, float outTime = 1f, bool muteSound = false, global::System.Action onMiddleReached = null, global::System.Action onComplete = null, float waitTime = 0f, global::UnityEngine.Color clr = default(global::UnityEngine.Color))
 	{
-		global::DG.Tweening.ShortcutExtensions.DOKill(m_blackFadeGroup);
+		m_blackFadeGroup.DOKill();
 		m_blackFadeGroup.alpha = 0f;
 		if (clr == default(global::UnityEngine.Color))
 		{
@@ -114,30 +114,48 @@ public class SceneLoader : global::UnityEngine.MonoBehaviour
 			m_prevSelectedBlack = null;
 		}
 		m_blackFadeGroup.blocksRaycasts = true;
-		global::DG.Tweening.Sequence sequence = global::DG.Tweening.DOTween.Sequence();
-		global::DG.Tweening.TweenSettingsExtensions.SetUpdate(sequence, isIndependentUpdate: true);
-		global::DG.Tweening.TweenSettingsExtensions.AppendInterval(sequence, waitTime);
-		global::DG.Tweening.Core.TweenerCore<float, float, global::DG.Tweening.Plugins.Options.FloatOptions> t = global::DG.Tweening.DOTweenModuleUI.DOFade(m_blackFadeGroup, 1f, inTime);
-		global::DG.Tweening.TweenSettingsExtensions.Append(sequence, t);
-		global::DG.Tweening.TweenSettingsExtensions.AppendCallback(sequence, delegate
+		bool fadesBack = outTime < 100f;
+		float fadeInEnd = waitTime + inTime;
+		float holdEnd = fadeInEnd + holdTime;
+		float total = holdEnd + (fadesBack ? outTime : 0f);
+		bool middleReached = false;
+		// The whole wait -> fade in -> hold -> fade out sequence runs as a single
+		// tween so the handle we return completes at the end, not at the middle.
+		SimpleTween tween = SimpleTween.Create(m_blackFadeGroup, total, delegate(float t)
 		{
-			onMiddleReached?.Invoke();
-		});
-		global::DG.Tweening.TweenSettingsExtensions.AppendInterval(sequence, holdTime);
-		if (outTime < 100f)
-		{
-			global::DG.Tweening.Core.TweenerCore<float, float, global::DG.Tweening.Plugins.Options.FloatOptions> fadeBackTween = global::DG.Tweening.DOTweenModuleUI.DOFade(m_blackFadeGroup, 0f, outTime);
+			float elapsed = t * total;
+			if (elapsed < fadeInEnd)
+			{
+				m_blackFadeGroup.alpha = ((inTime > 0f) ? EaseOutQuad((elapsed - waitTime) / inTime) : 0f);
+				return;
+			}
+			if (!middleReached)
+			{
+				middleReached = true;
+				m_blackFadeGroup.alpha = 1f;
+				onMiddleReached?.Invoke();
+			}
+			if (!fadesBack || elapsed < holdEnd)
+			{
+				m_blackFadeGroup.alpha = 1f;
+				return;
+			}
+			float outProgress = ((outTime > 0f) ? global::UnityEngine.Mathf.Clamp01((elapsed - holdEnd) / outTime) : 1f);
+			m_blackFadeGroup.alpha = 1f - EaseOutQuad(outProgress);
 			if (muteSound)
 			{
-				global::DG.Tweening.TweenSettingsExtensions.OnUpdate(fadeBackTween, delegate
-				{
-					AudioManager.Instance.SetMasterForced(global::UnityEngine.Mathf.Lerp(-80f, prevMasterVal, global::DG.Tweening.TweenExtensions.ElapsedPercentage(fadeBackTween)));
-				});
+				AudioManager.Instance.SetMasterForced(global::UnityEngine.Mathf.Lerp(-80f, prevMasterVal, outProgress));
 			}
-			global::DG.Tweening.TweenSettingsExtensions.Append(sequence, fadeBackTween);
-		}
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(sequence, delegate
+		});
+		tween.SetEase(SimpleTween.Ease.Linear);
+		tween.SetUpdate(isIndependentUpdate: true);
+		tween.OnComplete(delegate
 		{
+			if (!middleReached)
+			{
+				middleReached = true;
+				onMiddleReached?.Invoke();
+			}
 			m_blackFadeGroup.blocksRaycasts = false;
 			if (m_prevSelectedBlack != null)
 			{
@@ -145,7 +163,13 @@ public class SceneLoader : global::UnityEngine.MonoBehaviour
 			}
 			onComplete?.Invoke();
 		});
-		return sequence;
+		return tween;
+	}
+
+	private static float EaseOutQuad(float t)
+	{
+		t = global::UnityEngine.Mathf.Clamp01(t);
+		return t * (2f - t);
 	}
 
 	public void LoadSceneByEnumSplash(AllGameScenes scene)

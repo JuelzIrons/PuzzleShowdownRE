@@ -15,7 +15,7 @@ public class OptionsRandomVoiceLineGen : global::UnityEngine.MonoBehaviour
 	{
 		global::UnityEngine.AudioSource adS = base.transform.GetComponent<global::UnityEngine.AudioSource>();
 		adS.clip = m_amesLines[global::UnityEngine.Random.Range(0, m_amesLines.Count)];
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.ShortcutExtensions.DOMove(base.transform, base.transform.position, m_initialDelay), delegate
+		base.transform.DOMove(base.transform.position, m_initialDelay).OnComplete(delegate
 		{
 			adS.Play();
 		});

@@ -233,7 +233,7 @@ public class LocalMpCtrlManager : global::UnityEngine.MonoBehaviour
 		UnsubscribeToAllInputs();
 		CharacterSelectGrid selectGrid = m_selectGrid;
 		selectGrid.ALLREADYACTION = (global::System.Action)global::System.Delegate.Remove(selectGrid.ALLREADYACTION, new global::System.Action(AllReady));
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(1f, 0.6f, 0.5f, muteSound: true, delegate
+		
 		{
 			GameManager.Instance.PlayLocalMp();
 		}, null, 1f), delegate

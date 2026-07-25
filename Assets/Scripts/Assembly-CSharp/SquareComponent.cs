@@ -31,9 +31,9 @@ public class SquareComponent : global::UnityEngine.MonoBehaviour
 
 	public global::UnityEngine.Sprite CachedGarbageShape;
 
-	private global::DG.Tweening.Core.TweenerCore<global::UnityEngine.Vector3, global::UnityEngine.Vector3, global::DG.Tweening.Plugins.Options.VectorOptions> m_tweenX;
+	private SimpleTween m_tweenX;
 
-	private global::DG.Tweening.Core.TweenerCore<global::UnityEngine.Vector3, global::UnityEngine.Vector3, global::DG.Tweening.Plugins.Options.VectorOptions> m_tweenY;
+	private SimpleTween m_tweenY;
 
 	public bool IsSideMoving;
 
@@ -98,7 +98,7 @@ public class SquareComponent : global::UnityEngine.MonoBehaviour
 
 	private int tempChainID = -1;
 
-	private global::DG.Tweening.Tweener m_swapTween;
+	private SimpleTween m_swapTween;
 
 	public bool WillFall;
 
@@ -202,7 +202,7 @@ public class SquareComponent : global::UnityEngine.MonoBehaviour
 				}
 				if (m_swapTween != null)
 				{
-					global::DG.Tweening.TweenExtensions.Kill(m_swapTween);
+					m_swapTween?.Kill();
 				}
 				FinishSwap();
 				if (!(this.otherBlock == null) && (this.otherBlock.coordSwap == MyPodManager.CursorController.coords[0] || this.otherBlock.coordSwap == MyPodManager.CursorController.coords[1]))
@@ -258,9 +258,9 @@ public class SquareComponent : global::UnityEngine.MonoBehaviour
 				MyPodManager.GridManager.AliveSquares.Add(ghost);
 			}
 			IsSwapping = true;
-			m_swapTween = global::DG.Tweening.ShortcutExtensions.DOLocalMoveX(base.transform, coord.x, 0.066f);
-			global::DG.Tweening.TweenSettingsExtensions.SetEase(m_swapTween, global::DG.Tweening.Ease.Linear);
-			global::DG.Tweening.TweenSettingsExtensions.SetUpdate(m_swapTween, global::DG.Tweening.UpdateType.Fixed);
+			m_swapTween = base.transform.DOLocalMoveX(coord.x, 0.066f);
+			m_swapTween.SetEase(SimpleTween.Ease.Linear);
+			m_swapTween.SetUpdate(SimpleTween.UpdateMode.Fixed);
 			swapTs = MyPodManager.GameLoop.GameLoopFrameCounter + MyPodManager.GameLoop.SwappingFrames;
 			this.otherBlockChainID = otherBlockChainID;
 			coordSwap = coord;
@@ -277,7 +277,7 @@ public class SquareComponent : global::UnityEngine.MonoBehaviour
 	{
 		if (m_swapTween != null)
 		{
-			global::DG.Tweening.TweenExtensions.Complete(m_swapTween);
+			m_swapTween.Complete();
 		}
 		if (otherBlockChainID == -1)
 		{
@@ -916,7 +916,7 @@ public class SquareComponent : global::UnityEngine.MonoBehaviour
 			m_sr.color = (IsMatchable ? global::UnityEngine.Color.white : m_unmatchableSpriteClr);
 		}
 		UseOffset();
-		IsSideMoving = m_tweenX != null && m_tweenX.active;
+		IsSideMoving = m_tweenX != null && m_tweenX.IsActive();
 		if (IsGarbage && !HideGbgOverlay)
 		{
 			if (!GarbageOverlaySR.enabled)

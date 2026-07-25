@@ -76,27 +76,27 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 
 	private float m_originalMasterValue;
 
-	private global::DG.Tweening.Tweener m_masterFadeTween;
+	private SimpleTween m_masterFadeTween;
 
 	private bool m_isFadingGame;
 
 	private float m_originalGameValue;
 
-	private global::DG.Tweening.Tweener m_gameFadeTween;
+	private SimpleTween m_gameFadeTween;
 
 	private bool m_isFadingStory;
 
 	private float m_originalStoryValue;
 
-	private global::DG.Tweening.Tweener m_storyFadeTween;
+	private SimpleTween m_storyFadeTween;
 
 	private bool m_isFadingMenu;
 
 	private float m_originalMenuValue;
 
-	private global::DG.Tweening.Tweener m_menuFadeTween;
+	private SimpleTween m_menuFadeTween;
 
-	private global::DG.Tweening.Tweener m_speedTween;
+	private SimpleTween m_speedTween;
 
 	private float m_currentSpeedValue = 1f;
 
@@ -259,7 +259,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (MusicAS.volume == 0f)
 		{
-			global::DG.Tweening.DOTweenModuleAudio.DOFade(MusicAS, 1f, 0.7f);
+			MusicAS.DOFade(1f, 0.7f);
 		}
 		if (m_currentPlayingSong == trackType)
 		{
@@ -436,15 +436,15 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			m_isFadingMaster = true;
 			m_originalMasterValue = Instance.GetHardMasterVolume();
 			float volVal = 0f;
-			m_masterFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_masterFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, time);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_masterFadeTween, delegate
+			m_masterFadeTween.OnUpdate(delegate
 			{
 				Instance.SetMasterForced(global::UnityEngine.Mathf.Lerp(m_originalMasterValue, -80f, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_masterFadeTween, delegate
+			m_masterFadeTween.OnComplete(delegate
 			{
 				m_isFadingMaster = false;
 				m_masterFadeTween = null;
@@ -462,15 +462,15 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			float duration = global::UnityEngine.Mathf.Max(0.01f, time - startTime);
 			float volVal = num;
 			Instance.SetMasterForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalMasterValue, volVal));
-			m_masterFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_masterFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, duration);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_masterFadeTween, delegate
+			m_masterFadeTween.OnUpdate(delegate
 			{
 				Instance.SetMasterForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalMasterValue, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_masterFadeTween, delegate
+			m_masterFadeTween.OnComplete(delegate
 			{
 				m_isFadingMaster = false;
 				m_masterFadeTween = null;
@@ -482,7 +482,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingMaster)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_masterFadeTween);
+			m_masterFadeTween?.Kill();
 			m_masterFadeTween = null;
 			m_isFadingMaster = false;
 			if (snapToOriginal)
@@ -499,15 +499,15 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			m_isFadingGame = true;
 			m_originalGameValue = Instance.GetHardGameVolume();
 			float volVal = 0f;
-			m_gameFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_gameFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, time);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_gameFadeTween, delegate
+			m_gameFadeTween.OnUpdate(delegate
 			{
 				Instance.SetGameForced(global::UnityEngine.Mathf.Lerp(m_originalGameValue, -80f, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_gameFadeTween, delegate
+			m_gameFadeTween.OnComplete(delegate
 			{
 				m_isFadingGame = false;
 				m_gameFadeTween = null;
@@ -525,15 +525,15 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			float duration = global::UnityEngine.Mathf.Max(0.01f, time - startTime);
 			float volVal = num;
 			Instance.SetGameForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalGameValue, volVal));
-			m_gameFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_gameFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, duration);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_gameFadeTween, delegate
+			m_gameFadeTween.OnUpdate(delegate
 			{
 				Instance.SetGameForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalGameValue, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_gameFadeTween, delegate
+			m_gameFadeTween.OnComplete(delegate
 			{
 				m_isFadingGame = false;
 				m_gameFadeTween = null;
@@ -545,7 +545,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingGame)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_gameFadeTween);
+			m_gameFadeTween?.Kill();
 			m_gameFadeTween = null;
 			m_isFadingGame = false;
 			if (snapToOriginal)
@@ -562,15 +562,15 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			m_isFadingStory = true;
 			m_originalStoryValue = Instance.GetHardStoryVolume();
 			float volVal = 0f;
-			m_storyFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_storyFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, time);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_storyFadeTween, delegate
+			m_storyFadeTween.OnUpdate(delegate
 			{
 				Instance.SetStoryForced(global::UnityEngine.Mathf.Lerp(m_originalStoryValue, -80f, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_storyFadeTween, delegate
+			m_storyFadeTween.OnComplete(delegate
 			{
 				m_isFadingStory = false;
 				m_storyFadeTween = null;
@@ -588,15 +588,15 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			float duration = global::UnityEngine.Mathf.Max(0.01f, time - startTime);
 			float volVal = num;
 			Instance.SetStoryForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalStoryValue, volVal));
-			m_storyFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_storyFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, duration);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_storyFadeTween, delegate
+			m_storyFadeTween.OnUpdate(delegate
 			{
 				Instance.SetStoryForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalStoryValue, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_storyFadeTween, delegate
+			m_storyFadeTween.OnComplete(delegate
 			{
 				m_isFadingStory = false;
 				m_storyFadeTween = null;
@@ -608,7 +608,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingStory)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_storyFadeTween);
+			m_storyFadeTween?.Kill();
 			m_storyFadeTween = null;
 			m_isFadingStory = false;
 			if (snapToOriginal)
@@ -625,22 +625,22 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			m_isFadingMenu = true;
 			m_originalMenuValue = Instance.GetHardMenuVolume();
 			float volVal = 0f;
-			m_menuFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_menuFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, time);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_menuFadeTween, delegate
+			m_menuFadeTween.OnUpdate(delegate
 			{
 				Instance.SetMenuForced(global::UnityEngine.Mathf.Lerp(m_originalMenuValue, -80f, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_menuFadeTween, delegate
+			m_menuFadeTween.OnComplete(delegate
 			{
 				m_isFadingMenu = false;
 				m_menuFadeTween = null;
 			});
 			if (curve != null)
 			{
-				global::DG.Tweening.TweenSettingsExtensions.SetEase(m_menuFadeTween, curve);
+				m_menuFadeTween.SetEase(curve);
 			}
 		}
 	}
@@ -655,22 +655,22 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 			float duration = global::UnityEngine.Mathf.Max(0.01f, time - startTime);
 			float volVal = num;
 			Instance.SetMenuForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalMenuValue, volVal));
-			m_menuFadeTween = global::DG.Tweening.DOTween.To(() => volVal, delegate(float x)
+			m_menuFadeTween = SimpleTween.To(() => volVal, delegate(float x)
 			{
 				volVal = x;
 			}, 1f, duration);
-			global::DG.Tweening.TweenSettingsExtensions.OnUpdate(m_menuFadeTween, delegate
+			m_menuFadeTween.OnUpdate(delegate
 			{
 				Instance.SetMenuForced(global::UnityEngine.Mathf.Lerp(-80f, m_originalMenuValue, volVal));
 			});
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_menuFadeTween, delegate
+			m_menuFadeTween.OnComplete(delegate
 			{
 				m_isFadingMenu = false;
 				m_menuFadeTween = null;
 			});
 			if (curve != null)
 			{
-				global::DG.Tweening.TweenSettingsExtensions.SetEase(m_menuFadeTween, curve);
+				m_menuFadeTween.SetEase(curve);
 			}
 		}
 	}
@@ -679,7 +679,7 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_isFadingMenu)
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_menuFadeTween);
+			m_menuFadeTween?.Kill();
 			m_menuFadeTween = null;
 			m_isFadingMenu = false;
 			if (snapToOriginal)
@@ -701,45 +701,44 @@ public class AudioManager : global::UnityEngine.MonoBehaviour
 	{
 		if (m_musicDirector.playableGraph.IsValid())
 		{
-			global::DG.Tweening.TweenExtensions.Kill(m_speedTween);
+			m_speedTween?.Kill();
 			m_speedTween = null;
 			m_currentSpeedValue = speedMultiplier;
 			global::UnityEngine.Playables.PlayableExtensions.SetSpeed(m_musicDirector.playableGraph.GetRootPlayable(0), speedMultiplier);
 		}
 	}
 
-	public void FadeMusicSpeed(float targetSpeed, float time = 1f, global::DG.Tweening.Ease ease = global::DG.Tweening.Ease.Linear)
+	public void FadeMusicSpeed(float targetSpeed, float time = 1f)
 	{
 		if (m_currentSpeedValue == targetSpeed || !m_musicDirector.playableGraph.IsValid())
 		{
 			return;
 		}
-		global::DG.Tweening.TweenExtensions.Kill(m_speedTween);
+		m_speedTween?.Kill();
 		m_speedTween = null;
 		if (time <= 0f)
 		{
 			SetMusicSpeed(targetSpeed);
 			return;
 		}
-		m_speedTween = global::DG.Tweening.TweenSettingsExtensions.SetEase(global::DG.Tweening.DOTween.To(() => m_currentSpeedValue, delegate(float x)
+		m_speedTween = SimpleTween.To(() => m_currentSpeedValue, delegate(float x)
 		{
 			m_currentSpeedValue = x;
 			global::UnityEngine.Playables.PlayableExtensions.SetSpeed(m_musicDirector.playableGraph.GetRootPlayable(0), x);
-		}, targetSpeed, time), ease);
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(m_speedTween, delegate
+		}, targetSpeed, time).OnComplete(delegate
 		{
 			m_speedTween = null;
 		});
 	}
 
-	public void ResetMusicSpeed(float time = 1f, global::DG.Tweening.Ease ease = global::DG.Tweening.Ease.Linear)
+	public void ResetMusicSpeed(float time = 1f)
 	{
-		FadeMusicSpeed(1f, time, ease);
+		FadeMusicSpeed(1f, time);
 	}
 
 	public void StopMusicSpeedFade()
 	{
-		global::DG.Tweening.TweenExtensions.Kill(m_speedTween);
+		m_speedTween?.Kill();
 		m_speedTween = null;
 	}
 

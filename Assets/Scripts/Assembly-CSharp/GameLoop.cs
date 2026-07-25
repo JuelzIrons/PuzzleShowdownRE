@@ -672,7 +672,7 @@ public class GameLoop : global::UnityEngine.MonoBehaviour
 		instance.SendMoveToServerRpc(localTS, 3, localClientId, moveOrderNumberThisFrame, default(global::UnityEngine.Vector2), score);
 		MyPodManager.CursorController.moveOrderNumberThisFrame++;
 		PostDeathEvaluation = true;
-		global::DG.Tweening.TweenSettingsExtensions.SetUpdate(global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.ShortcutExtensions.DOMove(base.transform, base.transform.position, (float)NetworkServerReciever.Instance.MOVE_LATENCY * 1f / 60f), delegate
+		
 		{
 			PostDeathEvaluation = false;
 			if (!NetworkServerReciever.Instance.DRAW.Value && !NetworkServerReciever.Instance.LocalOpponentHasDied)
@@ -689,7 +689,7 @@ public class GameLoop : global::UnityEngine.MonoBehaviour
 					NetworkServerReciever.Instance.BroadcastTimeoutResultRpc(clientId2);
 				}
 			}
-		}), global::DG.Tweening.UpdateType.Fixed);
+		}), 
 	}
 
 	private bool CheckForLineClearWin()

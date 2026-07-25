@@ -74,10 +74,10 @@ public class GameManager : global::UnityEngine.MonoBehaviour
 			{
 				PersistentInputReader.Instance.ClearAllSubscriptions();
 				PersistentInputReader.Instance.AllowPausing = false;
-				global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(1f, 0.6f, 0.5f, muteSound: true, delegate
+				SceneLoader.Instance.DoBlackFade(1f, 0.6f, 0.5f, muteSound: true, delegate
 				{
 					SceneLoader.Instance.LoadSceneByActiveGameModeRegularFade();
-				}, null, 1f), delegate
+				}, null, 1f).OnComplete(delegate
 				{
 					GameStarted();
 				});

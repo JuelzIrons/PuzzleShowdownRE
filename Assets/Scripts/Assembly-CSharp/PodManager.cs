@@ -285,12 +285,12 @@ public class PodManager : global::UnityEngine.MonoBehaviour
 		if (ISPLAYER1)
 		{
 			m_innerBannerRend.sprite = m_characterData.CharacterInnerBannerP1;
-			global::DG.Tweening.DOTweenModuleSprite.DOColor(m_innerBannerRend, color, 1f);
+			
 		}
 		else
 		{
 			m_innerBannerRend.sprite = m_characterData.CharacterInnerBannerP2;
-			global::DG.Tweening.DOTweenModuleSprite.DOColor(m_innerBannerRend, color, 1f);
+			
 		}
 	}
 

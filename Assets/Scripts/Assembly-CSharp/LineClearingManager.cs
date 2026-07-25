@@ -99,7 +99,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 			return;
 		}
 		CG.enabled = false;
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(1.5f, 0.6f, 0.5f, muteSound: false, delegate
+		
 		{
 			DisableAllMenuButtons();
 		}), delegate
@@ -114,7 +114,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 
 	private void LoadNewGameCuscene()
 	{
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(1.5f, 0.6f, 0.5f, muteSound: true, delegate
+		
 		{
 			DisableAllMenuButtons();
 		}), delegate
@@ -125,7 +125,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 			global::UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(null);
 			CG.sprite = CurrentLevelDataSO.LevelCG;
 			CG.enabled = true;
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(CG, 1f, 1f), delegate
+			
 			{
 				DialogueManager.Instance.DialogueFinishedEvent?.AddListener(LoadFirstSectionOfLevelWithFade);
 				DialogueManager.Instance.CurrentData = CurrentLevelDataSO.LevelSpeechData[CurrentSublevelNumber];
@@ -152,7 +152,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 		CurrentLevelDataSO = GetCurrentLevelToLoad();
 		CG.sprite = CurrentLevelDataSO.LevelCG;
 		CG.enabled = true;
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(CG, 1f, 1f), delegate
+		
 		{
 			DialogueManager.Instance.DialogueFinishedEvent?.AddListener(BlurbDialogueFinished);
 			DialogueManager.Instance.CurrentData = CurrentLevelDataSO.LevelSpeechData[CurrentSublevelNumber];
@@ -175,7 +175,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 	public void PressBackToMenu()
 	{
 		CG.enabled = true;
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(CG, 0f, 1f), delegate
+		
 		{
 			GameManager.Instance.LoadMenu();
 		});
@@ -188,7 +188,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 		CurrentLevelDataSO = GetCurrentLevelToLoad();
 		CG.enabled = true;
 		CG.sprite = CurrentLevelDataSO.LevelCG;
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(CG, 1f, 1f), delegate
+		
 		{
 			SceneLoader.Instance.SceneLoadedEvent.AddListener(OnLevelLoadedIn);
 			SceneLoader.Instance.LoadSceneByActiveGameModeRegularFade();
@@ -205,7 +205,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.Object.FindFirstObjectByType<PodManager>().SetSelectedCharacter(CharacterType.Kelly);
 		global::UnityEngine.Object.FindFirstObjectByType<PodManager>().Setup();
 		global::UnityEngine.Object.FindFirstObjectByType<PodManager>().StartGame();
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(CG, 0f, 1f), delegate
+		
 		{
 			CG.enabled = false;
 		});
@@ -237,7 +237,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 			saveData.WAKendingsUnlocked |= 1 << c - 65;
 			SaveSystem.Save(saveData);
 			CG.enabled = true;
-			global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(CG, 1f, 1f), delegate
+			
 			{
 				SceneLoader.Instance.DoBlackFade(1f, 1.5f, 0.5f, muteSound: false, delegate
 				{
@@ -291,7 +291,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 		CurrentLevelNumber = GetIndexForLevelData(CurrentLevelDataSO.NextLevels[choiceNum]);
 		CurrentSublevelNumber = 0;
 		SaveData();
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(1f, 1.2f, 1f, muteSound: false, delegate
+		
 		{
 			LoadFirstSectionOfLevel();
 			ChoicePanel.SetActive(value: false);
@@ -348,7 +348,7 @@ public class LineClearingManager : global::UnityEngine.MonoBehaviour
 		CG.sprite = CurrentLevelDataSO.LevelCG;
 		SaveData();
 		CG.enabled = true;
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(CG, 1f, 1f), delegate
+		
 		{
 			DialogueManager.Instance.DialogueFinishedEvent?.AddListener(FinalLevelDialogueFinished);
 			DialogueManager.Instance.CurrentData = CurrentLevelDataSO.LevelSpeechData[CurrentSublevelNumber];

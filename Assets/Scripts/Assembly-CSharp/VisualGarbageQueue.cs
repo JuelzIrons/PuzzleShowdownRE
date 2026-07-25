@@ -48,7 +48,7 @@ public class VisualGarbageQueue : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.GameObject chainEffect = global::UnityEngine.Object.Instantiate(m_ChainGarabgeIcon);
 		chainEffect.transform.position = clearPosition;
 		chainEffect.GetComponentInChildren<global::TMPro.TextMeshPro>().text = (MyPodManager.OpponentManager.GameLoop.SlottedChainCounter[chainIndex] + 1).ToString() ?? "";
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.ShortcutExtensions.DOMove(chainEffect.transform, base.transform.position + new global::UnityEngine.Vector3(m_offsetLen * (float)indexToIncrement, 0f), 1f), delegate
+		
 		{
 			m_visualObjects[indexToIncrement].Visual.GetComponentInChildren<global::TMPro.TextMeshPro>().text = (MyPodManager.OpponentManager.GameLoop.SlottedChainCounter[chainIndex] + 1).ToString() ?? "";
 			global::UnityEngine.Object.Destroy(chainEffect);
@@ -61,10 +61,10 @@ public class VisualGarbageQueue : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.GameObject gameObject = global::UnityEngine.Object.Instantiate(m_ChainGarabgeIcon);
 		gameObject.transform.position = clearPosition;
 		gameObject.GetComponentInChildren<global::TMPro.TextMeshPro>().text = (MyPodManager.OpponentManager.GameLoop.SlottedChainCounter[chainIndex] + 1).ToString() ?? "";
-		global::DG.Tweening.Core.TweenerCore<global::UnityEngine.Vector3, global::UnityEngine.Vector3, global::DG.Tweening.Plugins.Options.VectorOptions> t = global::DG.Tweening.ShortcutExtensions.DOMove(gameObject.transform, base.transform.position + new global::UnityEngine.Vector3(m_offsetLen * (float)m_visualObjects.Count, 0f), 1f);
+		
 		GarbageVisualObject newVis = new GarbageVisualObject(chainIndex, -1, gameObject);
 		m_visualObjects.Add(newVis);
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(t, delegate
+		
 		{
 			newVis.HasArrived = true;
 		});
@@ -76,10 +76,10 @@ public class VisualGarbageQueue : global::UnityEngine.MonoBehaviour
 		global::UnityEngine.GameObject gameObject = global::UnityEngine.Object.Instantiate(m_ComboGarabgeIcon);
 		gameObject.transform.position = clearPosition;
 		gameObject.GetComponentInChildren<global::TMPro.TextMeshPro>().text = comboSize.ToString() ?? "";
-		global::DG.Tweening.Core.TweenerCore<global::UnityEngine.Vector3, global::UnityEngine.Vector3, global::DG.Tweening.Plugins.Options.VectorOptions> t = global::DG.Tweening.ShortcutExtensions.DOMove(gameObject.transform, base.transform.position + new global::UnityEngine.Vector3(m_offsetLen * (float)m_visualObjects.Count, 0f), 1f);
+		
 		GarbageVisualObject newVis = new GarbageVisualObject(-1, comboSize, gameObject);
 		m_visualObjects.Add(newVis);
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(t, delegate
+		
 		{
 			newVis.HasArrived = true;
 		});

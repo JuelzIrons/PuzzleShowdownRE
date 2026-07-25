@@ -334,7 +334,7 @@ public class CampaignManager : global::UnityEngine.MonoBehaviour
 	private void CutscenePlayed()
 	{
 		m_cutscenePlayer.CutsceneFinishedEvent.RemoveAllListeners();
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(0f, 1f, 0f, muteSound: false, delegate
+		
 		{
 		}), delegate
 		{
@@ -399,7 +399,7 @@ public class CampaignManager : global::UnityEngine.MonoBehaviour
 			break;
 		}
 		SaveSystem.Save(saveData);
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(1f, 0.2f, 0.5f, muteSound: false, delegate
+		
 		{
 			m_cutscenePlayer.PlayCutscene((CutsceneVideoIndicies)(SelectedDifficulty + 10), playSilently: false, playWithAnySkip: true);
 			m_cutscenePlayer.CutsceneFinishedEvent.AddListener(IntroCutsceneFinished);
@@ -418,7 +418,7 @@ public class CampaignManager : global::UnityEngine.MonoBehaviour
 	{
 		m_CG.sprite = CurrentLevelDataSO.LevelCG;
 		m_CG.enabled = true;
-		global::DG.Tweening.DOTweenModuleUI.DOFade(m_CG, 1f, 0f);
+		
 		RetryPanel.SetActive(value: false);
 		SceneLoader.ActiveGameMode = GameModeType.Campaign;
 		SceneLoader.Instance.SceneLoadedEvent.AddListener(OnLevelLoadedIn);
@@ -466,7 +466,7 @@ public class CampaignManager : global::UnityEngine.MonoBehaviour
 	private void IntroDialogueFinished()
 	{
 		global::UnityEngine.GameObject.Find("BG").GetComponent<global::UnityEngine.SpriteRenderer>().sprite = CurrentLevelDataSO.LevelCG;
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(global::DG.Tweening.DOTweenModuleUI.DOFade(m_CG, 0f, 1f), delegate
+		
 		{
 			m_CG.enabled = false;
 		});
@@ -707,7 +707,7 @@ public class CampaignManager : global::UnityEngine.MonoBehaviour
 		m_barnDoors.Play();
 		m_ReadyCheckObj.SetActive(value: false);
 		m_DoneCheckObj.SetActive(value: false);
-		global::DG.Tweening.DOTweenModuleAudio.DOFade(AudioManager.Instance.MusicAS, 0f, 1f);
+		
 		yield return new global::UnityEngine.WaitForSeconds(1f);
 		AudioManager.Instance.MusicAS.volume = 1f;
 		AudioManager.Instance.ChangeSong(MusicTrackType.NoMusic);

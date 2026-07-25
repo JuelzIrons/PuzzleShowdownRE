@@ -322,7 +322,7 @@ public class RelayManager : global::UnityEngine.MonoBehaviour
 		instance13.KeyboardSpecialEnterAction = (global::System.Action<global::UnityEngine.InputSystem.InputAction.CallbackContext>)global::System.Delegate.Remove(instance13.KeyboardSpecialEnterAction, new global::System.Action<global::UnityEngine.InputSystem.InputAction.CallbackContext>(CharGrid.SelectP1));
 		CharGrid.enabled = false;
 		global::UnityEngine.EventSystems.EventSystem.current.enabled = false;
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(SceneLoader.Instance.DoBlackFade(1f, 4f, 0.5f, muteSound: true, delegate
+		
 		{
 			m_selectCharCanvas.SetActive(value: false);
 			if (NetworkServerReciever.Instance.IsHost)

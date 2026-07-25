@@ -373,13 +373,13 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 		{
 			LevelDataSO currentLevelDataSO2 = LineClearingManager.Instance.CurrentLevelDataSO;
 			m_isShortWakDialogue = true;
-			global::DG.Tweening.DOTweenModuleUI.DOFade(m_bottomShadow, 1f, 0.8f);
+			
 			m_ambienceSource.gameObject.SetActive(value: true);
 			PlayAmbienceLooped(currentLevelDataSO2.AmbienceTrack);
 		}
 		else
 		{
-			global::DG.Tweening.DOTweenModuleUI.DOFade(m_bottomShadow, 1f, 0.8f);
+			
 			m_isShortWakDialogue = false;
 			m_ambienceSource.gameObject.SetActive(value: true);
 			if (!m_isCampaignMode)
@@ -545,7 +545,7 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			m_extraButtonsObj.SetActive(value: false);
 		}
 		m_stageText?.gameObject.SetActive(value: false);
-		global::DG.Tweening.DOTweenModuleUI.DOFade(m_bottomShadow, 0f, 0.6f);
+		
 		AudioManager.Instance.ChangeSong(MusicTrackType.NoMusic, isFromDialogue: true);
 		PersistentInputReader.Instance.SetSupressAllEvents(shouldSupressEvents: true);
 		m_audioSource?.Stop();
@@ -726,7 +726,7 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			{
 				if (CampaignManager.Instance.CurrentLevelDataSO.EnemyChar == CharacterType.Chustler && CampaignManager.Instance.CurrentLevelDataSO.PlayersChar == CharacterType.Jecka && CampaignPortraits[1].color == global::UnityEngine.Color.black)
 				{
-					global::DG.Tweening.DOTweenModuleUI.DOColor(CampaignPortraits[1], global::UnityEngine.Color.white, 1f);
+					
 				}
 				else
 				{
@@ -840,7 +840,7 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			m_activeAmbienceSource.loop = false;
 			m_activeAmbienceSource.volume = 0f;
 			m_activeAmbienceSource.Play();
-			global::DG.Tweening.DOTweenModuleAudio.DOFade(m_activeAmbienceSource, m_ambienceTargetVolume, 1f);
+			
 			if (m_ambienceLoopWatcher != null)
 			{
 				StopCoroutine(m_ambienceLoopWatcher);
@@ -868,8 +868,8 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 				inactiveAmbienceSource.volume = 0f;
 				inactiveAmbienceSource.loop = false;
 				inactiveAmbienceSource.PlayScheduled(time);
-				global::DG.Tweening.DOTweenModuleAudio.DOFade(activeAmbienceSource, 0f, num);
-				global::DG.Tweening.DOTweenModuleAudio.DOFade(inactiveAmbienceSource, m_ambienceTargetVolume, num);
+				
+				
 				m_activeAmbienceSource = inactiveAmbienceSource;
 				m_inactiveAmbienceSource = activeAmbienceSource;
 				StartCoroutine(StopSourceAfter(activeAmbienceSource, num + 0.1f));
@@ -895,16 +895,16 @@ public class DialogueManager : global::UnityEngine.MonoBehaviour
 			StopCoroutine(m_ambienceLoopWatcher);
 			m_ambienceLoopWatcher = null;
 		}
-		global::DG.Tweening.Sequence sequence = global::DG.Tweening.DOTween.Sequence();
+		
 		if (m_ambienceSource != null && m_ambienceSource.isPlaying)
 		{
-			global::DG.Tweening.TweenSettingsExtensions.Join(sequence, global::DG.Tweening.DOTweenModuleAudio.DOFade(m_ambienceSource, 0f, duration));
+			
 		}
 		if (m_ambienceSourceB != null && m_ambienceSourceB.isPlaying)
 		{
-			global::DG.Tweening.TweenSettingsExtensions.Join(sequence, global::DG.Tweening.DOTweenModuleAudio.DOFade(m_ambienceSourceB, 0f, duration));
+			
 		}
-		global::DG.Tweening.TweenSettingsExtensions.OnComplete(sequence, delegate
+		
 		{
 			m_ambienceSource?.Stop();
 			m_ambienceSourceB?.Stop();
