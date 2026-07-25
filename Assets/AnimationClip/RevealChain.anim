@@ -97,7 +97,7 @@ AnimationClip:
     attribute: m_fontColor.a
     path: ChainAmount
     classID: 114
-    script: {fileID: 11500000, guid: 334b3af4b97d3ad6a80278f82bcc6489, type: 3}
+    script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
     flags: 0
   - serializedVersion: 2
     curve:

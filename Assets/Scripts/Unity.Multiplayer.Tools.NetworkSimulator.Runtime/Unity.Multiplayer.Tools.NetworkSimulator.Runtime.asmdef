@@ -1,8 +1,0 @@
-{
-  "name": "Unity.Multiplayer.Tools.NetworkSimulator.Runtime",
-  "references": [
-    "Unity.Multiplayer.Tools.Adapters",
-    "Unity.Multiplayer.Tools.Common"
-  ],
-  "allowUnsafeCode": true
-}

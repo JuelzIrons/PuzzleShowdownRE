@@ -1,8 +1,0 @@
-{
-  "name": "Unity.Multiplayer.Tools.MetricTestData",
-  "references": [
-    "Unity.Multiplayer.Tools.NetStats",
-    "Unity.Multiplayer.Tools.MetricTypes"
-  ],
-  "allowUnsafeCode": true
-}

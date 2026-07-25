@@ -1,7 +1,0 @@
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.UGUI")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.Session")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.Vivox")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.Editor")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("Unity.Multiplayer.Widgets.Tests")]
-[assembly: global::System.Runtime.CompilerServices.InternalsVisibleTo("DynamicProxyGenAssembly2")]
-[assembly: global::System.Reflection.AssemblyVersion("0.0.0.0")]
