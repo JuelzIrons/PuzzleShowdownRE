@@ -242,8 +242,25 @@ public class SimpleTweenRunner : MonoBehaviour
 
 public static class SimpleTweenExtensions
 {
+	/// <summary>
+	/// Used when a tween is started on a missing reference. DOTween would throw here, and
+	/// because these are extension methods the throw happens inside the call rather than at
+	/// the call site - which silently kills the rest of the calling method. This project is
+	/// full of scene references the rip lost, so instead we warn and hand back a tween that
+	/// does nothing but still completes, so chained OnComplete logic keeps running.
+	/// </summary>
+	private static SimpleTween Inert(string caller)
+	{
+		Debug.LogWarning("[SimpleTween] " + caller + " called on a null target - tween skipped. Check for a missing reference in the scene.");
+		return SimpleTween.Create(null, 0f, null);
+	}
+
 	public static SimpleTween DOColor(this Graphic graphic, Color endColor, float duration)
 	{
+		if (graphic == null)
+		{
+			return Inert("DOColor(Graphic)");
+		}
 		Color startColor = graphic.color;
 		return SimpleTween.Create(graphic, duration, delegate(float t)
 		{
@@ -253,6 +270,10 @@ public static class SimpleTweenExtensions
 
 	public static SimpleTween DOFade(this Graphic graphic, float endAlpha, float duration)
 	{
+		if (graphic == null)
+		{
+			return Inert("DOFade(Graphic)");
+		}
 		Color startColor = graphic.color;
 		return SimpleTween.Create(graphic, duration, delegate(float t)
 		{
@@ -264,6 +285,10 @@ public static class SimpleTweenExtensions
 
 	public static SimpleTween DOColor(this SpriteRenderer renderer, Color endColor, float duration)
 	{
+		if (renderer == null)
+		{
+			return Inert("DOColor(SpriteRenderer)");
+		}
 		Color startColor = renderer.color;
 		return SimpleTween.Create(renderer, duration, delegate(float t)
 		{
@@ -273,6 +298,10 @@ public static class SimpleTweenExtensions
 
 	public static SimpleTween DOFade(this CanvasGroup canvasGroup, float endAlpha, float duration)
 	{
+		if (canvasGroup == null)
+		{
+			return Inert("DOFade(CanvasGroup)");
+		}
 		float startAlpha = canvasGroup.alpha;
 		return SimpleTween.Create(canvasGroup, duration, delegate(float t)
 		{
@@ -282,6 +311,10 @@ public static class SimpleTweenExtensions
 
 	public static SimpleTween DOFade(this AudioSource audioSource, float endVolume, float duration)
 	{
+		if (audioSource == null)
+		{
+			return Inert("DOFade(AudioSource)");
+		}
 		float startVolume = audioSource.volume;
 		return SimpleTween.Create(audioSource, duration, delegate(float t)
 		{
@@ -291,6 +324,10 @@ public static class SimpleTweenExtensions
 
 	public static SimpleTween DOMove(this Transform transform, Vector3 endValue, float duration)
 	{
+		if (transform == null)
+		{
+			return Inert("DOMove(Transform)");
+		}
 		Vector3 startPos = transform.position;
 		return SimpleTween.Create(transform, duration, delegate(float t)
 		{
@@ -300,6 +337,10 @@ public static class SimpleTweenExtensions
 
 	public static SimpleTween DOLocalMoveX(this Transform transform, float endX, float duration)
 	{
+		if (transform == null)
+		{
+			return Inert("DOLocalMoveX(Transform)");
+		}
 		float startX = transform.localPosition.x;
 		return SimpleTween.Create(transform, duration, delegate(float t)
 		{
@@ -311,6 +352,10 @@ public static class SimpleTweenExtensions
 
 	public static SimpleTween DOFloat(this Material material, float endValue, string property, float duration)
 	{
+		if (material == null)
+		{
+			return Inert("DOFloat(Material)");
+		}
 		float startValue = material.GetFloat(property);
 		return SimpleTween.Create(material, duration, delegate(float t)
 		{

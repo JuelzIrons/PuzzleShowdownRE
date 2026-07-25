@@ -26,12 +26,14 @@ public class StartupScreen : global::UnityEngine.MonoBehaviour
 		VIDINDEX = 0;
 		InitSettings();
 		StartCoroutine(DelayedStart());
-		global::UnityEngine.Debug.unityLogger.logEnabled = false;
+		// TEMP: logging left on for debugging. Restore before shipping.
+		// global::UnityEngine.Debug.unityLogger.logEnabled = false;
 	}
 
 	private void Awake()
 	{
-		global::UnityEngine.Debug.unityLogger.logEnabled = false;
+		// TEMP: logging left on for debugging. Restore before shipping.
+		// global::UnityEngine.Debug.unityLogger.logEnabled = false;
 	}
 
 	private global::System.Collections.IEnumerator DelayedStart()
