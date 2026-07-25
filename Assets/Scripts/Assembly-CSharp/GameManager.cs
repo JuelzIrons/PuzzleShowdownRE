@@ -160,16 +160,10 @@ public class GameManager : global::UnityEngine.MonoBehaviour
 
 	public void PressOnlinePlay()
 	{
-		if (!SteamManager.Initialized)
-		{
-			m_warnOnline.SetActive(value: true);
-			global::UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_warnOnlineOp);
-		}
-		else
-		{
-			DefinedGameMode = GameModeType.Online;
-			SceneLoader.Instance.LoadSceneByEnumRegularFadeNoWater(AllGameScenes.Matchmake);
-		}
+		// Online play runs on Unity Relay with anonymous Unity Authentication, so it
+		// no longer waits on a Steam session.
+		DefinedGameMode = GameModeType.Online;
+		SceneLoader.Instance.LoadSceneByEnumRegularFadeNoWater(AllGameScenes.Matchmake);
 	}
 
 	public void PressLocalMultiplayer()

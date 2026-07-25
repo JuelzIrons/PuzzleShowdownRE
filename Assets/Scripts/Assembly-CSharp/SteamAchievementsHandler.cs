@@ -1,3 +1,9 @@
+/// <summary>
+/// Steam has been removed, so achievements and stats no longer go anywhere. The
+/// component and its methods are kept because call sites across GameLoop,
+/// CampaignManager, LineClearingManager and CutsceneTheatre still invoke them, and
+/// because MainMenu.unity holds a reference to this script.
+/// </summary>
 public class SteamAchievementsHandler : global::UnityEngine.MonoBehaviour
 {
 	public static SteamAchievementsHandler Instance;
@@ -7,29 +13,31 @@ public class SteamAchievementsHandler : global::UnityEngine.MonoBehaviour
 		if (Instance != null)
 		{
 			global::UnityEngine.Object.Destroy(base.gameObject);
+			return;
 		}
-		else
+		Instance = this;
+		// GameLoop and LineClearingManager dereference Instance without a null check
+		// from gameplay scenes, so this has to outlive MainMenu.
+		global::UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
+	}
+
+	private void OnDestroy()
+	{
+		if (Instance == this)
 		{
-			Instance = this;
+			Instance = null;
 		}
 	}
 
 	public void GrantAchievement(string AchivementCode)
 	{
-		if (SteamManager.Initialized)
-		{
-			global::Steamworks.SteamUserStats.SetAchievement(AchivementCode);
-			global::Steamworks.SteamUserStats.StoreStats();
-		}
 	}
 
 	public void SetStats(string statname, float fdata)
 	{
-		global::Steamworks.SteamUserStats.SetStat(statname, fdata);
 	}
 
 	public void Resetcheivements()
 	{
-		global::Steamworks.SteamUserStats.ResetAllStats(bAchievementsToo: true);
 	}
 }

@@ -87,9 +87,8 @@ public class LinkManagerTMP : global::UnityEngine.MonoBehaviour, global::UnityEn
 
 	public void OpenSteamBrowser(string url)
 	{
-		if (SteamManager.Initialized)
-		{
-			global::Steamworks.SteamFriends.ActivateGameOverlayToWebPage(url);
-		}
+		// Without the Steam overlay, hand the link to the system browser so the link
+		// still does something instead of silently doing nothing.
+		global::UnityEngine.Application.OpenURL(url);
 	}
 }
