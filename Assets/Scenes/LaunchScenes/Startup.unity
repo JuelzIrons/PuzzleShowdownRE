@@ -3719,7 +3719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b62566c0c9277d28b455a0e2fda38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BUILDNAME: 1.0.0
+  BUILDNAME: 
   IsLoading: 0
   m_buildNumText: {fileID: 100}
   m_transitionMaterialPrep: {fileID: 2100000, guid: 31f47d2aefe25d244901a7266fe4b5fb, type: 2}
