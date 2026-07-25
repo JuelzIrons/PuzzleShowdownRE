@@ -47,6 +47,16 @@ public class RelayManager : global::UnityEngine.MonoBehaviour
 
 	private bool _exiting;
 
+	[global::UnityEngine.Header("Quick match (random lobby)")]
+	[global::UnityEngine.SerializeField]
+	private int m_lobbyMaxPlayers = 2;
+
+	private const string LOBBY_JOINCODE_KEY = "joinCode";
+
+	private global::Unity.Services.Lobbies.Models.Lobby m_lobby;
+
+	private global::UnityEngine.Coroutine m_lobbyHeartbeat;
+
 	private void Awake()
 	{
 		m_lastErrorMsg.text = "";
@@ -97,6 +107,7 @@ public class RelayManager : global::UnityEngine.MonoBehaviour
 
 	public void LocalDisconnect()
 	{
+		CloseLobby();
 		LoadingCanvas.SetActive(value: false);
 		joinCodeField.text = "";
 		joinCodeText.text = "";
@@ -116,12 +127,141 @@ public class RelayManager : global::UnityEngine.MonoBehaviour
 		MenuCanvas.SetActive(value: false);
 		ConnectedHostCanvas.SetActive(value: true);
 		PersistentInputReader.Instance.CustomMenuCtrlSwapper.SetSelected(m_hostFirstBtn.GetComponent<global::UnityEngine.UI.Selectable>());
+		await PublishLobby(text);
 		LoadingCanvas.SetActive(value: false);
 	}
 
 	public void CopyJoinCodeToClipboard()
 	{
 		global::UnityEngine.GUIUtility.systemCopyBuffer = joinCodeText.text;
+	}
+
+	/// <summary>
+	/// Hook this to the "Quick Match" button. Looks for any public lobby waiting for a
+	/// player and joins it using the relay code stored in that lobby. If nobody is waiting,
+	/// we host instead, so the button always does something useful.
+	/// </summary>
+	public async void QuickMatch()
+	{
+		LoadingCanvas.SetActive(value: true);
+		m_lastErrorMsg.text = "";
+		string joinCode = null;
+		try
+		{
+			global::Unity.Services.Lobbies.Models.Lobby lobby = await global::Unity.Services.Lobbies.LobbyService.Instance.QuickJoinLobbyAsync();
+			if (lobby != null && lobby.Data != null && lobby.Data.ContainsKey(LOBBY_JOINCODE_KEY))
+			{
+				joinCode = lobby.Data[LOBBY_JOINCODE_KEY].Value;
+			}
+		}
+		catch (global::Unity.Services.Lobbies.LobbyServiceException ex) when (ex.Reason == global::Unity.Services.Lobbies.LobbyExceptionReason.NoOpenLobbies)
+		{
+			joinCode = null;
+		}
+		catch (global::System.Exception ex2)
+		{
+			global::UnityEngine.Debug.LogWarning("Quick match lookup failed: " + ex2.Message);
+			m_lastErrorMsg.text = "Couldnt find a match!";
+			m_errorFader.DisplayMessage();
+			LoadingCanvas.SetActive(value: false);
+			return;
+		}
+		if (string.IsNullOrEmpty(joinCode))
+		{
+			// Nobody waiting - become the host so the next player to hit Quick Match finds us.
+			StartRelay();
+			return;
+		}
+		await StartClientWithRelay(joinCode);
+		LoadingCanvas.SetActive(value: false);
+	}
+
+	/// <summary>
+	/// Publishes the relay join code in a public lobby so QuickMatch can find this host.
+	/// Failing to publish is not fatal - the join code still works by hand.
+	/// </summary>
+	private async global::System.Threading.Tasks.Task PublishLobby(string joinCode)
+	{
+		if (string.IsNullOrEmpty(joinCode))
+		{
+			return;
+		}
+		try
+		{
+			global::Unity.Services.Lobbies.CreateLobbyOptions options = new global::Unity.Services.Lobbies.CreateLobbyOptions();
+			options.IsPrivate = false;
+			options.Data = new global::System.Collections.Generic.Dictionary<string, global::Unity.Services.Lobbies.Models.DataObject>();
+			options.Data.Add(LOBBY_JOINCODE_KEY, new global::Unity.Services.Lobbies.Models.DataObject(global::Unity.Services.Lobbies.Models.DataObject.VisibilityOptions.Member, joinCode));
+			m_lobby = await global::Unity.Services.Lobbies.LobbyService.Instance.CreateLobbyAsync("Puzzle Showdown", m_lobbyMaxPlayers, options);
+			m_lobbyHeartbeat = StartCoroutine(HeartbeatLobby());
+			global::Unity.Netcode.NetworkManager.Singleton.OnClientConnectedCallback += OnLobbyGuestConnected;
+		}
+		catch (global::System.Exception ex)
+		{
+			global::UnityEngine.Debug.LogWarning("Couldn't publish lobby, join code still works: " + ex.Message);
+		}
+	}
+
+	/// <summary>Lobbies go stale after 30s without a ping, so keep ours alive while we wait.</summary>
+	private global::System.Collections.IEnumerator HeartbeatLobby()
+	{
+		global::UnityEngine.WaitForSecondsRealtime wait = new global::UnityEngine.WaitForSecondsRealtime(15f);
+		while (m_lobby != null)
+		{
+			PingLobby();
+			yield return wait;
+		}
+	}
+
+	private async void PingLobby()
+	{
+		global::Unity.Services.Lobbies.Models.Lobby lobby = m_lobby;
+		if (lobby == null)
+		{
+			return;
+		}
+		try
+		{
+			await global::Unity.Services.Lobbies.LobbyService.Instance.SendHeartbeatPingAsync(lobby.Id);
+		}
+		catch (global::System.Exception)
+		{
+		}
+	}
+
+	/// <summary>Once the match is full, take the lobby down so nobody drops into a running game.</summary>
+	private void OnLobbyGuestConnected(ulong clientId)
+	{
+		if (global::Unity.Netcode.NetworkManager.Singleton.IsHost && global::Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds.Count >= m_lobbyMaxPlayers)
+		{
+			CloseLobby();
+		}
+	}
+
+	private async void CloseLobby()
+	{
+		if (m_lobbyHeartbeat != null)
+		{
+			StopCoroutine(m_lobbyHeartbeat);
+			m_lobbyHeartbeat = null;
+		}
+		if (global::Unity.Netcode.NetworkManager.Singleton != null)
+		{
+			global::Unity.Netcode.NetworkManager.Singleton.OnClientConnectedCallback -= OnLobbyGuestConnected;
+		}
+		global::Unity.Services.Lobbies.Models.Lobby lobby = m_lobby;
+		m_lobby = null;
+		if (lobby == null)
+		{
+			return;
+		}
+		try
+		{
+			await global::Unity.Services.Lobbies.LobbyService.Instance.DeleteLobbyAsync(lobby.Id);
+		}
+		catch (global::System.Exception)
+		{
+		}
 	}
 
 	public async void JoinRelay()
@@ -408,6 +548,7 @@ public class RelayManager : global::UnityEngine.MonoBehaviour
 
 	private void FinishReturnToMenu(bool noUnload = false)
 	{
+		CloseLobby();
 		m_alloc = null;
 		if (TallyManager.Instance != null)
 		{
