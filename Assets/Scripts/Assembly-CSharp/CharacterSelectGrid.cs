@@ -204,7 +204,7 @@ public class CharacterSelectGrid : global::UnityEngine.MonoBehaviour
 			m_splashColorTweensP1 = global::DG.Tweening.DOTweenModuleUI.DOColor(m_p1Splash.GetComponent<global::UnityEngine.UI.Image>(), global::UnityEngine.Color.white, 0.1f);
 			if (NetworkServerReciever.Instance != null)
 			{
-				NetworkServerReciever.Instance.SendReadyUpEventToOpponentRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, isReady: false, default(global::Unity.Netcode.RpcParams));
+				NetworkServerReciever.Instance.SendReadyUpEventToOpponentRpc(global::Unity.Netcode.NetworkManager.Singleton.LocalClientId, isReady: false);
 			}
 		}
 	}
