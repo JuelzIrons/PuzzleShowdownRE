@@ -10098,23 +10098,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ISMARATHON: 0
-  m_p1Cursor: {fileID: 0}
-  m_p2Cursor: {fileID: 0}
-  m_p1Splash: {fileID: 0}
-  m_p2Splash: {fileID: 0}
-  m_p1SplashPos: []
-  m_p2SplashPos: []
-  m_p1CharNameText: {fileID: 0}
-  m_p2CharNameText: {fileID: 0}
-  m_playerReadyObjs: []
+  m_p1Cursor: {fileID: 55}
+  m_p2Cursor: {fileID: 78}
+  m_p1Splash: {fileID: 81}
+  m_p2Splash: {fileID: 75}
+  m_p1SplashPos:
+  - {fileID: 255}
+  - {fileID: 263}
+  m_p2SplashPos:
+  - {fileID: 236}
+  - {fileID: 241}
+  m_p1CharNameText: {fileID: 284}
+  m_p2CharNameText: {fileID: 281}
+  m_playerReadyObjs:
+  - {fileID: 71}
+  - {fileID: 74}
   m_backBtn: {fileID: 0}
   rows: 2
   cols: 4
-  m_selectableChars: []
+  m_selectableChars:
+  - {fileID: 86}
+  - {fileID: 50}
+  - {fileID: 68}
+  - {fileID: 80}
+  - {fileID: 69}
+  - {fileID: 72}
+  - {fileID: 85}
+  - {fileID: 67}
   P1_READY: 0
   P2_READY: 0
-  m_readySplashColor: {r: 0, g: 0, b: 0, a: 0}
-  m_chardata: {fileID: 0}
+  m_readySplashColor: {r: 1, g: 1, b: 1, a: 1}
+  m_chardata: {fileID: 11400000, guid: 99956de2785499d4a8845c0ba71a2634, type: 2}
 --- !u!114 &408
 MonoBehaviour:
   m_ObjectHideFlags: 0

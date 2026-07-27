@@ -10758,6 +10758,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5757ef5581afbb9cb5f6f86c9540d6a4, type: 3}
   m_Name:
   m_EditorClassIdentifier:
+  ISMARATHON: 1
+  m_p1Cursor: {fileID: 50}
+  m_p2Cursor: {fileID: 0}
+  m_p1Splash: {fileID: 99}
+  m_p2Splash: {fileID: 78}
+  m_p1SplashPos:
+  - {fileID: 299}
+  - {fileID: 311}
+  m_p2SplashPos:
+  - {fileID: 284}
+  - {fileID: 277}
+  m_p1CharNameText: {fileID: 325}
+  m_p2CharNameText: {fileID: 0}
+  m_playerReadyObjs:
+  - {fileID: 83}
+  m_backBtn: {fileID: 0}
+  rows: 2
+  cols: 4
+  m_selectableChars:
+  - {fileID: 89}
+  - {fileID: 54}
+  - {fileID: 60}
+  - {fileID: 98}
+  - {fileID: 57}
+  - {fileID: 81}
+  - {fileID: 92}
+  - {fileID: 61}
+  P1_READY: 0
+  P2_READY: 0
+  m_readySplashColor: {r: 1, g: 1, b: 1, a: 1}
+  m_chardata: {fileID: 11400000, guid: 99956de2785499d4a8845c0ba71a2634, type: 2}
+
 --- !u!114 &478
 MonoBehaviour:
   m_ObjectHideFlags: 0
