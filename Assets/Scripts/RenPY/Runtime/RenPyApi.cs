@@ -550,6 +550,8 @@ namespace RenPy.Runtime
             config.Set("main_menu_music", null);
             config.Set("has_voice", true);
             config.Set("layers", new PyList(new List<object> { "master", "transient", "screens", "overlay" }));
+            config.Set("tag_layer", new PyDict());
+            config.Set("default_tag_layer", "master");
         }
 
         void SeedPreferences(PyDict preferences)

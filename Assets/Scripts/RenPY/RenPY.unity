@@ -166,8 +166,9 @@ MonoBehaviour:
   GamePath: FlipSide
   StartLabel: start
   AutoStart: 1
-  BootThroughMenu: 1
+  BootThroughMenu: 0
   UseCustomTitleScreen: 1
+  TitleLogoScale: 0.125
   TextSpeed: 45
   DefaultAutoAdvance: 2
   ClickSkipsWaits: 1

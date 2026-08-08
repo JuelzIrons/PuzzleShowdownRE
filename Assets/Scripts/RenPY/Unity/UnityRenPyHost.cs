@@ -32,6 +32,10 @@ namespace RenPy.Unity
 
         volatile bool stopping;
 
+        // Distinct from `stopping`: an abort unwinds the script thread but leaves the
+        // host usable, so the player can return to the title and start again.
+        volatile bool aborting;
+
         public UnityRenPyHost(RenPyPlayer player, RenPyFileSystem files)
         {
             this.player = player;
@@ -258,6 +262,22 @@ namespace RenPy.Unity
             if (player.VerboseLogging) Debug.Log("[RenPy] " + message);
         }
 
-        public bool ShouldStop { get { return stopping; } }
+        public bool ShouldStop { get { return stopping || aborting; } }
+
+        /// <summary>Unwinds the running script without shutting the host down.</summary>
+        public void RequestAbort()
+        {
+            aborting = true;
+            interactionDone.Set();
+            screenAction.Set();
+        }
+
+        /// <summary>Clears the abort so a new script run can begin.</summary>
+        public void ClearAbort()
+        {
+            aborting = false;
+            interactionDone.Reset();
+            screenAction.Reset();
+        }
     }
 }

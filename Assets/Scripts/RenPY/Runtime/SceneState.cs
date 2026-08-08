@@ -33,11 +33,9 @@ namespace RenPy.Runtime
         {
             if (string.IsNullOrEmpty(image.Tag)) return;
 
-            // Showing a tag on a new layer removes it from the old one.
-            string previous;
-            if (tagLayers.TryGetValue(image.Tag, out previous) && previous != image.Layer)
-                Layer(previous).Remove(image.Tag);
-
+            // Ren'Py keeps a separate scene list per layer, so the same tag can be
+            // showing on two layers at once. Migrating it here would silently erase
+            // an image the script still expects to be on screen.
             Layer(image.Layer)[image.Tag] = image;
             tagLayers[image.Tag] = image.Layer;
         }

@@ -133,7 +133,10 @@ namespace RenPy.Unity
             var rect = Child("logo", panel.transform);
             rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.sizeDelta = new Vector2(texture.width, texture.height);
+
+            // The source art is far larger than the screen, so it is drawn scaled down.
+            float scale = Mathf.Max(0.01f, player.TitleLogoScale);
+            rect.sizeDelta = new Vector2(texture.width * scale, texture.height * scale);
             rect.anchoredPosition = Vector2.zero;
 
             var image = rect.gameObject.AddComponent<RawImage>();

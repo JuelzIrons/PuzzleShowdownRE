@@ -22,6 +22,13 @@ namespace RenPy.Unity
         readonly Action<object> onAction;
         readonly Action<string> playSound;
         readonly Func<string, string, bool, Texture> movieResolver;
+        readonly Action<string> movieReleaser;
+
+        // Movie players live outside the screen hierarchy, so destroying a screen's
+        // widgets does not stop its video. Keys are tracked here and released
+        // explicitly, or a menu backdrop keeps playing (and audible) forever.
+        readonly HashSet<string> activeMovies = new HashSet<string>();
+        readonly HashSet<string> previousMovies = new HashSet<string>();
 
         readonly Dictionary<string, GameObject> screens = new Dictionary<string, GameObject>();
 
@@ -29,12 +36,14 @@ namespace RenPy.Unity
                                Func<string, Texture2D> textureLoader,
                                Action<object> onAction,
                                Action<string> playSound,
-                               Func<string, string, bool, Texture> movieResolver)
+                               Func<string, string, bool, Texture> movieResolver,
+                               Action<string> movieReleaser)
         {
             this.textureLoader = textureLoader;
             this.onAction = onAction;
             this.playSound = playSound;
             this.movieResolver = movieResolver;
+            this.movieReleaser = movieReleaser;
 
             var go = new GameObject("RenPy Screens", typeof(RectTransform));
             go.transform.SetParent(parent, false);
@@ -56,21 +65,40 @@ namespace RenPy.Unity
             // backdrop playing across rebuilds instead of restarting every frame.
             movieSerial = 0;
 
-            if (shown == null) return;
+            previousMovies.Clear();
+            foreach (var key in activeMovies) previousMovies.Add(key);
+            activeMovies.Clear();
 
-            foreach (var screen in shown)
+            if (shown != null)
             {
-                if (screen.Root == null) continue;
+                foreach (var screen in shown)
+                {
+                    if (screen.Root == null) continue;
 
-                var holder = new GameObject("screen " + screen.Name, typeof(RectTransform));
-                holder.transform.SetParent(root, false);
-                Stretch((RectTransform)holder.transform);
+                    var holder = new GameObject("screen " + screen.Name, typeof(RectTransform));
+                    holder.transform.SetParent(root, false);
+                    Stretch((RectTransform)holder.transform);
 
-                screens[screen.Name] = holder;
+                    screens[screen.Name] = holder;
 
-                foreach (var child in screen.Root.Children)
-                    Build(child, (RectTransform)holder.transform);
+                    foreach (var child in screen.Root.Children)
+                        Build(child, (RectTransform)holder.transform);
+                }
             }
+
+            // Anything that did not come back is gone for good; stop its video.
+            foreach (var key in previousMovies)
+                if (!activeMovies.Contains(key)) movieReleaser(key);
+
+            return;
+        }
+
+        /// <summary>Stops every video this view started.</summary>
+        public void ReleaseMovies()
+        {
+            foreach (var key in activeMovies) movieReleaser(key);
+            activeMovies.Clear();
+            previousMovies.Clear();
         }
 
         public bool IsShowing(string name) { return screens.ContainsKey(name); }
@@ -171,7 +199,12 @@ namespace RenPy.Unity
             // A screen can `add` a Movie, which is how animated menu backdrops work.
             if (widget.Displayable != null && widget.Displayable.Kind == "movie")
             {
-                Texture movie = movieResolver("screen/" + (movieSerial++), widget.Displayable.Path, true);
+                string movieKey = "screen/" + (movieSerial++);
+                Texture movie = movieResolver(movieKey, widget.Displayable.Path, true);
+                if (movie != null)
+                {
+                    activeMovies.Add(movieKey);
+                }
                 if (movie != null)
                 {
                     var movieRect = Create("movie", parent);

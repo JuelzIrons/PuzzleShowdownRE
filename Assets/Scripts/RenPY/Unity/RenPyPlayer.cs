@@ -45,6 +45,11 @@ namespace RenPy.Unity
                  "renderer for every other game.")]
         public bool UseCustomTitleScreen = true;
 
+        [Tooltip("Scale of the title logo. The source art is 5500x3000, far wider than the " +
+                 "screen, so it is drawn well below native size.")]
+        [Range(0.02f, 1f)]
+        public float TitleLogoScale = 0.125f;
+
         [Header("Presentation")]
         [Tooltip("Characters per second for the typewriter effect. 0 shows lines instantly.")]
         public float TextSpeed = 45f;
@@ -91,6 +96,7 @@ namespace RenPy.Unity
         public RenPyMovies Movies { get; private set; }
         public RenPyScreenView ScreenView { get; private set; }
         public FlipSideTitleScreen TitleScreen { get; private set; }
+        public IRenPyPauseMenu GameMenu { get; private set; }
 
         UnityRenPyHost host;
         Thread scriptThread;
@@ -136,7 +142,9 @@ namespace RenPy.Unity
             UI = new RenPyUI(transform, LoadTexture, ResolveMovie, Movies.Release, SortingOrder);
             ApplySuppression();
 
-            ScreenView = new RenPyScreenView(UI.Root, LoadTexture, QueueScreenAction, PlayUiSound, ResolveMovie);
+            ScreenView = new RenPyScreenView(UI.Root, LoadTexture, QueueScreenAction, PlayUiSound,
+                                             ResolveMovie, key => Movies.Release(key));
+            // The real menu is built once the game is known, in Boot().
             UI.SetAdvanceHandler(OnAdvanceClicked);
 
             BuildVideoSurface();
@@ -226,6 +234,13 @@ namespace RenPy.Unity
 
             if (Started != null) Started();
 
+            // A game-specific menu uses that game's own art; anything else gets the
+            // plain one, so saving is always reachable.
+            GameMenu = (UseCustomTitleScreen && FlipSidePauseMenu.Matches(Files))
+                ? (IRenPyPauseMenu)new FlipSidePauseMenu(this, UI.Root)
+                : new RenPyGameMenu(this, UI.Root);
+            GameMenu.SetOpenButtonVisible(false);
+
             if (UseCustomTitleScreen && FlipSideTitleScreen.Matches(Files))
             {
                 // The bespoke title screen owns the menu; the engine only runs once a
@@ -243,6 +258,12 @@ namespace RenPy.Unity
         void StartScriptThread()
         {
             if (scriptThread != null && scriptThread.IsAlive) return;
+
+            // A menu click's sound would otherwise keep playing over the opening scene.
+            Audio.StopNow("sound");
+
+            if (host != null) host.ClearAbort();
+            if (GameMenu != null) { GameMenu.Close(); GameMenu.SetOpenButtonVisible(true); }
 
             scriptThread = new Thread(RunScript) { IsBackground = true, Name = "RenPy Script" };
             scriptThread.Start();
@@ -321,10 +342,19 @@ namespace RenPy.Unity
             if (BlockScreensBlack != lastBlockScreensBlack || SuppressedImages != lastSuppressedImages)
                 ApplySuppression();
 
+            if (GameMenu != null) GameMenu.Tick();
+
             if (ReturnToTitleRequested)
             {
                 ReturnToTitleRequested = false;
-                ReturnToTitle();
+
+                if (pendingResume != null)
+                {
+                    var resume = pendingResume;
+                    pendingResume = null;
+                    ResumeFromSave(resume);
+                }
+                else ReturnToTitle();
             }
 
             host.SamplePositions(Audio);
@@ -655,6 +685,44 @@ namespace RenPy.Unity
 
         RenPySaveState pendingLoad;
 
+        /// <summary>Loads a slot while the game is already running.</summary>
+        public void LoadFromSlotInGame(int slot)
+        {
+            var state = RenPySaveSystem.Load(GamePath, slot);
+            if (state == null)
+            {
+                Debug.LogWarning("[RenPy] save slot " + slot + " is empty or unreadable.");
+                return;
+            }
+
+            // Unwind the running script first, then resume from the save.
+            pendingResume = state;
+            AbortRunningScript();
+        }
+
+        /// <summary>Stops the script and shows the title screen again.</summary>
+        public void AbortToTitle()
+        {
+            pendingResume = null;
+            AbortRunningScript();
+        }
+
+        RenPySaveState pendingResume;
+
+        void AbortRunningScript()
+        {
+            if (host == null) return;
+
+            if (scriptThread == null || !scriptThread.IsAlive)
+            {
+                // Nothing running; act on the request immediately.
+                ReturnToTitleRequested = true;
+                return;
+            }
+
+            host.RequestAbort();
+        }
+
         /// <summary>Queues a screen action for the engine thread and wakes it.</summary>
         void QueueScreenAction(object action)
         {
@@ -666,6 +734,22 @@ namespace RenPy.Unity
             if (waiting != Waiting.None && waiting != Waiting.Menu) Finish(0);
         }
 
+        /// <summary>Restarts the script thread from a loaded save.</summary>
+        void ResumeFromSave(RenPySaveState state)
+        {
+            scriptThread = null;
+
+            Audio.StopAll();
+            if (ScreenView != null) ScreenView.ReleaseMovies();
+            Movies.ReleaseAll();
+            UI.HideDialogue();
+            UI.ClearChoices();
+            UI.DiscardGhosts();
+
+            pendingLoad = state;
+            StartScriptThread();
+        }
+
         /// <summary>Clears the stage and brings the title screen back up.</summary>
         public void ReturnToTitle()
         {
@@ -674,6 +758,7 @@ namespace RenPy.Unity
             scriptThread = null;
 
             Audio.StopAll();
+            if (ScreenView != null) ScreenView.ReleaseMovies();
             Movies.ReleaseAll();
             UI.HideDialogue();
             UI.ClearChoices();
@@ -683,6 +768,9 @@ namespace RenPy.Unity
                 UI.ClearLayer(layer);
 
             SavePersistent();
+
+            if (GameMenu != null) { GameMenu.Close(); GameMenu.SetOpenButtonVisible(false); }
+
             TitleScreen.Show();
         }
 

@@ -783,11 +783,23 @@ namespace RenPy.Runtime
         }
 
         /// <summary>
-        /// Ren'Py puts images on "master" unless the tag was registered elsewhere.
+        /// The layer a bare `show` targets. Ren'Py's default_layer() consults
+        /// config.tag_layer and falls back to config.default_tag_layer -- it does
+        /// NOT remember where the tag currently is. Making it sticky sends an image
+        /// to whatever layer that tag last used, which puts backdrops above the scene.
         /// </summary>
         public string DefaultLayer(string tag)
         {
-            return Scene.LayerForTag(tag) ?? "master";
+            var config = Interp.GetStore("store.config");
+
+            string fallback = config.GetStr("default_tag_layer", null) as string ?? "master";
+            if (string.IsNullOrEmpty(tag)) return fallback;
+
+            var tagLayer = config.GetStr("tag_layer", null) as PyDict;
+            if (tagLayer == null) return fallback;
+
+            object layer;
+            return tagLayer.TryGet(tag, out layer) && layer != null ? PyOps.ToStr(layer) : fallback;
         }
 
         // ---------------------------------------------------------------- python

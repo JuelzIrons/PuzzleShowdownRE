@@ -249,7 +249,18 @@ namespace RenPy.Unity
         // The outgoing contents of a layer, retained so a transition has something to
         // fade FROM. Ren'Py transitions between the old and new state of a layer; if
         // the old widgets are destroyed on `scene`, there is nothing to dissolve.
-        readonly Dictionary<string, CanvasGroup> ghosts = new Dictionary<string, CanvasGroup>();
+        /// <summary>
+        /// A retained layer plus the movies it owns. The video must outlive the
+        /// crossfade but die with the ghost, or it keeps playing (and sounding)
+        /// after the scene it belonged to is gone.
+        /// </summary>
+        sealed class Ghost
+        {
+            public CanvasGroup Group;
+            public readonly List<string> MovieKeys = new List<string>();
+        }
+
+        readonly Dictionary<string, Ghost> ghosts = new Dictionary<string, Ghost>();
 
         /// <summary>
         /// Moves a layer's current contents aside before it is modified, so the next
@@ -275,20 +286,37 @@ namespace RenPy.Unity
 
             while (source.childCount > 0) source.GetChild(0).SetParent(rect, true);
 
-            // The live views are gone; new shows must build fresh ones.
+            var ghost = new Ghost { Group = group };
+
+            // The live views are gone; new shows must build fresh ones. Their movie
+            // keys transfer to the ghost so nothing is left playing untracked.
             var orphaned = new List<string>();
             foreach (var kv in shown)
                 if (kv.Value.Layer == layerName) orphaned.Add(kv.Key);
-            foreach (var key in orphaned) shown.Remove(key);
 
-            ghosts[layerName] = group;
+            foreach (var key in orphaned)
+            {
+                ghost.MovieKeys.Add(key);
+                shown.Remove(key);
+            }
+
+            ghosts[layerName] = ghost;
         }
 
         /// <summary>Drops the retained scene; called once a transition ends or is moot.</summary>
         public void DiscardGhosts()
         {
             foreach (var kv in ghosts)
-                if (kv.Value != null) UnityEngine.Object.Destroy(kv.Value.gameObject);
+            {
+                var ghost = kv.Value;
+                if (ghost == null) continue;
+
+                // Stop the videos before the widgets that displayed them go away.
+                foreach (var key in ghost.MovieKeys) movieReleaser(key);
+
+                if (ghost.Group != null) UnityEngine.Object.Destroy(ghost.Group.gameObject);
+            }
+
             ghosts.Clear();
         }
 
@@ -518,7 +546,11 @@ namespace RenPy.Unity
             float zoomX = state.Zoom * state.XZoom;
             float zoomY = state.Zoom * state.YZoom;
 
-            rect.sizeDelta = new Vector2(width * zoomX, height * zoomY);
+            // A negative zoom mirrors the image. Feeding that into sizeDelta yields a
+            // degenerate rect, so the sign becomes a scale flip and the size stays
+            // positive -- this is how `xzoom -1` faces a sprite the other way.
+            rect.sizeDelta = new Vector2(width * Mathf.Abs(zoomX), height * Mathf.Abs(zoomY));
+            rect.localScale = new Vector3(zoomX < 0f ? -1f : 1f, zoomY < 0f ? -1f : 1f, 1f);
 
             // Ren'Py measures from the top-left with y growing downwards.
             float anchorX = state.XAnchor;
@@ -721,8 +753,10 @@ namespace RenPy.Unity
             switch (name)
             {
                 case "pause":
-                    // A pause is a wait, not a blend: hold the outgoing scene.
-                    ghostAlpha = 1f;
+                    // Ren'Py's Pause is NoTransition, which "only displays the NEW
+                    // screen for `delay` seconds" — its render draws new_widget. So
+                    // the outgoing scene goes at once and the new one is held.
+                    ghostAlpha = 0f;
                     break;
 
                 case "fade":
@@ -740,7 +774,7 @@ namespace RenPy.Unity
             }
 
             foreach (var kv in ghosts)
-                if (kv.Value != null) kv.Value.alpha = ghostAlpha;
+                if (kv.Value != null && kv.Value.Group != null) kv.Value.Group.alpha = ghostAlpha;
 
             if (fadeOverlay != null)
             {
