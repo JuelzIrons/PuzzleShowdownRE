@@ -73,3 +73,11 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ren'Py test game (symlink to a 1.2GB local copy, not repo content)
+/Assets/StreamingAssets/FlipSide
+/Assets/StreamingAssets/FlipSide.meta
+/forclaude/
+
+# Local backups of the Ren'Py player source
+/RenPY-backup-*.zip
