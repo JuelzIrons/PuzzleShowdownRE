@@ -4,13 +4,13 @@ Runs a real Ren'Py game inside Unity: it reads the game's compiled `.rpyc` files
 interprets the embedded Python, and drives dialogue, images, audio and video
 through Unity.
 
-No Python runtime, no reflection, no code generation — everything is plain C#, so
+No Python runtime, no reflection, no code generation, everything is plain C#, so
 it works under IL2CPP on Android.
 
 ## Using it
 
 1. Put an unzipped Ren'Py game under `Assets/StreamingAssets/`. Use the whole
-   original game folder — the one containing `game/` (the `.exe` and `lib/` can
+   original game folder, the one containing `game/` (the `.exe` and `lib/` can
    stay, they are ignored). A `<name>.zip` beside it works too.
 2. Add the **Ren'Py Player** component to any GameObject in any scene.
 3. Set **Game Path** to the folder name under `StreamingAssets` (e.g. `FlipSide`).
@@ -24,9 +24,9 @@ EventSystem are all created at runtime.
 `StreamingAssets` lives inside the APK on Android, where directories cannot be
 listed and files cannot be opened directly. Two options:
 
-- **Zip** — put `<name>.zip` in `StreamingAssets`. It is extracted to
+- **Zip**, put `<name>.zip` in `StreamingAssets`. It is extracted to
   `persistentDataPath` on first launch.
-- **Folder** — run **Tools > Ren'Py > Generate Manifest for StreamingAssets
+- **Folder**, run **Tools > Ren'Py > Generate Manifest for StreamingAssets
   Games** before building. The player copies the listed files out of the APK on
   first launch.
 
@@ -69,7 +69,7 @@ which is how the engine is regression-tested against a real game.
 
 ## Threading
 
-Ren'Py's script semantics are synchronous — `renpy.say()` does not return until
+Ren'Py's script semantics are synchronous, `renpy.say()` does not return until
 the player clicks. Rewriting the interpreter in continuation-passing style to fit
 a coroutine would have distorted it, so instead the script runs on its own thread:
 
@@ -82,30 +82,30 @@ a coroutine would have distorted it, so instead the script runs on its own threa
 
 ## What is supported
 
-**Statements** — `label`, `jump`, `call`, `return`, `if`/`elif`/`else`, `while`,
+**Statements**, `label`, `jump`, `call`, `return`, `if`/`elif`/`else`, `while`,
 `menu`, `scene`, `show`, `hide`, `with`, `image`, `transform`, `define`,
 `default`, `python`/`init python`, `say`, `screen`, `style`, plus the built-in
 user statements `play`, `queue`, `stop`, `pause`, `voice`, `window`, and
 `show`/`hide screen`.
 
-**Python** — expressions, `def` (defaults, `*args`, `**kwargs`, closures),
+**Python**, expressions, `def` (defaults, `*args`, `**kwargs`, closures),
 `class` with inheritance, `for`/`while`/`break`/`continue`, `try`/`except`/
 `finally`, `with`, comprehensions (list/set/dict/generator), f-strings,
 `%`-formatting and `str.format`, slicing, unpacking, `global`, `import`, and the
 common builtins. Both Python 2 and 3 spellings, since Ren'Py 7 games are Python 2.
 
-**Ren'Py API** — `renpy.say/pause/jump/call/return_statement/checkpoint/show/
+**Ren'Py API**, `renpy.say/pause/jump/call/return_statement/checkpoint/show/
 hide/scene/transition/image/movie_cutscene/variant/loader/random`, the
 `renpy.music`/`sound`/`audio` channels, `Character`, `config`, `gui`,
 `persistent`, `preferences`, displayables (`Image`, `Solid`, `Text`, `Frame`,
 `Composite`, `Movie`, …), positions (`left`, `center`, `truecenter`, …), and the
 transition set.
 
-**Text tags** — `{p}`, `{w}`, `{nw}`, `{cps}` are lifted out as timing; `{b}`,
+**Text tags**, `{p}`, `{w}`, `{nw}`, `{cps}` are lifted out as timing; `{b}`,
 `{i}`, `{u}`, `{color}`, `{size}`, `{alpha}`, `{k}` become TextMeshPro markup.
 `[variable]` interpolation is evaluated against the store.
 
-**Audio** — Ren'Py's `<from N to N loop N>` filename clauses, per-channel fades,
+**Audio**, Ren'Py's `<from N to N loop N>` filename clauses, per-channel fades,
 pause/resume, and arbitrary game-defined channel names.
 
 ## Boot sequence
@@ -134,7 +134,7 @@ Actions: `Start`, `MainMenu`, `Quit`, `Return`, `Jump`, `Show`/`Hide`, `ShowMenu
 `Play`, `Stop`, `Function`, `SetField`, `ToggleField`, `SetVariable`,
 `ToggleVariable`, `If`, and no-op stubs for the save/load family.
 
-Actions are **queued, not run where clicked** — they can jump, start the game or
+Actions are **queued, not run where clicked**, they can jump, start the game or
 call Python, none of which is safe from Unity's thread while the engine owns the
 interpreter. The engine drains the queue between statements.
 
